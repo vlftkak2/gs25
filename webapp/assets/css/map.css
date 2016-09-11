@@ -9,6 +9,10 @@ margin-bottom:30px;
 
 .container_map {margin: 0 auto; width: 1500px;}
 
+.container_mapsub{
+	margin-left:70px;
+}
+
 
 #board { 
 	width:700px;
@@ -17,13 +21,13 @@ margin-bottom:30px;
         
 #store_header{
 	margin-top:50px;
-	margin-left:120px;
+	margin-left:150px;
 }
         
 #store{margin:50px 60px;}
 
       
-#txt_header{margin:20px 30px 40px 70px;
+#txt_header{margin:20px 30px 40px 60px;
             text-align:left}
 
 #search{
@@ -46,7 +50,7 @@ margin-bottom:30px;
 }
 
 #board{
-	margin-left:80px;
+	margin-left:100px;
 }
 
 input[type="text"]	{
