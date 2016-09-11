@@ -2,7 +2,7 @@
 @import "gs25site.css";
 
 p{
-	font-size:0.75em;
+	font-size:1em;
 }
 
 #highlight{
@@ -13,6 +13,10 @@ p{
 
 #member_main{
 	margin: 0 auto; width: 1500px;
+}
+
+#member_sub{
+	margin-left:130px;
 }
 
 #top_wrap{
