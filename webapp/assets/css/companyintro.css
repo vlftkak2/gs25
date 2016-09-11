@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+
+p{
+	font-size:1em;
+}
+
+#highlight{
+	margin-bottom:10px;
+	font-weight:bold;
+	font-size:1.5em;
+}
+
+
+
+#intro_main{
+	margin: 0 auto; width: 1500px;
+}
+
+#intro_sub{
+	margin-left:130px;
+}
+
+#brand_main{
+margin-top : 50px;
+margin-left : 150px;
+}
+#first_wrap{
+	width:1500px;
+	margin-top:30px;
+	margin-left:150px;
+}
+#about_wrap{
+	float:left;
+}
+#about_bottom{
+	margin-top:50px;
+	margin-bottom:50px;
+}
+#groce_wrap{
+	float:left;
+}
+#fresh_wrap{
+	float:left;
+	margin-left:30px;
+}
+#month_average{
+	float:left;
+	margin-left:30px;
+}
+
+#fresh_photo{
+	margin-left:150px;
+	margin-top:280px;
+	margin-bottom:30px;
+}
+#daily_wrap{
+	margin-left:150px;
+	margin-bottom:30px;
+}
+#refresh_photo{
+	margin-left:150px;
+	margin-bottom:30px;
+}
