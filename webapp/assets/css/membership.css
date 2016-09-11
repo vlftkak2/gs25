@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+p{
+	font-size:0.75em;
+}
+
+#highlight{
+	margin-bottom:10px;
+	font-weight:bold;
+	font-size:1.5em;
+}
+
+#member_main{
+	margin: 0 auto; width: 1500px;
+}
+
+#top_wrap{
+	margin-left:150px;
+	margin-top:50px;
+	margin-bottom:40px;
+}
+
+#card_main{
+	margin-top:20px;
+}
+
+#LG_wrap{
+	margin-left:150px;
+	margin-bottom:250px;
+}
+
+#LG{
+	float:left;
+}
+
+#LG_content{
+	float:left;
+	margin-left:50px;
+}
+
+#Opoint_wrap{
+	margin-left:150px;
+	margin-bottom:470px;
+}
+
+#Opoint{
+	float:left;
+}
+
+#Opoint_content{
+	float:left;
+	margin-left:50px;
+}
+
+
+#MVisa_wrap{
+	margin-left:150px;
+	margin-bottom:680px;
+}
+
+#MVisa{
+	float:left;
+}
+
+#MVisa_content{
+	float:left;
+	margin-left:50px;
+}
+
+#Happy_wrap{
+	margin-left:150px;
+	margin-bottom:900px;
+}
+
+#Happy{
+	float:left;
+}
+
+#Happy_content{
+	float:left;
+	margin-left:50px;
+}
+
+
+
+
+
