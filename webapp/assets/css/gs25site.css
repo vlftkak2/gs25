@@ -7,7 +7,7 @@ ul, ol, li			{ list-style-type: none }
 
 /* layout */
 div#container	{ text-align:left; width:100%; margin:0 auto; background-color:#fff }
-div#content		{ float:right; width:100%; background-color:#fff }
+div#content		{ float:left; width:100%; background-color:#fff }
 div#footer		{ clear:both; width:100% }
 
 /* header */
@@ -16,7 +16,7 @@ div#heaer body {position:relative; font-size:13px; color:#333; font-family:'Nanu
 		a {color:#333; text-decoration:none;}
 		h1, h2, h3, h4, h5 {font-weight:bold;}
 .header {position:relative; margin:0 auto; width:100%;border-bottom: 1px solid #dfdfdf;}
-		.topwrap {width:100%; background:url("/gs25/assets/images/top_bg.gif") repeat-x;}
+		.topwrap {width:100%; background:url("/gs25/assets/images/index/top_bg.gif") repeat-x;}
 		.brdwrap {position:relative; margin:0 auto; width:960px; padding:0}
 		.brdwrap .uty {position:relative; float:right; width:370px;top:8px; font-family:'NanumBarunGothic', NanumBarunGothic}
 		.brdwrap .uty ul {float:right;}
@@ -29,7 +29,7 @@ div#heaer body {position:relative; font-size:13px; color:#333; font-family:'Nanu
 		.gnb_bg{position:absolute;top:86px;left:0;width:100%;height:294px;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;background: #f7f7f7;z-index: 99}
 		.gnbw:after,
 		.gnbwrap .gnb ul:after{content: "";clear: both;display: block;height: 0;visibility: hidden;}
-		.gnbwrap .logo {float:left; background:url("/gs25/assets/images/logo.gif") no-repeat; width:170px; height:46px; text-indent:-999em; margin:30px 0px 6px 10px}
+		.gnbwrap .logo {float:left; background:url("/gs25/assets/images/index/logo.gif") no-repeat; width:170px; height:46px; text-indent:-999em; margin:30px 0px 6px 10px}
 		.gnbwrap .logo a{width:70%;height:100%;display:block;}
 		.gnbwrap .gnb {float:left; margin:0 auto; width:780px}
 		.gnbwrap .gnb > ul {width:810px;}
@@ -54,7 +54,7 @@ div#footer body {position:relative; font-size:13px; color:#333; font-family:'Nan
 		.btm_sns_area .btm_sns { float:left; width:617px; height:39px; padding-top:20px}  
 		.btm_sns_area .btm_sns > img { float:left; padding:4px 16px 0 0;}
 		.btm_sns_area .btm_sns ul li { float:left; padding-right:15px; margin-top:-4px;}
-		.btm_sns_area .btm_sns ul li a { display:block; width:39px; height:39px; background:url('/gs25/assets/images/ico_btm_sns.png') no-repeat left center; }
+		.btm_sns_area .btm_sns ul li a { display:block; width:39px; height:39px; background:url('/gs25/assets/images/index/ico_btm_sns.png') no-repeat left center; }
 		.btm_sns_area .btm_sns ul li a .hide {display:block; height: 0; width: 0; font-size: 0; line-height: 0; margin: 0; padding: 0; overflow:hidden;}
 		.btm_sns_area .btm_sns ul li a.blog { background-position:-48px 0;}
 		.btm_sns_area .btm_sns ul li a.instagram { background-position:-96px 0;}
@@ -70,7 +70,7 @@ div#footer body {position:relative; font-size:13px; color:#333; font-family:'Nan
 		.copywrap .copy {float:left; width:790px; padding-bottom:80px}
 		.copy .copy_menu { width:800px; margin-bottom:35px; *margin-bottom:20px;}
 		.copy .copy_menu li {float:left; font-size: 11px; color:#666; letter-spacing:-0.2px;}
-		.copy .copy_menu li a{ padding:0 8px;background:url("/gs25/assets/images/bg_sns.gif") no-repeat center left;}
+		.copy .copy_menu li a{ padding:0 8px;background:url("/gs25/assets/images/index/bg_sns.gif") no-repeat center left;}
 		.copy .copy_menu li a,.copy .copy_menu li a:hover {display:block; font-size: 11px; color:#666;}
 		.copy .copy_menu li:first-child a {padding:0 10px 0 0;font-size:12px;font-weight:bold;background:none;}
 		.copy_txt {font-size:11px; color:#666; line-height:20px}

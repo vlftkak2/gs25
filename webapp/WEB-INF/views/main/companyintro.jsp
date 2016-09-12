@@ -72,11 +72,6 @@
 					<img src="/gs25/assets/images/introduce/refresh.png" width="1000px" />
 				</div>
 
-
-
-
-
-
 			</div>
 			</div>
 

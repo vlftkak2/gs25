@@ -89,10 +89,12 @@
 
 				</div>
 				
-				<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 				</div>
+				
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		
 	</div>
 </body>
 </html>

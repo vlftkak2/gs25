@@ -7,7 +7,7 @@
 <head>
 <title>GS25</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/gs25/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="/gs25/assets/css/map.css" rel="stylesheet" type="text/css">
 
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=c0be589b60311ceeea226dd7d2e0e990"></script>
@@ -104,14 +104,18 @@ function makeOutListener(infowindow) {
 
 </head>
 <body>
-	<div id="container">
+<div id="container">
 
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 	
 <div id="content">
 
-	<div id="store">
+<div class="container_map">
+<div class="container_mapsub">
+
+<div id="store_header">
+<div id="store">
 <h1 id="sub_h1">매장검색</h1>
 </div>
 <div id="txt_header">
@@ -119,14 +123,16 @@ function makeOutListener(infowindow) {
 <p>지역별 매장 또는 매장명 검색으로 GS25를 찾아보세요</p>
 </div>
 
+</div>
+
 <div id="search"> 
 <form id="search_form" action="/gs25/map/list" method="get">
 <input type="text" id="kwd" name="kwd" value="${map.keyword }"> 
 <input type="submit" value="찾기">
 </form>
-
 </div>
-<div>
+
+<div id=map_container>
 	<div id="board">
 	<table class="tbl-ex">
 		<tr>
@@ -187,12 +193,10 @@ function makeOutListener(infowindow) {
 		</div>
 		
 		</div>
+		</div>
+		</div>
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		</div>
-
-	
-	
-	
 	
 	</body>
 </html>

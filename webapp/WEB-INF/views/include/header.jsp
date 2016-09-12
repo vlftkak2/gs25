@@ -31,16 +31,16 @@
 				<!-- gnbwrap -->
 				<div class="gnbwrap">
 					<div class="gnbw">
-						<h1 class="logo"><a href="/gscvs/ko/main">GS25</a></h1>
+						<h1 class="logo"><a href="/gs25/main">GS25</a></h1>
 						<div class="gnb" id="gnb_menu">
 							<ul>
-								<li><h2><a href="javascript:void(0);" class="on">고객센터</a></h2>
+								<li><h2><a href="/gs25/custom/list" class="on">고객센터</a></h2>
 								</li>
-								<li><h2><a href="javascript:void(0);">맴버십</a></h2>
+								<li><h2><a href="/gs25/membership">맴버십</a></h2>
 								</li>
-								<li><h2><a href="javascript:void(0);">매장검색</a></h2>
+								<li><h2><a href="/gs25/map/list">매장검색</a></h2>
 								</li>
-								<li><h2><a href="javascript:void(0);">회사소개</a></h2>
+								<li><h2><a href="/gs25/companyintro">회사소개</a></h2>
 								</ul>
 							</div>
 						</div>

@@ -11,5 +11,21 @@ public class MainController {
 		
 		return "/main/index";
 	}
+	
+	@RequestMapping("/membership")
+	public String membership(){
+		return "/main/membership";
+	}
+	
+	@RequestMapping("/companyintro")
+	public String companyintro(){
+		return "/main/companyintro";
+	}
+	
+	@RequestMapping("/test")
+	public String test(){
+		
+		return "/test/test";
+	}
 
 }

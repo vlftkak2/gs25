@@ -20,8 +20,9 @@
 <div id="content">
 
 <div class="container_index">
-		<img src="/gs25/assets/images/gs25_03.gif"/>
+		<img src="/gs25/assets/images/index/gs25_03.gif"/>
 		<div class="market_list">
+		<div class="markey_list_sub">
 			<ul class="market_list_area">
 				<li><a href="#" class="on">서울</a></li>
 				<li><a href="#">경기</a></li>
@@ -45,6 +46,7 @@
 			</ul>
 
 
+			</div>
 		</div>
 	</div>	
 

@@ -41,7 +41,7 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>webapp/assets/images/check.png</name>
+			<name>webapp/assets/images/index/check.png</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Downloads/check.png</locationURI>
 		</link>

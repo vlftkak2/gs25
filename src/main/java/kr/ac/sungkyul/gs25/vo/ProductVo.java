@@ -11,6 +11,8 @@ public class ProductVo {
 	private Long kindno;
 	private String kind;
 	private int dispercent;
+	private String producturl;
+	
 	public Long getNo() {
 		return no;
 	}
@@ -65,12 +67,23 @@ public class ProductVo {
 	public void setDispercent(int dispercent) {
 		this.dispercent = dispercent;
 	}
+	
+	
+	public String getProducturl() {
+		return producturl;
+	}
+	public void setProducturl(String producturl) {
+		this.producturl = producturl;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", regdate=" + regdate + ", expirydate="
 				+ expirydate + ", maker=" + maker + ", kindno=" + kindno + ", kind=" + kind + ", dispercent="
-				+ dispercent + "]";
+				+ dispercent + ", producturl=" + producturl + "]";
 	}
+	
+	
 	
 	
 	

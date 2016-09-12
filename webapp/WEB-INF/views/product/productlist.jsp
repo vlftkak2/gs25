@@ -1,44 +1,54 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="/gs25/assets/css/board.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
+<link href="/gs25/assets/css/board.css" rel="stylesheet" type="text/css">
+
 <body>
+
 <div id="search"> 
 <form id="search_form" action="/gs25/product/list" method="get">
 <input type="text" id="kwd" name="kwd" value="${map.keyword }"> 
 <input type="submit" value="찾기">
 </form>
+</div>
+
+<div class="product_list" style="margin-left:40px; margin-top:50px;">
+
+<ul>
+
+<c:forEach var='vo' items='${map.list}' varStatus='status'>
+
+<li style="float:left; top: 50px; left: 192px; z-index: 3; border: 1px solid rgb(215, 215, 215); height: 250px; width: 350px;">
+<ul class="tag_list_01">
+<li class="ico_tag_03"></li>
+</ul>
+<div class="pic_product">
+<img src="${vo.producturl }" alt="형민)맛있는도시락" width="80px" height="130px" >
+<div class="infowrap">
+<div class="name">${vo.name }</div>
+<div class="price">${vo.price } </div> 
+</div>
+</div>
+</li>
+
+</c:forEach>
+
+
+</ul>
 
 </div>
 
-	<div id="board">
-	<table class="tbl-ex">
-		<tr>
-			<th>할인상품</th>
-			<th>가격</th>
-			<th>유통기한</th>
-			
-		</tr>
-			<c:forEach var='vo' items='${map.list}' varStatus='status'>
-			<tr>
-				<td>${vo.name }</td>
-				<td>${vo.price }원</td>
-				<td>${vo.expirydate }</td>
-			</tr>
-		</c:forEach>
-	</table>
-	
 
-	<!-- begin:paging -->
+<!-- begin:paging -->
 	<div class="pager">
 		<ul>
 		
@@ -75,7 +85,10 @@
 				</c:if>
 				</ul>
 			</div>
-		</div>
+
+
+
+
 
 
 </body>

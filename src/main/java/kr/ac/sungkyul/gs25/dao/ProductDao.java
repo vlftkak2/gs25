@@ -73,7 +73,7 @@ public class ProductDao {
 		try {
 			conn=dataSource.getConnection();
 			String sql = (keyword ==null || "".equals(keyword))? 
-		    "select * from(select c.*,rownum rn from(select name,price,TO_CHAR(EXPIRY_DATE,'YYYY.MM.DD') from product) c) where ?<=rn and rn<=?"
+		    "select * from(select c.*,rownum rn from(select name,price,to_char(reg_date,'yyyy.mm.dd'),TO_CHAR(EXPIRY_DATE,'YYYY.MM.DD'),maker,product_url from product) c) where ?<=rn and rn<=?"
 			: "select * from(select c.*,rownum rn from(select a.NAME,a.PRICE,to_char(a.EXPIRY_DATE,'yyyy-mm-dd') from product a, productkind b where a.KIND_NO=b.NO and a.name like ? order by price desc, a.EXPIRY_DATE asc) c) where ?<=rn and rn<=?";
 				
 			pstmt = conn.prepareStatement(sql);
@@ -98,16 +98,24 @@ public class ProductDao {
 			while (rs.next()) {
 				String name=rs.getString(1);
 				Integer price=rs.getInt(2);
-				String expirydate=rs.getString(3);
+				String regdate=rs.getString(3);
+				String expirydate=rs.getString(4);
+				String maker=rs.getString(5);
+				String producturl=rs.getString(6);
+				
 				
 			
 				
 				ProductVo vo=new ProductVo();
 				vo.setName(name);
 				vo.setPrice(price);
+				vo.setRegdate(regdate);
 				vo.setExpirydate(expirydate);
-				
+				vo.setMaker(maker);
+				vo.setProducturl(producturl);
+
 				list.add(vo);
+				System.out.println(list);
 			}
 			
 			return list;

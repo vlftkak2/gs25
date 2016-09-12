@@ -13,7 +13,7 @@
 		<div class="btm_sns_area">
 			<div class="left">
 				<div class="btm_sns">
-					<img src="/gs25/assets/images/btm_gs25_sns.jpg" alt="GS25와 소통하세요!">
+					<img src="/gs25/assets/images/index/btm_gs25_sns.jpg" alt="GS25와 소통하세요!">
 					<ul>
 						<li><a href="https://www.facebook.com/funGS25/" class="facebook" target="_blank"><span class="hide">facebook</span></a></li>
 						<li><a href="http://gs25friend.blog.me/" class="blog" target="_blank"><span class="hide">blog</span></a></li>

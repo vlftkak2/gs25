@@ -2,7 +2,9 @@
 @import "gs25site.css";
 
 	a {color:#333; text-decoration:none;}
-		.container_index {margin: 0 auto;width: 960px; text-align: center;}
+		.container_index {margin: 0 auto; width: 990px; text-align: center;}
+
+        .markey_list_sub{margin-left:13px;}
 
 		.market_list {clear:both; overflow: hidden; margin: 0px 0 8px; padding-left: 0px;}
 		.market_list li{float:left;width:135px;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;}
@@ -11,7 +13,7 @@
 		.market_list li:first-child{border-left:1px solid #dfdfdf;}
 		.market_list li a.sty01{padding:23px 0 24px;}
 		.market_list li a:hover,
-		.market_list li a.on{background:url("/gs25/assets/images/tab_bg_arr.png") 50% 0 no-repeat;color:#397ca8;border-top:4px solid #397ca8;font-weight:bold;}
+		.market_list li a.on{background:url("/gs25/assets/images/index/tab_bg_arr.png") 50% 0 no-repeat;color:#397ca8;border-top:4px solid #397ca8;font-weight:bold;}
 		.market_list_area{clear:both; overflow: hidden; margin: 0px 0 8px; padding-left: 0px;}
 		.market_list_point{clear:both; overflow: hidden; margin: 0px 0 8px; padding-left: 0px;}	
 
