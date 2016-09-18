@@ -71,10 +71,10 @@
 										<td style="text-align:left; padding-left:${vo.depth*10}px">
 											<img src="/gs25/assets/images/customcenter/re2.png"> <c:choose>
 												<c:when test='${authUser.no == vo.userNo}'>
-													<a href="/gs25/board/view?no=${vo.no}">${vo.title }</a>
+													<a href="/gs25/custom/viewform?no=${vo.no}">${vo.title }</a>
 												</c:when>
 												<c:otherwise>
-													<a href="/gs25/board/right">${vo.title }</a>
+													<a href="/gs25/custom/right">${vo.title }</a>
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -82,10 +82,10 @@
 									<c:otherwise>
 										<td style="text-align: left"><c:choose>
 												<c:when test='${authUser.no == vo.userNo}'>
-													<a href="/gs25/board/view?no=${vo.no}">${vo.title }</a>
+													<a href="/gs25/custom/viewform?no=${vo.no}">${vo.title }</a>
 												</c:when>
 												<c:otherwise>
-													<a href="/gs25/board/right">${vo.title }</a>
+													<a href="/gs25/custom/right">${vo.title }</a>
 												</c:otherwise>
 
 											</c:choose></td>
@@ -97,7 +97,7 @@
 								<td><c:choose>
 										<c:when
 											test='${not empty authUser && authUser.no == vo.userNo }'>
-											<a href="/gs25/board/delete?no=${vo.no}" class="del">삭제</a>
+											<a href="/gs25/custom/delete?no=${vo.no}" class="del">삭제</a>
 										</c:when>
 										<c:otherwise>
             						&nbsp;
@@ -155,7 +155,7 @@
 						<c:otherwise>
 							<div class="bottom">
 
-								<a href="/gs25/board/write" id="new-book">글쓰기</a>
+								<a href="/gs25/custom/write?userno=${authUser.no}" id="new-book">글쓰기</a>
 							</div>
 
 						</c:otherwise>

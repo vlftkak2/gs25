@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+a{
+    color: #494949;
+    text-decoration: none;
+}
+
+.login{
+	width:320px;
+	height:375px;
+	position:inherit;
+	float: right;
+}
+#title{
+	padding-top:50px;
+	padding-bottom:20px;
+	font-size: 25px;
+}
+#intro{
+	font-size:15px;
+	padding-bottom:20px;
+}
+.login-form{
+	/*background-color: #acd4d6;*/
+	width:320px;
+	height:90px;
+	padding: 10px 0;
+}
+.login-form ul{
+	width:100px;
+	position:absolute;
+}
+input[type=text], input[type=password] {
+    text-indent: 5px;
+    border: 1px solid #d6d6d6;
+    height: 33px;
+    width: 218px;
+    line-height: 31px;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.img{
+	position:absolute;
+	margin:0;
+}
+#login-btn{
+	position: relative;
+    width: 97px;
+    height: 77px;
+    line-height: 83px;
+    text-align: center;
+    background: #397ca8;
+    color: #fff;
+    font-size: 16px;
+    float:right;
+}
+#side-menu{
+	float: left;
+	width:150px;
+}
+#product{
+	float: right;
+	width:810px;
+}
+#side-menu ul{
+	overflow: auto;
+	text-align: center;
+	padding-left:0;
+}
+#side-menu ul li{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+#product ul{
+	overflow: auto;
+}
+#product ul li{
+	float:left;
+	padding: 0 10px;
+}
+#product-list{
+	height:250px;
+	position:relative;
+	background-color: #cbeef3;
+	margin-bottom:70px;
+}

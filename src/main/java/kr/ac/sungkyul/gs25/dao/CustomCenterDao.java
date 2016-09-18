@@ -9,10 +9,12 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.ac.sungkyul.gs25.vo.CustomCenterVo;
+import kr.ac.sungkyul.gs25.vo.AttachFileVO;
+import kr.ac.sungkyul.gs25.vo.CustomBoardVo;
 
 @Repository
 public class CustomCenterDao {
@@ -21,8 +23,11 @@ public class CustomCenterDao {
 	@Autowired
 	private DataSource dataSource;
 	
-	public List<CustomCenterVo> getList(int page, int pagesize,String keyword) {
-		List<CustomCenterVo> list = new ArrayList<CustomCenterVo>();
+	@Autowired
+	private SqlSession sqlSession;
+	
+	public List<CustomBoardVo> getList(int page, int pagesize,String keyword) {
+		List<CustomBoardVo> list = new ArrayList<CustomBoardVo>();
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -62,7 +67,7 @@ public class CustomCenterDao {
 				Integer depth = rs.getInt(7);
 			
 				
-			     CustomCenterVo vo=new CustomCenterVo();
+			     CustomBoardVo vo=new CustomBoardVo();
 			     vo.setNo(no);
 			     vo.setTitle(title);
 			     vo.setName(name);
@@ -141,5 +146,256 @@ public class CustomCenterDao {
 		return totalCount;
 
 	}
+	
+	public int insert(CustomBoardVo vo) {
+		int count = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
 
+			conn=dataSource.getConnection();
+
+			// 3. statement 생성 ?-> 값이 바인딩 된다.
+			String sql = (vo.getGroupNo() == null)
+					? "insert into boards VALUES(seq_boards.nextval,?,?,1,nvl((select max(group_no) from boards), 0)+1,1,1,sysdate,?)"
+					: "insert into boards values(seq_boards.nextval, ?, ?, 0, ?, ?, ?, sysdate,?)";
+			pstmt = conn.prepareStatement(sql);
+
+			// nvl((select max(group_no) from board),0+1)
+
+			if (vo.getGroupNo() == null) {
+				// 4. 바인딩 타이틀,컨텐 츠,번호
+				pstmt.setString(1, vo.getTitle());
+				pstmt.setString(2, vo.getContent());
+				pstmt.setLong(3, vo.getUserNo());
+			} else {
+
+				pstmt.setString(1, vo.getTitle());
+				pstmt.setString(2, vo.getContent());
+				pstmt.setInt(3, vo.getGroupNo());
+				pstmt.setInt(4, vo.getGroupOrderNo());
+				pstmt.setInt(5, vo.getDepth());
+				pstmt.setLong(6, vo.getUserNo());
+
+			}
+
+			// 5. 쿼리 실행
+			pstmt.executeUpdate(); // pstmt.executeUpdate(sql) ->sql문을 줄
+									// 필요가 없다
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 6. 자원정리
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error : " + e);
+
+			}
+
+		}
+		return count;
+
+		}
+	
+	public void delete(CustomBoardVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn=dataSource.getConnection();
+
+			String sql = "delete from boards where no=? ";
+			pstmt = conn.prepareStatement(sql);
+
+			// 4. 바인딩
+			pstmt.setLong(1, vo.getNo());
+
+			// 5. sql 실행
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("연결 오류 : " + e);
+		} finally {
+			try {
+
+				if (conn != null) {
+					conn.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error : " + e);
+			}
+		}
+
+	}
+	
+	public CustomBoardVo get(Long no1) {
+
+		CustomBoardVo vo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			conn=dataSource.getConnection();
+
+			String sql = "select no,title,content,user_no,depth,order_no,group_no from boards where no=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setLong(1, no1);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				Long no = rs.getLong(1);
+				String title = rs.getString(2);
+				String content = rs.getString(3);
+				Long userno = rs.getLong(4);
+				Integer depth = rs.getInt(5);
+				Integer orderno = rs.getInt(6);
+				Integer groupno = rs.getInt(7);
+
+				vo = new CustomBoardVo();
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setUserNo(userno);
+				vo.setDepth(depth);
+				vo.setGroupOrderNo(orderno);
+				vo.setGroupNo(groupno);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error : " + e);
+		}
+
+		return vo;
+
+	}
+	
+	public void updateViewCount(Long no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn=dataSource.getConnection();
+
+			String sql = "update boards set view_count = view_count + 1 where no = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setLong(1, no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void update(CustomBoardVo vo) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			conn=dataSource.getConnection();
+
+			String sql = "update boards set title=?, content=? where no=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setLong(3, vo.getNo());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("error : " + e);
+		} finally {
+
+			try {
+
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error : " + e);
+			}
+		}
+	}
+	
+	public void updatereplyCount(int groupNo, int orderNo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn=dataSource.getConnection();
+
+			String sql = "update boards set order_no=order_no+1 where group_no=? and order_no>=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, orderNo);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public AttachFileVO selectAttachFileByFNO(int fNO) {
+		return sqlSession.selectOne("board.selectAttachFileByFNO", fNO);
+	}
+	
+	public void insertAttachFile(AttachFileVO attachFileVO) {
+		sqlSession.insert("board.insertAttachFile", attachFileVO);
+	}
+
+
+	public AttachFileVO selectAttachFileByNO(int no) {
+		return sqlSession.selectOne("board.selectAttachFileByNO", no);
+	}
+
+
+	
 }
+
+
+

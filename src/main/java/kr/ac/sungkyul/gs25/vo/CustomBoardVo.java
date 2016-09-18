@@ -1,8 +1,7 @@
 package kr.ac.sungkyul.gs25.vo;
 
-public class CustomCenterVo {
+public class CustomBoardVo {
 	
-
 	private Long no;
 	private String title;
 	private String content;
@@ -16,7 +15,6 @@ public class CustomCenterVo {
 	private String UserName;
 	private Integer orderNo;
 	private String keyword;
-	
 	public Long getNo() {
 		return no;
 	}
@@ -95,10 +93,9 @@ public class CustomCenterVo {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
 	@Override
 	public String toString() {
-		return "CustomCenterVo [no=" + no + ", title=" + title + ", content=" + content + ", count=" + count
+		return "CustomBoardVo [no=" + no + ", title=" + title + ", content=" + content + ", count=" + count
 				+ ", groupNo=" + groupNo + ", groupOrderNo=" + groupOrderNo + ", depth=" + depth + ", UserNo=" + UserNo
 				+ ", date=" + date + ", name=" + name + ", UserName=" + UserName + ", orderNo=" + orderNo + ", keyword="
 				+ keyword + "]";

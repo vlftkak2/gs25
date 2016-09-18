@@ -20,6 +20,12 @@
    <property name="suffix" value=".jsp" />
    <property name="order" value="1" />
 </bean>
+
+<!-- 첨부파일관련 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
 	
 
 	<context:annotation-config />	

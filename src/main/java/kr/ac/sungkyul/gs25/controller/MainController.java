@@ -22,10 +22,6 @@ public class MainController {
 		return "/main/companyintro";
 	}
 	
-	@RequestMapping("/test")
-	public String test(){
-		
-		return "/test/test";
-	}
+
 
 }

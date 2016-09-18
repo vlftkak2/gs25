@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="selectAttachFileByNO" parameterType="java.lang.Long"
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		select * from boardsfile where boards_no=#{no}
+	</select>
+
+
+	<select id="selectAttachFileByFNO" parameterType="java.lang.Integer"
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		select * from boardsfile where no=#{fNO}
+	</select>
+	
+		<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.mysite.vo.AttachFileVO">
+		<![CDATA[
+			insert into boardsfile(
+				no, path, orgName, saveName, fileSize,boards_no
+			)
+			values (
+				seq_boardsfile.nextVal, #{path}, #{orgName}, #{saveName}, #{fileSize},#{no} 
+			)
+		]]>
+	</insert>
+
+
+
+</mapper>
+	
