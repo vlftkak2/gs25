@@ -2,26 +2,28 @@ package kr.ac.sungkyul.gs25.vo;
 
 public class AttachFileVO {
 	
-	private int fNO;
-	private int no;
+	private Long fNO;
+	private Long no;
 	private String path;
 	private String orgName;
 	private String saveName;
 	private long fileSize;
+	private String imageurl;
 
-	public int getfNO() {
+
+	public Long getfNO() {
 		return fNO;
 	}
 
-	public void setfNO(int fNO) {
+	public void setfNO(Long fNO) {
 		this.fNO = fNO;
 	}
 
-	public int getNo() {
+	public Long getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(Long no) {
 		this.no = no;
 	}
 
@@ -56,11 +58,22 @@ public class AttachFileVO {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
+	
+	
+
+	public String getImageurl() {
+		return imageurl;
+	}
+
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
 
 	@Override
 	public String toString() {
 		return "AttachFileVO [fNO=" + fNO + ", no=" + no + ", path=" + path + ", orgName=" + orgName + ", saveName="
-				+ saveName + ", fileSize=" + fileSize + "]";
+				+ saveName + ", fileSize=" + fileSize + ", imageurl=" + imageurl + "]";
 	}
+
 
 }

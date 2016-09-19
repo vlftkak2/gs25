@@ -114,11 +114,11 @@
 						<ul>
 
 							<c:if test="${map.prevtoPage >= 0 }">
-								<li><a href="/gs25/map/list?p=${map.prevtoPage }">◀◀</a></li>
+								<li><a href="/gs25/custom/list?p=${map.prevtoPage }">◀◀</a></li>
 							</c:if>
 
 							<c:if test="${map.prevPage >= 0 }">
-								<li><a href="/gs25/map/list?p=${map.prevPage }">◀</a></li>
+								<li><a href="/gs25/custom/list?p=${map.prevPage }">◀</a></li>
 							</c:if>
 
 							<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
@@ -131,16 +131,16 @@
 										<li>${i }</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/gs25/board/list?p=${i }">${i }</a></li>
+										<li><a href="/gs25/custom/list?p=${i }">${i }</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
 							<c:if test='${map.nextPage > 0 }'>
-								<li><a href="/gs25/map/list?p=${map.nextPage }">▶</a></li>
+								<li><a href="/gs25/custom/list?p=${map.nextPage }">▶</a></li>
 							</c:if>
 							<c:if test='${map.nexttoPage > 0 }'>
-								<li><a href="/gs25/map/list?p=${map.nexttoPage }">▶▶</a></li>
+								<li><a href="/gs25/custom/list?p=${map.nexttoPage }">▶▶</a></li>
 							</c:if>
 
 						</ul>

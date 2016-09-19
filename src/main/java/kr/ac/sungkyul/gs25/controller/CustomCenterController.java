@@ -50,10 +50,8 @@ public class CustomCenterController {
 		return "/customcenter/write";
 	}
 
-	@RequestMapping("/write")
+	@RequestMapping(value="/write",method=RequestMethod.POST)
 	public String write(@ModelAttribute CustomBoardVo vo, HttpSession session, MultipartFile file) throws Exception {
-
-		System.out.println(file.getOriginalFilename());
 
 		if (session == null) {
 			return "redirect:/main";
@@ -63,9 +61,9 @@ public class CustomCenterController {
 		if (authUser == null) {
 			return "redirect:/main";
 		}
+		
 		vo.setUserNo(authUser.getNo());
-		System.out.println(vo);
-		customservice.write(vo, file);
+		customservice.write(vo,file);
 
 		return "redirect:/custom/list";
 	}
@@ -90,20 +88,25 @@ public class CustomCenterController {
 
 	@RequestMapping("/viewform")
 	public String viewfrom(HttpSession session,
-			@RequestParam(value = "no", required = true, defaultValue = "1") Long no, Model model) {
+			@RequestParam(value = "no", required = false, defaultValue = "1") Long no, Model model) {
 
 		if (session == null) {
 			return "redirect:/main";
 		}
 
 		CustomBoardVo vo = customservice.boardinfo(no);
+		AttachFileVO attachFileVO = customservice.selectAttachFileByNO(no);
+		System.out.println(attachFileVO);
 
 		if (vo == null) {
 			return "redirect:/custom/list";
 		}
 		model.addAttribute("vo", vo);
+		model.addAttribute("attachFileVO", attachFileVO);
+
 
 		customservice.viewcountup(no);
+		
 
 		return "/customcenter/view";
 	}
@@ -185,7 +188,9 @@ public class CustomCenterController {
 
 		vo.setDepth(depth);
 		vo.setGroupOrderNo(groupOrderno);
+		vo.setGroupNo(groupNo);
 		
+		System.out.println(vo);
 		
 		customservice.updatereplyCount(groupNo, groupOrderno);
 		
@@ -202,7 +207,7 @@ public class CustomCenterController {
 	
 	//파일다운로드
 		@RequestMapping(value = "download", method = RequestMethod.GET)
-		public void downloadFile(int fNO, HttpServletResponse res) throws Exception {
+		public void downloadFile(Long fNO, HttpServletResponse res) throws Exception {
 			System.out.println(fNO);
 			
 			
@@ -217,12 +222,14 @@ public class CustomCenterController {
 			res.setHeader("Content-disposition", "attachment; filename=\"" + URLEncoder.encode(orgName,"UTF-8") +"\"");
 			OutputStream resOut = res.getOutputStream();
 			
-			FileInputStream fin = new FileInputStream("C:\\upload\\"+saveName);
+			FileInputStream fin = new FileInputStream("c:\\Users\\형민\\workspace\\gs25\\webapp\\assets\\images\\customcenter\\"+saveName);
 			FileCopyUtils.copy(fin, resOut);
 				
 			fin.close();
 			    
 		}
+		
+		
 	
 	
 

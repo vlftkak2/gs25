@@ -9,40 +9,57 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <div id="container">
-      <jsp:include page="/WEB-INF/views/include/header.jsp" />
-      
-      <div id="content">
-            
-            
-         
-            <h3 align=center>BRAND STORY</h3>
-               <h4>ABOUT</h4>
-               <p>
-                  매일매일 신선함으로 가득 차는 GS25는 재치 있는 상품으로 하루를 충전하고, <br>
-                  365일 24시간 언제 어디서나 편리하게 원하는 것을 넘어 필요한 것까지 찾아주는 서비스로 편의점 이상의 가치를 드립니다.
-                  <br><br> 신선함으로 일상을 충전하고 활력을 얻는 공간, <br>
-                  고객의 하루가 시작되고 머무르고 마무리되는 Fresh한 경험 <br>
-               </p>   
-            
-            <img src="/gs25/assets/images/fresh.png" />
-            
-
-         </div>
-         
-         <div>
-            <p>
-               <strong>고객의 하루가 시작되고 잠깐의 휴식이 되어 머무르고, 하루의 마무리를 같이하는 편의점</strong> <br>
-               이전까지의 편의점은 단순히 제품과 서비스를 채워두고 제공하는 편의점으로 고객들이 필요로 하는 사품과 서비스, 편안한 휴식
-               제공에 대해 부족함이 있었습니다. <br> GS2는 정형화된 틀을 깨는 Fresh한 생각으로 매장을 방문한
-               고객들이 1분 1초도 Refresh 할 수 있도록 편안한 휴식처를 제공합니다.
-            </p>
-            <p align=center>
-               <img src="/gs25/assets/images/refresh.png" />
-            </p>
-         </div>
-         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-      </div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+function getThumbnailPrivew(html, $target) {
+    if (html.files && html.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $target.css('display', '');
+            //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
+            $target.html('<img src="' + e.target.result + '" border="0" alt="" />');
+        }
+        reader.readAsDataURL(html.files[0]);
+    }
+}
+</script>
+<style>
+.filebox label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    width:100%;
+    max-width:100%;
+}
+ 
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+</style>
+ 
+<form name="form" id="form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+    <div class="filebox">
+        <label for="cma_file">사진 인증샷 업로드</label>
+        <input type="file" name="cma_file" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+        <br /><br />
+        <div id="cma_image" style="width:100%;max-width:100%;border:1px solid #000;display:none;"></div>
+    </div>
+</form>
       
 </body>
 </html>

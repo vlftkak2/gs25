@@ -1,11 +1,14 @@
 package kr.ac.sungkyul.gs25.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.dao.CustomCenterDao;
@@ -15,8 +18,8 @@ import kr.ac.sungkyul.gs25.vo.CustomBoardVo;
 @Service
 public class CustomCenterService {
 
-	private static final int LIST_PAGESIZE = 5; // 리스팅 되는 게시물 수
-	private static final int LIST_BLOCKSIZE = 3; // 페이지 리스트에 표시되는 페이지 수
+	private static final int LIST_PAGESIZE = 10; // 리스팅 되는 게시물 수
+	private static final int LIST_BLOCKSIZE = 5; // 페이지 리스트에 표시되는 페이지 수
 
 	@Autowired
 	private CustomCenterDao customdao;
@@ -65,8 +68,43 @@ public class CustomCenterService {
 		return map;
 	}
 
-	public void write(CustomBoardVo vo, MultipartFile file) throws Exception {
-		customdao.insert(vo);
+	public void write(CustomBoardVo vo, MultipartFile file) throws Exception{
+		       Long no=customdao.insert(vo);
+		
+		       //2.no-->게시글저장할때
+				//1.fno-->저장할때
+
+				//3.orgName
+				String orgName =file.getOriginalFilename();
+				
+				//4.fileSize
+				long fileSize =file.getSize();
+				
+				//5.saveName
+				String saveName = orgName;
+				
+				//6.path 
+				String path ="c:\\Users\\형민\\workspace\\gs25\\webapp\\assets\\images\\customcenter";
+
+				//7.url
+				String imageurl="/gs25/assets/images/customcenter"+"/"+orgName;
+				
+				AttachFileVO attachFileVO = new AttachFileVO();
+				attachFileVO.setNo(no);
+				attachFileVO.setPath(path);
+				attachFileVO.setOrgName(orgName);
+				attachFileVO.setSaveName(saveName);
+				attachFileVO.setFileSize(fileSize);
+				attachFileVO.setImageurl(imageurl);
+
+				System.out.println(attachFileVO.toString());
+				
+				customdao.insertAttachFile(attachFileVO);
+				
+				
+				File target = new File(path, saveName);
+				FileCopyUtils.copy(file.getBytes(),target);
+		
 	}
 
 	public void delete(CustomBoardVo vo) {
@@ -95,10 +133,14 @@ public class CustomCenterService {
 	}
 	
 	public void reply(CustomBoardVo vo){
-		customdao.insert(vo);
+		customdao.reply(vo);
 	}
 	
-	public AttachFileVO selectAttachFileByFNO(int fNO){
+	public AttachFileVO selectAttachFileByNO(Long no){
+		return customdao.selectAttachFileByNO(no);
+	}
+	
+	public AttachFileVO selectAttachFileByFNO(Long fNO){
 		return customdao.selectAttachFileByFNO(fNO);
 	}
 	

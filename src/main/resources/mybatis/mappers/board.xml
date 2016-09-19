@@ -3,27 +3,89 @@
 
 <mapper namespace="board">
 
-	<select id="selectAttachFileByNO" parameterType="java.lang.Long"
-		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
-		select * from boardsfile where boards_no=#{no}
-	</select>
+	<insert id="replyBoard" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 
-
-	<select id="selectAttachFileByFNO" parameterType="java.lang.Integer"
-		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
-		select * from boardsfile where no=#{fNO}
-	</select>
-	
-		<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.mysite.vo.AttachFileVO">
-		<![CDATA[
-			insert into boardsfile(
-				no, path, orgName, saveName, fileSize,boards_no
+		<selectKey resultType="java.lang.Long" keyProperty="no"
+			order="BEFORE">
+       	<![CDATA[
+       		SELECT seq_boards.nextVal as no FROM DUAL
+       	]]>
+		</selectKey>
+		
+		<![CDATA[	
+			insert into boards(
+				no, title, content,view_count,group_no,order_no,depth,reg_Date,user_no
 			)
-			values (
-				seq_boardsfile.nextVal, #{path}, #{orgName}, #{saveName}, #{fileSize},#{no} 
+			values
+			(
+				#{no},
+				#{title},
+				#{content},
+				0,
+				#{groupNo},
+				#{groupOrderNo},
+				#{depth},
+				sysdate,
+				#{UserNo}
+			)
+		]]>
+
+	</insert>
+
+	<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
+
+		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
+       	<![CDATA[
+       		SELECT seq_boards.nextVal as no FROM DUAL
+       	]]>
+		</selectKey>
+
+		<![CDATA[	
+			insert into boards(
+				no, title, content,view_count,group_no,order_no,depth,reg_Date,user_no
+			)
+			values
+			(
+				#{no},
+				#{title},
+				#{content},
+				0,
+				nvl((select max(group_no) from boards), 0)+1,
+				1,
+				1,
+				sysdate,
+				#{UserNo}
 			)
 		]]>
 	</insert>
+
+
+
+	<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		<![CDATA[
+			insert into boardsfile(
+				fNO, no, path, orgName, saveName, fileSize,imageurl
+			)
+			values (
+				seq_boardsfile.nextVal, #{no}, #{path}, #{orgName}, #{saveName}, #{fileSize},#{imageurl} 
+			)
+		]]>
+	</insert>
+
+
+
+	<select id="selectAttachFileByNO" parameterType="java.lang.Long"
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		select * from boardsfile where no=#{no}
+	</select>
+
+
+
+
+	<select id="selectAttachFileByFNO" parameterType="java.lang.Long"
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		select * from boardsfile where fno=#{fNO}
+	</select>
 
 
 

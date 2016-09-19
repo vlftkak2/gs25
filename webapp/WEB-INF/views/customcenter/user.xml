@@ -3,59 +3,54 @@
 
 <mapper namespace="user">
 
-<select id="getByEmailAndPassword" 
-parameterType="userVo"
-resultType="userVo">
+	<select id="getByEmailAndPassword" parameterType="userVo"
+		resultType="userVo">
 
 <![CDATA[
-select no,name from users where email=#{email} and password=#{password}
+select no,name,email,password from users where email=#{email} and password=#{password}
 ]]>
 
-</select>
+	</select>
 
-<select id="getByEmail" 
-parameterType="string"
-resultType="userVo">
+	<select id="getByEmail" parameterType="string" resultType="userVo">
 
 <![CDATA[
 select no,name,email from users where email=#{email}
 ]]>
 
-</select>
+	</select>
 
 
-<select id="getByNo" 
-parameterType="long"
-resultType="userVo">
+	<select id="getByNo" parameterType="long" resultType="userVo">
 
 <![CDATA[
 select no,name,gender from users where no=#{no}
 ]]>
 
-</select>
+	</select>
 
-<insert id="insert" parameterType="userVo">
+	<insert id="insert" parameterType="userVo">
 <![CDATA[
 insert into USERS VALUES(seq_users.nextval,#{name},#{email},#{password},#{gender})
 ]]>
-</insert>
+	</insert>
 
 
-<update id="update" parameterType="userVo">
- <choose>
-  <when test="#{password==''}">
+	<update id="update" parameterType="userVo">
+		<choose>
+			<when test="#{password==''}">
   <![CDATA[
   update users set name=#{name}, gender=#{gender} where no=#{no}
   ]]>
-  </when>
-  <otherwise>
+			</when>
+			<otherwise>
     <![CDATA[
   update users set name=#{name}, password=#{password}, gender=#{gender} where no=#{no}
   ]]>
-  
-  </otherwise>
-</choose>
-</update>
+
+			</otherwise>
+		</choose>
+	</update>
 
 
 </mapper>

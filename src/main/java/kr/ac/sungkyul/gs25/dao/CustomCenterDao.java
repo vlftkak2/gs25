@@ -103,7 +103,6 @@ public class CustomCenterDao {
 				ex.printStackTrace();
 			}
 		}
-		
 	}
 	
 	public int getTotalCount() {
@@ -147,64 +146,15 @@ public class CustomCenterDao {
 
 	}
 	
-	public int insert(CustomBoardVo vo) {
-		int count = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-
-			conn=dataSource.getConnection();
-
-			// 3. statement 생성 ?-> 값이 바인딩 된다.
-			String sql = (vo.getGroupNo() == null)
-					? "insert into boards VALUES(seq_boards.nextval,?,?,1,nvl((select max(group_no) from boards), 0)+1,1,1,sysdate,?)"
-					: "insert into boards values(seq_boards.nextval, ?, ?, 0, ?, ?, ?, sysdate,?)";
-			pstmt = conn.prepareStatement(sql);
-
-			// nvl((select max(group_no) from board),0+1)
-
-			if (vo.getGroupNo() == null) {
-				// 4. 바인딩 타이틀,컨텐 츠,번호
-				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContent());
-				pstmt.setLong(3, vo.getUserNo());
-			} else {
-
-				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContent());
-				pstmt.setInt(3, vo.getGroupNo());
-				pstmt.setInt(4, vo.getGroupOrderNo());
-				pstmt.setInt(5, vo.getDepth());
-				pstmt.setLong(6, vo.getUserNo());
-
-			}
-
-			// 5. 쿼리 실행
-			pstmt.executeUpdate(); // pstmt.executeUpdate(sql) ->sql문을 줄
-									// 필요가 없다
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				// 6. 자원정리
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error : " + e);
-
-			}
-
+	public Long insert(CustomBoardVo vo) {
+		sqlSession.insert("board.insertBoard", vo);
+		System.out.println(vo.getNo());
+		return vo.getNo();
 		}
-		return count;
-
-		}
+	
+	public void reply(CustomBoardVo vo){
+		sqlSession.insert("board.replyBoard",vo);
+	}
 	
 	public void delete(CustomBoardVo vo) {
 		Connection conn = null;
@@ -380,7 +330,7 @@ public class CustomCenterDao {
 		}
 	}
 	
-	public AttachFileVO selectAttachFileByFNO(int fNO) {
+	public AttachFileVO selectAttachFileByFNO(Long fNO) {
 		return sqlSession.selectOne("board.selectAttachFileByFNO", fNO);
 	}
 	
@@ -389,7 +339,7 @@ public class CustomCenterDao {
 	}
 
 
-	public AttachFileVO selectAttachFileByNO(int no) {
+	public AttachFileVO selectAttachFileByNO(Long no) {
 		return sqlSession.selectOne("board.selectAttachFileByNO", no);
 	}
 
