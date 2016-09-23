@@ -44,13 +44,12 @@
 							</tr>
 							<tr>
 								<td class="label">첨부파일</td>
-								<td id="attachFile" data-fno="${attachFileVO.fNO }">${attachFileVO.orgName }</td>
+							<td id="attachFile" data-fno="${attachFileVO.fNO }">${attachFileVO.orgName }</td>
 							</tr>
 						</table>
+						<img alt="이미지 없음" src="download?fNO=${attachFileVO.fNO }">
 				<div id="cma_image" style="width:95%; max-width:100%; border:1px solid #c0c0c0;">
-				<img src="${ attachFileVO.imageurl}" alt="형민)맛있는도시락">
 				</div>
-				
 						<div class="bottom">
 							<a href="/gs25/custom/list">글목록</a>
 							<c:if test='${not empty authUser }'>

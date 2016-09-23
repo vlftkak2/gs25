@@ -24,13 +24,13 @@ public class MapDao {
 
 	public List<MapBoardVo> getList(int page, int pagesize,String keyword) {
 		List<MapBoardVo> list = new ArrayList<MapBoardVo>();
-
+		System.out.println(keyword);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn=dataSource.getConnection();
-			String sql = (keyword ==null || "".equals(keyword))? 
+			String sql =(keyword ==null || "".equals(keyword))? 
 		    "select * from(select c.*,rownum rn from(select no,name,address from store) c) where ?<=rn and rn<=?"
 			: "select * from(select c.*,rownum rn from(select no,name,address from store where name like ? or address like ?) c) where ?<=rn and rn<=?";
 				
@@ -57,7 +57,6 @@ public class MapDao {
 				Long no = rs.getLong(1);
 				String name=rs.getString(2);
 				String address=rs.getString(3);
-			
 				
 				MapBoardVo vo = new MapBoardVo();
 				vo.setNo(no);
@@ -67,8 +66,6 @@ public class MapDao {
 
 				list.add(vo);
 			}
-			
-			return list;
 			
 		} catch (SQLException ex) {
 			
@@ -90,7 +87,7 @@ public class MapDao {
 				ex.printStackTrace();
 			}
 		}
-		
+		return list;
 	}
 	
 	public int getTotalCount() {

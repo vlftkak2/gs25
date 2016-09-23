@@ -36,7 +36,7 @@ public class CustomCenterDao {
 			conn=dataSource.getConnection();
 			String sql = (keyword ==null || "".equals(keyword))? 
 		    "select * from(select c.*,rownum rn from(select a.no,a.title,b.name,a.user_no,a.view_count,to_char(a.reg_date, 'yyyy-mm-dd pm hh:mi:ss'),a.depth from boards a, users b where a.user_no=b.no order by group_no desc, order_no asc) c) where ?<=rn and rn<=?"
-			: "select * from(select c.*,rownum rn from(select no,name,address from store where name like ? or address like ?) c) where ?<=rn and rn<=?";
+		    :"select * from(select c.*,rownum rn from(select a.no,a.title,b.name,a.user_no,a.view_count,to_char(a.reg_date, 'yyyy-mm-dd pm hh:mi:ss'),a.depth from boards a, users b where a.user_no=b.no and (title like ? or content like ?) order by group_no desc, order_no asc) c) where ?<=rn and rn<=?";
 				
 			pstmt = conn.prepareStatement(sql);
 			

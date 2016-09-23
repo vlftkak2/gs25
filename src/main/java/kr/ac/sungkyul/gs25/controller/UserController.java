@@ -1,5 +1,7 @@
 package kr.ac.sungkyul.gs25.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.sungkyul.gs25.service.UserService;
 import kr.ac.sungkyul.gs25.vo.UserVo;
@@ -17,7 +20,9 @@ import kr.ac.sungkyul.gs25.vo.UserVo;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Autowired UserService userService;
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/joinform")
 	public String joinform(){
 		return "user/joinform";
@@ -25,7 +30,7 @@ public class UserController {
 	
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo vo){
-		System.out.println(vo);
+		System.out.println("join: "+vo.toString());
 		userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}
@@ -95,14 +100,38 @@ public class UserController {
 	}
 
 	@RequestMapping("/idFind")
-	public String idFind(@ModelAttribute UserVo vo){
+	public String idFind(@ModelAttribute UserVo vo,Model model){
 		String email = userService.idfind(vo);
-		
-		return "redirect:/user/findInfo";
+		model.addAttribute("email",email);
+		return "user/idresult";
 	}
-
-	@RequestMapping("/passFind")
-	public String passFind(){
-		return "user/passFind";
+	
+	@RequestMapping("/repassword")
+	public String repasswordForm(){
+		return "user/repassword";
+	}
+	
+	@RequestMapping("/setPass")
+	public String setPassword
+			(@RequestParam(value= "email", required=false, defaultValue="") String email,
+			 @RequestParam(value= "password", required=false, defaultValue="") String password){
+		
+		userService.setpass(email,password);
+		
+		return "user/send";
+	}
+	
+	@RequestMapping("/passresult")
+	public String passResult(){
+		return "user/passresult";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "CheckEmail", method = RequestMethod.POST)
+	public Map<String, Object> checkEmail(String email) {	//Request 객체받음, script or DB 객체 분별
+		
+		Map<String, Object> map = userService.checkEmail(email);
+		
+		return map;
 	}
 }

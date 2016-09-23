@@ -1,7 +1,6 @@
 package kr.ac.sungkyul.gs25.vo;
 
 public class UserVo {
-
 	private Long no;
 	private String name;
 	private String email;
@@ -11,6 +10,8 @@ public class UserVo {
 	private String address;
 	private String phone;
 	private Integer point;
+	private String position;
+	private Long store_no;
 	
 	public Long getNo() {
 		return no;
@@ -66,9 +67,22 @@ public class UserVo {
 	public void setPoint(Integer point) {
 		this.point = point;
 	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public Long getStore_no() {
+		return store_no;
+	}
+	public void setStore_no(Long store_no) {
+		this.store_no = store_no;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", birth="
-				+ birth + ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", point=" + point + "]";
+				+ birth + ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", point=" + point
+				+ ", position=" + position + ", store_no=" + store_no + "]";
 	}
 }

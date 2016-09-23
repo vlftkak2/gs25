@@ -60,7 +60,6 @@ public class MapService {
 		map.put("keyword", keyword);
 		map.put("nexttoPage", nexttoPage);
 		map.put("prevtoPage", prevtoPage);
-		
 		return map;
 	}
 	

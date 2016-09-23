@@ -87,7 +87,25 @@
 		<version>1.3.1</version>
 	</dependency>
 	
-
+	<!-- java 메일 API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-context-support</artifactId>
+	        <version>4.2.6.RELEASE</version>
+		</dependency>
+		
+		 <!-- jackson -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.8.1</version>
+		</dependency>
 
 	</dependencies>
 

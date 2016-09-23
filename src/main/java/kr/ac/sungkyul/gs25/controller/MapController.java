@@ -22,12 +22,11 @@ public class MapController {
 	@RequestMapping("/list")
 	public String maplist(Model model,
 			@RequestParam(value="p",required=true,defaultValue="1") String page,
-			@RequestParam(value="kwd",required=false, defaultValue="") String keyword,
+			@RequestParam(value="kwd",required=true, defaultValue="") String keyword,
 			@RequestParam(value="no", required=true, defaultValue="1") Long no){
 		
-		
+		System.out.println(keyword);
 		Map<String, Object> map=mapservice.list(page, keyword); //게시판 리스트
-		System.out.println(map);
 		
 		Map<String, Object> map2=mapservice.maplist(keyword, no); //지도 리스트
 
@@ -35,7 +34,7 @@ public class MapController {
 		model.addAttribute("map", map);
 		model.addAttribute("map2", map2);
 
-		return "/map/maplist";
+		return "/MainPage/store_search";
 	}
 	
 }

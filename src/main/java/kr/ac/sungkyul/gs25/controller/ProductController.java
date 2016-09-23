@@ -27,7 +27,7 @@ public class ProductController {
 		System.out.println(map);
 		model.addAttribute("map", map);
 		
-		return "/product/productlist";
+		return "/SubPage/product_search";
 	}
 	
 }

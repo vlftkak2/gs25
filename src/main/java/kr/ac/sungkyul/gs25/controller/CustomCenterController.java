@@ -37,7 +37,7 @@ public class CustomCenterController {
 		Map<String, Object> map = customservice.list(page, keyword);
 		model.addAttribute("map", map);
 
-		return "customcenter/customboardlist";
+		return "MainPage/customcenter/customboardlist";
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
@@ -47,7 +47,7 @@ public class CustomCenterController {
 			return "redirect:/main";
 		}
 
-		return "/customcenter/write";
+		return "/MainPage/customcenter/write";
 	}
 
 	@RequestMapping(value="/write",method=RequestMethod.POST)
@@ -108,7 +108,7 @@ public class CustomCenterController {
 		customservice.viewcountup(no);
 		
 
-		return "/customcenter/view";
+		return "/MainPage/customcenter/view";
 	}
 
 	@RequestMapping("/modifyform")
@@ -126,7 +126,7 @@ public class CustomCenterController {
 		CustomBoardVo vo = customservice.boardinfo(no);
 		model.addAttribute("vo", vo);
 
-		return "/customcenter/modify";
+		return "/MainPage/customcenter/modify";
 	}
 
 	@RequestMapping("/modify")
@@ -164,7 +164,7 @@ public class CustomCenterController {
 
 		System.out.println(vo);
 
-		return "/customcenter/reply";
+		return "/MainPage/customcenter/reply";
 	}
 	
 	@RequestMapping("/reply")
@@ -202,7 +202,7 @@ public class CustomCenterController {
 	
 	@RequestMapping("/right")
 	public String right(){
-		return "/customcenter/right";
+		return "/MainPage/customcenter/right";
 	}
 	
 	//파일다운로드
@@ -222,7 +222,7 @@ public class CustomCenterController {
 			res.setHeader("Content-disposition", "attachment; filename=\"" + URLEncoder.encode(orgName,"UTF-8") +"\"");
 			OutputStream resOut = res.getOutputStream();
 			
-			FileInputStream fin = new FileInputStream("c:\\Users\\형민\\workspace\\gs25\\webapp\\assets\\images\\customcenter\\"+saveName);
+			FileInputStream fin = new FileInputStream("c:\\upload\\"+saveName);
 			FileCopyUtils.copy(fin, resOut);
 				
 			fin.close();

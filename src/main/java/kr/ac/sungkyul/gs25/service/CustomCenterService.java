@@ -71,23 +71,19 @@ public class CustomCenterService {
 	public void write(CustomBoardVo vo, MultipartFile file) throws Exception{
 		       Long no=customdao.insert(vo);
 		
-		       //2.no-->게시글저장할때
-				//1.fno-->저장할때
 
-				//3.orgName
+		       //3.orgName
 				String orgName =file.getOriginalFilename();
 				
 				//4.fileSize
 				long fileSize =file.getSize();
 				
 				//5.saveName
-				String saveName = orgName;
+				String saveName = UUID.randomUUID().toString()+ "_" + orgName;
 				
 				//6.path 
-				String path ="c:\\Users\\형민\\workspace\\gs25\\webapp\\assets\\images\\customcenter";
-
-				//7.url
-				String imageurl="/gs25/assets/images/customcenter"+"/"+orgName;
+				String path ="c:\\upload";
+				
 				
 				AttachFileVO attachFileVO = new AttachFileVO();
 				attachFileVO.setNo(no);
@@ -95,8 +91,7 @@ public class CustomCenterService {
 				attachFileVO.setOrgName(orgName);
 				attachFileVO.setSaveName(saveName);
 				attachFileVO.setFileSize(fileSize);
-				attachFileVO.setImageurl(imageurl);
-
+				
 				System.out.println(attachFileVO.toString());
 				
 				customdao.insertAttachFile(attachFileVO);

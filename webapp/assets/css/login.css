@@ -1,6 +1,5 @@
 @CHARSET "UTF-8";
-@import "gs25site.css";
-@CHARSET "UTF-8";
+@IMPORT "gs25site.css";
 body{
 	position:relative;
 	margin:0;
@@ -15,17 +14,32 @@ form, select, input, textarea {
 	width:960px;
 	margin: 0 auto;
 }
+input[type=radio], input[type=checkbox] {
+    margin-right: 5px;
+}
+select {
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    padding: 6px 8px;
+}
+.labelM{
+	margin-right: 10px;
+}
 #contents{
 	position:relative;
 	height: 400px;
 	margin-bottom: 30px;
+}
+#contenta{
+	position:relative;
+	height: 600px;
 }
 #user{
 	height:250px;
     padding: 25px 0 40px;
     border-top: 1px solid #6c6c6c;
     border-bottom: 1px solid #e0e0e0;
-    background: #fbfbfb url("/gs25/assets/images/login/gsMember.png") 88px 0 no-repeat;
+    background: #fbfbfb url("/gs25/assets//images/login/gsMember.png") 88px 0 no-repeat;
 }
 #tlt1 {
     padding: 50px 0;
@@ -62,6 +76,20 @@ form, select, input, textarea {
 	float:left;
 	width: 432px;
 	position:absolute;
+}
+.spc_sty02{
+	margin-right:10px;	
+}
+#sel2_lt {
+	margin-top: 8px;
+    float: left;
+}
+#sel2_rt {
+    float: left;
+    width: 140px;
+}
+#storeDrop{
+	margin-left: 10px;
 }
 #findcan{
 	width:500px;
@@ -152,6 +180,13 @@ form, select, input, textarea {
     background-color: #337ab7;
     border-color: #2e6da4;
 }
+.btn-find{
+	 color: #fff;
+    background-color: #66afe9;
+	border-radius:1px;
+	float:right;
+	margin: 30px 0 0 0;
+}
 button {
     overflow: visible;
 }
@@ -228,7 +263,14 @@ legend {
     margin: 0 auto;
     width: 960px;
     padding: 0;
-    height:650px;
+    height: 1050px;
+}
+#modiForm {
+    position: relative;
+    margin: 0 auto;
+    width: 960px;
+    padding: 0;
+    height: 700px;
 }
 .banner{
 	margin-left:10px;
@@ -305,7 +347,168 @@ input[type=text], input[type=password] {
 	font-size:13px;
 	color:red;
 }
+#msg_email{
+	margin-left:10px;
+	font-size:13px;
+	color:red;
+}
+.scl_box {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+    width: 920px;
+    height: 200px;
+    padding: 25px 20px 30px;
+    background: #fbfbfb;
+    border: 1px solid #dfdfdf;
+    font-size: 13px;
+    color: #666;
+    line-height: 22px;
+}
+.agree_tbox{
+	margin: 5px 15px;
+}
+.scl_box table {
+    width: 819px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+.scl_box table th {
+    padding: 4px 0 3px 0;
+    border-bottom: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    font-weight: normal;
+    background-color: #f8f8f8;
+}
+.scl_box table td {
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+}
+#agreeF{
+	margin: 30px 0 0 10px;
+}
+#emailCheck{
+	margin-left:10px;
+	font-size:13px;
+	color:red;
+}
 /*findInfo*/
 .smaller{
-	width:480px;
+	width:450px;
+}
+.both{
+	height:380px;
+    border-bottom: 1px solid #999;
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.popwrap {
+	position:relative;
+	background:#444;
+	border: 1px solid #5e5e5e;
+	margin-bottom: 20px;
+}
+.popwrap .pop_tlt1 {
+	background:url("/gs25/assets/images/login/ico_popt.gif") no-repeat 25px 20px;
+	padding:15px 0px 20px 40px;
+	color:#fff;
+	font-size:18px;
+}
+/*joinSuccess*/
+#join-succ{
+	height:250px;
+    padding: 25px 0 40px;
+    border-top: 1px solid #6c6c6c;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fbfbfb url("/gs25/assets/images/login/gs25_store.png") 60px no-repeat;
+}
+#goLogin{
+	margin: 75px 0 0 410px;
+}
+#line{
+	margin:0;
+	font-size: 18px;
+	padding: 10px 0;
+}
+.lineM{
+	background:url("/gs25/assets/images/login/home.png") no-repeat 25px 20px;
+	padding: 17px 0px 20px 57px;
+	color:#fff;
+}
+.lineL{
+	background:url("/gs25/assets/images/login/unlock.png") no-repeat 25px 20px;
+	padding: 17px 0px 20px 57px;
+	color:#fff;
+}
+/*repassword*/
+#gsBack{
+	background: url("/gs25/assets/images/login/gs25store.jpg") center #cdd2c4 no-repeat;
+    background-size: cover;
+}
+#wrapper {
+    text-align: center;
+    padding: 150px 100px;
+}
+#repass{
+	height:200px;
+	margin-bottom:70px;
+}
+#move{
+	width:100%;
+	margin-bottom:20px;
+	height:60px;
+}
+.tbl_wtype2{
+	border-top: 1px solid #666;
+    color: #222;
+    font-size: 13px;
+    margin: 0 auto;
+    width: 700px;
+}
+.tbl_wtype2 th {
+    width: 160px;
+    padding: 17px 0 16px 20px;
+    line-height: 16px;
+    background: #F5F0ED;
+    border-bottom: 1px solid #dfdfdf;
+    text-align: left;
+    vertical-align: top;
+}
+.tbl_wtype2 td {
+    padding: 7px 10px;
+    text-align:left;
+    height: 30px;
+    color: #444;
+    border-left: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+}
+.ceLeft{
+	width: 200px;
+    margin: 0 auto;
+}
+#box {
+    background: rgba(255,255,255,0.96);
+    padding: 23px;
+    border-radius: 6px;
+    margin: 0 auto;
+    color: gray;
+    letter-spacing: -1px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+    width:1000px;
+}
+#sbox {
+	margin:25px;
+}
+.marRight{
+	margin-right:125px
+}
+#sorryman{
+	height: 150px;
+    padding: 25px 0 40px;
+    background: url(/gs25/assets/images/login/sorryman.png) 400px 0 no-repeat;
 }

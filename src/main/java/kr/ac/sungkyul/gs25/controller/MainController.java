@@ -9,17 +9,17 @@ public class MainController {
 	@RequestMapping("/main")
 	public String main(){
 		
-		return "/main/index";
+		return "/MainPage/index";
 	}
 	
 	@RequestMapping("/membership")
 	public String membership(){
-		return "/main/membership";
+		return "/MainPage/membership";
 	}
 	
 	@RequestMapping("/companyintro")
 	public String companyintro(){
-		return "/main/companyintro";
+		return "/MainPage/companyintro";
 	}
 	
 

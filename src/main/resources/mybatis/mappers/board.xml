@@ -64,10 +64,10 @@
 	<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		<![CDATA[
 			insert into boardsfile(
-				fNO, no, path, orgName, saveName, fileSize,imageurl
+				fNO, no, path, orgName, saveName, fileSize
 			)
 			values (
-				seq_boardsfile.nextVal, #{no}, #{path}, #{orgName}, #{saveName}, #{fileSize},#{imageurl} 
+				seq_boardsfile.nextVal, #{no}, #{path}, #{orgName}, #{saveName}, #{fileSize}
 			)
 		]]>
 	</insert>
