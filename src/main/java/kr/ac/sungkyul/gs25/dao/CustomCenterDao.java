@@ -156,6 +156,39 @@ public class CustomCenterDao {
 		sqlSession.insert("board.replyBoard",vo);
 	}
 	
+	public void delete(Long no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn=dataSource.getConnection();
+
+			String sql = "delete from boardsfile where no=? ";
+			pstmt = conn.prepareStatement(sql);
+
+			// 4. 바인딩
+			pstmt.setLong(1, no);
+
+			// 5. sql 실행
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("연결 오류 : " + e);
+		} finally {
+			try {
+
+				if (conn != null) {
+					conn.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error : " + e);
+			}
+		}
+
+	}
+	
 	public void delete(CustomBoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

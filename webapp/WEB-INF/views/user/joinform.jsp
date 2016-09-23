@@ -64,8 +64,7 @@
 										<div id="sel2_lt">
 											<input type="radio" name="position" id="customer" value="CUSTOMER" checked />
 											<label class="labelM" class="mr20">고객</label>
-											<input type="radio" name="position" id="header" value="HEADQUARTERS"/>
-											<label class="labelM">본사 관리자</label>
+				
 											<input type="radio" name="position" id="branch" value="BRANCH" >
 											<label class="labelM">지점 관리자</label>
 										</div>

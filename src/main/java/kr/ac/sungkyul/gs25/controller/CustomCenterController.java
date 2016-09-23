@@ -80,6 +80,7 @@ public class CustomCenterController {
 			return "redirect:/main";
 		}
 		vo.setNo(no);
+		customservice.delete(no);
 
 		customservice.delete(vo);
 
@@ -90,22 +91,24 @@ public class CustomCenterController {
 	public String viewfrom(HttpSession session,
 			@RequestParam(value = "no", required = false, defaultValue = "1") Long no, Model model) {
 
+		System.out.println(no);
 		if (session == null) {
 			return "redirect:/main";
 		}
 
 		CustomBoardVo vo = customservice.boardinfo(no);
+		
 		AttachFileVO attachFileVO = customservice.selectAttachFileByNO(no);
 		System.out.println(attachFileVO);
 
 		if (vo == null) {
 			return "redirect:/custom/list";
 		}
+		
+		customservice.viewcountup(no);
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("attachFileVO", attachFileVO);
-
-
-		customservice.viewcountup(no);
 		
 
 		return "/MainPage/customcenter/view";
@@ -208,8 +211,6 @@ public class CustomCenterController {
 	//파일다운로드
 		@RequestMapping(value = "download", method = RequestMethod.GET)
 		public void downloadFile(Long fNO, HttpServletResponse res) throws Exception {
-			System.out.println(fNO);
-			
 			
 			AttachFileVO attachFileVO = customservice.selectAttachFileByFNO(fNO);
 			

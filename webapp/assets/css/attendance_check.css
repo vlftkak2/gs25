@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+	.container{width:960px;margin: 0 auto;}
+	
+	em{font-style: normal;}
+	.title h1 {font-size: 35px; padding-top: 70px;}
+	.event_cal{margin: 20px 0px;}
+	.count    {float:left; font-size: 16px; font-family: NanumBarunGothicRegular !important;}
+	.count em {color:orange;}
+	.select_cal {margin-left: 390px;}
+	.select_cal select{font-family: NanumBarunGothicRegular !important; padding: 6px 8px; margin-right: 10px;}
+	.float_clear{clear:both;}
+	table,tbody,tfoot,thead,tr,th,td {border:0 none}
+	table{width:100%;table-layout:fixed; border-collapse:collapse; border-spacing:0; border:0;}
+	.cal_box{margin-bottom: 25px;}
+	.cal_box th{border: 1px solid #dfdfdf; background-color: #fbfbfb;}
+	.cal_box td{border: 1px solid #dfdfdf;}
+	
+	.th_wrap{font-size: 16px; height: 45px; line-height: 45px;}
+	.td_wrap{height: 214px;}
+	.td_date{padding: 10px 0 0 10px; color: #d04001; font-weight: bold; font-size:14px;}
+	.td_img{margin: 0px 10px;}
+	.gift_txt{font-family: NanumBarunGothicRegular !important; margin: 8px 10px 0px 10px; text-align: center;font-size: 13px;}
+	.prs_num{margin: 0px 10px; padding-top:5px; color: #00857c; font-size: 16px; text-align: center;}

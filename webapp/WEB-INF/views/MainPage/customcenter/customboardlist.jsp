@@ -70,7 +70,7 @@
 									<c:when test='${vo.depth > 1 }'>
 										<td style="text-align:left; padding-left:${vo.depth*10}px">
 											<img src="/gs25/assets/images/customcenter/re2.png"> <c:choose>
-												<c:when test='${authUser.no == vo.userNo}'>
+												<c:when test='${(authUser.no == vo.userNo) || (authUser.no==1)}'>
 													<a href="/gs25/custom/viewform?no=${vo.no}">${vo.title }</a>
 												</c:when>
 												<c:otherwise>
@@ -78,10 +78,11 @@
 												</c:otherwise>
 											</c:choose>
 										</td>
+										
 									</c:when>
 									<c:otherwise>
 										<td style="text-align: left"><c:choose>
-												<c:when test='${authUser.no == vo.userNo}'>
+												<c:when test='${(authUser.no == vo.userNo && vo.userNo==3) || (authUser.no==1)}'>
 													<a href="/gs25/custom/viewform?no=${vo.no}">${vo.title }</a>
 												</c:when>
 												<c:otherwise>
@@ -96,7 +97,7 @@
 								<td>${vo.date }</td>
 								<td><c:choose>
 										<c:when
-											test='${not empty authUser && authUser.no == vo.userNo }'>
+											test='${(not empty authUser && authUser.no == vo.userNo) || (authUser.no==1)}'>
 											<a href="/gs25/custom/delete?no=${vo.no}" class="del">삭제</a>
 										</c:when>
 										<c:otherwise>

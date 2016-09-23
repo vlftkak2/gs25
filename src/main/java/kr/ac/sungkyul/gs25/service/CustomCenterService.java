@@ -71,9 +71,11 @@ public class CustomCenterService {
 	public void write(CustomBoardVo vo, MultipartFile file) throws Exception{
 		       Long no=customdao.insert(vo);
 		
-
+		       
 		       //3.orgName
-				String orgName =file.getOriginalFilename();
+				String orgName ="이미지";
+				
+			  //file.getOriginalFilename();
 				
 				//4.fileSize
 				long fileSize =file.getSize();
@@ -100,6 +102,10 @@ public class CustomCenterService {
 				File target = new File(path, saveName);
 				FileCopyUtils.copy(file.getBytes(),target);
 		
+	}
+	
+	public void delete(Long no){
+		customdao.delete(no);
 	}
 
 	public void delete(CustomBoardVo vo) {

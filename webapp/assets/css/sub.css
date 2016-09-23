@@ -1,35 +1,61 @@
 @CHARSET "UTF-8";
 @import "gs25site.css";
 
+body{
+   position:relative;
+   margin:0;
+   min-height: 100%;
+}
+ul, ol, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 a{
     color: #494949;
     text-decoration: none;
 }
-
+form, select, input, textarea {
+    vertical-align: middle;
+    font-family: 'NanumBarunGothic', NanumBarunGothic,'돋움',Dotum, Arial,sans-serif;
+    font-size: 13px;
+}
+.container{
+   width:960px;
+   margin: 0 auto;
+}
+#contents{
+   position:relative;
+   width:960px;
+   height: 375px;
+   margin-top:30px;
+   margin-bottom: 30px;
+}
 .login{
-	width:320px;
-	height:375px;
-	position:inherit;
-	float: right;
+   width:320px;
+   height:375px;
+   position:inherit;
+   float: right;
 }
 #title{
-	padding-top:50px;
-	padding-bottom:20px;
-	font-size: 25px;
+   padding-top:50px;
+   padding-bottom:20px;
+   font-size: 25px;
 }
 #intro{
-	font-size:15px;
-	padding-bottom:20px;
+   font-size:15px;
+   padding-bottom:20px;
 }
 .login-form{
-	/*background-color: #acd4d6;*/
-	width:320px;
-	height:90px;
-	padding: 10px 0;
+   /*background-color: #acd4d6;*/
+   width:320px;
+   height:90px;
+   padding: 10px 0;
 }
 .login-form ul{
-	width:100px;
-	position:absolute;
+   width:100px;
+   position:absolute;
 }
 input[type=text], input[type=password] {
     text-indent: 5px;
@@ -43,11 +69,11 @@ input[type=text], input[type=password] {
 }
 
 .img{
-	position:absolute;
-	margin:0;
+   position:absolute;
+   margin:0;
 }
 #login-btn{
-	position: relative;
+   position: relative;
     width: 97px;
     height: 77px;
     line-height: 83px;
@@ -58,32 +84,48 @@ input[type=text], input[type=password] {
     float:right;
 }
 #side-menu{
-	float: left;
-	width:150px;
+   float: left;
+   width:150px;
 }
 #product{
-	float: right;
-	width:810px;
+   float: right;
+   width:810px;
 }
 #side-menu ul{
-	overflow: auto;
-	text-align: center;
-	padding-left:0;
+   overflow: auto;
+   text-align: center;
+   padding-left:0;
 }
 #side-menu ul li{
-	padding-top:5px;
-	padding-bottom:5px;
+   padding-top:5px;
+   padding-bottom:5px;
 }
-#product ul{
-	overflow: auto;
-}
-#product ul li{
-	float:left;
-	padding: 0 10px;
-}
-#product-list{
-	height:250px;
-	position:relative;
-	background-color: #cbeef3;
-	margin-bottom:70px;
-}
+
+.prod_wrap{ background-color: #cbeef3; width: 100%; height: 290px;}
+
+.prod_tab{width: 240px; float:left;}
+.prod_tab #tab4{border-bottom: 0px;}
+
+.afterClass, .beforeClass{border-bottom:1px solid #29a8e9; background-color: #0091df; font-size: 20px;font-weight: bold;font-style: normal;}
+.beforeClass {padding: 8px 28px; height:37px; font-size: 20px;color:#a8e5ff;}
+.afterClass{padding:28px 0px 0px 28px;height:100px; font-size: 24px;color:#fff;}
+
+.afterClass div {font-size: 13px; padding: 13px 0;}
+.beforeClass div {display: none;}
+
+.prod_list{width: 720px; height:290px;background-color: #ddf5fb; float: left;}
+#list2, #list3, #list4{display:none;}
+
+.sbbox{float:left;width:180px;height:240px}
+.pro{position:relative;top:30px;background:url(/gs25/assets/images/subindex/gs25_probg.png) no-repeat 25px 20px;}
+.pro img{margin:40px 0 0 45px;width:95px;height:92px;}
+.pro a{height:175px;display:block}
+.pro .tip{display:table;position:absolute;top:15px;right:10px;width:46px;height:46px;color:#fff;font-size:18px;text-align:center;background:url(/gs25/assets/images/subindex/flag_bg.png) no-repeat; background-image: url(/gs25/assets/images/subindex/flag_bg.png);font-weight: bold}
+.pro .tip.typ1{background-position: 0 0}
+.pro .tip.typ2{background-position: -65px 0}
+.pro .tip.typ3{background-position: 0 -55px;font-size: 16px}
+.pro .tip span{display:table-cell;padding:3px 1px 0 0;vertical-align: middle;line-height: 16px}
+.pro .tip.typ3 span{padding:3px 4px 0 0;font-size: 14px}
+.pro .title{color:#222;text-align:center;  display:block;position: absolute;top: 175px;left: 50%;margin-left: -90px;width: 100%; }
+.pro .title .mt{font-size:13px;display:block; font-style:normal;}
+.pro .title em{margin-top:5px;font-size:22px;display:block; font-style:normal;}

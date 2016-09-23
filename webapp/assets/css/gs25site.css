@@ -1,14 +1,17 @@
 @CHARSET "UTF-8";
+@import url("/gs25/assets/font/nanumbarungothicbold/nanum-barun-gothic-bold.css");
+@import url("/gs25/assets/font/nanumbarungothicregular/nanum-barun-gothic-regular.css");
 
 /* reset */
-*				{ margin:0; padding:0 }
-body			{ font:0.9em "맑은 고딕", 돋움, 굴림; }
-ul, ol, li			{ list-style-type: none }
+*            { margin:0; padding:0 }
+body         { font:0.9em "맑은 고딕", 돋움, 굴림; font-family:NanumBarunGothic !important;}
+ul, ol, li         { list-style-type: none }
 
 /* layout */
-div#container	{ text-align:left; width:100%; margin:0 auto; background-color:#fff }
-div#content		{ float:left; width:100%; background-color:#fff }
-div#footer		{ clear:both; width:100% }
+div#container   { text-align:left; width:100%; margin:0 auto; background-color:#fff }
+div#content      { float:left; width:100%; background-color:#fff }
+div#footer      { clear:both; width:100% }
+
 
 /* header */
 
