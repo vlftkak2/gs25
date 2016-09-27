@@ -33,11 +33,12 @@ public class CustomCenterController {
 
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam(value = "p", required = true, defaultValue = "1") String page,
-			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
-		Map<String, Object> map = customservice.list(page, keyword);
+			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword)
+	{
+		Map<String, Object> map = customservice.list(page, keyword);		
 		model.addAttribute("map", map);
-
-		return "MainPage/customcenter/customboardlist";
+	
+		return "Main_Page/custom_board";
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
@@ -47,7 +48,7 @@ public class CustomCenterController {
 			return "redirect:/main";
 		}
 
-		return "/MainPage/customcenter/write";
+		return "/Main_Page/custom_write";
 	}
 
 	@RequestMapping(value="/write",method=RequestMethod.POST)
@@ -56,7 +57,6 @@ public class CustomCenterController {
 		if (session == null) {
 			return "redirect:/main";
 		}
-
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
 			return "redirect:/main";
@@ -69,7 +69,10 @@ public class CustomCenterController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(HttpSession session, @RequestParam("no") Long no, @ModelAttribute CustomBoardVo vo) {
+	public String delete(HttpSession session, 
+			@RequestParam("groupNo") Integer no, 
+			@RequestParam("groupOrderNo") Integer orderno,
+			@ModelAttribute CustomBoardVo vo) {
 
 		if (session == null) {
 			return "redirect:/main";
@@ -79,8 +82,7 @@ public class CustomCenterController {
 		if (authUser == null) {
 			return "redirect:/main";
 		}
-		vo.setNo(no);
-		customservice.delete(no);
+		customservice.delete(no,orderno);
 
 		customservice.delete(vo);
 
@@ -89,17 +91,31 @@ public class CustomCenterController {
 
 	@RequestMapping("/viewform")
 	public String viewfrom(HttpSession session,
-			@RequestParam(value = "no", required = false, defaultValue = "1") Long no, Model model) {
-
-		System.out.println(no);
+			@RequestParam(value = "no", required = false, defaultValue = "1") Long no,
+			@RequestParam("groupNo") Integer groupNo,
+			Model model) {
+		
+		System.out.println("그룹번호"+groupNo);
 		if (session == null) {
 			return "redirect:/main";
 		}
-
-		CustomBoardVo vo = customservice.boardinfo(no);
 		
+		UserVo authUser=(UserVo)session.getAttribute("authUser");
+		if(authUser==null){
+			return "redirect:/main";
+		}
+		
+		Long authno = authUser.getNo();
+		if( authno ==null){
+			return "redirect:/main/list";
+		}
+		
+		CustomBoardVo DeterminVo =customservice.userno(groupNo); // 사용자 그룹 번호 판별
+		Long userno=DeterminVo.getUserNo();
+		
+		CustomBoardVo vo = customservice.boardinfo(no);
+
 		AttachFileVO attachFileVO = customservice.selectAttachFileByNO(no);
-		System.out.println(attachFileVO);
 
 		if (vo == null) {
 			return "redirect:/custom/list";
@@ -107,11 +123,22 @@ public class CustomCenterController {
 		
 		customservice.viewcountup(no);
 		
+	    if(authno==1){ //사용자가 관리자일 때
+	    	vo = customservice.boardinfo(no);
+			attachFileVO = customservice.selectAttachFileByNO(no);
+			model.addAttribute("vo", vo);
+			model.addAttribute("attachFileVO", attachFileVO);
+			return "/Main_Page/custom_view";
+		}
+	    
+		if(authno!=userno){ //로그인한 사용자번호와 작성자의 번호가 다를때 권한 위배 표시
+			return "redirect:/custom/right";
+		}
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("attachFileVO", attachFileVO);
 		
-
-		return "/MainPage/customcenter/view";
+		return "/Main_Page/custom_view";
 	}
 
 	@RequestMapping("/modifyform")
@@ -129,7 +156,7 @@ public class CustomCenterController {
 		CustomBoardVo vo = customservice.boardinfo(no);
 		model.addAttribute("vo", vo);
 
-		return "/MainPage/customcenter/modify";
+		return "/Main_Page/custom_modify";
 	}
 
 	@RequestMapping("/modify")
@@ -165,15 +192,15 @@ public class CustomCenterController {
 		CustomBoardVo vo = customservice.boardinfo(no);
 		model.addAttribute("vo", vo);
 
-		System.out.println(vo);
 
-		return "/MainPage/customcenter/reply";
+		return "/Main_Page/custom_reply";
 	}
 	
 	@RequestMapping("/reply")
 	public String reply(
 			HttpSession session,
-			@ModelAttribute CustomBoardVo vo){
+			@ModelAttribute CustomBoardVo vo,
+			MultipartFile file) throws Exception {
 		
 		if(session==null){
 			return "redirect:/main";
@@ -192,12 +219,10 @@ public class CustomCenterController {
 		vo.setDepth(depth);
 		vo.setGroupOrderNo(groupOrderno);
 		vo.setGroupNo(groupNo);
-		
-		System.out.println(vo);
-		
+				
 		customservice.updatereplyCount(groupNo, groupOrderno);
 		
-		customservice.reply(vo);
+		customservice.reply(vo,file);
 		
 		
 		return "redirect:/custom/list";
@@ -205,7 +230,7 @@ public class CustomCenterController {
 	
 	@RequestMapping("/right")
 	public String right(){
-		return "/MainPage/customcenter/right";
+		return "/Main_Page/custom_right";
 	}
 	
 	//파일다운로드

@@ -9,6 +9,8 @@ public class AttachFileVO {
 	private String saveName;
 	private long fileSize;
 	private String imageurl;
+	private int groupno;
+	private int orderno;
 
 
 	public Long getfNO() {
@@ -68,12 +70,36 @@ public class AttachFileVO {
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
+	
+	
+
+
+	public int getGroupno() {
+		return groupno;
+	}
+
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
+	}
+
+	
+	
+	public int getOrderno() {
+		return orderno;
+	}
+
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
+	}
 
 	@Override
 	public String toString() {
 		return "AttachFileVO [fNO=" + fNO + ", no=" + no + ", path=" + path + ", orgName=" + orgName + ", saveName="
-				+ saveName + ", fileSize=" + fileSize + ", imageurl=" + imageurl + "]";
+				+ saveName + ", fileSize=" + fileSize + ", imageurl=" + imageurl + ", groupno=" + groupno + ", orderno="
+				+ orderno + "]";
 	}
+
+	
 
 
 }

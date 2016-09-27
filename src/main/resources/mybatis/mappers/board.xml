@@ -64,10 +64,10 @@
 	<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		<![CDATA[
 			insert into boardsfile(
-				fNO, no, path, orgName, saveName, fileSize
+				fNO, no, path, orgName, saveName, fileSize,groupno,orderno
 			)
 			values (
-				seq_boardsfile.nextVal, #{no}, #{path}, #{orgName}, #{saveName}, #{fileSize}
+				seq_boardsfile.nextVal, #{no}, #{path}, #{orgName}, #{saveName}, #{fileSize},#{groupno},#{orderno}
 			)
 		]]>
 	</insert>
@@ -80,14 +80,16 @@
 	</select>
 
 
-
-
 	<select id="selectAttachFileByFNO" parameterType="java.lang.Long"
 		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		select * from boardsfile where fno=#{fNO}
 	</select>
-
-
+	
+	<select id="list" 
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
+		select groupno from boardsfile
+	</select>
+	
 
 </mapper>
 	

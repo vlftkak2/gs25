@@ -25,7 +25,6 @@ public class CustomCenterService {
 	private CustomCenterDao customdao;
 
 	public Map<String, Object> list(String spage, String keyword) {
-
 		int page = Integer.parseInt(spage);
 
 		int totalCount = customdao.getTotalCount();
@@ -51,6 +50,7 @@ public class CustomCenterService {
 		int prevtoPage = (currentBlock > 1) ? startPage - 3 : page;
 
 		List<CustomBoardVo> list = customdao.getList(page, LIST_PAGESIZE, keyword);
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sizeList", LIST_PAGESIZE);
 		map.put("firstPage", startPage);
@@ -70,8 +70,11 @@ public class CustomCenterService {
 
 	public void write(CustomBoardVo vo, MultipartFile file) throws Exception{
 		       Long no=customdao.insert(vo);
-		
-		       
+				CustomBoardVo vo1 = customdao.get(no);
+				int groupno=vo1.getGroupNo(); //그룹넘버 정보 얻어오기
+				int orderno=vo1.getGroupOrderNo();
+
+				
 		       //3.orgName
 				String orgName ="이미지";
 				
@@ -93,9 +96,9 @@ public class CustomCenterService {
 				attachFileVO.setOrgName(orgName);
 				attachFileVO.setSaveName(saveName);
 				attachFileVO.setFileSize(fileSize);
-				
-				System.out.println(attachFileVO.toString());
-				
+				attachFileVO.setGroupno(groupno);
+				attachFileVO.setOrderno(orderno);
+												
 				customdao.insertAttachFile(attachFileVO);
 				
 				
@@ -104,8 +107,8 @@ public class CustomCenterService {
 		
 	}
 	
-	public void delete(Long no){
-		customdao.delete(no);
+	public void delete(Integer no, int orderno){
+		customdao.delete(no,orderno);
 	}
 
 	public void delete(CustomBoardVo vo) {
@@ -117,6 +120,7 @@ public class CustomCenterService {
 		CustomBoardVo vo = customdao.get(no);
 		return vo;
 	}
+	
 
 	public void viewcountup(Long no) {
 
@@ -133,8 +137,42 @@ public class CustomCenterService {
 		customdao.updatereplyCount(groupno, ordernumber);
 	}
 	
-	public void reply(CustomBoardVo vo){
-		customdao.reply(vo);
+	public void reply(CustomBoardVo vo,MultipartFile file) throws Exception{
+		Long no=customdao.reply(vo);
+		CustomBoardVo vo1 = customdao.get(no);
+		int groupno=vo1.getGroupNo(); //그룹넘버 정보 얻어오기
+		int orderno=vo1.getGroupOrderNo();
+		
+		  //3.orgName
+		String orgName ="이미지";
+		
+	  //file.getOriginalFilename();
+		
+		//4.fileSize
+		long fileSize =file.getSize();
+		
+		//5.saveName
+		String saveName = UUID.randomUUID().toString()+ "_" + orgName;
+		
+		//6.path 
+		String path ="c:\\upload";
+		
+		
+		AttachFileVO attachFileVO = new AttachFileVO();
+		attachFileVO.setNo(no);
+		attachFileVO.setPath(path);
+		attachFileVO.setOrgName(orgName);
+		attachFileVO.setSaveName(saveName);
+		attachFileVO.setFileSize(fileSize);
+		attachFileVO.setGroupno(groupno);
+		attachFileVO.setOrderno(orderno);
+				
+		customdao.insertAttachFile(attachFileVO);
+		
+		
+		File target = new File(path, saveName);
+		FileCopyUtils.copy(file.getBytes(),target);
+
 	}
 	
 	public AttachFileVO selectAttachFileByNO(Long no){
@@ -145,8 +183,16 @@ public class CustomCenterService {
 		return customdao.selectAttachFileByFNO(fNO);
 	}
 	
+	public int getgroupno(AttachFileVO vo){
+		int groupno=customdao.getgroupno(vo);
+		
+		return groupno;
+	}
 	
-	
+	public CustomBoardVo userno(int groupNo) {
+		CustomBoardVo vo  = customdao.getList(groupNo);
+		return vo;
+	}
 	
 
 }
