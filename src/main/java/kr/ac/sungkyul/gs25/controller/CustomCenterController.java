@@ -242,8 +242,6 @@ public class CustomCenterController {
 			String saveName = attachFileVO.getSaveName();
 			String orgName = attachFileVO.getOrgName();
 			    
-			    
-			    
 			res.setContentType("application/download");
 			res.setHeader("Content-disposition", "attachment; filename=\"" + URLEncoder.encode(orgName,"UTF-8") +"\"");
 			OutputStream resOut = res.getOutputStream();
@@ -254,9 +252,4 @@ public class CustomCenterController {
 			fin.close();
 			    
 		}
-		
-		
-	
-	
-
 }

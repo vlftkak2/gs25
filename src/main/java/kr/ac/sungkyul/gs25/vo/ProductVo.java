@@ -5,13 +5,14 @@ public class ProductVo {
 	private Long no;
 	private String name;
 	private int price;
-	private String regdate;
-	private String expirydate;
+	private String reg_date;
+	private String expiry_date;
 	private String maker;
-	private Long kindno;
+	private Long kind_no;
 	private String kind;
 	private int dispercent;
-	private String producturl;
+	private String category;
+	private String imageurl;
 	
 	public Long getNo() {
 		return no;
@@ -31,30 +32,14 @@ public class ProductVo {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	public String getExpirydate() {
-		return expirydate;
-	}
-	public void setExpirydate(String expirydate) {
-		this.expirydate = expirydate;
-	}
+	
 	public String getMaker() {
 		return maker;
 	}
 	public void setMaker(String maker) {
 		this.maker = maker;
 	}
-	public Long getKindno() {
-		return kindno;
-	}
-	public void setKindno(Long kindno) {
-		this.kindno = kindno;
-	}
+	
 	public String getKind() {
 		return kind;
 	}
@@ -67,24 +52,48 @@ public class ProductVo {
 	public void setDispercent(int dispercent) {
 		this.dispercent = dispercent;
 	}
-	
-	
-	public String getProducturl() {
-		return producturl;
+
+	public String getCategory() {
+		return category;
 	}
-	public void setProducturl(String producturl) {
-		this.producturl = producturl;
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+	public String getExpiry_date() {
+		return expiry_date;
+	}
+	public void setExpiry_date(String expiry_date) {
+		this.expiry_date = expiry_date;
+	}
+	public Long getKind_no() {
+		return kind_no;
+	}
+	public void setKind_no(Long kind_no) {
+		this.kind_no = kind_no;
 	}
 	
+	
+	public String getImageurl() {
+		return imageurl;
+	}
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
 	@Override
 	public String toString() {
-		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", regdate=" + regdate + ", expirydate="
-				+ expirydate + ", maker=" + maker + ", kindno=" + kindno + ", kind=" + kind + ", dispercent="
-				+ dispercent + ", producturl=" + producturl + "]";
+		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", reg_date=" + reg_date
+				+ ", expiry_date=" + expiry_date + ", maker=" + maker + ", kind_no=" + kind_no + ", kind=" + kind
+				+ ", dispercent=" + dispercent + ", category=" + category + ", imageurl=" + imageurl + "]";
 	}
+
 	
-	
-	
+
 	
 	
 

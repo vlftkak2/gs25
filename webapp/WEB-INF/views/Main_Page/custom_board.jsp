@@ -18,7 +18,7 @@
 		<div id="content">
 
 			<div id="customBoard_main">
-
+				<div id="customBoard_sub">
 				<div id="custom_wrap">
 					<div id="main_center">
 						<img src="/gs25/assets/images/customcenter/customer_center.jpg">
@@ -46,7 +46,6 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>글내용</th>
 							<th>글쓴이</th>
 							<th>조회수</th>
 							<th>작성일</th>
@@ -150,6 +149,7 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+			</div>
 			</div>
 		</div>
 

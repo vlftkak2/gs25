@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+
+<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.ProductVo">
+
+		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
+       	<![CDATA[
+       		SELECT seq_product.nextVal as no FROM DUAL
+       	]]>
+		</selectKey>
+
+		<![CDATA[	
+			insert into product(
+				no, name, price,reg_date,expiry_date,maker,kind_no)
+			values
+			(
+				#{no},
+				#{name},
+				#{price},
+				#{reg_date},
+				#{expiry_date},
+				#{maker},
+				#{kind_no}
+			)
+		]]>
+	</insert>
+	
+	<insert id="insertAttachPrFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
+		<![CDATA[
+			insert into boardsfilepr(
+				fNO, no, path, orgName, saveName, fileSize,imageurl
+			)
+			values (
+				seq_boardsfilepr.nextVal, #{no}, #{path}, #{orgName}, #{saveName},#{fileSize} ,#{imageurl}
+			)
+		]]>
+	</insert>
+	
+	<select id="List" 
+		resultType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
+		select imageurl from boardsfilepr
+	</select>
+
+
+</mapper>

@@ -7,7 +7,7 @@
 <link href="/gs25/assets/css/sub.css" rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<title>Insert title here</title>
+<title>Sub_Main</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/subheader.jsp" />

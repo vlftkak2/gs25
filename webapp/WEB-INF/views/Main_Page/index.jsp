@@ -36,7 +36,7 @@
 			</ul>
 
 			<ul class="market_list_point">
-				<li><a href="#" class="on">지점1</a></li>
+				<li><a href="/gs25/sub/main" class="on">지점1</a></li>
 				<script language="JavaScript">
 					for (i = 0; i < 27; i++) {
 						document.write("<li><a href='#'>지점"+i+"</a></li>")

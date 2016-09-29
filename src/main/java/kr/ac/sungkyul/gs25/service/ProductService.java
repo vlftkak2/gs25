@@ -1,19 +1,24 @@
 package kr.ac.sungkyul.gs25.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.dao.ProductDao;
+import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 
 @Service
 public class ProductService {
 	
-	private static final int LIST_PAGESIZE = 15; // 리스팅 되는 게시물 수
+	private static final int LIST_PAGESIZE = 12; // 리스팅 되는 게시물 수
 	private static final int LIST_BLOCKSIZE = 5; // 페이지 리스트에 표시되는 페이지 수
 	
 	@Autowired
@@ -24,7 +29,6 @@ public class ProductService {
 		int page=Integer.parseInt(spage);
 		
 		int totalCount = productdao.getTotalCount();
-		System.out.println(totalCount);
 		int pageCount = (int) Math.ceil((double) totalCount / LIST_PAGESIZE);
 		int blockCount = (int) Math.ceil((double) pageCount / LIST_BLOCKSIZE);
 		int currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
@@ -48,6 +52,7 @@ public class ProductService {
 		int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
 		
 		List<ProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword);
+		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("sizeList", LIST_PAGESIZE);
 		map.put("firstPage", startPage);
@@ -65,5 +70,50 @@ public class ProductService {
 		
 		return map;
 	}
+    
+    
+	public void insert(ProductVo vo, MultipartFile file) throws Exception{
+		  Long no=productdao.insert(vo);
+
+	       //3.orgName
+			String orgName =file.getOriginalFilename();
+//		  //file.getOriginalFilename();
+		
+			//4.fileSize
+			long fileSize =file.getSize();
+			
+			//5.saveName
+			String saveName = orgName;
+			
+			//UUID.randomUUID().toString()+ "_" + orgName;
+			//6.path 
+		    String path ="C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\product";
+		    //C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\gs25\\webapp\\assets\\images\\product
+		    
+			String imageurl="/gs25/assets/images/product/"+saveName;
+			//"/gs25/assets/images/product/"+saveName;
+			
+		    AttachFilePrVo attachFilePrVO = new AttachFilePrVo();
+			attachFilePrVO.setNo(no);
+			attachFilePrVO.setPath(path);
+			attachFilePrVO.setOrgName(orgName);
+			attachFilePrVO.setSaveName(saveName);
+			attachFilePrVO.setFileSize(fileSize);
+			attachFilePrVO.setImageurl(imageurl);
+			System.out.println(attachFilePrVO);
+			
+			productdao.insertAttachPrFile(attachFilePrVO);
+			
+			File target = new File(path, saveName);
+			FileCopyUtils.copy(file.getBytes(),target);
+		
+	}
+	
+    
+//    public List<AttachFilePrVo> selectList(attachFilePrVO vo){
+//		List<AttachFilePrVo> list= productdao.selectList(attachFilePrVO vo);
+//		
+//    	return list;
+//	}
 
 }

@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.sungkyul.gs25.service.MapService;
 
-
 @Controller
-@RequestMapping("/map")
-public class MapController {
+@RequestMapping("/submap")
+public class SubMapController {
 	
-
 	@Autowired
 	MapService mapservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/sublist")
 	public String maplist(Model model,
 			@RequestParam(value="p",required=true,defaultValue="1") String page,
 			@RequestParam(value="kwd",required=true, defaultValue="") String keyword,
@@ -34,8 +32,8 @@ public class MapController {
 		model.addAttribute("map", map);
 		model.addAttribute("map2", map2);
 
-		return "/Main_Page/store_search";
+		
+		return "/Sub_Page/store_search";
 	}
-	
-	
+
 }

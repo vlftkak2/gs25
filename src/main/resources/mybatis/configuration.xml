@@ -5,5 +5,7 @@
 	</typeAliases>
 	<mappers>
 	<mapper resource="mybatis/mappers/board.xml" />	
+	<mapper resource="mybatis/mappers/product.xml" />	
+		
 	</mappers>
 </configuration>

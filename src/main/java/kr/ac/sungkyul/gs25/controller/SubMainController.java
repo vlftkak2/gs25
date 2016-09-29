@@ -10,7 +10,7 @@ public class SubMainController {
 	@RequestMapping("/main")
 	public String SubMain(){
 		
-		return "SubPage/sub_index";
+		return "Sub_Page/sub_index";
 	}
 
 }
