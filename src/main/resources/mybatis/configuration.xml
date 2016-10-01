@@ -2,11 +2,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+	<typeAlias type="kr.ac.sungkyul.gs25.vo.EventBoardVo" alias="eventboardvo"/>
 	</typeAliases>
 	<mappers>
 	<mapper resource="mybatis/mappers/board.xml" />	
 	<mapper resource="mybatis/mappers/product.xml" />	
 	<mapper resource="mybatis/mappers/storesearch.xml" />			
-			
+	<mapper resource="mybatis/mappers/eventboard.xml" />		
 	</mappers>
 </configuration>

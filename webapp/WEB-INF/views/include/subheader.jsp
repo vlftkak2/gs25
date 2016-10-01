@@ -47,7 +47,7 @@
 									<a href="javascript:void(0);" class="on">방명록</a>
 								</h2></li>
 							<li><h2>
-									<a href="javascript:void(0);">이벤트</a>
+									<a href="/gs25/event/eventlist">이벤트</a>
 								</h2></li>
 							<li><h2>
 									<a href="/gs25/submap/sublist">매장검색</a>
