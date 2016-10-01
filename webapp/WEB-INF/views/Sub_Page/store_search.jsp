@@ -128,7 +128,7 @@ function makeOutListener(infowindow) {
 					</div>
 
 					<div id="search">
-						<form id="search_form" action="/gs25/map/list" method="get">
+						<form id="search_form" action="/gs25/submap/sublist" method="get">
 							<input type="text" id="kwd" name="kwd" value="${map.keyword }">
 							<input type="submit" value="찾기">
 						</form>
@@ -151,6 +151,17 @@ function makeOutListener(infowindow) {
 									</tr>
 								</c:forEach>
 							</table>
+
+							<c:if test="${empty map.list}">
+								<div id="submap_right">
+									<div id="submap_risk">
+										<img src="/gs25/assets/images/customcenter/risk.png">
+									</div>
+									<p class="submap_list-right">
+										검색된 결과를 찾을 수 없습니다. <br>
+									</p>
+								</div>
+							</c:if>
 
 							<c:if test='${not empty map.list }'>
 								<!-- begin:paging -->
@@ -191,7 +202,7 @@ function makeOutListener(infowindow) {
 										</c:if>
 									</ul>
 								</div>
-								</c:if>
+							</c:if>
 						</div>
 						<div id="map"></div>
 					</div>
