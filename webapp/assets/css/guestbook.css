@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+#guestbook			{ margin:20px auto;	width:700px; }
+
+#guestbook form, 
+#guestbook table	{ width:100%;
+border-collapse:collapse;
+}
+.tbl-ex		{
+	width:100%;
+	margin:10px auto; 
+	border-collapse:collapse;
+	border-bottom:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	border-right:1px solid #c0c0c0
+}
+.tbl-ex th	{
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0; 
+	font-size:1.1em; 
+	background-color:#00A5FF;
+	color:#FFFFFF
+}
+.tbl-ex td {
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0;
+}
+.tbl-ex th, .tbl-ex td {
+	padding:6px;
+}
+
+#size{
+	width:350px;
+}
+#guestbook ul		{ width:100%; margin-top:20px }
+#guestbook ul li	{ width:100%; margin-top:10px }
+
+/*Button bootstrap*/
+.btn{
+	display:inline-block;
+	padding:6px 12px;
+	margin-bottom:0;
+	font-size:14px;
+	font-weight:400;
+	line-height:1.42857143;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:middle;
+	-ms-touch-action:manipulation;
+	touch-action:manipulation;
+	cursor:pointer;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	background-image:none;
+	border:1px solid transparent;
+	border-radius:4px;
+}
+.btn-primary{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn-block {
+    display: block;
+    /*width: 100%;*/
+    width:100px;
+}
+#br {
+	margin-bottom:10px;
+}
+#guestbook.delete-form	{ height:200px }
+#guestbook.delete-form form {
+	width:300px;
+	padding:10px;
+	border:1px solid #666;
+	border-radius: 10px;
+	margin:50px auto;
+}
+#guestbook.delete-form a	{ display:block; margin:20px auto; width:110px }
+
+#guestbook.delete-message p	{ padding:100px; height:50px; text-align:center }
+
+#guestbook textarea#content	{ width: 100%; border:none; height: 100px; resize: none; outline: none; }
+
+
+div.pager {
+	width:100%;
+	text-align:center;
+
+}
+div.pager  ul {
+	height:20px;
+	margin:10px auto;
+}
+
+div.pager  ul li 			{ display:inline; margin:5px 0; width:20px ; font-weight:bold; }
+div.pager  ul li.selected { text-decoration: underline; color:#f00 }
+div.pager  ul li a,
+div.pager  ul li a:visited,
+div.pager  ul li a:link,
+div.pager  ul li a:active { text-decoration: none; color:#ff8080 }
+div.pager  ul li a:hover { text-decoration: none; color:#f00 }
