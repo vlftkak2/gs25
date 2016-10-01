@@ -220,11 +220,11 @@ input#kwd	{
  	margin:50px 0 30px 80px; 
  } 
  div.pager  ul li 			{ display:inline-block; margin:5px 8px; width:20px ; font-weight:bold; } 
- div.pager  ul li.selected { text-decoration: underline; color:#f40808 } 
+ div.pager  ul li.selected { text-decoration: underline; color:#f00 } 
  div.pager  ul li a, 
  div.pager  ul li a:visited, 
  div.pager  ul li a:link, 
- div.pager  ul li a:active { text-decoration: none; color:#555 } 
+ div.pager  ul li a:active { text-decoration: none; color:#ff8080 } 
  div.pager  ul li a:hover { text-decoration: none; color:#f00 } 
 
 

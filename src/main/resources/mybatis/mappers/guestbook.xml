@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guestbook">
+<!--  
+ /* 
+  2016-10-01  작업자 : 최솔빈
+      개발 상황 : 완료   */ 
+ -->
+ 	<!-- 방명록 총 수 구하기 -->
+	<select id="getCal" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from guestbook
+	]]>	
+	</select>
+	
+	<!-- 방명록 리스트로 가져오기 -->
+	<select id="getList" parameterType="map" resultType="guestbookvo">
+	<![CDATA[
+	select * from
+	( select c.*, rownum rn from
+	( select a.no, a.content, a.reg_date, a.user_no,a.store_no, b.email 
+	from guestbook a, users b 
+	where a.user_no = b.no and a.store_no = 4 order by no desc) c) 
+	where #{page_top}<=rn and rn<=#{page_bottom}
+	
+	]]>
+	</select>
+	
+	<!-- 방명록 삽입하기 -->
+	<insert id="insert" parameterType="guestbookvo">
+		<![CDATA[
+		insert into guestbook values(seq_guestbook.nextval, #{content},sysdate,#{user_no},#{store_no})
+		]]>
+	</insert>
+	
+	<!-- 선택된 방명록 삭제하기 -->
+	<delete id="delete" parameterType="guestbookvo">
+		<![CDATA[
+		delete from guestbook where no=#{no}
+		]]>
+	</delete>
+	
+	
+</mapper>

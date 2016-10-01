@@ -44,7 +44,7 @@
 					<div class="gnb" id="gnb_menu">
 						<ul>
 							<li><h2>
-									<a href="javascript:void(0);" class="on">방명록</a>
+									<a href="/gs25/guestbook/list" class="on">방명록</a>
 								</h2></li>
 							<li><h2>
 									<a href="/gs25/event/eventlist">이벤트</a>

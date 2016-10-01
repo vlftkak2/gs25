@@ -58,6 +58,15 @@ border-collapse:collapse;
 	border:1px solid transparent;
 	border-radius:4px;
 }
+
+a.del	{
+	display:block;
+	width:20px;
+	height:20px; 
+	background:url("/gs25/assets/images/eventboard/delete.png") no-repeat 0 0;
+	font-size:0;
+}
+
 .btn-primary{
 	color: #fff;
     background-color: #337ab7;
@@ -86,17 +95,20 @@ border-collapse:collapse;
 #guestbook textarea#content	{ width: 100%; border:none; height: 100px; resize: none; outline: none; }
 
 
+
 div.pager {
 	width:100%;
 	text-align:center;
 
 }
 div.pager  ul {
-	height:20px;
+	height:50px;
 	margin:10px auto;
 }
 
-div.pager  ul li 			{ display:inline; margin:5px 0; width:20px ; font-weight:bold; }
+
+
+div.pager  ul li 			{ display:inline; margin:	10px 8px; width:20px ; font-weight:bold; }
 div.pager  ul li.selected { text-decoration: underline; color:#f00 }
 div.pager  ul li a,
 div.pager  ul li a:visited,

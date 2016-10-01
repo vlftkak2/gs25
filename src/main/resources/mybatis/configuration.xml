@@ -3,11 +3,15 @@
 <configuration>
 	<typeAliases>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.EventBoardVo" alias="eventboardvo"/>
+	<typeAlias type="kr.ac.sungkyul.gs25.vo.GuestbookVo" alias="guestbookvo"/>
+	
 	</typeAliases>
 	<mappers>
 	<mapper resource="mybatis/mappers/board.xml" />	
 	<mapper resource="mybatis/mappers/product.xml" />	
 	<mapper resource="mybatis/mappers/storesearch.xml" />			
 	<mapper resource="mybatis/mappers/eventboard.xml" />		
+	<mapper resource="mybatis/mappers/guestbook.xml" />
+	
 	</mappers>
 </configuration>
