@@ -15,6 +15,11 @@ public class CustomBoardVo {
 	private String UserName;
 	private Integer orderNo;
 	private String keyword;
+	private String category;
+	private String imageurl;
+
+	
+	
 	public Long getNo() {
 		return no;
 	}
@@ -94,14 +99,29 @@ public class CustomBoardVo {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
+	
+	public String getImageurl() {
+		return imageurl;
+	}
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
 	@Override
 	public String toString() {
 		return "CustomBoardVo [no=" + no + ", title=" + title + ", content=" + content + ", count=" + count
 				+ ", groupNo=" + groupNo + ", groupOrderNo=" + groupOrderNo + ", depth=" + depth + ", UserNo=" + UserNo
 				+ ", regdate=" + regdate + ", name=" + name + ", UserName=" + UserName + ", orderNo=" + orderNo
-				+ ", keyword=" + keyword + "]";
+				+ ", keyword=" + keyword + ", category=" + category + ", imageurl=" + imageurl + "]";
 	}
+
+	
 
 	
 	

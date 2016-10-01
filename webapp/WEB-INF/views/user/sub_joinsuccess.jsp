@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,22 +12,21 @@
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="title1">
-			<h3>GS편의점 회원 인증 성공</h3>
+			<h3>GS25 편의점 회원가입 완료</h3>
 		</div>
 		<div id ="title1_p">
-			<p><em id="emphasis">회원임을 인증되었습니다.</em></p>
-			<p>새로운 삶의 가치를 창조하는 GS25 편의점은 더 나은 서비스로 고객님께 다가서겠습니다.</p>
+			<p><em id="emphasis">회원가입을 축하합니다.</em>&nbsp;고객과 함께 내일을 꿈꾸며,
+			<br>새로운 삶의 가치를 창조하는 GS25 편의점 회원이 되신걸 환영합니다.</p>
 		</div>
 		<div id="contents">
 			<div id="join-succ">
-				<div id="goLogin">
+				<div id="goMain">
 					<ul>
-						<li id="line">회원님의 비밀번호는 이메일로 전송되었습니다.</li>
-						<li id="line">임시 비밀번호로 전송되었으므로 차후 변경하시기 바랍니다.</li>
+						<li id="line"><h3 class="lineM"><a href="/gs25/sub/main">메인페이지 이동</a></h3></li>
+						<li id="line"><h3 class="lineL"><a href="/gs25/user/Subloginform">로그인하기</a></h3></li>
 					</ul>
 				</div>	
 			</div>

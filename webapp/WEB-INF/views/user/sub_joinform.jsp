@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="title1">
 			<h3>GS25 편의점 신규 회원가입</h3>
@@ -25,7 +25,7 @@
 		<div id="block">
 			<h4 id="tlt2_p0">입력 사항</h4>
 			<div id="signup">
-				<form id="join-form" name="joinForm" method="post" action="/gs25/user/join">
+				<form id="join-form" name="joinForm" method="post" action="/gs25/user/Subjoin">
 					<div id="brdwrap2">
 						<h5 id="tit">기본사항</h5>
 						<div class="tblwrap">

@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,13 +17,21 @@
 			<!-- brandwrap -->
 			<div class="brdwrap">
 				<!-- utility -->
-				<div class="uty">
+					<div class="uty">
 					<ul>
-						<li><a href="/gscvs/ko/sign-up/login">로그인</a></li>
-						<li><a href="/gscvs/ko/sign-up/certification?siteGubun=2">
-								회원가입</a></li>
-					</ul>
-				</div>
+					<c:choose>
+					<c:when test='${empty sessionScope.authUser }'>
+					<li><a href="/gs25/user/Subloginform">로그인</a></li>
+					<li><a href="/gs25/user/Subjoinform">회원가입</a></li>
+					</c:when>
+					<c:otherwise>
+						<li>${authUser.name}님안녕하세요^^;</li>
+						<li><a href="/gs25/user/Submodifyform">회원정보수정</a></li>
+						<li><a href="/gs25/user/Sublogout">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
+						</ul>
+					</div>
 				<!-- //utility -->
 			</div>
 			<!-- //brandwrap -->

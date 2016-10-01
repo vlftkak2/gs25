@@ -22,13 +22,12 @@
 				<p id="intro">기존 GS편의점 사이트에 가입하신<br> 아이디와 비밀번호로 로그인 하실 수 있습니다.</p>
 				</div>
 					<div id="login2">
-						<form class="login-form" name="loginform" method="post" action="/convenience/user/login">
+						<form class="login-form" name="loginform" method="post">
 							<ul>
-								<li><input id="email" name="email" class="form-control" type="text" value="" placeholder="이메일"></li>
-								<li><input name="password" type="password" class="form-control" value="" placeholder="비밀번호"></li>
+						<li><input id="email" name="email" class="form-control" type="text" value="" placeholder="이메일"></li>
+						<li><input id="password" name="password" type="password" class="form-control" value="" placeholder="비밀번호"></li>
 							</ul>
-								<input type="button" id="login-btn" type="submit" value="로그인">
-								<a href="/gs25/user/findInfo">아이디/비밀번호찾기</a>
+								<input type="button" id="login-btn" value="로그인">
 						</form>
 					</div>
 			</div>

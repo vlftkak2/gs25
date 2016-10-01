@@ -16,6 +16,13 @@ import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 
+/*
+ 2016-10-01 
+   작업자 : 최형민
+   개발 상황 : 완료
+*/
+
+
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -23,6 +30,7 @@ public class ProductController {
 	@Autowired
 	ProductService productservice;
 
+	//상품 검색 리스트
 	@RequestMapping("/list")
 	public String productlist(Model model,
 			@RequestParam(value = "p", required = true, defaultValue = "1") String page,
@@ -34,12 +42,14 @@ public class ProductController {
 		return "/Sub_Page/product_search";
 	}
 	
+	//상품 등록 페이지 이동
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
 	public String productinsertForm(){
 		
 		return "/Sub_Page/product_insert";
 		}
 	
+	//상품 등록
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String productinsert(@ModelAttribute ProductVo vo, MultipartFile file) throws Exception{
 

@@ -29,6 +29,11 @@ public class UserController {
 		return "user/joinform";
 	}
 	
+	@RequestMapping("/Subjoinform")
+	public String Subjoinform(){
+		return "user/sub_joinform";
+	}
+	
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo vo){
 		System.out.println("join: "+vo.toString());
@@ -36,14 +41,33 @@ public class UserController {
 		return "redirect:/user/joinsuccess";
 	}
 	
+	@RequestMapping("/Subjoin")
+	public String Subjoin(@ModelAttribute UserVo vo){
+		System.out.println("join: "+vo.toString());
+		userService.join(vo);
+		return "redirect:/user/Subjoinsuccess";
+	}
+	
 	@RequestMapping("/joinsuccess")
 	public String joinSuccess(){
 		return "user/joinsuccess";
 	}
 	
+	@RequestMapping("/Subjoinsuccess")
+	public String SubjoinSuccess(){
+		return "user/sub_joinsuccess";
+	}
+	
+	
 	@RequestMapping("/loginform")
 	public String loginform(){
 		return "user/loginform";
+	}
+	
+	
+	@RequestMapping("/Subloginform")
+	public String Subloginform(){
+		return "user/sub_loginform";
 	}
 	
 	//1. Ajax 사용 시 - DB (로그인 정보 비교)
@@ -75,6 +99,14 @@ public class UserController {
 		return "redirect:/main";
 	}
 	
+	@RequestMapping("/Sublogout")
+	public String Sublogout(HttpSession session){
+		session.removeAttribute("authUser");
+		session.invalidate();	//로그아웃 처리 시 세션을 지워줌
+		
+		return "redirect:/sub/main";
+	}
+	
 	@RequestMapping("/modifyform")
 	public String modifyform(HttpSession session, Model model){
 		UserVo temp = (UserVo)session.getAttribute("authUser");
@@ -86,6 +118,19 @@ public class UserController {
 		
 		return "user/modifyform";
 	}
+	
+	@RequestMapping("/Submodifyform")
+	public String Submodifyform(HttpSession session, Model model){
+		UserVo temp = (UserVo)session.getAttribute("authUser");
+		
+		Long no = temp.getNo();
+		
+		UserVo nvo = userService.get(no);
+		model.addAttribute("userVo", nvo);
+		
+		return "user/sub_modifyform";
+	}
+	
 	
 	@RequestMapping("/modify")
 	public String modify(HttpSession session, @ModelAttribute UserVo vo){
@@ -99,9 +144,27 @@ public class UserController {
 		return "user/modifysuccess";
 	}
 	
+
+	@RequestMapping("/Submodify")
+	public String Submodify(HttpSession session, @ModelAttribute UserVo vo){
+		
+		UserVo temp = (UserVo)session.getAttribute("authUser");
+		Long no = temp.getNo();
+		
+		vo.setNo(no);
+		
+		userService.update(vo);
+		return "user/sub_modifysuccess";
+	}
+	
 	@RequestMapping("/findInfo")	//찾기 폼
 	public String findInfo(){
 		return "user/findInfo";
+	}
+	
+	@RequestMapping("/SubfindInfo")	//찾기 폼
+	public String SubfindInfo(){
+		return "user/sub_findinfo";
 	}
 
 	@RequestMapping("/idFind")	// 아이디 찾기
@@ -117,6 +180,21 @@ public class UserController {
 		
 		model.addAttribute("email",email);
 		return "user/idresult";
+	}
+	
+	@RequestMapping("/SubidFind")	// 아이디 찾기
+	public String SubidFind(@ModelAttribute UserVo vo, Model model){
+
+		String email = userService.idfind(vo);
+
+		if(email == null){	//계정 정보가 없을 경우
+			Boolean result = false;
+			model.addAttribute("result", result);
+			return "user/findInfo";
+		}
+		
+		model.addAttribute("email",email);
+		return "user/sub_idresult";
 	}
 		
 	@ResponseBody
@@ -162,6 +240,11 @@ public class UserController {
 	@RequestMapping("/passresult")	//메일 전송 완료
 	public String passResult(){
 		return "user/passresult";
+	}
+	
+	@RequestMapping("/Subpassresult")	//메일 전송 완료
+	public String SubpassResult(){
+		return "user/sub_passresult";
 	}
 	
 	@RequestMapping("/repasswordSuccess")	//비번 재설정 완료

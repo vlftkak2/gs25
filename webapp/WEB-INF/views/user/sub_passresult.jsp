@@ -9,8 +9,7 @@
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="title1">
 			<h3>GS편의점 회원 인증 성공</h3>

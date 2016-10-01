@@ -25,7 +25,7 @@ public class MapController {
 	@Autowired
 	MapService mapservice;
 	
-	//상품 검색 리스트
+	//매장 검색 리스트
 	@RequestMapping("/list")
 	public String maplist(Model model,
 			@RequestParam(value="p",required=true,defaultValue="1") String page,

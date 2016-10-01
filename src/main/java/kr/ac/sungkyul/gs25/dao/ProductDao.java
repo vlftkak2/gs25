@@ -1,13 +1,8 @@
 package kr.ac.sungkyul.gs25.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.sql.DataSource;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,148 +11,60 @@ import org.springframework.stereotype.Repository;
 import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 
+
+/*
+ 2016-10-01 
+   작업자 : 최형민
+   개발 상황 : 완료
+*/
+
 @Repository
 public class ProductDao {
-	
-
-	@Autowired
-	private DataSource dataSource;
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 상품 리스트 총 개수 구하기
 	public int getTotalCount() {
-
-		int totalCount = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn=dataSource.getConnection();
-
-			String sql = "select count(*) from product";
-			pstmt = conn.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				totalCount = rs.getInt(1);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
+		
+		int totalCount=sqlSession.selectOne("product.getTotalCount");
 		return totalCount;
 
 	}
 	
-
+	//상품 리스트
 	public List<ProductVo> getList(int page, int pagesize,String keyword) {
-		List<ProductVo> list = new ArrayList<ProductVo>();
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn=dataSource.getConnection();
-			String sql = (keyword ==null || "".equals(keyword))? 
-		    "select * from(select c.*,rownum rn from(select a.name,a.price,to_char(a.reg_date,'yyyy.mm.dd'),TO_CHAR(a.EXPIRY_DATE,'YYYY.MM.DD'),a.maker,a.category,b.IMAGEURL from product a, boardsfilepr b where a.NO=b.NO) c) where ?<=rn and rn<=?"
-			: "select * from(select c.*,rownum rn from(select a.NAME,a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),a.maker,a.category,d.imageurl from product a, productkind b, boardsfilepr d where a.KIND_NO=b.NO and a.NO=d.NO and (a.NAME like ? or b.KIND like ?) order by price desc, a.EXPIRY_DATE asc) c) where ?<=rn and rn<=?";
-				
-			pstmt = conn.prepareStatement(sql);
-			
-			if(keyword ==null || "".equals(keyword)){
-				
-			pstmt.setInt(1, (page - 1) * pagesize + 1);
-			pstmt.setInt(2, page * pagesize);
 		
+		Map<String, Object> map=new HashMap<>();
+		
+		//키보드가 null or 비어있을 때 리스트 가져오기
+		if(keyword ==null || "".equals(keyword)){
 			
-			}else{
-				
-			pstmt.setString(1, "%"+keyword+"%");
-			pstmt.setString(2, "%"+keyword+"%");
-			pstmt.setInt(3, (page - 1) * pagesize + 1);
-			pstmt.setInt(4, page * pagesize);
-			}
-			
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				String name=rs.getString(1);
-				Integer price=rs.getInt(2);
-				String regdate=rs.getString(3);
-				String expirydate=rs.getString(4);
-				String maker=rs.getString(5);
-				String category=rs.getString(6);
-				String imageurl=rs.getString(7);
-				
-				
-				ProductVo vo=new ProductVo();
-				vo.setName(name);
-				vo.setPrice(price);
-				vo.setReg_date(regdate);
-				vo.setExpiry_date(expirydate);
-				vo.setMaker(maker);
-				vo.setCategory(category);
-				vo.setImageurl(imageurl);
-			
-
-				list.add(vo);
-			}
-			
-		} catch (SQLException ex) {
-			
-			System.out.println("error: " + ex);
-			
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
+		map.put("page_start", (page - 1) * pagesize + 1);
+		map.put("page_end", page * pagesize);
+		
+		//검색된 리스트 가져오기
+		List<ProductVo> list=sqlSession.selectList("product.getList",map);
 		return list;
+		}else{
+			
+			map.put("keyword", "%"+keyword+"%");
+			map.put("page_start", (page - 1) * pagesize + 1);
+			map.put("page_end", page * pagesize);
+			
+			List<ProductVo> list=sqlSession.selectList("product.getListKeyword",map);
+			return list;
+		}
 	}
 	
+	// 상품 등록
 	public Long insert(ProductVo vo) {
 		sqlSession.insert("product.insertBoard", vo);
 		return vo.getNo();
 	}
-	
-	
+
+	//상품 첨부파일 등록
 	public void insertAttachPrFile(AttachFilePrVo attachFilePrVO) {
 		sqlSession.insert("product.insertAttachPrFile", attachFilePrVO);
 	}
-	
-	
-//	public List<AttachFilePrVo> selectList(Long fNO) {
-//		List<AttachFilePrVo> list=sqlSession.selectList("product.selectList", fNO);
-//		return list;
-//	}
-
-
 }

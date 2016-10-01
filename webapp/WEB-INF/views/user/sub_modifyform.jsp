@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,10 +10,9 @@
 <title>Insert title here</title>
 <link href="/gs25/assets/css/login.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
-
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="title1">
 			<h3>GS25 편의점 회원정보 수정</h3>
@@ -24,7 +23,7 @@
 		<div id="block">
 			<h4 id="tlt2_p0">수정 사항</h4>
 			<div id="modiForm">
-				<form id="join-form" name="joinForm" method="post" action="/gs25/user/modify">
+				<form id="join-form" name="joinForm" method="post" action="/gs25/user/Submodify">
 					<div id="brdwrap2">
 						<h5 id="tit">기본사항</h5>
 						<div class="tblwrap">

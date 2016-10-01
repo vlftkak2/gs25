@@ -3,7 +3,48 @@
 
 <mapper namespace="product">
 
-<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.ProductVo">
+	<!-- imageurl 정보 얻기 -->
+	<select id="getTotalCount" resultType="java.lang.Integer">
+		select count(*) from product
+	</select>
+	
+	<!-- 게시물 리스트 가져오기 -->
+	<select id="getList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.ProductVo">
+   <![CDATA[
+   select * from(
+   	select c.*,rownum rn from(
+   		select 
+   			a.name,
+   			a.price,
+   			to_char(a.reg_date,'yyyy.mm.dd') as reg_date,
+   			TO_CHAR(a.EXPIRY_DATE,'YYYY.MM.DD') as expiry_date,
+   			a.maker,
+   			a.category,
+   			b.IMAGEURL from product a, boardsfilepr b where a.NO=b.NO) c) 
+   	where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+   
+     <!--검색된 게시물 리스트 가져오기  -->
+   	<select id="getListKeyword" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.ProductVo">
+   <![CDATA[
+  	select * from(
+  		select c.*,rownum rn from(
+  			select a.NAME,
+  				   a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),
+  				   to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),
+  				   a.maker,
+  				   a.category,
+  				   d.imageurl from product a, productkind b, boardsfilepr d 
+  					where a.KIND_NO=b.NO and a.NO=d.NO and (a.NAME like #{keyword} or b.KIND like #{keyword}) 
+  		order by price desc, a.EXPIRY_DATE asc) c) 
+  	where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+
+
+	<!-- 상품 등록 -->
+	<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.ProductVo">
 
 		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
        	<![CDATA[
@@ -27,6 +68,7 @@
 		]]>
 	</insert>
 	
+	<!--첨부파일 삽입  -->
 	<insert id="insertAttachPrFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
 		<![CDATA[
 			insert into boardsfilepr(
@@ -38,6 +80,7 @@
 		]]>
 	</insert>
 	
+	<!-- imageurl 정보 얻기 -->
 	<select id="List" 
 		resultType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
 		select imageurl from boardsfilepr

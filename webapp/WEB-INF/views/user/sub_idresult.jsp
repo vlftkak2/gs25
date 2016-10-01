@@ -9,8 +9,7 @@
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="title1">
 			<h3>GS편의점 회원 인증 성공</h3>
@@ -23,8 +22,8 @@
 			<div id="join-succ">
 				<div id="goLogin">
 					<ul>
-						<li id="line">회원님의 비밀번호는 이메일로 전송되었습니다.</li>
-						<li id="line">임시 비밀번호로 전송되었으므로 차후 변경하시기 바랍니다.</li>
+						<li id="line">회원님의 아이디(이메일)는 다음과 같습니다.</li>
+						<li id="line"><em>${email }</em>&nbsp;입니다.</li>
 					</ul>
 				</div>	
 			</div>

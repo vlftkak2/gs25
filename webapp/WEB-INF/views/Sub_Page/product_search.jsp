@@ -42,9 +42,11 @@
 </form>
 </div>
 
+<c:if test='${authUser.no==1 }'>
 <div class="insert">
 <a href="/gs25/product/insert" id="new-book">상품등록</a>
 </div>
+</c:if>
 
 <div id="productboard">
 <div id="productlist">

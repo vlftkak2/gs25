@@ -13,6 +13,7 @@ public class ProductVo {
 	private int dispercent;
 	private String category;
 	private String imageurl;
+
 	
 	public Long getNo() {
 		return no;
@@ -53,12 +54,6 @@ public class ProductVo {
 		this.dispercent = dispercent;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
 	public String getReg_date() {
 		return reg_date;
 	}
@@ -77,6 +72,12 @@ public class ProductVo {
 	public void setKind_no(Long kind_no) {
 		this.kind_no = kind_no;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
 	
 	public String getImageurl() {
@@ -91,10 +92,5 @@ public class ProductVo {
 				+ ", expiry_date=" + expiry_date + ", maker=" + maker + ", kind_no=" + kind_no + ", kind=" + kind
 				+ ", dispercent=" + dispercent + ", category=" + category + ", imageurl=" + imageurl + "]";
 	}
-
 	
-
-	
-	
-
 }
