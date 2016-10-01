@@ -23,7 +23,7 @@
 		</div>
 		<div id="contents">
 			<div id="join-succ">
-				<div id="goLogin">
+				<div id="goMain">
 					<ul>
 						<li id="line"><h3 class="lineM"><a href="/gs25/main">메인페이지 이동</a></h3></li>
 						<li id="line"><h3 class="lineL"><a href="/gs25/user/loginform">로그인하기</a></h3></li>

@@ -96,9 +96,10 @@
 </body>
 <script>
 $(function(){
-	 $('#password').keyup(function(){
-		   $('font[name=passCheck]').text('');
-		  }); //#password.keyup
+	  $('#password').keydown(function() {
+		$('font[name=passCheck]').html('');
+		$('#repassword').val('');
+	  }); //#password.keyup
 	  $('#repassword').keyup(function(){
 	   if($('#password').val()!=$('#repassword').val()){
 	    $('font[name=passCheck]').text('');
@@ -115,6 +116,7 @@ $(function(){
 			$("#name").focus();
 			return false;
 		}
+		
 		//생년월일
 		var regBirth = /^(19|20)\d{2}([0][1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/;	//정규식
 		if($("#birth").val() == ""){
@@ -128,6 +130,14 @@ $(function(){
 			    return false;  
 			}
 		}
+		
+		//패스워드 일치 여부
+		if($("#password").val() != $("#repassword").val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			$("#password").focus();
+			return false;
+		}
+		
 		//휴대폰
 		var regPhone = /^((01[0|1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 		if($("#phone").val() == ""){

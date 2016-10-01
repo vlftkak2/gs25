@@ -134,6 +134,7 @@ public class CustomCenterService {
 	
 	public void updatereplyCount(int groupno, int ordernumber){
 		
+		
 		customdao.updatereplyCount(groupno, ordernumber);
 	}
 	

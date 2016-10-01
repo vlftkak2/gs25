@@ -78,7 +78,7 @@ public class ProductDao {
 			conn=dataSource.getConnection();
 			String sql = (keyword ==null || "".equals(keyword))? 
 		    "select * from(select c.*,rownum rn from(select a.name,a.price,to_char(a.reg_date,'yyyy.mm.dd'),TO_CHAR(a.EXPIRY_DATE,'YYYY.MM.DD'),a.maker,a.category,b.IMAGEURL from product a, boardsfilepr b where a.NO=b.NO) c) where ?<=rn and rn<=?"
-			: "select * from(select c.*,rownum rn from(select a.NAME,a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),a.maker,a.category from product a, productkind b where a.KIND_NO=b.NO and (a.NAME like ? or b.KIND like ?) order by price desc, a.EXPIRY_DATE asc) c) where ?<=rn and rn<=?";
+			: "select * from(select c.*,rownum rn from(select a.NAME,a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),a.maker,a.category,d.imageurl from product a, productkind b, boardsfilepr d where a.KIND_NO=b.NO and a.NO=d.NO and (a.NAME like ? or b.KIND like ?) order by price desc, a.EXPIRY_DATE asc) c) where ?<=rn and rn<=?";
 				
 			pstmt = conn.prepareStatement(sql);
 			

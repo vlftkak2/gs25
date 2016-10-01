@@ -39,7 +39,7 @@ select {
     padding: 25px 0 40px;
     border-top: 1px solid #6c6c6c;
     border-bottom: 1px solid #e0e0e0;
-    background: #fbfbfb url("/gs25/assets//images/login/gsMember.png") 88px 0 no-repeat;
+    background: #fbfbfb url("/gs25/assets/images/login/gsMember.png") 88px 0 no-repeat;
 }
 #tlt1 {
     padding: 50px 0;
@@ -70,7 +70,6 @@ select {
     padding: 50px 0 40px;
     border-top: 1px solid #6c6c6c;
     border-bottom: 1px solid #e0e0e0;
-    background: #fbfbfb url("/_ui/desktop/common/images/gsretail/membership/join_img1.png") 88px 0 no-repeat;
 }
 #joincan{
 	float:left;
@@ -90,6 +89,7 @@ select {
 }
 #storeDrop{
 	margin-left: 10px;
+	display:none;
 }
 #findcan{
 	width:500px;
@@ -387,6 +387,7 @@ input[type=text], input[type=password] {
 }
 #agreeF{
 	margin: 30px 0 0 10px;
+	border: solid 0px white;
 }
 #emailCheck{
 	margin-left:10px;
@@ -426,6 +427,9 @@ input[type=text], input[type=password] {
     border-top: 1px solid #6c6c6c;
     border-bottom: 1px solid #e0e0e0;
     background: #fbfbfb url("/gs25/assets/images/login/gs25_store.png") 60px no-repeat;
+}
+#goMain{
+	margin: 40px 0 0 480px;	
 }
 #goLogin{
 	margin: 75px 0 0 410px;
@@ -511,4 +515,9 @@ input[type=text], input[type=password] {
 	height: 150px;
     padding: 25px 0 40px;
     background: url(/gs25/assets/images/login/sorryman.png) 400px 0 no-repeat;
+}
+#iDcard{
+	height: 150px;
+    padding: 25px 0 40px;
+    background: url(/gs25/assets/images/login/gsMember.png) 300px no-repeat;
 }

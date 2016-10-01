@@ -64,7 +64,7 @@
 										<div id="sel2_lt">
 											<input type="radio" name="position" id="customer" value="CUSTOMER" checked />
 											<label class="labelM" class="mr20">고객</label>
-				
+								
 											<input type="radio" name="position" id="branch" value="BRANCH" >
 											<label class="labelM">지점 관리자</label>
 										</div>
@@ -170,11 +170,13 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 <script>
-	$(function() {
-		$('#password').change(function() {
-			$('font[name=passCheck]').text('');
+$(function() {
+		var flag_validation = false;
+		
+		$('#password').keydown(function() {
+			$('font[name=passCheck]').html('');
 			$('#repassword').val('');
-		}); //#password.keyup
+		});
 		$('#repassword').keyup(function() {
 			if ($('#password').val() != $('#repassword').val()) {
 				$('font[name=passCheck]').text('');
@@ -233,25 +235,17 @@
 				    return false;  
 				}
 			}
-			//이메일
-			//var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			if($("#email").val() == ""){
 				alert("아이디 필수 입력 항목입니다.");
 				$("#email").focus();
 				return false;
 			} 
-			//else {  //이메일 유효성 검사
-			 //  	if(!regEmail.test($("#email").val())) { 
-			  //    alert("이메일 주소가 유효하지 않습니다"); 
-			   //   $("#email").focus(); 
-			    //  return false; 
-				//}
-			//}
+			
 			//중복검사
-			if($("#emailCheck").val('') == "check"){
+			if(flag_validation == false){
+				console.log(flag_validation);
 				alert("중복검사를 해주세요");
-				console.log($("#emailCheck").val(''));
-				//$("#btn-checkEmail").focus();
+				$("#btn-checkEmail").focus();
 				return false;
 			}
 		
@@ -268,6 +262,14 @@
 				$("#repassword").focus();
 				return false;
 				}
+			
+			//패스워드 일치 여부
+			if($("#password").val() != $("#repassword").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				$("#password").focus();
+				return false;
+			}
+			
 			//주소
 			if($("#address").val() == ""){
 				alert("주소는 필수 입력 항목입니다.");
@@ -289,33 +291,29 @@
 			$("#btn-checkEmail").show();
 		});
 		
-		$("#btn-checkEmail").click(function(){
-			var email = $("#email").val();
-			if(email == ""){
-				return;
-			}
-		});
 		//이메일 유효성 검사
-		var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		$("#btn-checkEmail").click(function(){
+		$("#btn-checkEmail").click(function(){			
 			var email = $("#email").val();
+			var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+			
 			if(email == ""){
-				alert("이메일을 입력하시지 않으셨습니다.");
+				alert("아이디를 입력하시지 않으셨습니다.");
 				return false;
 			} else {  //이메일 유효성 검사
-			   	if(!regEmail.test($("#email").val())) { 
-				      alert("이메일 주소가 유효하지 않습니다"); 
+			   	if(!regEmail.test(email)) { 
+				      alert("입력된 아이디 형식이 유효하지 않습니다"); 
 				      $("#email").focus(); 
 				      return false; 
 				}
 			}
+			
 			$.ajax({
 				url: "CheckEmail",
 				type: "POST",
 				data: {"email":email},
 				dataType: "json",
-				"success": function(response){
-					//console.log(response);
+				success: function(response){
+					console.log(response);
 					if(response.result == "fail"){
 						console.error("error:"+response.message);
 						return ;
@@ -326,17 +324,18 @@
 						$("#email").val("").focus();
 						return;
 					}
+					
 					//console.log("사용할 수 있음!");
-					$("#emailCheck").text('check');
+					flag_validation = true;
 					$("#emailCheck").html("[사용 가능]");
 					$("#btn-checkEmail").hide();
 				},
 				
-				"error": function(jsXHR, status, e){
+				error: function(jsXHR, status, e){
 					console.error("error:"+status+":"+e);
 				}
 			});
 		});
-	});
+});
 </script>
 </html>
