@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="store">
+
+<!-- 
+/*
+  2016-10-01 
+     작업자 : 최형민
+     개발 상황 : 완료
+ */
+  -->
+	
+	<!--게시물 리스트 가져오기  -->
+	<select id="getList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.MapBoardVo">
+   <![CDATA[
+   select * from(
+   		select c.*,rownum rn from(
+   			select 
+   				no,
+   				name,
+   				address 
+   				from store) c) 
+   	where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+   
+   	<!--검색된 게시물 리스트 가져오기  -->
+   	<select id="getListKeyword" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.MapBoardVo">
+   <![CDATA[
+ 	select * from(
+ 		select c.*,rownum rn from(
+ 			select 
+ 		 		no,
+ 				name,
+ 				address 
+ 				from store where name like #{keyword} or address like #{keyword}) c) 
+ 	where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+   
+   <!-- 게시물 총 수 가져오기 -->
+    	<select id="getCount" resultType="java.lang.Integer">
+   <![CDATA[
+ 	select count(*) from store
+   ]]>
+   </select>
+   
+    <!-- 게시물 총 수 가져오기 -->
+   <select id="getMapList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.MapVo">
+   <![CDATA[
+    select 
+   		no,
+   		name,
+   		localx,
+   		localy,
+   		region_no 
+    from map where region_no=#{reno}
+   ]]>
+   </select>
+   
+    <!-- 검색된 지도 리스트 가져오기 -->
+   	<select id="getMapListKeyword" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.MapVo">
+   <![CDATA[
+ 	select 
+ 		a.no,
+ 		a.name,
+ 		a.localx,
+ 		a.localy,
+ 		a.region_no from map a, 
+ 		region b 
+ 	where a.REGION_NO=b.NO and (b.NAME like #{keyword} or a.NAME like #{keyword})
+   ]]>
+   </select>
+
+
+
+
+</mapper>

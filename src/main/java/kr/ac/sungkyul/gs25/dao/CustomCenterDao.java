@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 import kr.ac.sungkyul.gs25.vo.AttachFileVO;
 import kr.ac.sungkyul.gs25.vo.CustomBoardVo;
 
+/*
+2016-10-01 
+ 작업자 : 최형민
+ 개발 상황 : 완료
+*/
+
 @Repository
 public class CustomCenterDao {
 
@@ -18,9 +24,11 @@ public class CustomCenterDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<CustomBoardVo> getList(int page, int pagesize, String keyword) { //게시판 리스트
+	//게시판 리스트
+	public List<CustomBoardVo> getList(int page, int pagesize, String keyword) { 
 		Map<String, Object> map=new HashMap<>();
-		
+
+		//키보드가 null or 비어있을 때 리스트 가져오기
 		if (keyword == null || "".equals(keyword)) {
 
 			map.put("page_start", (page - 1) * pagesize + 1);
@@ -28,9 +36,9 @@ public class CustomCenterDao {
 			
 			List<CustomBoardVo> list=sqlSession.selectList("board.getList",map);
 			return list;
-
+			
+		//검색된 리스트 가져오기
 		} else {
-			System.out.println(keyword);
 			map.put("keyword", "%" + keyword + "%");
 			map.put("page_start", (page - 1) * pagesize + 1);
 			map.put("page_end", page * pagesize);
@@ -40,22 +48,26 @@ public class CustomCenterDao {
 		}
 	}
 
-	public int getTotalCount() { //Total Count값 구하기
+	//게시판 총 개수
+	public int getTotalCount() { 
 
 	return sqlSession.selectOne("board.totalCount");
 	}
 
-	public Long insert(CustomBoardVo vo) { //게시판 삽입
+	//게시판 글쓰기
+	public Long insert(CustomBoardVo vo) { 
 		sqlSession.insert("board.insertBoard", vo);
 		return vo.getNo();
 	}
 
-	public Long reply(CustomBoardVo vo) { //댓글 달기
+	//게시판 댓글 달기
+	public Long reply(CustomBoardVo vo) { 
 		sqlSession.insert("board.replyBoard", vo);
 		return vo.getNo();
 	}
 
-	public void delete(int no, int orderno) { //첨부파일 삭제
+	 //첨부파일 삭제
+	public void delete(int no, int orderno) {
 		Map<String, Object> map=new HashMap<>();
 		map.put("no", no);
 		map.put("orderno", orderno);
@@ -64,27 +76,32 @@ public class CustomCenterDao {
 		
 	}
 
-	public void delete(CustomBoardVo vo) { //게시판 삭제
+	//게시판 삭제
+	public void delete(CustomBoardVo vo) { 
 		sqlSession.delete("board.deleteBoard",vo);
 
 	}
 
-	public CustomBoardVo get(Long no1) { //게시판 정보 얻기
+	 //게시판 정보 얻기
+	public CustomBoardVo get(Long no1) {
 		System.out.println(no1);
 		CustomBoardVo vo=sqlSession.selectOne("board.listByNo",no1);
 		return vo;
 	}
 
-	public void updateViewCount(Long no) { //뷰 카운트 증가
+	//조회수 증가
+	public void updateViewCount(Long no) { 
 		sqlSession.update("board.updateViewCount",no);
 	}
 
-	public void update(CustomBoardVo vo) { //게시판 수정
+	//게시판 수정
+	public void update(CustomBoardVo vo) { 
 
 		sqlSession.update("board.update",vo);
 	}
 
-	public void updatereplyCount(int groupNo, int orderNo) { //그룹 내 순서 증가
+	 //그룹 내 순서 정렬
+	public void updatereplyCount(int groupNo, int orderNo) {
 		Map<String, Object> map=new HashMap<>();
 		map.put("groupNo", groupNo);
 		map.put("orderNo", orderNo);
@@ -92,11 +109,13 @@ public class CustomCenterDao {
 		sqlSession.update("board.updatereplyCount",map);
 	}
 
-	public AttachFileVO selectAttachFileByFNO(Long fNO) { //첨부파일 정보
+	//첨부파일 정보 얻기
+	public AttachFileVO selectAttachFileByFNO(Long fNO) { 
 		return sqlSession.selectOne("board.selectAttachFileByFNO", fNO);
 	}
 
-	public void insertAttachFile(AttachFileVO attachFileVO) { //첨부파일 삽입
+	//첨부파일 삽입
+	public void insertAttachFile(AttachFileVO attachFileVO) { 
 		sqlSession.insert("board.insertAttachFile", attachFileVO);
 	}
 
@@ -104,13 +123,15 @@ public class CustomCenterDao {
 		return sqlSession.selectOne("board.selectAttachFileByNO", no);
 	}
 
-	public int getgroupno(AttachFileVO vo) { //첨부파일 그룹번호 반환
+	 //첨부파일 그룹번호 반환
+	public int getgroupno(AttachFileVO vo) {
 		sqlSession.selectList("board.list");
 		System.out.println(vo.getGroupno());
 		return vo.getGroupno();
 	}
 
-	public CustomBoardVo getList(int groupNo) { //사용자에게 댓글 달린 것을 확인 하기 위해서
+	//사용자에게 댓글 달린 것을 확인 하기 위한 객체 얻기
+	public CustomBoardVo getList(int groupNo) { 
 		
 		CustomBoardVo vo=sqlSession.selectOne("board.ListByGroupNo",groupNo);
 		return vo;

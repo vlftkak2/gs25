@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.sungkyul.gs25.service.MapService;
 
+/*
+  2016-10-01 
+     작업자 : 최형민
+     개발 상황 : 완료
+ */
+
 
 @Controller
 @RequestMapping("/map")
@@ -19,19 +25,23 @@ public class MapController {
 	@Autowired
 	MapService mapservice;
 	
+	//상품 검색 리스트
 	@RequestMapping("/list")
 	public String maplist(Model model,
 			@RequestParam(value="p",required=true,defaultValue="1") String page,
 			@RequestParam(value="kwd",required=true, defaultValue="") String keyword,
 			@RequestParam(value="no", required=true, defaultValue="1") Long no){
 		
-		System.out.println(keyword);
-		Map<String, Object> map=mapservice.list(page, keyword); //게시판 리스트
+		//게시판 리스트
+		Map<String, Object> map=mapservice.list(page, keyword); 
 		
-		Map<String, Object> map2=mapservice.maplist(keyword, no); //지도 리스트
+		//지도 리스트
+		Map<String, Object> map2=mapservice.maplist(keyword, no); 
 
-		
-		model.addAttribute("map", map);
+		//게시판 리스트 객체 넘기기
+		model.addAttribute("map", map); 
+		 
+		//지도 리스트 객체 넘기기
 		model.addAttribute("map2", map2);
 
 		return "/Main_Page/store_search";

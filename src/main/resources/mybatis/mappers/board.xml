@@ -3,12 +3,23 @@
 
 <mapper namespace="board">
 
+
+<!-- 
+/*
+  2016-10-01 
+     작업자 : 최형민
+     개발 상황 : 완료
+ */
+  -->
+
+	<!--게시물 총 개수 얻기  -->
 	<select id="totalCount" resultType="java.lang.Integer">
 		<![CDATA[
 		select count(*) from boards
 				]]>
 	</select>
 	
+	<!-- 게시물 리스트 가져오기 -->
 	<select id="getList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
    <![CDATA[
    select * from(
@@ -31,6 +42,7 @@
    ]]>
    </select>
    
+     <!--검색된 게시물 리스트 가져오기  -->
    	<select id="getListKeyword" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
    <![CDATA[
    select * from(
@@ -55,6 +67,7 @@
    </select>
    
 
+	<!--조회수 증가  -->
 	<update id="updateViewCount" parameterType="java.lang.Long">
 		<![CDATA[
 		update boards set
@@ -62,6 +75,7 @@
 					]]>
 	</update>
 
+	<!--게시물 수정  -->
 	<update id="update" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 		<![CDATA[
 		update boards set
@@ -69,6 +83,7 @@
 				]]>
 	</update>
 
+	<!--그룹내 순서 정렬  -->
 	<update id="updatereplyCount" parameterType="map">
 		<![CDATA[
 		update boards set
@@ -76,18 +91,21 @@
 			]]>
 	</update>
 
+	<!--첨부파일 삭제  -->
 	<delete id="deleteAttachFile" parameterType="map">
 		<![CDATA[
 		delete from boardsfile where groupno=#{no} and orderno>=#{orderno}
 			]]>
 	</delete>
 	
+	<!-- 게시물 삭제 -->
 	<delete id="deleteBoard" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 		<![CDATA[
 		delete from boards where GROUP_NO=#{groupNo} and ORDER_NO>=#{groupOrderNo}
 			]]>
 	</delete>
 
+	<!--유저 번호 얻기  -->
 	<select id="ListByGroupNo" parameterType="java.lang.Integer"
 		resultType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 		<![CDATA[
@@ -96,6 +114,7 @@
 			]]>
 	</select>
 
+	<!--게시물 정보 얻기  -->
 	<select id="listByNo" parameterType="java.lang.Long"
 		resultType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 			<![CDATA[
@@ -106,7 +125,7 @@
 	   		]]>
 	</select>
 
-
+	<!--게시물 답글 달기  -->
 	<insert id="replyBoard" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 
 		<selectKey resultType="java.lang.Long" keyProperty="no"
@@ -136,6 +155,7 @@
 
 	</insert>
 
+	<!--게시물 글쓰기  -->
 	<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
 
 		<selectKey resultType="java.lang.Long" keyProperty="no"
@@ -165,7 +185,7 @@
 	</insert>
 
 
-
+	<!--첨부파일 삽입  -->
 	<insert id="insertAttachFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		<![CDATA[
 			insert into boardsfile(
@@ -177,8 +197,7 @@
 		]]>
 	</insert>
 
-
-
+	<!--첨부파일 정보 얻기  -->
 	<select id="selectAttachFileByNO" parameterType="java.lang.Long"
 		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		<![CDATA[	
@@ -186,7 +205,7 @@
 				]]>
 	</select>
 
-
+	<!--첨부파일 정보 얻기  -->
 	<select id="selectAttachFileByFNO" parameterType="java.lang.Long"
 		resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 		<![CDATA[	
@@ -194,6 +213,7 @@
 			]]>
 	</select>
 
+	<!--첨부파일 그룹 번호 얻기  -->
 	<select id="list" resultType="kr.ac.sungkyul.gs25.vo.AttachFileVO">
 				<![CDATA[	
 		select groupno from boardsfile
