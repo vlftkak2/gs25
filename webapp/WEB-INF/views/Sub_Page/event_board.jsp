@@ -90,6 +90,7 @@
 							</div>
 						</c:if>
 		
+		<c:if test='${not empty map.list }'>
 			<!-- begin:paging -->
 						<div class="pager">
 							<ul>
@@ -126,7 +127,7 @@
 
 							</ul>
 						</div>
-		
+		</c:if>
 	
 		
 		<!-- end:paging -->

@@ -80,7 +80,8 @@
 				</div>
 </c:if>
 
- <c:if test="${not empty map.list}">
+
+		<c:if test='${not empty map.list }'>
 <!-- begin:paging -->
 	<div class="pager">
 		<ul>

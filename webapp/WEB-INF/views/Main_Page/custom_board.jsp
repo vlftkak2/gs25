@@ -107,44 +107,44 @@
 							</div>
 						</c:if>
 
+						<c:if test='${not empty map.list }'>
+							<!-- begin:paging -->
+							<div class="pager">
+								<ul>
 
-						<!-- begin:paging -->
-						<div class="pager">
-							<ul>
+									<c:if test="${map.prevtoPage >= 0 }">
+										<li><a href="/gs25/custom/list?p=${map.prevtoPage }">◀◀</a></li>
+									</c:if>
 
-								<c:if test="${map.prevtoPage >= 0 }">
-									<li><a href="/gs25/custom/list?p=${map.prevtoPage }">◀◀</a></li>
-								</c:if>
+									<c:if test="${map.prevPage >= 0 }">
+										<li><a href="/gs25/custom/list?p=${map.prevPage }">◀</a></li>
+									</c:if>
 
-								<c:if test="${map.prevPage >= 0 }">
-									<li><a href="/gs25/custom/list?p=${map.prevPage }">◀</a></li>
-								</c:if>
+									<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
+										step='1' var='i'>
+										<c:choose>
+											<c:when test='${map.currentPage == i }'>
+												<li class="selected">${i }</li>
+											</c:when>
+											<c:when test='${i > map.pageCount }'>
+												<li>${i }</li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="/gs25/custom/list?p=${i }">${i }</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 
-								<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
-									step='1' var='i'>
-									<c:choose>
-										<c:when test='${map.currentPage == i }'>
-											<li class="selected">${i }</li>
-										</c:when>
-										<c:when test='${i > map.pageCount }'>
-											<li>${i }</li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="/gs25/custom/list?p=${i }">${i }</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
+									<c:if test='${map.nextPage > 0 }'>
+										<li><a href="/gs25/custom/list?p=${map.nextPage }">▶</a></li>
+									</c:if>
+									<c:if test='${map.nexttoPage > 0 }'>
+										<li><a href="/gs25/custom/list?p=${map.nexttoPage }">▶▶</a></li>
+									</c:if>
 
-								<c:if test='${map.nextPage > 0 }'>
-									<li><a href="/gs25/custom/list?p=${map.nextPage }">▶</a></li>
-								</c:if>
-								<c:if test='${map.nexttoPage > 0 }'>
-									<li><a href="/gs25/custom/list?p=${map.nexttoPage }">▶▶</a></li>
-								</c:if>
-
-							</ul>
-						</div>
-
+								</ul>
+							</div>
+						</c:if>
 						<!-- end:paging -->
 						<c:choose>
 							<c:when test='${empty authUser }'>
