@@ -47,7 +47,7 @@
 							<td id="attachFile" data-fno="${attachFileVO.fNO }">${attachFileVO.orgName }</td>
 							</tr>
 						</table>
-						<img alt="이미지 없음" src="download?fNO=${attachFileVO.fNO }">
+						<img alt="이미지 없음" src="download?fNO=${attachFileVO.fNO }" width=200px; height="200px">
 				<div id="cma_image" style="width:95%; max-width:100%; border:1px solid #c0c0c0;">
 				</div>
 						<div class="bottom">
