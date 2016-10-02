@@ -122,5 +122,16 @@ public class ProductService {
 			FileCopyUtils.copy(file.getBytes(),target);
 		
 	}
+	
+	//상품 첨부파일 삭제
+	public void deletefile(Long no){
+		productdao.deletefile(no);
+	}
+	
+	//상품 삭제
+	public void delete(Long no){
+		
+		productdao.delete(no);
+	}
 
 }
