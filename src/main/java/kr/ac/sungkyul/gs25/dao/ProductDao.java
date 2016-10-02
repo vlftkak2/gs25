@@ -67,4 +67,14 @@ public class ProductDao {
 	public void insertAttachPrFile(AttachFilePrVo attachFilePrVO) {
 		sqlSession.insert("product.insertAttachPrFile", attachFilePrVO);
 	}
+	
+	//상품 첨부파일 삭제
+	public void deletefile(Long no){
+		sqlSession.delete("product.deleteproductfile",no);
+	}
+	
+	//상품 삭제
+	public void delete(Long no){
+		sqlSession.delete("product.deleteproduct",no);
+	}
 }

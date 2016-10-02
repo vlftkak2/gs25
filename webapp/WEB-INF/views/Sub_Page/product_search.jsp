@@ -8,123 +8,129 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript"
+	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
-<link href="/gs25/assets/css/product.css" rel="stylesheet" type="text/css">
+<link href="/gs25/assets/css/product.css" rel="stylesheet"
+	type="text/css">
 
 <body>
 
-<div id="container">
+	<div id="container">
 
-	<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
-	
-	
-<div id="content">
+		<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 
-<div class="container_product">
-<div class="container_productsub">
 
-<div id="store_header">
-<div id="store">
-<h1 id="sub_h1">상품검색</h1>
-</div>
-<div id="txt_header">
-<p>GS25 할인 상품을 안내해드립니다.</p>
-<p>할인상품을 검색을 통해 찾아보세요</p>
-</div>
+		<div id="content">
 
-</div>
+			<div class="container_product">
+				<div class="container_productsub">
 
-<div id="search"> 
-<form id="search_form" action="/gs25/product/list" method="get">
-<input type="text" id="kwd" name="kwd" value="${map.keyword }"> 
-<input type="submit" value="찾기">
-</form>
-</div>
+					<div id="store_header">
+						<div id="store">
+							<h1 id="sub_h1">상품검색</h1>
+						</div>
+						<div id="txt_header">
+							<p>GS25 할인 상품을 안내해드립니다.</p>
+							<p>할인상품을 검색을 통해 찾아보세요</p>
+						</div>
 
-<c:if test='${authUser.no==1 }'>
-<div class="insert">
-<a href="/gs25/product/insert" id="new-book">상품등록</a>
-</div>
-</c:if>
-
-<div id="productboard">
-<div id="productlist">
-<ul>
-<c:forEach var='vo' items='${map.list}' varStatus='status'>
-<li style="float:left; top: 50px; left: 192px; z-index: 3; border: 1px solid rgb(215, 215, 215); height: 200px; width: 350px;">
-<ul class="tag_list_01">
-<li class="ico_tag_03">
-<!--${vo.category}-->
-</li>
-</ul>
-<div class="pic_product">
-<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락" >
-<div class="infowrap">
-<div class="name">${vo.name }</div>
-<div class="price">${vo.price }원 </div> 
-</div>
-</div>
-</li>
-</c:forEach>
-</ul>
-
- <c:if test="${empty map.list}">
-	<div id="right">
-					<div id="risk">
-						<img src="/gs25/assets/images/customcenter/risk.png">
 					</div>
-					<p class="list-right">
-						검색된 결과를 찾을 수 없습니다. <br> 
-					</p>
+
+					<div id="search">
+						<form id="search_form" action="/gs25/product/list" method="get">
+							<input type="text" id="kwd" name="kwd" value="${map.keyword }">
+							<input type="submit" value="찾기">
+						</form>
+					</div>
+
+					<c:if test='${authUser.no==1 }'>
+						<div class="insert">
+							<a href="/gs25/product/insert" id="new-book">상품등록</a>
+						</div>
+					</c:if>
+
+					<div id="productboard">
+						<div id="productlist">
+							<ul>
+								<c:forEach var='vo' items='${map.list}' varStatus='status'>
+									<li id="product_li">
+										<ul class="tag_list_01">
+											<li class="ico_tag_03">
+												<!--${vo.category}-->
+											</li>
+										</ul> 
+										<div class="pic_product">
+										<div id="del">
+										<a href="/gs25/product/delete?no=${vo.no }" class="del">삭제</a>
+										</div>
+											<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락">
+											<div class="infowrap">
+												<div class="name">${vo.name }</div>
+												<div class="price">${vo.price }원</div>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+
+							<c:if test="${empty map.list}">
+								<div id="right">
+									<div id="risk">
+										<img src="/gs25/assets/images/customcenter/risk.png">
+									</div>
+									<p class="list-right">
+										검색된 결과를 찾을 수 없습니다. <br>
+									</p>
+								</div>
+							</c:if>
+
+
+							<c:if test='${not empty map.list }'>
+								<!-- begin:paging -->
+								<div class="pager">
+									<ul>
+										<c:if test="${map.prevtoPage >= 0 }">
+											<li><a href="/gs25/product/list?p=${map.prevtoPage }">◀◀</a></li>
+										</c:if>
+
+										<c:if test="${map.prevPage >= 0 }">
+											<li><a href="/gs25/product/list?p=${map.prevPage }">◀</a></li>
+										</c:if>
+
+										<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
+											step='1' var='i'>
+											<c:choose>
+												<c:when test='${map.currentPage == i }'>
+													<li class="selected">${i }</li>
+												</c:when>
+
+												<c:when test='${i > map.pageCount }'>
+													<li>${i }</li>
+												</c:when>
+
+												<c:otherwise>
+													<li><a href="/gs25/product/list?p=${i }">${i }</a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+
+										<c:if test='${map.nextPage > 0 }'>
+											<li><a href="/gs25/product/list?p=${map.nextPage }">▶</a></li>
+										</c:if>
+										<c:if test='${map.nexttoPage > 0 }'>
+											<li><a href="/gs25/product/list?p=${map.nexttoPage }">▶▶</a></li>
+										</c:if>
+									</ul>
+								</div>
+							</c:if>
+						</div>
+					</div>
+
 				</div>
-</c:if>
-
-
-		<c:if test='${not empty map.list }'>
-<!-- begin:paging -->
-	<div class="pager">
-		<ul>
-			<c:if test="${map.prevtoPage >= 0 }">
-			<li><a href="/gs25/product/list?p=${map.prevtoPage }">◀◀</a></li>
-			</c:if>
-		
-			<c:if test="${map.prevPage >= 0 }">
-			<li><a href="/gs25/product/list?p=${map.prevPage }">◀</a></li>
-			</c:if>
-			
-			<c:forEach begin='${map.firstPage }' end='${map.lastPage }' step='1' var='i'>
-				<c:choose>
-					<c:when test='${map.currentPage == i }'>
-						<li class="selected">${i }</li>
-					</c:when>
-
-					<c:when test='${i > map.pageCount }'>
-						<li>${i }</li>
-					</c:when>
-
-					<c:otherwise>
-						<li><a href="/gs25/product/list?p=${i }">${i }</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-				<c:if test='${map.nextPage > 0 }'>
-				<li><a href="/gs25/product/list?p=${map.nextPage }">▶</a></li>
-				</c:if>
-				<c:if test='${map.nexttoPage > 0 }'>
-				<li><a href="/gs25/product/list?p=${map.nexttoPage }">▶▶</a></li>
-				</c:if>
-				</ul>
 			</div>
-			</c:if>
-			</div>
-			</div>
-
-		</div>
-		</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-		</div>
+	</div>
 </body>
 </html>

@@ -3,6 +3,8 @@ package kr.ac.sungkyul.gs25.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.service.ProductService;
-import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
+import kr.ac.sungkyul.gs25.vo.UserVo;
 
 /*
  2016-10-01 
@@ -57,5 +59,30 @@ public class ProductController {
 		
 		return "redirect:/product/list";
 		}
+	
+	//상품 삭제
+	@RequestMapping("/delete")
+	public String productdelete(
+			@RequestParam("no") Long no,
+			HttpSession session){
+		
+		if (session == null) {
+			return "redirect:/sub/main";
+		}
+
+		//사용자 세션 정보 얻어오기
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if (authUser == null) {
+			return "redirect:/sub/main";
+		}
+		
+		//상품 첨부파일 삭제
+		productservice.deletefile(no);
+		
+		//상품 삭제
+		productservice.delete(no);
+		
+		return "redirect:/product/list";
+	}
 
 }

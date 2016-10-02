@@ -14,6 +14,7 @@
    select * from(
    	select c.*,rownum rn from(
    		select 
+   		    a.no,
    			a.name,
    			a.price,
    			to_char(a.reg_date,'yyyy.mm.dd') as reg_date,
@@ -30,7 +31,9 @@
    <![CDATA[
   	select * from(
   		select c.*,rownum rn from(
-  			select a.NAME,
+  			select 
+  			       a.no,
+  				   a.NAME,
   				   a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),
   				   to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),
   				   a.maker,
@@ -83,8 +86,24 @@
 	<!-- imageurl 정보 얻기 -->
 	<select id="List" 
 		resultType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
+			<![CDATA[
 		select imageurl from boardsfilepr
+			]]>
 	</select>
+	
+	<!-- 상품 첨부파일 삭제 -->
+	<delete id="deleteproductfile" parameterType="java.lang.Long">
+	<![CDATA[
+	delete from boardsfilepr where no=#{no}
+	]]>
+	</delete>
+	
+	<!-- 상품 삭제 -->
+	<delete id="deleteproduct" parameterType="java.lang.Long">
+		<![CDATA[
+		delete from product where no=#{no}
+		]]>
+	</delete>
 
 
 </mapper>
