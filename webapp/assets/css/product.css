@@ -227,6 +227,10 @@ a.del	{
 	margin-top:5px;
 }
 
+#selectbox{
+	width:150px;
+}
+
 /* 
 137 	게시판 리스트 페이징 
 138 */ 
@@ -245,6 +249,5 @@ a.del	{
  div.pager  ul li a:visited, 
  div.pager  ul li a:link, 
  div.pager  ul li a:active { text-decoration: none; color:#ff8080 } 
- div.pager  ul li a:hover { text-decoration: none; color:#f00 } 
-
-
+ div.pager  ul li a:hover { text-decoration: none; color:#f00 }
+ 

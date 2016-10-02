@@ -57,7 +57,7 @@
 
 		<![CDATA[	
 			insert into product(
-				no, name, price,reg_date,expiry_date,maker,kind_no)
+				no, name, price,reg_date,expiry_date,maker,kind_no,category)
 			values
 			(
 				#{no},
@@ -66,7 +66,8 @@
 				#{reg_date},
 				#{expiry_date},
 				#{maker},
-				#{kind_no}
+				#{kind_no},
+				#{category}
 			)
 		]]>
 	</insert>
