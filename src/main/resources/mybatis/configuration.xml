@@ -4,7 +4,7 @@
 	<typeAliases>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.EventBoardVo" alias="eventboardvo"/>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.GuestbookVo" alias="guestbookvo"/>
-	
+	<typeAlias type="kr.ac.sungkyul.gs25.vo.ProductVo" alias="productvo"/>
 	</typeAliases>
 	<mappers>
 	<mapper resource="mybatis/mappers/board.xml" />	

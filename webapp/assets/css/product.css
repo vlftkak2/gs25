@@ -4,9 +4,16 @@
 .container_product {margin: 0 auto; width: 1500px;}
 
 
+
 .container_productsub{
 	margin-left:80px;
 }
+
+.container_main{
+	width:960px;
+	margin: 0 auto;
+}
+
 
 /*상품 등록*/
 #wrap{
@@ -251,3 +258,218 @@ a.del	{
  div.pager  ul li a:active { text-decoration: none; color:#ff8080 } 
  div.pager  ul li a:hover { text-decoration: none; color:#f00 }
  
+/* 상품 상세보기 */
+#title_head {
+	margin: 70px 0;
+	position: relative;
+}
+#title1 {
+    font-size: 35px;
+    color: #222;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+#title1_p {
+    margin-top: 25px;
+    font-size: 16px;
+    color: #666;
+    line-height: 24px;
+}
+.go_see a {
+    display: inline-block;
+    line-height: 17px;
+    padding: 15px 18px 14px 54px;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: -1px;
+    background: #494c51 url("/gs25/assets/images/product/product_icon.png") 19px -115px no-repeat;
+    position: absolute;
+    top: 1px;
+    right: 0;
+}
+#product_back {
+    min-height: 42px;
+    margin-bottom: 46px;
+    background: url("/gs25/assets/images/product/lineBackground.png") 0 0 repeat-x;
+}
+.inner {
+	padding: 30px 0;
+}
+.product_view {
+    position: relative;
+    width: 960px;
+    height: 480px;
+    background: #fff;
+}
+.product_view .product_img {
+    float: left;
+    width: 478px;
+    height: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-right: 1px solid #eaeaea;
+}
+.product_view .product_img span {
+    position: relative;
+    display: block;
+    width: 478px;
+    height: 480px;
+}
+.product_view .tag_list_02 {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+.productView_content {
+    float: left;
+    width: 400px;
+    margin-left: 40px;
+}
+.productView_content dl dt {
+    height: 90px;
+    padding-top: 50px;
+}
+.productView_content dl dd {
+    float: left;
+}
+.productView_content_dd_01 {
+    height: 250px;
+    border-bottom: 1px solid #a1a5aa;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.productView_content_dd_02 {
+    width: 100%;
+    position: relative;
+}
+.productView_content_ul {
+    margin-bottom: 120px;
+}
+.productView_content_ul li {
+    margin: 15px 0;
+}
+#txt1{
+	margin-top:30px;
+}
+.product_view span {
+    letter-spacing: -1px;
+}
+.product_price {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    text-align: right;
+    font-size: 18px;
+    color: #2f3234;
+}
+.product_price strong {
+    font-size: 36px;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+.productView_content dl dt .tit_product_view {
+    display: block;
+    font-size: 30px;
+    color: #24809c;
+    letter-spacing: -1px;
+    line-height: 35px;
+    margin-bottom: 10px;
+}
+#pro_img {
+	position: absolute;
+    left: 20%;
+    top: 15%;
+    width: 280px;
+    height: 350px;
+}
+#tit {
+    margin-bottom: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background: url(/gs25/assets/images/login/icon_signup.png) 0 -274px no-repeat;
+}
+#Nsearch {
+	margin: 50px 0;
+	padding: 0 20px;
+}
+.tbl_wtype1 {
+    border-top: 1px solid #666;
+    color: #222;
+    font-size: 13px;
+    width: 920px;
+}
+#table_head {
+	height: 40px;
+	padding: 7px 40px;
+    background-color: #fafafa;
+}
+.tbl_wtype1 th {
+    width: 160px;
+    padding: 17px 0 16px 20px;
+    line-height: 16px;
+    background: #fbfbfb;
+    border-bottom: 1px solid #dfdfdf;
+    text-align: left;
+    vertical-align: top;
+}
+.tbl_wtype1 td {
+    padding: 7px 10px;
+    height: 30px;
+    color: #444;
+    border-bottom: 1px solid #dfdfdf;
+}
+.tag_list_02 li {
+    float: left;
+    width: 50px;
+    height: 18px;
+    padding-top: 6px;
+    margin-right: 2px;
+    color: #fff;
+    font-size: 12px;
+    font-family: "돋움", Dotum;
+    text-align: center;
+    letter-spacing: -1px;
+}
+.ico_tag_07 {
+    background: #763AC9;
+}
+#nbloger {
+    background-image: url(/gs25/assets/images/product/Nballon.png);
+    background-size: 700px 170px;
+    background-repeat: no-repeat;
+    background-position: 200px 4px;
+}
+#NBear {
+	float: left;
+    margin-left: 50px;
+    width: 140px;
+}
+#blogerName {
+	position: absolute;
+    margin-top: 130px;
+    margin-left: 190px;
+}
+#ballonIn {
+	margin-top: 25px;
+    margin-left: 310px;
+}
+#ballonIn ul{
+	text-align: left;
+}
+#ballonIn ul li{
+	padding: 5px 0;
+}
+#ballonIn ul li strong{
+	font-size: 23px;
+    text-decoration: underline;
+}
+#ballonIn ul li span{
+	font-size: 18px;
+}
+#sorryT {
+	margin-top: 70px;
+    margin-left: 350px;
+    font-size: 25px;
+    color: gray;
+}

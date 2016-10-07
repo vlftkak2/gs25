@@ -46,7 +46,7 @@
    ]]>
    </select>
    
-    <!-- 게시물 총 수 가져오기 -->
+    <!-- 게시물 가져오기 -->
    <select id="getMapList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.MapVo">
    <![CDATA[
     select 

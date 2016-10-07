@@ -90,11 +90,10 @@ public class EventController {
 			
 			return "redirect:/event/eventlist";
 		}
-		/* select box 를 이용한 날짜 선택 테스트
+		// select box 를 이용한 날짜 선택 테스트
 		 @RequestMapping("/test")
-		 
 		public String test(){
 			return "/Sub_Page/test";
 		}
-		*/
+		
 	}

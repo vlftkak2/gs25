@@ -9,7 +9,7 @@
 	</select>
 	
 	<!-- 게시물 리스트 가져오기 -->
-	<select id="getList" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.ProductVo">
+	<select id="getList" parameterType="map" resultType="productvo">
    <![CDATA[
    select * from(
    	select c.*,rownum rn from(
@@ -20,14 +20,13 @@
    			to_char(a.reg_date,'yyyy.mm.dd') as reg_date,
    			TO_CHAR(a.EXPIRY_DATE,'YYYY.MM.DD') as expiry_date,
    			a.maker,
-   			a.category,
    			b.IMAGEURL from product a, boardsfilepr b where a.NO=b.NO) c) 
    	where #{page_start}<=rn and rn<=#{page_end}
    ]]>
    </select>
    
      <!--검색된 게시물 리스트 가져오기  -->
-   	<select id="getListKeyword" parameterType="map" resultType="kr.ac.sungkyul.gs25.vo.ProductVo">
+   	<select id="getListKeyword" parameterType="map" resultType="productvo">
    <![CDATA[
   	select * from(
   		select c.*,rownum rn from(
@@ -37,7 +36,6 @@
   				   a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),
   				   to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),
   				   a.maker,
-  				   a.category,
   				   d.imageurl from product a, productkind b, boardsfilepr d 
   					where a.KIND_NO=b.NO and a.NO=d.NO and (a.NAME like #{keyword} or b.KIND like #{keyword}) 
   		order by price desc, a.EXPIRY_DATE asc) c) 
@@ -47,7 +45,7 @@
 
 
 	<!-- 상품 등록 -->
-	<insert id="insertBoard" parameterType="kr.ac.sungkyul.gs25.vo.ProductVo">
+	<insert id="insertBoard" parameterType="productvo">
 
 		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
        	<![CDATA[
@@ -55,7 +53,7 @@
        	]]>
 		</selectKey>
 
-		<![CDATA[	
+	<![CDATA[	
 			insert into product(
 				no, name, price,reg_date,expiry_date,maker,kind_no,category)
 			values
@@ -105,6 +103,40 @@
 		delete from product where no=#{no}
 		]]>
 	</delete>
-
+	
+	<!-- 상품 서브리스트 (유통기한) -->
+	<select id="getSubDate" resultType="productvo">
+		<![CDATA[
+		SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
+		FROM (SELECT a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL
+  		FROM product a, boardsfilepr b where a.no = b.no and expiry_date > sysdate ORDER BY expiry_date) c WHERE rownum < 5
+		]]>
+	</select>
+	
+	<!-- 상품 서브리스트 (신상품) -->
+	<select id="getSubNew" resultType="productvo">
+		<![CDATA[
+		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
+		 FROM (SELECT a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL 
+  		 FROM product a, boardsfilepr b  where a.no = b.no ORDER BY reg_date desc) c WHERE rownum < 5
+		]]>
+	</select>
+	
+	<!-- 상품 서브리스트 (랜덤추천) -->
+	<select id="getSubReco" resultType="productvo">
+		<![CDATA[
+		 SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL
+  		 FROM(select a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL 
+ 		 FROM product a, boardsfilepr b  where a.no = b.no order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
+		]]>
+	</select>
+	
+	<!-- 상품 상세정보 -->
+	<select id="searchproduct" parameterType="long" resultType="productvo">
+		<![CDATA[
+		 SELECT a.no, a.name, a.price,  to_char(a.expiry_date,'yyyy/mm/dd') as expiry_date, a.maker, b.IMAGEURL 
+		 FROM product a, boardsfilepr b  where a.no = b.no and a.no=#{no }
+		]]>
+	</select>
 
 </mapper>

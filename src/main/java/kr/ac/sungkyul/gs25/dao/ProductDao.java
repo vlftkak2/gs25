@@ -77,4 +77,35 @@ public class ProductDao {
 	public void delete(Long no){
 		sqlSession.delete("product.deleteproduct",no);
 	}
+	
+	//서브메인 - 유통기한별 4개
+	public List<ProductVo> getSubDate() {
+		
+		List<ProductVo> list=sqlSession.selectList("product.getSubDate");
+		System.out.println("유통기한 "+list);
+		return list;
+	}
+	
+	//서브메인 - 신상품별 4개
+	public List<ProductVo> getSubNew() {
+		
+		List<ProductVo> list=sqlSession.selectList("product.getSubNew");
+		System.out.println("신상 "+list);
+		return list;
+	}
+	
+	//서브메인 - 추천별 4개
+	public List<ProductVo> getSubReco() {
+		
+		List<ProductVo> list=sqlSession.selectList("product.getSubReco");
+		System.out.println("추천 " + list);
+		return list;
+	}
+	
+	//상품 상세정보 출력
+	public ProductVo productInfo(Long no){
+		ProductVo vo = sqlSession.selectOne("product.searchproduct",no);
+		System.out.println("상품상세정보: " + vo.toString());
+		return vo;
+	}
 }

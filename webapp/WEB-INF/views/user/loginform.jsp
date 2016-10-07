@@ -11,9 +11,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 <link href="/gs25/assets/css/login.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
-
+<script src="/gs25/assets/js/sweetalert.min.js"></script> 
 </head>
 <body>
 
@@ -60,13 +61,13 @@ $(function() {
 	/* $(".login-form").submit(function(){ */
 	 $("#btn_Login").on("click", function(){ 	
 		if($("#email").val() == ""){
-			alert("아이디를 입력해주십시오.");
+			sweetAlert("아이디를 입력해주십시오.", "Something went wrong!", "error");
 			$("#email").focus();
 			return false;
 			}
 		
 		if($("#password").val() == ""){
-			alert("비밀번호를 입력해주십시오.");
+			sweetAlert("비밀번호를 입력해주십시오.", "Something went wrong!", "error");
 			$("#password").focus();
 			return false;
 			}
@@ -83,7 +84,7 @@ $(function() {
 				console.log(result);
 				if(result == "false"){
 					console.log(result);
-					alert("유효하지 않는 로그인입니다. 다시 시도해주세요.")
+					sweetAlert("유효하지 않는 로그인입니다.", "다시 시도해주세요.", "error");
 					return false;
 				}
 				

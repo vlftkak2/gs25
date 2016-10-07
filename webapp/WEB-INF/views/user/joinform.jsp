@@ -9,7 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="/gs25/assets/css/login.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
+<script src="/gs25/assets/js/sweetalert.min.js"></script> 
 
 </head>
 <body>
@@ -184,6 +186,7 @@ $(function() {
 			} else {
 				$('font[name=passCheck]').text('');
 				$('font[name=passCheck]').html("암호맞음");
+				swal("Good job!", "You clicked the button!", "success");
 			}
 		});
 		
@@ -205,38 +208,34 @@ $(function() {
 			console.log("form check");
 			//이름 체크
 			if($("#name").val() == ""){
-			alert("이름은 필수 입력 항목입니다.");
+			sweetAlert("이름은 필수 입력 항목입니다. ","Something went wrong" ,"error");
 			$("#name").focus();
 			return false;
 			}
 			//생년월일
 			var regBirth = /^(19|20)\d{2}([0][1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/;	//정규식
 			if($("#birth").val() == ""){
-				alert("생년월일은 필수 입력 항목입니다.");
-				$("#birth").focus();
+				sweetAlert("생년월일은 필수 입력 항목입니다.","Something went wrong", "error");				$("#birth").focus();
 				return false;
 			} else {
 				if(!regBirth.test($("#birth").val())) {  
-				    alert("생년월일 입력 형식이 잘못되었습니다.");
-				    $("#birth").focus();
+					sweetAlert("생년월일 입력 형식이 잘못되었습니다.","Something went wrong", "error");				    $("#birth").focus();
 				    return false;  
 				}
 			}
 			//휴대폰
 			var regPhone = /^((01[0|1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 			if($("#phone").val() == ""){
-				alert("휴대폰 번호는 필수 입력 항목입니다.");
-				$("#phone").focus();
+				sweetAlert("휴대폰 번호는 필수 입력 항목입니다.","Something went wrong", "error");				$("#phone").focus();
 				return false;
 			} else { 	//휴대폰 유효성 검사
 				if(!regPhone.test($("#phone").val())) {  
-				    alert("휴대폰 번호 입력된 내용이 잘못된 형식입니다.");
-				    $("#phone").focus();
+					sweetAlert("휴대폰 번호 입력된 내용이 잘못된 형식입니다.","Something went wrong", "error");				    $("#phone").focus();
 				    return false;  
 				}
 			}
 			if($("#email").val() == ""){
-				alert("아이디 필수 입력 항목입니다.");
+				sweetAlert("아이디 필수 입력 항목입니다.","Something went wrong", "error");
 				$("#email").focus();
 				return false;
 			} 
@@ -244,42 +243,42 @@ $(function() {
 			//중복검사
 			if(flag_validation == false){
 				console.log(flag_validation);
-				alert("중복검사를 해주세요");
+				sweetAlert("중복검사를 해주세요!","Something went wrong", "error");
 				$("#btn-checkEmail").focus();
 				return false;
 			}
 		
 			//패스워드
 			if($("#password").val() == ""){
-				alert("비밀번호는 필수 입력 항목입니다.");
+				sweetAlert("비밀번호는 필수 입력 항목입니다.","Something went wrong", "error");
 				$("#password").focus();
 				return false;
 				}
 			
 			//재 패스워드
 			if($("#repassword").val() == ""){
-				alert("비밀번호 재입력은 필수 입력 항목입니다.");
+				sweetAlert("비밀번호 재입력은 필수 입력 항목입니다.","Something went wrong", "error");
 				$("#repassword").focus();
 				return false;
 				}
 			
 			//패스워드 일치 여부
 			if($("#password").val() != $("#repassword").val()){
-				alert("비밀번호가 일치하지 않습니다.");
+				sweetAlert("비밀번호가 일치하지 않습니다.","Something went wrong", "error");
 				$("#password").focus();
 				return false;
 			}
 			
 			//주소
 			if($("#address").val() == ""){
-				alert("주소는 필수 입력 항목입니다.");
+				sweetAlert("주소는 필수 입력 항목입니다.","Something went wrong", "error");
 				$("#address").focus();
 				return false;
 				}
 			
 			//약관동의
 			if($("#agree-prov").is(':checked') == false ) {
-		         alert("약관 동의가 필요합니다.");
+				sweetAlert("약관 동의가 필요합니다.","Something went wrong", "error");
 		         return false;
 		     }
 		return true;
@@ -297,11 +296,11 @@ $(function() {
 			var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			
 			if(email == ""){
-				alert("아이디를 입력하시지 않으셨습니다.");
+				sweetAlert("아이디를 입력하시지 않으셨습니다.","Something went wrong", "error");
 				return false;
 			} else {  //이메일 유효성 검사
 			   	if(!regEmail.test(email)) { 
-				      alert("입력된 아이디 형식이 유효하지 않습니다"); 
+			   		sweetAlert("이메일 주소가 유효하지 않습니다.","Something went wrong", "error");
 				      $("#email").focus(); 
 				      return false; 
 				}
@@ -320,8 +319,7 @@ $(function() {
 					}
 					
 					if(response.data == true){
-						alert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요.");
-						$("#email").val("").focus();
+						sweetAlert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요.","Something went wrong", "error");						$("#email").val("").focus();
 						return;
 					}
 					

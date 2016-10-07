@@ -61,13 +61,22 @@
 											</li>
 										</ul> 
 										<div class="pic_product">
+										<c:if test="${authUser.no==1 }">
 										<div id="del">
 										<a href="/gs25/product/delete?no=${vo.no }" class="del">삭제</a>
 										</div>
+										</c:if>
+										
+											<a href="/gs25/product/view?no=${vo.no }&&name=${vo.name}">
 											<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락">
+											</a>
 											<div class="infowrap">
-												<div class="name">${vo.name }</div>
-												<div class="price">${vo.price }원</div>
+												
+												<span class='title'>
+								<em class='mt'>${vo.maker})${vo.name }</em><em>${vo.price }원</em>
+								</span>
+												
+												
 											</div>
 										</div>
 									</li>

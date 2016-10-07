@@ -64,17 +64,19 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select no, name from users where email=? and password=?";
+			String sql = "select no, name,email from users where email=? and password=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
+		
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
+				String emails=rs.getString(3);
 
 				System.out.println(no + " " + name + "님이 로그인하셨습니다.");
 
@@ -82,6 +84,7 @@ public class UserDao {
 
 				vo.setNo(no);
 				vo.setName(name);
+				vo.setEmail(emails);
 			}
 
 		} catch (SQLException e) {

@@ -1,6 +1,7 @@
 package kr.ac.sungkyul.gs25.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.service.ProductService;
+import kr.ac.sungkyul.gs25.vo.NblogVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
@@ -84,5 +86,26 @@ public class ProductController {
 		
 		return "redirect:/product/list";
 	}
+	
+	/*
+	 2016-10-05 
+	   작업자 : 최재은
+	   개발 상황 : 추가
+	*/
+	
+	//상품 상세 페이지 이동
+		@RequestMapping(value="/view", method=RequestMethod.GET)
+		public String productView(Model model,
+				@RequestParam(value= "no") Long no,
+				@RequestParam(value="name") String name){
+			
+			ProductVo vo = productservice.productInfo(no);
+			model.addAttribute("prodvo", vo);
+			
+			List<NblogVo> nvo = productservice.searchNBlog(name);
+			model.addAttribute("nvo", nvo);
+			
+			return "/Sub_Page/product_view";
+		}
 
 }
