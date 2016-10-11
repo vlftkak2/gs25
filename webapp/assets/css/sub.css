@@ -12,6 +12,11 @@ ul, ol, li {
     padding: 0;
 }
 
+#price{
+	text-decoration:line-through;
+	color:red;
+}
+
 a{
     color: #494949;
     text-decoration: none;
@@ -131,7 +136,7 @@ input[type=text], input[type=password] {
 .pro{position:relative;top:30px;background:url(/gs25/assets/images/subindex/gs25_probg.png) no-repeat 25px 20px;}
 .pro img{margin:40px 0 0 45px;width:95px;height:92px;}
 .pro a{height:175px;display:block}
-.pro .tip{display:table;position:absolute;top:15px;right:10px;width:46px;height:46px;color:#fff;font-size:18px;text-align:center;background:url(/gs25/assets/images/subindex/flag_bg.png) no-repeat; background-image: url(/gs25/assets/images/subindex/flag_bg.png);font-weight: bold}
+.pro .tip{display:table;position:absolute;top:15px;right:10px;width:46px;height:46px;color:#fff;font-size:0.8em;text-align:center;background:url(/gs25/assets/images/subindex/flag_bg.png) no-repeat; background-image: url(/gs25/assets/images/subindex/flag_bg.png);font-weight: bold}
 .pro .tip.typ1{background-position: 0 0}
 .pro .tip.typ2{background-position: -65px 0}
 .pro .tip.typ3{background-position: 0 -55px;font-size: 16px}

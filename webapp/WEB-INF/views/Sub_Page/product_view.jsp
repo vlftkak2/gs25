@@ -49,11 +49,78 @@
 							<ul class="productView_content_ul">
 								<li><strong>제조사</strong> : <span>${prodvo.maker }</span></li>
 								<li><strong>유통기한</strong> : <span>${prodvo.expiry_date }</span></li>
+								<c:choose>
+									<c:when test='${prodvo.remainderdate<0 }'>
+										<c:choose>
+										<c:when test='${prodvo.remaindercountdate<=0}'>
+										<li><span id="countdate"><strong>할인이 종료되었습니다.</strong></span></li>
+										</c:when>
+										<c:otherwise>
+								<li><span id="countdate"><strong>할인 마무리가 되기까지 남은일자</strong> : ${prodvo.remaindercountdate}일</span></li>
+										</c:otherwise>
+										</c:choose>
+									</c:when>
+										<c:otherwise>
+									<li><span id="countdate"><strong>할인적용까지 남은 일자</strong> : ${prodvo.remainderdate }일</span></li>	
+										</c:otherwise>
+								</c:choose>
 							</ul>
 							<span id="txt1">고객님 위 제품은 어떠세요?아래 후기를 통해 참고하실 수 있습니다.^^</span>
 						</dd>
 						<dd class="productView_content_dd_02">
-							<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+						
+						<c:choose>
+								<c:when test='${prodvo.remaindercountdate>7}'>
+								<span class="product_wonprice"> 
+								<strong>${prodvo.price }</strong><span>원</span>
+								</span>							
+								</c:when>
+								<c:when test='${prodvo.remaindercountdate==7 && (prodvo.price-vo.countprice)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==6 && (prodvo.price-prodvo.countprice*2)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*2)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==5 && (prodvo.price-prodvo.countprice*3)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*3)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==4 && (prodvo.price-prodvo.countprice*4)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*4)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==3 && (prodvo.price-prodvo.countprice*5)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*5)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==2 && ((prodvo.price-(prodvo.countprice*6))>=(prodvo.price*0.5)) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*6)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate==1 && (prodvo.price-prodvo.countprice*7)>=(prodvo.price*0.5) }'>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*7)}</strong><span>원</span></span>
+								</c:when>
+								
+								<c:when test='${prodvo.remaindercountdate<=0 }'>
+								<span class="product_wonprice"> 
+								<strong>${prodvo.price }</strong><span>원</span>
+								</span>	
+								</c:when>
+								
+								<c:otherwise>
+								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
+								<span class="product_countprice"><strong>할인 가격 : ${prodvo.halfprice}</strong><span>원</span></span>
+								</c:otherwise>
+							</c:choose>
 						</dd>
 					</dl>
 					</div>
@@ -62,7 +129,7 @@
 		</div>
 	</div>
 	<!-- //cont_top -->
-	<div class="container">
+	<div class="container_main">
 		<div id="Nsearch">
 			<h5 id="tit">네이버 블로그 후기</h5>
 			<table class="tbl_wtype1">

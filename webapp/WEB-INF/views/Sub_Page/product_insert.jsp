@@ -10,6 +10,9 @@
 <title>product_insert</title>
 <link href="/gs25/assets/css/product.css" rel="stylesheet"
 	type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>	
 </head>
 <body>
 	<div class="container">
@@ -35,12 +38,12 @@
 									<td class="label">가격</td>
 									<td><input type="text" name="price" value=""></td>
 									<td class="label">제조일</td>
-									<td><input type="text" name="reg_date" value=""></td>
+									<td><input type="text" id="datepicker1" name="reg_date" value=""></td>
 
 								</tr>
 								<tr>
 									<td class="label">유통기한</td>
-									<td><input type="text" name="expiry_date" value=""></td>
+									<td><input type="text" id="datepicker2" name="expiry_date" value=""></td>
 									<td class="label">제조사</td>
 									<td><input type="text" name="maker" value=""></td>
 									<td class="label">첨부파일</td>
@@ -102,4 +105,27 @@
 
 
 </body>
+
+<script>
+  $(function() {
+	 $.datepicker.setDefaults({
+      dateFormat: 'yymmdd',
+      showButtonPanel: true,
+      prevText: '이전 달',
+      nextText: '다음 달',
+      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      dayNames: ['일','월','화','수','목','금','토'],
+      dayNamesShort: ['일','월','화','수','목','금','토'],
+      dayNamesMin: ['일','월','화','수','목','금','토'],
+      showMonthAfterYear: true,
+      changeMonth: true,
+      changeYear: true,
+      yearSuffix: '년'
+    });
+  });
+  $(function() {
+	    $("#datepicker1, #datepicker2").datepicker();
+	  });
+</script>
 </html>

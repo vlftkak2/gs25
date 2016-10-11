@@ -11,9 +11,14 @@ public class ProductVo {
 	private Long kind_no;
 	private String kind;
 	private int dispercent;
-	private String category;
+	private String category; // 인기 신상품
 	private String imageurl;
-
+	private int count;
+	private int countprice;
+	private int remainderdate;
+	private int maxcountprice;
+	private int remaindercountdate;
+	private int halfprice;
 	
 	public Long getNo() {
 		return no;
@@ -86,11 +91,63 @@ public class ProductVo {
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
+	
+	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
+	
+	public int getCountprice() {
+		return countprice;
+	}
+	public void setCountprice(int countprice) {
+		this.countprice = countprice;
+	}
+	public int getRemainderdate() {
+		return remainderdate;
+	}
+	public void setRemainderdate(int remainderdate) {
+		this.remainderdate = remainderdate;
+	}
+	public int getMaxcountprice() {
+		return maxcountprice;
+	}
+	public void setMaxcountprice(int maxcountprice) {
+		this.maxcountprice = maxcountprice;
+	}
+	
+	
+	public int getRemaindercountdate() {
+		return remaindercountdate;
+	}
+	public void setRemaindercountdate(int remaindercountdate) {
+		this.remaindercountdate = remaindercountdate;
+	}
+	
+	
+	
+	public int getHalfprice() {
+		return halfprice;
+	}
+	public void setHalfprice(int halfprice) {
+		this.halfprice = halfprice;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", reg_date=" + reg_date
 				+ ", expiry_date=" + expiry_date + ", maker=" + maker + ", kind_no=" + kind_no + ", kind=" + kind
-				+ ", dispercent=" + dispercent + ", category=" + category + ", imageurl=" + imageurl + "]";
+				+ ", dispercent=" + dispercent + ", category=" + category + ", imageurl=" + imageurl + ", count="
+				+ count + ", countprice=" + countprice + ", remainderdate=" + remainderdate + ", maxcountprice="
+				+ maxcountprice + ", remaindercountdate=" + remaindercountdate + ", halfprice=" + halfprice + "]";
 	}
+
+
+
 	
 }

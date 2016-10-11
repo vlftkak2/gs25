@@ -151,11 +151,10 @@ public class ProductService {
 		return list;
 	}
 
-	// public List<ProductVo> getSubPopular(){
-	// List<ProductVo> list = productdao.getSubPopular();
-	// System.out.println("service: "+list.toString());
-	// return list;
-	// }
+	 public List<ProductVo> getSubPopular(){
+	 List<ProductVo> list = productdao.getSubPopular();
+	 return list;
+	 }
 
 	public List<ProductVo> getSubNew() {
 		List<ProductVo> list = productdao.getSubNew();
@@ -174,6 +173,12 @@ public class ProductService {
 		ProductVo vo = productdao.productInfo(no);
 		return vo;
 	}	
+	
+	//상품 조회수 증가
+		public void viewcountup(Long no) {
+
+			productdao.updateViewCount(no);
+		}
 	
 	//네이버 검색 API 연공(XML파싱 방법)
 	private static String clientID = "l4imIq5y2XeyyT7P16JT"; //api 사용 신청시 제공되는 아이디
@@ -270,5 +275,15 @@ public class ProductService {
         }
         return list;
     }
+    
+    //할인된 가격계산
+    public Map<String, Object> price(){
+    	
+    	Map<String, Object> PriceMap=productdao.price();    	
+    	
+    	return PriceMap;
+    }
+    
+ 
 
 }

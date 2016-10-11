@@ -73,10 +73,58 @@
 											<div class="infowrap">
 												
 												<span class='title'>
-								<em class='mt'>${vo.maker})${vo.name }</em><em>${vo.price }원</em>
-								</span>
-												
-												
+								<em class='mt'>${vo.maker})${vo.name }</em>
+								
+								<c:choose>
+								<c:when test='${vo.remainderdate>7}'>
+								<em>${vo.price }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==7 && (vo.price-vo.countprice)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==6 && (vo.price-vo.countprice*2)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*2) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==5 && (vo.price-vo.countprice*3)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*3) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==4 && (vo.price-vo.countprice*4)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*4) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==3 && (vo.price-vo.countprice*5)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*5) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==2 && (vo.price-vo.countprice*6)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*6) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate==1 && (vo.price-vo.countprice*7)>=(vo.price*0.5) }'>
+								<em id="price">${vo.price }원</em>
+								<em id="countprice">${vo.price-(vo.countprice*7) }원</em>
+								</c:when>
+								
+								<c:when test='${vo.remainderdate<=0 }'>
+								<em>${vo.price }원</em>
+								</c:when>
+								
+								<c:otherwise>
+								<em id="price">${vo.price }원</em>
+								 <em id="countprice">${vo.halfprice }원</em>
+								</c:otherwise>
+							</c:choose>
+												</span>												
 											</div>
 										</div>
 									</li>

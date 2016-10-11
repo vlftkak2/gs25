@@ -28,17 +28,25 @@ public class SubMainController {
 	public String SubMain(Model model){
 		
 		//유통기한
-		List<ProductVo> vo = productservice.getSubDate();
-		model.addAttribute("vo",vo);
+		List<ProductVo> expiryVo = productservice.getSubDate();
+		model.addAttribute("expiryVo",expiryVo);
+		
+		//인기상품
+		List<ProductVo> popularity=productservice.getSubPopular();
+		model.addAttribute("popularityVo", popularity);
 		
 		//신상품
-		List<ProductVo> vo3 = productservice.getSubNew();
-		model.addAttribute("vo3",vo3);
+		List<ProductVo> newProductVo = productservice.getSubNew();
+		model.addAttribute("newProductVo",newProductVo);
 		
-		List<ProductVo> vo4 = productservice.getSubReco();
-		model.addAttribute("vo4",vo4);
+		//추천상품
+		List<ProductVo> recommendVo = productservice.getSubReco();
+		model.addAttribute("recommendVo",recommendVo);
+		
 		
 		return "Sub_Page/sub_index";
 	}
+	
+	
 
 }

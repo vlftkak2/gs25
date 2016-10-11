@@ -21,9 +21,9 @@ import kr.ac.sungkyul.gs25.vo.ProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
 /*
- 2016-10-01 
+ 2016-10-11 
    작업자 : 최형민
-   개발 상황 : 완료
+   개발 상황 : 수정
 */
 
 
@@ -39,8 +39,14 @@ public class ProductController {
 	public String productlist(Model model,
 			@RequestParam(value = "p", required = true, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
+		
+		//상품 리스트
 		Map<String, Object> map = productservice.listBoard(page, keyword);
 
+		//할인된 가격 계산
+		Map<String, Object> PriceMap=productservice.price();
+		
+		model.addAttribute("PriceMap", PriceMap);
 		model.addAttribute("map", map);
 
 		return "/Sub_Page/product_search";
@@ -99,13 +105,16 @@ public class ProductController {
 				@RequestParam(value= "no") Long no,
 				@RequestParam(value="name") String name){
 			
+			//상품 정보
 			ProductVo vo = productservice.productInfo(no);
 			model.addAttribute("prodvo", vo);
 			
 			List<NblogVo> nvo = productservice.searchNBlog(name);
 			model.addAttribute("nvo", nvo);
 			
+			//조회 수 증가
+			productservice.viewcountup(no);
+			
 			return "/Sub_Page/product_view";
 		}
-
 }
