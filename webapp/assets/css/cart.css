@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+#cart_list{
+	margin: 0 auto; width: 1500px;
+}
+#cart_wrap{
+		margin-left:290px;
+}
+#cart_header{
+	margin:50px 0 50px;
+}
+#txt_header{
+	margin-top:20px
+}
+#cartboard{
+	float:left;
+}
+#cartlist{
+	float:left;
+}
+#product{
+	margin-top: 5px;
+    margin-left: 75px;
+    width: 200px;
+    height: 180px;
+}
+#cart_li{
+	margin-left:10px;
+	float: left; 
+	top: 50px; 
+	left: 192px; 
+	z-index: 3; 
+	border: 1px solid rgb(215, 215, 215); 
+	height: 280px; 
+	width: 350px;
+}
+.infowrap {
+    text-align: center;
+}
+#productView_content_dd_02{
+	float:left;
+}
+
+#right{
+	margin-left:400px;
+	height:150px;
+}
+
+#risk{
+	float:left;
+	margin-top:70px;
+}
+
+#right p.empty-list{
+	 margin-top:80px;
+	margin-left:20px;
+	margin-bottom:200px;
+	float:left;
+	font-weight:bold;
+	font-size:1.5em;
+}
+
+div.pager {
+	margin:50px 0;
+    width: 950px;
+    float: left;
+    text-align: center;
+    margin-left:50px;
+}
+
+div.pager ul li {
+    display: inline;
+    margin: 10px 8px;
+    width: 20px;
+    font-weight: bold;
+}
+div.pager ul li.selected {
+    text-decoration: underline;
+    color: #f00;
+}
+div.pager  ul li { display:inline-block; margin:	10px 8px; width:20px ; font-weight:bold; }
+div.pager  ul li.selected { text-decoration: underline; color:#f00 }
+div.pager  ul li a,
+div.pager  ul li a:visited,
+div.pager  ul li a:link,
+div.pager  ul li a:active { text-decoration: none; color:#ff8080 }
+div.pager  ul li a:hover { text-decoration: none; color:#f00 }
+
+
+#price{
+	text-decoration:line-through;
+	color:#ff8080;
+}
+
+#countprice{
+	color:#ff8080;
+}
+ .title .mt{font-size:1em;display:block; font-style:normal;}
+ .title em{margin-top:5px;font-size:22px;display:block; font-style:normal;}
+
+
