@@ -23,80 +23,71 @@ public class UserService {
 	private UserDao usersdao;
 	
 	@Autowired
-	private MailSender mailSender;
-
+	private MailSender mailSender; // xml에 등록한 bean autowired
 	
-	public void join(UserVo vo){
+	
+	public void join(UserVo vo){ // 가입
 		usersdao.insert(vo);
 	}
 	
-	public UserVo login(String email, String password){
-		UserVo authUser = usersdao.get(email,password);
+	public UserVo login(String email, String password){ // 로그인
+		UserVo authUser = usersdao.login(email,password);
 		return authUser;
 	}
 	
 	public Boolean loginCheck(String email, String password){	//로그인 시 검사
-		System.out.println("service: "+email);
-		UserVo vo =  usersdao.get(email,password);
+		UserVo vo =  usersdao.login(email,password); // no, name, email 가져옴
 		Boolean result = (vo != null);
-		System.out.println(result);
+//		System.out.println(result);
 		return result;
 	}
-		
+	
 	public UserVo get(Long no){	//회원정보 수정 시 정보 출력
 		UserVo uservo = usersdao.get(no);
 		return uservo;
 	}
 	
-	public void update(UserVo vo){
+	public void update(UserVo vo){ // 회원정보 수정 (패스워드 미입력)
 		usersdao.update(vo);
 	}
 	
-	public void update(String tempPass){
-		usersdao.update(tempPass);
-	}
-	
-	public void updateInfo(UserVo vo){
-			usersdao.update(vo);	
+	public void updateInfo(UserVo vo){ // 회원정보 수정 (패스워드 입력)
+		usersdao.update(vo);
+		
 	}
 	
 	public Boolean idCheck(UserVo uservo){	//로그인 시 검사
-		System.out.println("service: "+uservo);
+//		System.out.println("service: "+uservo);
 		String email = usersdao.find(uservo);
-		System.out.println("service: "+email);
-		Boolean result = (email != null);
-		System.out.println(result);
+//		System.out.println("service: "+email);
+		Boolean result = (email != null); // 존재하면 true
+//		System.out.println(result);
 		return result;
 	}
 	
-	public String idfind(UserVo vo){	//아이디 찾기
+	public String idfind(UserVo vo){ //아이디 찾기
 		String email = usersdao.find(vo);
 		return email;
 	}
 	
 	public String setpass(Long no,String password){	//비밀번호 찾기 후 재설정
-		System.out.println(no);
-		System.out.println("s: "+password);
-		
-		//state 설정
 		Integer state = 1; 
-		usersdao.setState(no, state);
-		//result 반환
-		Integer resultInt = usersdao.setPass(no,password);
-		String result = String.valueOf(resultInt);
+		usersdao.setState(no, state); //state 설정
+		
+		Integer resultInt = usersdao.setPass(no,password); //result 반환
+		String result = String.valueOf(resultInt); // String 변환
 		System.out.println("Service: "+result);
 		return result;
 	}
 	
-	public String checkPass(UserVo uservo){	//비밀번호 찾기 시 검사
-//		System.out.println("service: "+uservo);
+	//비밀번호 찾기 시 검사
+	public String checkPass(UserVo uservo){	
 		String email = usersdao.passfind(uservo);
-//		System.out.println("service: "+email);
 		return email;
 	}
 	
-	public Map<String, Object> checkEmail(String email){	//아이디 유효성 검사
-		System.out.println(email);
+	//아이디 유효성 검사
+	public Map<String, Object> checkEmail(String email){	
 		Long no = usersdao.checkEmail(email);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -122,7 +113,7 @@ public class UserService {
 	    	usersdao.savelink(link,email);	//DB에 링크 저장
 	    	
 	    	String sender = "GS25_Manager@gs25.com"; 
-	    	String receiver = "beckyi@naver.com"; //받을사람의 이메일입니다.
+	    	String receiver = "csb6225@naver.com"; //받을사람의 이메일입니다.
 	        String subject = "GS25편의점 회원님의 임시 비밀번호입니다.";
 	        String content = "안녕하세요. GS25편의점입니다. 회원님의 비밀번호를 새로 설정하실 수 있으시는 링크 입니다. \n" 
 	        				+ "http://localhost:8088/gs25/user/" + link +"/repassword";
@@ -142,7 +133,6 @@ public class UserService {
 	        
 	        String result = "true";
 	        return result;
-//	        return "redirect:/user/passresult";
 	 }
 	 
 	public String random() {
@@ -182,11 +172,8 @@ public class UserService {
 	}
 	 
 	 public Long passlink(String domain){	//비밀번호 찾기 후 재설정
-		 System.out.println(domain);
-
-		 PassLinkVo plvo = usersdao.passlink(domain);
+		 PassLinkVo plvo = usersdao.passlink(domain); // no, link, state, user_no 가져옴
 		 Long no = null;
-		 System.out.println("plvo: "+plvo);
 		 
 		 if(plvo == null){
 			 System.out.println("plvo null");
