@@ -12,7 +12,7 @@
 	width:960px;
 	margin: 0 auto;
 }
- .title .mt{font-size:13px;display:block; font-style:normal;}
+ .title .mt{font-size:1em;display:block; font-style:normal;}
  .title em{margin-top:5px;font-size:22px;display:block; font-style:normal;}
 
 #title{
@@ -363,11 +363,12 @@ a.del	{
     position: relative;
 }
 .productView_content_ul {
-    margin-bottom: 120px;
+    margin-bottom: 70px;
 }
 .productView_content_ul li {
     margin: 15px 0;
 }
+
 #txt1{
 	margin-top:30px;
 }
@@ -528,4 +529,44 @@ a.del	{
     margin-left: 350px;
     font-size: 25px;
     color: gray;
+}
+
+#btn1 {
+    background-color: #c0f0ff;
+}
+.hide {
+    display: none !important;
+}
+#btn2 {
+    background-color: turquoise;
+}
+.pick{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4
+}
+
+#btn3{
+	 background-color: #c0f0ff;
+	
+}
+button {
+    vertical-align: middle;
+    font-family: 'NanumBarunGothic', NanumBarunGothic,'돋움',Dotum, Arial,sans-serif;
+    font-size: 28px;
+	border: 0px solid #96d5fa;
+	padding: 7px 13px;
+	border-radius: 22px;
+	cursor: pointer	
+	
+	
+}
+button:hover{
+	border: 0px solid #0a3c59;
+	text-shadow: #f06ccd 0 1px 0;
+	color: #ff2626;
+}
+
+.productView_content_ul li {
+	font-size:1em;
 }

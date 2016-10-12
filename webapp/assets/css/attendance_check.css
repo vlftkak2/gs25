@@ -4,10 +4,11 @@
 	.container{width:960px;margin: 0 auto;}
 	
 	em{font-style: normal;}
-	.title h1 {font-size: 35px; padding-top: 70px;}
+	.title {margin-bottom: 30px;}
+	.title h1 {font-size: 35px; padding-top: 70px; padding-bottom: 30px;}
 	.event_cal{margin: 20px 0px;}
-	.count    {float:left; font-size: 16px; font-family: NanumBarunGothicRegular !important;}
-	.count em {color:orange;}
+	.count    {float:left; font-size: 16px; font-family: NanumBarunGothicRegular !important; margin-bottom:20px;}
+	.count em {color:orange; margin-left: 20px;}
 	.select_cal {margin-left: 390px;}
 	.select_cal select{font-family: NanumBarunGothicRegular !important; padding: 6px 8px; margin-right: 10px;}
 	.float_clear{clear:both;}
@@ -18,8 +19,187 @@
 	.cal_box td{border: 1px solid #dfdfdf;}
 	
 	.th_wrap{font-size: 16px; height: 45px; line-height: 45px;}
-	.td_wrap{height: 214px;}
+	.td_wrap{height: 200px; position: relative;}
 	.td_date{padding: 10px 0 0 10px; color: #d04001; font-weight: bold; font-size:14px;}
 	.td_img{margin: 0px 10px;}
 	.gift_txt{font-family: NanumBarunGothicRegular !important; margin: 8px 10px 0px 10px; text-align: center;font-size: 13px;}
 	.prs_num{margin: 0px 10px; padding-top:5px; color: #00857c; font-size: 16px; text-align: center;}
+	
+	/* 2016.10.07 출첵 이벤트 최재은 */
+	.inform {
+	    height:  220px;
+	    background: #fbfbfb;
+	    margin-bottom: 30px;
+    	padding: 10px 50px;
+	}
+	#giftImg { 
+		width: 103px;
+	    height: 102px;
+	    background: url(/gs25/assets/images/subindex/icon_event.png) 0 -297px no-repeat;
+	    position: absolute;
+	    top: 397px;
+	    right: 490px;
+	}
+	.inform p{
+		font-size: 16px;
+	    color: #666;
+	    line-height: 24px;
+        margin: 35px 0;
+	}
+	.inform li{
+		margin: 5px 0;
+	}
+	.inform #stro1 {
+	    font-size: 50px;
+	    color: #f27539;
+	    text-shadow: -6px -4px 4px rgba(142, 142, 142, 0.51);
+	    margin-right: 8px;
+	}
+	.inform #stro2 {
+	    font-size: 20px;
+	    color: #019823;
+	    margin: 0 10px;
+	}
+	#black {
+		background : #211f1f; 
+	    filter: alpha(opacity=80);
+	    opacity: 0.8;
+	    z-index: 10;
+	    width: 132px;
+	    height: 190px;
+	    position: absolute;
+		top: 5px;
+	    left: 2px;
+	}
+	/* #black p {
+	    text-align: center;
+	    color: #fff;
+	    margin-top: 90px;
+	} */
+	#toDbox {
+		position: absolute;
+	    top: -1px;
+	    left: -1px;
+	    width: 132px;
+	    height: 197px;
+	    border: 3px solid #338ec9;
+	    z-index: 10;
+	}
+	input[id="checkDate"] {
+	    width: 126px;
+	    background-color: #00857c;
+	    padding: 8px 40px;
+	    text-align: center;
+	    color: #fff;
+	    font-size: 13px;
+	    background-position: right 11px;
+	    margin: 148px 2.5px 0;
+	    cursor: pointer;
+	}
+	#flag {
+		position: absolute;
+	    top: -7px;
+	    left: -7px;
+	    width: 49px;
+	    height: 45px;
+	    background: url(/gs25/assets/images/subindex/icon_event.png) 0 -145px no-repeat;
+	    z-index: 99;
+	}
+	#stamp {
+        z-index: 10;
+	    width: 120px;
+	    height: 120px;
+	    position: absolute;
+	    top: 39px;
+	    background: url(/gs25/assets/images/subindex/stamp.png) 0 2px no-repeat;
+	    left: 5px;
+	}
+	#goods{
+	    margin-left: 20px;
+	    width: 83px;
+	    height: 27px;
+	    background: #f27539;
+	    border: 0px solid;
+	    color: white;
+	    font-size: 16px;
+	    border-radius: 6px;
+	    cursor: pointer;
+	}
+	/*모달창 css*/
+	#simplemodal-overlay {background-color:#000;}
+	#modal_content{
+		display: none;
+    	margin: 41px -350px;
+    	width: 728px;
+    	height: 900px;
+    	background: #f7f7f7;
+    	color: #666;
+    }
+    #Mod_title{
+    	margin: 16px 18px;
+    }
+    .Modal_head{
+   	    height: 60px;
+	    color: #f7f7f7;
+	    padding: 10px 5px;
+	    background: #ff8b54;
+    }
+	#m_close{
+	    position: absolute;
+	    top: 59px;
+	    height: 39px;
+	    border: 1px solid #ff8b54;
+	    width: 35px;
+	    right: -321px;
+	    background: url(/gs25/assets/images/subindex/close_icon.png) 0 2px no-repeat;
+	    cursor: pointer;
+	}
+	#m_giftImg { 
+	    width: 103px;
+	    height: 103px;
+	    background: url(/gs25/assets/images/subindex/icon_event.png) 0 -301px no-repeat;
+	    position: absolute;
+	    top: 162px;
+	    right: 234px;
+	}
+	.mod_move{
+	    margin: 9px 162px;
+	}
+	.mod_move2{
+		margin: 28px 75px;
+	}
+	#mod_last {
+	    color: #929090;
+	    margin-left: 101px;
+	    margin-top: 55px;
+	}
+	#m_count{
+		color: #f9661f;
+		margin: 0 10px;
+	}
+	#m_empha{
+		color: #f9661f;
+	}
+	.giftInfo{
+	    border-top: 4px solid #615c5c;
+	    margin: 40px 50px;
+	    background: #fff;
+	    width: 620px;
+	    height: 440px;
+	    border-radius: 0px 0 16px 16px;
+	}
+	.giftInfo h2{
+		margin: 15px 40px; 
+	}
+	.giftInfo p{
+	    margin: 26px 40px;
+	}
+	#m_money{
+		color: green;
+		text-decoration: underline;
+	}
+	#goodsimg{
+        width: 268px;
+	    height: 310px;
+	    margin: 6px 173px;
+	}
