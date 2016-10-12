@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cart">
+
+	<!-- 전체 이벤트 게시물 총 수 가져오기 -->
+	<select id="getCal" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from cart
+	]]>
+	</select>
+	
+	<select id="getList" parameterType="map" resultType="cartvo">
+		<![CDATA[
+		select * from (
+			select e.*, rownum rn from (
+				select d.USER_NO, 
+				d.PRODUCT_NO, 
+				c.name, 
+				c.price, 
+				c.maker, 
+				c.kind_no, 
+				c.imageurl,
+				c.remainderdate,
+				c.countprice,
+				c.halfprice
+    	   from(
+			select a.no, 
+				   a.name, 
+				   a.price, 
+				   a.maker, 
+				   a.kind_no, 
+				   b.imageurl,
+    			   ceil(a.expiry_date-sysdate) as remainderdate,
+    			   (ceil(((f.DIS_PERCENT*0.01)*a.price)/7)) countprice,
+    			   a.price*0.5 as halfprice from 
+    				   	product a,
+						BOARDSFILEPR b, 
+						productkind f where a.no=b.no and a.KIND_NO=f.NO) c, 
+			cart d where c.no = d.PRODUCT_NO and d.user_no=#{user_no})
+		e) where #{page_top}<=rn and rn<=#{page_bottom}
+    
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="cartvo">
+		<![CDATA[
+		insert into cart values(
+			#{user_no},
+			#{product_no})
+		]]>
+	</insert>
+	
+	
+	<delete id="cartRelieve" parameterType="cartvo">
+	<![CDATA[
+	delete from cart where user_no=#{user_no} and product_no=#{product_no}
+	]]>
+	</delete>
+	
+	<delete id="deleteCart" parameterType="cartvo">
+	<![CDATA[
+	delete from cart where user_no=#{user_no} and product_no=#{product_no}
+	]]>
+	</delete>
+</mapper>
