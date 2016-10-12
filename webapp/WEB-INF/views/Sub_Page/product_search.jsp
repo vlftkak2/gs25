@@ -57,6 +57,13 @@
 									<li id="product_li">
 										<ul class="tag_list_01">
 											<li class="ico_tag_03">
+											 <c:if test='${vo.count>=20 }'>
+											 <strong>인기</strong>
+											 </c:if>
+											 
+											 <c:if test='${vo.newdate<=15 }'>
+											 <strong>신상</strong>
+											 </c:if>
 												<!--${vo.category}-->
 											</li>
 										</ul> 

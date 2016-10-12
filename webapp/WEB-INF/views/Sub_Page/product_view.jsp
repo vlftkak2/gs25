@@ -7,9 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 <link href="/gs25/assets/css/product.css" rel="stylesheet"
 	type="text/css"><script type="text/javascript"
-	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script><title>Insert title here</title>
+	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
+	<script src="/gs25/assets/js/sweetalert.min.js"></script>
+	<title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
@@ -50,7 +53,7 @@
 								<li><strong>제조사</strong> : <span>${prodvo.maker }</span></li>
 								<li><strong>유통기한</strong> : <span>${prodvo.expiry_date }</span></li>
 								<c:choose>
-									<c:when test='${prodvo.remainderdate<0 }'>
+									<c:when test='${prodvo.remainderdate<1 }'>
 										<c:choose>
 										<c:when test='${prodvo.remaindercountdate<=0}'>
 										<li><span id="countdate"><strong>할인이 종료되었습니다.</strong></span></li>
@@ -64,7 +67,24 @@
 									<li><span id="countdate"><strong>할인적용까지 남은 일자</strong> : ${prodvo.remainderdate }일</span></li>	
 										</c:otherwise>
 								</c:choose>
+								
+							<c:if test="${not empty authUser}">
+							<c:choose>
+								<c:when test='${empty checkVo.user_no}'>
+									<button id="btn1">찜하기</button>
+									<button id="btn2" class="hide">찜해제</button>
+									<a href="/gs25/cart/list"><button id="btn3">찜목록바로가기</button></a>
+								 </c:when>
+								 <c:otherwise>
+									<button id="btn2">찜해제</button>
+									<button id="btn1" class="hide">찜하기</button>
+									<a href="/gs25/cart/list"><button id="btn3">찜목록바로가기</button></a>
+								</c:otherwise>
+							</c:choose>
+							</c:if>								
 							</ul>
+
+							
 							<span id="txt1">고객님 위 제품은 어떠세요?아래 후기를 통해 참고하실 수 있습니다.^^</span>
 						</dd>
 						<dd class="productView_content_dd_02">
@@ -171,4 +191,64 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
+
+<script>
+$(function() {
+	$("#btn1").on("click", function(){
+		console.log('click');
+		var product_no = ${prodvo.no };
+		$.ajax({
+			url: "/gs25/cart/write",
+			type: "POST",
+			data: {"product_no":product_no},
+			dataType: "text",
+			success : function(result){
+				console.log('리절트!');
+				
+				 if(result == "1"){
+					sweetAlert("찜하기 완료!");
+					$("#btn1").addClass("hide");
+					$("#btn2").removeClass("hide");
+					
+				} 
+				
+			},
+			"error": function(jsXHR, status, e){
+				console.error("error:"+status+":"+e);
+			}
+		});
+	});
+	
+	$("#btn2").on("click", function(){
+		var product_no = ${prodvo.no };
+		$.ajax({
+			url: "/gs25/cart/relieve",
+			type: "POST",
+			data: {"product_no":product_no},
+			dataType: "text",
+			success: function(result){
+				console.log('dkqjd');
+				if(result == "1"){
+					//$(this).siblings("button").removeClass("hide");
+					sweetAlert("찜해제!");
+					$("#btn2").addClass("hide");
+					$("#btn1").removeClass("hide");
+				}
+					
+					
+			},
+			"error": function(jsXHR, status, e){
+				console.error("error:"+status+":"+e);
+			}
+	
+		});
+	
+	});
+});
+</script>
+
+
+
+
+
 </html>

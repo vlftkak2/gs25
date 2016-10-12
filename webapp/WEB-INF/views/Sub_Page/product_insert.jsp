@@ -68,20 +68,10 @@
 											</select>
 										</div>
 									</td>
-									<td class="label">카테고리</td>
-
-									<td>
-										<div class="select_box">
-											<!--  	<label for="selectbox">선택해 주세요</label>-->
-											<select id="selectbox" name="category">
-												<option selected="selected">선택해 주세요</option>
-												<option value="인기">인기</option>
-												<option value="단체">단체</option>
-												<option value="신상">신상</option>
-												<option value="없음">없음</option>
-											</select>
-										</div>
-									</td>
+									
+										<td class="label"></td>
+									<td>&nbsp</td>
+								
 									<td class="label"></td>
 									<td>&nbsp</td>
 								</tr>
