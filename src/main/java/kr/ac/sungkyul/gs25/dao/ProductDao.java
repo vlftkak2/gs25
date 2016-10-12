@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
+import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 
 /*
@@ -126,6 +127,27 @@ public class ProductDao {
 		return PriceMap;
 	}
 	
-	
+	// 1000원 이하 랜덤 상품 (출석체크 상품 증정)
+		public ProductVo random1000(){
+			
+			ProductVo vo = sqlSession.selectOne("product.random1000");
+			return vo;
+		}
+		
+		// 2000원 이하 랜덤 상품 (출석체크 상품 증정)
+		public ProductVo random2000(){
+			
+			ProductVo vo = sqlSession.selectOne("product.random2000");
+			return vo;
+		}
+		
+		public CartVo maintainCheck(Long user_no, Long product_no){
+			CartVo checkVo = new CartVo();
+			checkVo.setUser_no(user_no);
+			checkVo.setProduct_no(product_no);
+			checkVo = sqlSession.selectOne("product.maintainCheck", checkVo);
+			return checkVo;
+		}
+
 	
 }

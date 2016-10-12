@@ -19,6 +19,7 @@ public class ProductVo {
 	private int maxcountprice;
 	private int remaindercountdate;
 	private int halfprice;
+	private int newdate;
 	
 	public Long getNo() {
 		return no;
@@ -138,15 +139,25 @@ public class ProductVo {
 		this.halfprice = halfprice;
 	}
 	
+	
+	
+	public int getNewdate() {
+		return newdate;
+	}
+	public void setNewdate(int newdate) {
+		this.newdate = newdate;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", reg_date=" + reg_date
 				+ ", expiry_date=" + expiry_date + ", maker=" + maker + ", kind_no=" + kind_no + ", kind=" + kind
 				+ ", dispercent=" + dispercent + ", category=" + category + ", imageurl=" + imageurl + ", count="
 				+ count + ", countprice=" + countprice + ", remainderdate=" + remainderdate + ", maxcountprice="
-				+ maxcountprice + ", remaindercountdate=" + remaindercountdate + ", halfprice=" + halfprice + "]";
+				+ maxcountprice + ", remaindercountdate=" + remaindercountdate + ", halfprice=" + halfprice
+				+ ", newdate=" + newdate + "]";
 	}
-
+	
 
 
 	

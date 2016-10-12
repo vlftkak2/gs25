@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.service.ProductService;
+import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.NblogVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
@@ -34,6 +36,11 @@ public class ProductController {
 	@Autowired
 	ProductService productservice;
 
+	/*
+	 2016-10-05 
+	   작업자 : 최형민
+	   개발 상황 : 수정
+	*/
 	//상품 검색 리스트
 	@RequestMapping("/list")
 	public String productlist(Model model,
@@ -45,6 +52,7 @@ public class ProductController {
 
 		//할인된 가격 계산
 		Map<String, Object> PriceMap=productservice.price();
+		
 		
 		model.addAttribute("PriceMap", PriceMap);
 		model.addAttribute("map", map);
@@ -103,11 +111,27 @@ public class ProductController {
 		@RequestMapping(value="/view", method=RequestMethod.GET)
 		public String productView(Model model,
 				@RequestParam(value= "no") Long no,
-				@RequestParam(value="name") String name){
+				@RequestParam(value="name") String name,
+				HttpSession session){
+			
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			
+			if(authUser != null){
+			Long user_no = authUser.getNo();
+			
+			CartVo checkVo = new CartVo();
+			checkVo = productservice.maintainCheck(user_no, no);
+			model.addAttribute("checkVo", checkVo);
+			
+			ProductVo vo = productservice.productInfo(no);
+			model.addAttribute("prodvo", vo);
+			
+			}else{
 			
 			//상품 정보
 			ProductVo vo = productservice.productInfo(no);
 			model.addAttribute("prodvo", vo);
+			}
 			
 			List<NblogVo> nvo = productservice.searchNBlog(name);
 			model.addAttribute("nvo", nvo);
@@ -117,4 +141,29 @@ public class ProductController {
 			
 			return "/Sub_Page/product_view";
 		}
+		
+		@ResponseBody
+		@RequestMapping("/random1000")	//출석체크 클릭 시
+		public ProductVo random1000(HttpSession session){
+			
+//			UserVo uservo = (UserVo)session.getAttribute("authUser");
+//			Long user_no = uservo.getNo();
+			
+			ProductVo productvo = productservice.random1000();
+			
+			return productvo;
+		}
+		
+		@ResponseBody
+		@RequestMapping("/random2000")	//출석체크 클릭 시
+		public ProductVo random2000(HttpSession session){
+			
+//			UserVo uservo = (UserVo)session.getAttribute("authUser");
+//			Long user_no = uservo.getNo();
+			
+			ProductVo productvo = productservice.random2000();
+			
+			return productvo;
+		}
+		
 }

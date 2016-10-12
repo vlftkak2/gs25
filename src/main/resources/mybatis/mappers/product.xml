@@ -18,14 +18,16 @@
    			a.name,
    			a.price,
    			to_char(a.reg_date,'yyyy/mm/dd') as reg_date,
+   			ceil(sysdate-a.reg_date) as newdate,
    			TO_CHAR(a.EXPIRY_DATE,'yyyy/mm/dd') as expiry_date,
    			a.maker,
    			b.IMAGEURL,
         ceil(a.expiry_date-sysdate) as remainderdate, 
         (ceil(((c.DIS_PERCENT*0.01)*a.price)/7)) countprice,
         ((c.DIS_PERCENT*0.01)*a.price) as maxcountprice,
-         a.price*0.5 as halfprice
-        from product a, boardsfilepr b, PRODUCTKIND c where a.NO=b.NO and c.no=a.KIND_NO) c) 
+         a.price*0.5 as halfprice,
+         a.count
+        from product a, boardsfilepr b, PRODUCTKIND c where a.NO=b.NO and c.no=a.KIND_NO order by reg_date desc) c) 
    	where #{page_start}<=rn and rn<=#{page_end}
    ]]>
    </select>
@@ -42,6 +44,8 @@
   				   to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),
   				   a.maker,
   				   d.imageurl, 
+  				   a.count,
+  				   ceil(sysdate-a.reg_date) as newdate,
   				   ceil(a.expiry_date-sysdate) as remainderdate, 
         		   (ceil(((b.DIS_PERCENT*0.01)*a.price)/7)) countprice,
         		   ((b.DIS_PERCENT*0.01)*a.price) as maxcountprice,
@@ -65,7 +69,7 @@
 
 	<![CDATA[	
 			insert into product(
-				no, name, price,reg_date,expiry_date,maker,kind_no,category,count)
+				no, name, price,reg_date,expiry_date,maker,kind_no,count)
 			values
 			(
 				#{no},
@@ -75,7 +79,6 @@
 				#{expiry_date},
 				#{maker},
 				#{kind_no},
-				#{category},
 				1
 			)
 		]]>
@@ -207,6 +210,32 @@
 		and (b.EXPIRY_DATE-sysdate)<=7
 		]]>
 	</select>
+	
+	<!-- 상품 1000원이하 랜덤 증정(출첵) -->
+	<select id="random1000" resultType="productvo">
+		<![CDATA[
+		 SELECT c.no, c.name, c.price, c.maker, c.IMAGEURL
+  		 FROM(select a.no, a.name, a.price, a.maker, b.IMAGEURL 
+ 		 FROM product a, boardsfilepr b  where a.no = b.no and a.price < 1000 order by DBMS_RANDOM.RANDOM) c WHERE rownum < 2
+		]]>
+	</select>
+	
+	<!-- 상품 2000원이하 랜덤 증정(출첵) -->
+	<select id="random2000" resultType="productvo">
+		<![CDATA[
+		  SELECT c.no, c.name, c.price, c.maker, c.IMAGEURL
+  		 FROM(select a.no, a.name, a.price, a.maker, b.IMAGEURL 
+ 		 FROM product a, boardsfilepr b  where a.no = b.no and a.price < 2000 and a.price > 1000 order by DBMS_RANDOM.RANDOM) c WHERE rownum < 2
+		]]>
+	</select>
+	
+	<select id="maintainCheck" parameterType="cartvo" resultType="cartvo">
+		<![CDATA[
+		select * from cart 
+		where user_no=#{user_no} and product_no=#{product_no}
+		]]>
+	</select>
+	
 	
 
 </mapper>
