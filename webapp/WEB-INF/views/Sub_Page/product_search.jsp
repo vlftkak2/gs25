@@ -64,7 +64,7 @@
 											 <c:if test='${vo.newdate<=15 }'>
 											 <strong>신상</strong>
 											 </c:if>
-												<!--${vo.category}-->
+											
 											</li>
 										</ul> 
 										<div class="pic_product">

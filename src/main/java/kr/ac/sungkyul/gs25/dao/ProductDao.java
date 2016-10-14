@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
+import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 
 /*
  2016-10-01 
@@ -33,7 +34,7 @@ public class ProductDao {
 	}
 
 	// 상품 리스트
-	public List<ProductVo> getList(int page, int pagesize, String keyword) {
+	public List<ProductVo> getList(int page, int pagesize, String keyword,Long StoreNo) {
 
 		Map<String, Object> map = new HashMap<>();
 
@@ -42,6 +43,7 @@ public class ProductDao {
 
 			map.put("page_start", (page - 1) * pagesize + 1);
 			map.put("page_end", page * pagesize);
+			map.put("store_no", StoreNo);
 
 			// 검색된 리스트 가져오기
 			List<ProductVo> list = sqlSession.selectList("product.getList", map);
@@ -56,6 +58,7 @@ public class ProductDao {
 			return list;
 		}
 	}
+	
 
 	// 상품 등록
 	public Long insert(ProductVo vo) {
@@ -117,15 +120,6 @@ public class ProductDao {
 		sqlSession.update("product.updateViewCount", no);
 	}
 	
-	//할인된 가격계산
-	public Map<String, Object> price(){
-		List<ProductVo> PriceList=sqlSession.selectList("product.getPriceList");
-		Map<String, Object> PriceMap=new HashMap<String, Object>();
-		
-		PriceMap.put("PriceList", PriceList);
-	
-		return PriceMap;
-	}
 	
 	// 1000원 이하 랜덤 상품 (출석체크 상품 증정)
 		public ProductVo random1000(){
@@ -149,5 +143,10 @@ public class ProductDao {
 			return checkVo;
 		}
 
+		public StoreProductVo getStoreName(Long store_no){
+			
+			StoreProductVo StoreVo=sqlSession.selectOne("product.getStoreName",store_no);
+			return StoreVo;
+		}
 	
 }

@@ -7,6 +7,7 @@
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.EventBoardVo" alias="eventboardvo"/>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.GuestbookVo" alias="guestbookvo"/>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.ProductVo" alias="productvo"/>
+	<typeAlias type="kr.ac.sungkyul.gs25.vo.StoreProductVo" alias="storeproductvo"/>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.CartVo" alias="cartvo"/>
 	<typeAlias type="kr.ac.sungkyul.gs25.vo.CheckeventVo" alias="checkeventvo"/>
 	</typeAliases>

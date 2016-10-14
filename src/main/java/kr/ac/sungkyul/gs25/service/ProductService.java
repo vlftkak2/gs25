@@ -26,6 +26,7 @@ import kr.ac.sungkyul.gs25.vo.AttachFilePrVo;
 import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.NblogVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
+import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 
 
 /*
@@ -46,7 +47,7 @@ public class ProductService {
 	@Autowired
 	private ProductDao productdao;
 	
-    public Map<String, Object> listBoard(String spage, String keyword){
+    public Map<String, Object> listBoard(String spage, String keyword,Long StoreNo){
     	
     	// 1. 페이지 값 받기
 		int page=Integer.parseInt(spage);
@@ -75,9 +76,9 @@ public class ProductService {
 		int nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
 		int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
 		
-		List<ProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword);
+		List<ProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword,StoreNo);
 		
-		// 5. map에 객체 담기
+		// 6. map에 객체 담기
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("sizeList", LIST_PAGESIZE);
 		map.put("firstPage", startPage);
@@ -277,14 +278,6 @@ public class ProductService {
         return list;
     }
     
-    //할인된 가격계산
-    public Map<String, Object> price(){
-    	
-    	Map<String, Object> PriceMap=productdao.price();    	
-    	
-    	return PriceMap;
-    }
-    
     // 1000원 이하 랜덤 상품 (출석체크 상품 증정)
  	public ProductVo random1000() {
  		ProductVo vo = productdao.random1000();
@@ -302,6 +295,12 @@ public class ProductService {
 		return checkVo;
 	}
     
+  	//매장 이름 정보 얻기
+  	public StoreProductVo getStoreName(Long store_no){
+  		
+  		StoreProductVo StoreVo=productdao.getStoreName(store_no);
+  		return StoreVo;
+  	}
  
 
 }

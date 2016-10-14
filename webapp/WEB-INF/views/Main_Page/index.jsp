@@ -15,6 +15,7 @@
 <body>
 
 <div id="container">
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 <div id="content">
@@ -36,7 +37,8 @@
 			</ul>
 
 			<ul class="market_list_point">
-				<li><a href="/gs25/sub/main" class="on">지점1</a></li>
+				<li><a href="/gs25/sub/main?store_no=4" class="">지점1</a></li>
+				<li><a href="/gs25/sub/main?store_no=1" class="">지점0</a></li>
 				<script language="JavaScript">
 					for (i = 0; i < 27; i++) {
 						document.write("<li><a href='#'>지점"+i+"</a></li>")

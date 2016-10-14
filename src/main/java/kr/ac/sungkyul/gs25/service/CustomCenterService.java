@@ -26,6 +26,7 @@ public class CustomCenterService {
 
 	// 리스팅 되는 게시물 수
 	private static final int LIST_PAGESIZE = 10; 
+	
 	// 페이지 리스트에 표시되는 페이지 수
 	private static final int LIST_BLOCKSIZE = 5; 
 
@@ -152,7 +153,7 @@ public class CustomCenterService {
 
 	}
 	
-	//답글 조회수 증가
+	//중간에 들어오는 게시물 순서 정렬
 	public void updatereplyCount(int groupno, int ordernumber){
 		
 		

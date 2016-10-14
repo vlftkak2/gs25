@@ -16,6 +16,9 @@
 <jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 	<div class="container">
 		<div id="contents">
+		
+		<Strong id="storeName">GS ${StoreVo.storename }점</Strong>
+		
 			<div class="img">
 				<img src="/gs25/assets/images/subindex/gs25Main.png" width="600px">
 			</div>
@@ -38,6 +41,8 @@
 						<div id="login3">
 							<a href='/gs25/user/joinform' id="aleft">회원가입</a>
 							<a href="/gs25/user/findInfo" id="aright">아이디/비밀번호찾기</a>
+							
+							<a href="/gs25/main">메인바로 가기</a>
 						</div>
 						</c:when>
 						<c:otherwise>
@@ -75,7 +80,7 @@
 				</div>
 			</div>
 		</div>
-		
+	
 	<div class="prod_wrap">
 		<div class="container">
 			<div class="prod_tab">
@@ -197,7 +202,7 @@
 			</div>
 		</div>
 	</div>
-		
+			${map.StoreName }
 		
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>

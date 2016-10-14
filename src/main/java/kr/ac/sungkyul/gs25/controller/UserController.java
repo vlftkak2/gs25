@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.sungkyul.gs25.service.UserService;
+import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
 @Controller
@@ -100,11 +102,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/Sublogout")
-	public String Sublogout(HttpSession session){
+	public String Sublogout(HttpSession session, @RequestParam("store_no") Long store_no){
 		session.removeAttribute("authUser");
 		session.invalidate();	//로그아웃 처리 시 세션을 지워줌
-		
-		return "redirect:/sub/main";
+		return "redirect:/sub/main?store_no="+store_no;
 	}
 	
 	@RequestMapping("/modifyform")

@@ -88,7 +88,7 @@ $(function() {
 				}
 				
 				 if(result == "true"){
-					location.href='/gs25/sub/main';
+					location.href='/gs25/sub/main?store_no=${store_no}';
 				} 
 			},
 			

@@ -45,16 +45,13 @@ public class ProductController {
 	@RequestMapping("/list")
 	public String productlist(Model model,
 			@RequestParam(value = "p", required = true, defaultValue = "1") String page,
-			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
+			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword,
+			HttpSession session,
+			@RequestParam("store_no") Long StoreNo) {
 		
 		//상품 리스트
-		Map<String, Object> map = productservice.listBoard(page, keyword);
+		Map<String, Object> map = productservice.listBoard(page, keyword,StoreNo);
 
-		//할인된 가격 계산
-		Map<String, Object> PriceMap=productservice.price();
-		
-		
-		model.addAttribute("PriceMap", PriceMap);
 		model.addAttribute("map", map);
 
 		return "/Sub_Page/product_search";

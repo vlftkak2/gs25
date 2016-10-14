@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.sungkyul.gs25.service.CartListService;
@@ -15,6 +17,7 @@ import kr.ac.sungkyul.gs25.service.CheckeventService;
 import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.vo.CheckeventVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
+import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
 /*
@@ -38,8 +41,20 @@ public class SubMainController {
 	
 	//서브 메인 페이지 이동
 	@RequestMapping("/main")
-	public String SubMain(Model model){
+	public String SubMain(Model model, 
+			@RequestParam("store_no") Long store_no,
+			HttpSession session){
 		
+		
+		System.out.println("매장 번호 :"+store_no);
+		
+		//상품 번호 추가
+		session.setAttribute("store_no", store_no);
+
+		//매장 이름  정보얻기
+		StoreProductVo StoreVo=productservice.getStoreName(store_no);
+		model.addAttribute("StoreVo", StoreVo);
+
 		//유통기한
 		List<ProductVo> expiryVo = productservice.getSubDate();
 		model.addAttribute("expiryVo",expiryVo);

@@ -189,3 +189,9 @@ input[type=text], input[type=password] {
 	margin: 5px 0;
 	color: #a5a4a4;
 }
+
+#storeName{
+	font-size:2em;
+	color:#b366ff;
+}
+
