@@ -48,7 +48,7 @@ public class SubMainController {
 		
 		System.out.println("매장 번호 :"+store_no);
 		
-		//상품 번호 추가
+		//상품 번호 세션 등록
 		session.setAttribute("store_no", store_no);
 
 		//매장 이름  정보얻기
@@ -56,19 +56,19 @@ public class SubMainController {
 		model.addAttribute("StoreVo", StoreVo);
 
 		//유통기한
-		List<ProductVo> expiryVo = productservice.getSubDate();
+		List<StoreProductVo> expiryVo = productservice.getSubDate(store_no);
 		model.addAttribute("expiryVo",expiryVo);
 		
 		//인기상품
-		List<ProductVo> popularity=productservice.getSubPopular();
+		List<StoreProductVo> popularity=productservice.getSubPopular(store_no);
 		model.addAttribute("popularityVo", popularity);
 		
 		//신상품
-		List<ProductVo> newProductVo = productservice.getSubNew();
+		List<StoreProductVo> newProductVo = productservice.getSubNew(store_no);
 		model.addAttribute("newProductVo",newProductVo);
 		
 		//추천상품
-		List<ProductVo> recommendVo = productservice.getSubReco();
+		List<StoreProductVo> recommendVo = productservice.getSubReco(store_no);
 		model.addAttribute("recommendVo",recommendVo);
 		
 		//찜목록 총 개수

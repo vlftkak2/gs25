@@ -24,7 +24,7 @@
 		<div id ="title1_p">
 			<p>매월 새롭게 진행되는 다양한 행사상품과 함께 고객님께 즐거움을 제공해드립니다.^^</p>
 			<div class="go_see">
-				<a href="/gs25/product/list">전체 상품 보기</a>
+				<a href="/gs25/product/list?store_no=${store_no }">전체 상품 보기</a>
 			</div>
 		</div>
 		</div>
@@ -73,7 +73,7 @@
 								<c:when test='${empty checkVo.user_no}'>
 									<button id="btn1">찜하기</button>
 									<button id="btn2" class="hide">찜해제</button>
-									<a href="/gs25/cart/list"><button id="btn3">찜목록바로가기</button></a>
+									<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
 								 </c:when>
 								 <c:otherwise>
 									<button id="btn2">찜해제</button>

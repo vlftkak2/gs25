@@ -7,6 +7,9 @@ public class ProductVo {
 	private int price;
 	private String maker;
 	private Long kind_no;
+	private String imageurl;
+	
+	
 	public Long getNo() {
 		return no;
 	}
@@ -37,6 +40,19 @@ public class ProductVo {
 	public void setKind_no(Long kind_no) {
 		this.kind_no = kind_no;
 	}
+	public String getImageurl() {
+		return imageurl;
+	}
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
+	
+	@Override
+	public String toString() {
+		return "ProductVo [no=" + no + ", name=" + name + ", price=" + price + ", maker=" + maker + ", kind_no="
+				+ kind_no + ", imageurl=" + imageurl + "]";
+	}
+	
 
 
 	

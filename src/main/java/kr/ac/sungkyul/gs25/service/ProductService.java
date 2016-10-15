@@ -30,9 +30,9 @@ import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 
 
 /*
- 2016-10-01 
+ 2016-10-14
    작업자 : 최형민
-   개발 상황 : 완료
+   개발 상황 : 추가
 */
 
 @Service
@@ -47,7 +47,14 @@ public class ProductService {
 	@Autowired
 	private ProductDao productdao;
 	
-    public Map<String, Object> listBoard(String spage, String keyword,Long StoreNo){
+	//메인 상품 리스트 가져오기
+	public List<ProductVo> listBoard(){
+		List<ProductVo> Productlist=productdao.getList();
+		return Productlist;
+	}
+	
+	//메인 상품 검색 리스트
+		public Map<String, Object> listBoard(String spage, String keyword){
     	
     	// 1. 페이지 값 받기
 		int page=Integer.parseInt(spage);
@@ -76,7 +83,103 @@ public class ProductService {
 		int nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
 		int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
 		
-		List<ProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword,StoreNo);
+		List<ProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword);
+		
+		// 6. map에 객체 담기
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("sizeList", LIST_PAGESIZE);
+		map.put("firstPage", startPage);
+		map.put("lastPage", endPage);
+		map.put("prevPage", prevPage);
+		map.put("nextPage", nextPage);
+		map.put("currentPage", page);
+		map.put("pageCount", pageCount);
+		map.put("list", list);
+		map.put("totalCount", totalCount);
+		map.put("keyword", keyword);
+		map.put("nexttoPage", nexttoPage);
+		map.put("prevtoPage", prevtoPage);
+		
+		
+		return map;
+	}
+		
+		//메인 상품 등록
+		public void insert(ProductVo vo, MultipartFile file) throws Exception{
+
+				// 1. 게시물의 번호 얻기
+				Long no=productdao.insert(vo);
+
+		       // 2. orgName
+				String orgName =file.getOriginalFilename();
+			
+				// 3. fileSize
+				long fileSize =file.getSize();
+				
+				// 4. saveName
+				String saveName = orgName;
+				
+				// 5. path 경로 정하기
+			    String path ="C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\product";
+
+			    // 6. imageurl 경로
+				String imageurl="/gs25/assets/images/product/"+saveName;
+				
+				//7. 첨부파일 객체에 담기
+			    AttachFilePrVo attachFilePrVO = new AttachFilePrVo();
+				attachFilePrVO.setNo(no);
+				attachFilePrVO.setPath(path);
+				attachFilePrVO.setOrgName(orgName);
+				attachFilePrVO.setSaveName(saveName);
+				attachFilePrVO.setFileSize(fileSize);
+				attachFilePrVO.setImageurl(imageurl);
+				
+				//8. 첨부파일 삽입
+				productdao.insertAttachPrFile(attachFilePrVO);
+				
+				//9. 파일 복사 및 이동
+				File target = new File(path, saveName);
+				FileCopyUtils.copy(file.getBytes(),target);
+			
+		}
+		
+		//메인 상품 삭제
+		public void delete(Long no){
+			
+			productdao.delete(no);
+		}
+	
+	//서브 상품 검색 리스트
+    public Map<String, Object> listBoard(String spage, String keyword,Long StoreNo){
+    	
+    	// 1. 페이지 값 받기
+		int page=Integer.parseInt(spage);
+		
+		// 2. 페이지를 그리기 위한 기초 작업
+		int totalCount = productdao.getTotalCount(StoreNo);
+		int pageCount = (int) Math.ceil((double) totalCount / LIST_PAGESIZE);
+		int blockCount = (int) Math.ceil((double) pageCount / LIST_BLOCKSIZE);
+		int currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
+		
+		// 3. page값 검증
+		if (page < 1) {
+			page = 1;
+			currentBlock = 1;
+		} else if (page > pageCount) {
+			page = pageCount;
+			currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
+		}
+
+
+		// 4. 페이지를 그리기 위한 값 계산
+		int startPage = (currentBlock - 1) * LIST_BLOCKSIZE + 1;
+		int endPage = (startPage - 1) + LIST_BLOCKSIZE;
+		int prevPage = (page >= startPage) ? (page-1) : (currentBlock - 1) * LIST_BLOCKSIZE;
+		int nextPage = (page <= endPage) ? (page+1) : currentBlock * LIST_BLOCKSIZE + 1;
+		int nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
+		int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
+		
+		List<StoreProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword,StoreNo);
 		
 		// 6. map에 객체 담기
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -97,82 +200,57 @@ public class ProductService {
 		return map;
 	}
     
-    //상품 등록
-	public void insert(ProductVo vo, MultipartFile file) throws Exception{
-
-			// 1. 게시물의 번호 얻기
-			Long no=productdao.insert(vo);
-
-	       // 2. orgName
-			String orgName =file.getOriginalFilename();
-		
-			// 3. fileSize
-			long fileSize =file.getSize();
-			
-			// 4. saveName
-			String saveName = orgName;
-			
-			// 5. path 경로 정하기
-		    String path ="C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\product";
-
-		    // 6. imageurl 경로
-			String imageurl="/gs25/assets/images/product/"+saveName;
-			
-			//7. 첨부파일 객체에 담기
-		    AttachFilePrVo attachFilePrVO = new AttachFilePrVo();
-			attachFilePrVO.setNo(no);
-			attachFilePrVO.setPath(path);
-			attachFilePrVO.setOrgName(orgName);
-			attachFilePrVO.setSaveName(saveName);
-			attachFilePrVO.setFileSize(fileSize);
-			attachFilePrVO.setImageurl(imageurl);
-			
-			//8. 첨부파일 삽입
-			productdao.insertAttachPrFile(attachFilePrVO);
-			
-			//9. 파일 복사 및 이동
-			File target = new File(path, saveName);
-			FileCopyUtils.copy(file.getBytes(),target);
-		
-	}
+    //서브 상품 등록
+    public void insert(StoreProductVo vo){
+    	
+    	productdao.Subinsert(vo);
+    	
+    }
+    
+    //서브 상품 삭제
+    public void Subdelete(Long product_no,Long store_no){
+    	
+    	productdao.subdelete(product_no,store_no);
+    }
+    
 	
 	//상품 첨부파일 삭제
 	public void deletefile(Long no){
 		productdao.deletefile(no);
 	}
 	
-	//상품 삭제
-	public void delete(Long no){
-		
-		productdao.delete(no);
-	}
 	
-	public List<ProductVo> getSubDate() {
-		List<ProductVo> list = productdao.getSubDate();
+	
+	//유통기한 상품
+	public List<StoreProductVo> getSubDate(Long store_no) {
+		List<StoreProductVo> list = productdao.getSubDate(store_no);
 		// System.out.println("service: "+list.toString());
 		return list;
 	}
 
-	 public List<ProductVo> getSubPopular(){
-	 List<ProductVo> list = productdao.getSubPopular();
+	//인기 상품
+	 public List<StoreProductVo> getSubPopular(Long store_no){
+	 List<StoreProductVo> list = productdao.getSubPopular(store_no);
 	 return list;
 	 }
 
-	public List<ProductVo> getSubNew() {
-		List<ProductVo> list = productdao.getSubNew();
+	 //신상품
+	public List<StoreProductVo> getSubNew(Long store_no) {
+		List<StoreProductVo> list = productdao.getSubNew(store_no);
 		// System.out.println("service: "+list.toString());
 		return list;
 	}
 
-	public List<ProductVo> getSubReco() {
-		List<ProductVo> list = productdao.getSubReco();
+	//추천상품
+	public List<StoreProductVo> getSubReco(Long store_no) {
+		List<StoreProductVo> list = productdao.getSubReco(store_no);
 		// System.out.println("service: "+list.toString());
 		return list;
 	}
 	
 	// 상품 상세보기
-	public ProductVo productInfo(Long no) {
-		ProductVo vo = productdao.productInfo(no);
+	public StoreProductVo productInfo(Long no,Long store_no) {
+		StoreProductVo vo = productdao.productInfo(no,store_no);
 		return vo;
 	}	
 	

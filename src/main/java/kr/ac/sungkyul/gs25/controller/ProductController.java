@@ -20,6 +20,7 @@ import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.NblogVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
+import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
 /*
@@ -37,17 +38,74 @@ public class ProductController {
 	ProductService productservice;
 
 	/*
-	 2016-10-05 
+	 2016-10-14
 	   작업자 : 최형민
-	   개발 상황 : 수정
+	   개발 상황 : 추가
 	*/
-	//상품 검색 리스트
+	//메인 상품 검색 리스트
+		@RequestMapping("/Mainlist")
+		public String productMainlist(Model model,
+				@RequestParam(value = "p", required = true, defaultValue = "1") String page,
+				@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
+						
+			//상품 리스트
+			Map<String, Object> map = productservice.listBoard(page, keyword);
+
+			model.addAttribute("map", map);
+
+			return "/Main_Page/product_search";
+		}
+		
+		//메인 상품 등록 페이지 이동
+		@RequestMapping(value="/Maininsert", method=RequestMethod.GET)
+		public String productMaininsertForm(){
+			
+			return "/Main_Page/product_insert";
+			}
+		
+		//메인페이지 상품 등록
+		@RequestMapping(value="/Maininsert", method=RequestMethod.POST)
+		public String productMaininsert(@ModelAttribute ProductVo vo, MultipartFile file) throws Exception{
+
+			productservice.insert(vo,file);
+			
+			return "redirect:/product/Mainlist";
+			}
+		
+		//메인 상품 삭제
+		@RequestMapping("/Maindelete")
+		public String productdelete(
+				@RequestParam("no") Long no,
+				HttpSession session){
+			
+			if (session == null) {
+				return "redirect:/main";
+			}
+
+			//사용자 세션 정보 얻어오기
+			UserVo authUser = (UserVo) session.getAttribute("authUser");
+			if (authUser == null) {
+				return "redirect:/main";
+			}
+			
+			//상품 첨부파일 삭제
+			productservice.deletefile(no);
+			
+			//상품 삭제
+			productservice.delete(no);
+			
+			return "redirect:/product/Mainlist";
+		}
+	
+	//서브 상품 검색 리스트
 	@RequestMapping("/list")
 	public String productlist(Model model,
 			@RequestParam(value = "p", required = true, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword,
 			HttpSession session,
 			@RequestParam("store_no") Long StoreNo) {
+		
+		model.addAttribute("StoreNo", StoreNo);
 		
 		//상품 리스트
 		Map<String, Object> map = productservice.listBoard(page, keyword,StoreNo);
@@ -57,31 +115,47 @@ public class ProductController {
 		return "/Sub_Page/product_search";
 	}
 	
-	//상품 등록 페이지 이동
+	
+	//서브 상품 등록 페이지 이동
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String productinsertForm(){
+	public String productinsertForm(
+			Model model,
+			@RequestParam("store_no") Long store_no){
 		
+		//매장 이름  정보얻기
+		StoreProductVo StoreVo=productservice.getStoreName(store_no);
+		model.addAttribute("StoreVo", StoreVo);
+		
+		//본사 상품 리스트 정보 가져오기
+		 List<ProductVo> Productlist=productservice.listBoard();
+		 System.out.println(Productlist);
+		 model.addAttribute("Productlist", Productlist);
+		 
+		//매장 번호 정보 얻기
+		model.addAttribute("store_no", store_no);
 		return "/Sub_Page/product_insert";
 		}
 	
-	//상품 등록
+	//서브페이지 상품 등록
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String productinsert(@ModelAttribute ProductVo vo, MultipartFile file) throws Exception{
+	public String productinsert(@ModelAttribute StoreProductVo vo,
+			@RequestParam("store_no") Long store_no) throws Exception{
 
-		productservice.insert(vo,file);
+		productservice.insert(vo);
 		
-		return "redirect:/product/list";
+		return "redirect:/product/list?store_no="+store_no;
 		}
 	
 	//상품 삭제
-	@RequestMapping("/delete")
-	public String productdelete(
-			@RequestParam("no") Long no,
+	@RequestMapping("/Subdelete")
+	public String productSubdelete(
+			@RequestParam("product_no") Long product_no,
+			@RequestParam("store_no") Long store_no,
 			HttpSession session){
 		
 		if (session == null) {
 			return "redirect:/sub/main";
-		}
+	}
 
 		//사용자 세션 정보 얻어오기
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
@@ -89,14 +163,13 @@ public class ProductController {
 			return "redirect:/sub/main";
 		}
 		
-		//상품 첨부파일 삭제
-		productservice.deletefile(no);
-		
 		//상품 삭제
-		productservice.delete(no);
+		productservice.Subdelete(product_no,store_no);
 		
-		return "redirect:/product/list";
+		return "redirect:/product/list?store_no="+store_no;
 	}
+	
+	
 	
 	/*
 	 2016-10-05 
@@ -109,6 +182,7 @@ public class ProductController {
 		public String productView(Model model,
 				@RequestParam(value= "no") Long no,
 				@RequestParam(value="name") String name,
+				@RequestParam(value="store_no") Long store_no,
 				HttpSession session){
 			
 			UserVo authUser = (UserVo)session.getAttribute("authUser");
@@ -116,17 +190,23 @@ public class ProductController {
 			if(authUser != null){
 			Long user_no = authUser.getNo();
 			
+			//매장번호 넘기기
+			model.addAttribute("store_no", store_no);
+			
 			CartVo checkVo = new CartVo();
 			checkVo = productservice.maintainCheck(user_no, no);
 			model.addAttribute("checkVo", checkVo);
 			
-			ProductVo vo = productservice.productInfo(no);
+			StoreProductVo vo = productservice.productInfo(no,store_no);
 			model.addAttribute("prodvo", vo);
 			
 			}else{
+				
+			//매장번호 넘기기
+			model.addAttribute("store_no", store_no);	
 			
 			//상품 정보
-			ProductVo vo = productservice.productInfo(no);
+			StoreProductVo vo = productservice.productInfo(no,store_no);
 			model.addAttribute("prodvo", vo);
 			}
 			
@@ -162,5 +242,6 @@ public class ProductController {
 			
 			return productvo;
 		}
+		
 		
 }

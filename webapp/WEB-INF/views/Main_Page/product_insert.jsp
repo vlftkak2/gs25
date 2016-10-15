@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
+		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 		<div id="content">
 			<div class="container_product">
@@ -27,54 +27,52 @@
 
 					<div id="board">
 						<form class="board-form" method="post"
-							action="/gs25/product/insert?store_no=${store_no }" enctype="multipart/form-data">
+							action="/gs25/product/Maininsert" enctype="multipart/form-data">
 							<table class="tbl-ex">
 								<tr>
 									<th colspan="6">글쓰기</th>
 								</tr>
 								<tr>
-									<td class="label">매장이름</td>
-									<td>
-										<div class="select_box">
-											<select id="selectbox" name="store_no">
-												<option selected="selected">선택해 주세요</option>
-												<option value="${store_no }">GS${StoreVo.storename }점</option>
-											</select>
-										</div>
-									</td>
-									
-									
-									<td class="label">상품</td>
-
-									<td>
-										<div class="select_box">
-											<select id="selectbox" name="product_no">
-												<option selected="selected">선택해 주세요</option>
-												<c:forEach var='vo' items='${Productlist }' varStatus='s'>
-												<option value="${vo.no }">${vo.name }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</td>
-									<td class="label">수량</td>
-									<td><input type="text" name="mount" value=""></td>
-								
-
+									<td class="label">상품이름</td>
+									<td><input type="text" name="name" value=""></td>
+									<td class="label">가격</td>
+									<td><input type="text" name="price" value=""></td>
+									<td class="label">제조사</td>
+									<td><input type="text" name="maker" value=""></td>
 								</tr>
 								<tr>
-									<td class="label">제조일</td>
-									<td><input type="text" id="datepicker1" name="reg_date" value=""></td>
-									<td class="label">유통기한</td>
-									<td><input type="text" id="datepicker2" name="expiry_date" value=""></td>
-									<td class="label"></td>
+									<td class="label">첨부파일</td>
+									<td><input type="file" name="file" id="file"></td>
+								
+									<td class="label">상품종류</td>
+
+									<td>
+										<div class="select_box">
+											<select id="selectbox" name="kind_no">
+												<option selected="selected">선택해 주세요</option>
+												<option value="1">과일</option>
+												<option value="2">도시락</option>
+												<option value="3">김밥</option>
+												<option value="4">햄버거</option>
+												<option value="5">주류</option>
+												<option value="6">라면</option>
+												<option value="7">아이스크림</option>
+												<option value="8">샐러드</option>
+
+											</select>
+										</div>
+									</td>
+									
+										<td class="label"></td>
 									<td>&nbsp</td>
-								</tr>
+								
+							
 							</table>
 							<div id="cma_image"
 								style="width: 95%; max-width: 100%; border: 1px solid #c0c0c0; display: none;"></div>
 
 							<div class="bottom">
-								<a href="/gs25/product/list">취소</a> <input type="submit"
+								<a href="/gs25/product/Mainlist">취소</a> <input type="submit"
 									value="등록">
 							</div>
 						</form>

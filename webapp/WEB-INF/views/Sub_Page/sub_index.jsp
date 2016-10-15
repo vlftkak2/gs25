@@ -98,7 +98,7 @@
 							<div class='sbbox pro'>
 								<span class='tip typ1'><span>D-day ${expiryVo.expiry_date }</span>
 								</span>
-								<a href="/gs25/product/view?no=${expiryVo.no }&&name=${expiryVo.name}"><img src='${expiryVo.imageurl }'></a>
+								<a href="/gs25/product/view?no=${expiryVo.no }&&name=${expiryVo.name}&&store_no=${store_no}"><img src='${expiryVo.imageurl }'></a>
 								<span class='title'>
 								<em class='mt'>
 							${expiryVo.maker})${expiryVo.name }</em>
@@ -158,7 +158,7 @@
 								<li>
 								<div class='sbbox pro'>
 								<span class='tip typ1'><span>조회수 ${popularityVo.count }</span></span>
-								<a href="/gs25/product/view?no=${popularityVo.no }&&name=${popularityVo.name}"><img src='${popularityVo.imageurl }'></a>
+								<a href="/gs25/product/view?no=${popularityVo.no }&&name=${popularityVo.name}&&store_no=${store_no}"><img src='${popularityVo.imageurl }'></a>
 								<span class='title'>
 								<em class='mt'>${popularityVo.maker})${popularityVo.name }</em><em>${popularityVo.price }원</em>
 								</span>
@@ -175,7 +175,7 @@
 						<li>
 							<div class='sbbox pro'>
 								<!--  <span class='tip typ1'><span>${countList }</span></span>-->
-								<a href="/gs25/product/view?no=${newProductVo.no }&name=${newProductVo.name}"><img src='${newProductVo.imageurl }'></a>
+								<a href="/gs25/product/view?no=${newProductVo.no }&name=${newProductVo.name}&&store_no=${store_no}"><img src='${newProductVo.imageurl }'></a>
 								<span class='title'>
 								<em class='mt'>${newProductVo.maker})${newProductVo.name }</em><em>${newProductVo.price }원</em>
 								</span>
@@ -191,7 +191,7 @@
 						<li>
 							<div class='sbbox pro'>
 								<!-- <span class='tip typ1'><span>${countList }</span></span>-->
-								<a href="/gs25/product/view?no=${recommendVo.no }&name=${recommendVo.name}"><img src='${recommendVo.imageurl }'></a>
+								<a href="/gs25/product/view?no=${recommendVo.no }&name=${recommendVo.name}&&store_no=${store_no}"><img src='${recommendVo.imageurl }'></a>
 								<span class='title'>
 								<em class='mt'>${recommendVo.maker})${recommendVo.name }</em><em>${recommendVo.price }원</em>
 								</span>
@@ -202,7 +202,6 @@
 			</div>
 		</div>
 	</div>
-			${map.StoreName }
 		
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
@@ -238,7 +237,7 @@ $(function() {
 				}
 				
 				 if(result == "true"){
-					location.href='/gs25/main';
+					location.href='/gs25/sub/main?store_no=${store_no}';
 				} 
 			},
 			

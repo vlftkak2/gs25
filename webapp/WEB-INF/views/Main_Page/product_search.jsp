@@ -18,7 +18,7 @@
 
 	<div id="container">
 
-		<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
+		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 
 		<div id="content">
@@ -31,15 +31,14 @@
 							<h1 id="sub_h1">상품검색</h1>
 						</div>
 						<div id="txt_header">
-							<p>GS25 할인 상품을 안내해드립니다.</p>
-							<p>할인상품을 검색을 통해 찾아보세요</p>
+							<p>GS25 관리자 상품을 등록하는 곳입니다.</p>
+							<p>상품은 검색을 통해 찾아보세요</p>
 						</div>
 
 					</div>
 
 					<div id="search">
-						<form id="search_form" action="/gs25/product/list" method="get">
-							<input type="hidden" name="store_no" value="${StoreNo }">
+						<form id="search_form" action="/gs25/product/Mainlist" method="get">
 							<input type="text" id="kwd" name="kwd" value="${map.keyword }">
 							<input type="submit" value="찾기">
 						</form>
@@ -47,7 +46,7 @@
 
 					<c:if test='${authUser.no==1 }'>
 						<div class="insert">
-							<a href="/gs25/product/insert?store_no=${store_no }" id="new-book">상품등록</a>
+							<a href="/gs25/product/Maininsert" id="new-book">상품등록</a>
 						</div>
 					</c:if>
 
@@ -58,80 +57,21 @@
 									<li id="product_li">
 										<ul class="tag_list_01">
 											<li class="ico_tag_03">
-											 <c:if test='${vo.count>=20 }'>
-											 <strong>인기</strong>
-											 </c:if>
-											 
-											 <c:if test='${vo.newdate<=15 }'>
-											 <strong>신상</strong>
-											 </c:if>
 											
 											</li>
 										</ul> 
 										<div class="pic_product">
 										<c:if test="${authUser.no==1 }">
 										<div id="del">
-										<a href="/gs25/product/Subdelete?product_no=${vo.product_no }&store_no=${vo.store_no}" class="del">삭제</a>
+										<a href="/gs25/product/Maindelete?no=${vo.no }" class="del">삭제</a>
 										</div>
 										</c:if>
-										
-											<a href="/gs25/product/view?no=${vo.no }&&name=${vo.name}&&store_no=${store_no}">
 											<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락">
-											</a>
 											<div class="infowrap">
 												
 												<span class='title'>
 								<em class='mt'>${vo.maker})${vo.name }</em>
-								
-								<c:choose>
-								<c:when test='${vo.remainderdate>7}'>
 								<em>${vo.price }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==7 && (vo.price-vo.countprice)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==6 && (vo.price-vo.countprice*2)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*2) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==5 && (vo.price-vo.countprice*3)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*3) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==4 && (vo.price-vo.countprice*4)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*4) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==3 && (vo.price-vo.countprice*5)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*5) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==2 && (vo.price-vo.countprice*6)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*6) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate==1 && (vo.price-vo.countprice*7)>=(vo.price*0.5) }'>
-								<em id="price">${vo.price }원</em>
-								<em id="countprice">${vo.price-(vo.countprice*7) }원</em>
-								</c:when>
-								
-								<c:when test='${vo.remainderdate<=0 }'>
-								<em>${vo.price }원</em>
-								</c:when>
-								
-								<c:otherwise>
-								<em id="price">${vo.price }원</em>
-								 <em id="countprice">${vo.halfprice }원</em>
-								</c:otherwise>
-							</c:choose>
 												</span>												
 											</div>
 										</div>
@@ -156,11 +96,11 @@
 								<div class="pager">
 									<ul>
 										<c:if test="${map.prevtoPage >= 0 }">
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.prevtoPage }">◀◀</a></li>
+											<li><a href="/gs25/product/Mainlist?p=${map.prevtoPage }">◀◀</a></li>
 										</c:if>
 
 										<c:if test="${map.prevPage >= 0 }">
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.prevPage }">◀</a></li>
+											<li><a href="/gs25/product/Mainlist?p=${map.prevPage }">◀</a></li>
 										</c:if>
 
 										<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
@@ -175,16 +115,16 @@
 												</c:when>
 
 												<c:otherwise>
-													<li><a href="/gs25/product/list?store_no=${store_no }&p=${i }">${i }</a></li>
+													<li><a href="/gs25/product/Mainlist?p=${i }">${i }</a></li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
 
 										<c:if test='${map.nextPage > 0 }'>
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.nextPage }">▶</a></li>
+											<li><a href="/gs25/product/Mainlist?p=${map.nextPage }">▶</a></li>
 										</c:if>
 										<c:if test='${map.nexttoPage > 0 }'>
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.nexttoPage }">▶▶</a></li>
+											<li><a href="/gs25/product/list/Mainlist?p=${map.nexttoPage }">▶▶</a></li>
 										</c:if>
 									</ul>
 								</div>

@@ -3,12 +3,83 @@
 
 <mapper namespace="product">
 
-	<!-- imageurl 정보 얻기 -->
-	<select id="getTotalCount" resultType="java.lang.Integer">
-		select count(*) from product
+	<!--메인 상품 게시물 총 개수 얻기  -->
+	<select id="getMainTotalCount" resultType="java.lang.Integer">
+	   <![CDATA[
+	  select count(*) from product 
+	    ]]>
 	</select>
 	
-	<!-- 게시물 리스트 가져오기 -->
+	<!-- 본사 상품 리스트 가져오기 -->
+	<select id="getMainShopList" resultType="productvo">
+		     <![CDATA[
+select a.no,a.name,a.price,a.maker,a.kind_no,b.IMAGEURL from product a, boardsfilepr b 
+where a.no=b.no
+		     ]]>
+	</select>
+	
+	<!-- 메인 게시물 상품 리스트 가져오기 -->
+	<select id="getMainList" parameterType="map" resultType="productvo">
+		     <![CDATA[
+	select * from(
+		select c.*,rownum rn from(
+			select a.no,a.name,a.maker,a.price,a.KIND_NO,b.IMAGEURL from product a, boardsfilepr b where a.no=b.no order by a.PRICE asc) c)
+	where #{page_start}<=rn and rn<=#{page_end}	
+		     ]]>
+	</select>
+	
+	<!-- 메인 게시물 검색 상품 리스트 가져오기 -->
+	<select id="getMainListKeyword" parameterType="map" resultType="productvo">
+		     <![CDATA[
+	select * from(
+		select c.*,rownum rn from(
+			select a.no,a.name,a.maker,a.price,a.KIND_NO,b.IMAGEURL from product a, boardsfilepr b, PRODUCTKIND d where a.no=b.no 
+      and d.no=a.kind_no and (a.NAME like #{keyword} or d.KIND like #{keyword})
+			 order by a.PRICE desc) c)
+	where #{page_start}<=rn and rn<=#{page_end}
+		     ]]>
+	</select>
+	
+	<!-- 메인 상품 등록 -->
+	<insert id="insertMainBoard" parameterType="productvo">
+
+		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
+       	<![CDATA[
+       		SELECT seq_product.nextVal as no FROM DUAL
+       	]]>
+		</selectKey>
+
+	<![CDATA[	
+			insert into product(
+				no, name, price,maker,kind_no)
+			values
+			(
+				#{no},
+				#{name},
+				#{price},
+				#{maker},
+				#{kind_no}
+	
+			)
+		]]>
+	</insert>
+	
+	<!--메인 상품 삭제 -->
+	<delete id="deleteproduct" parameterType="java.lang.Long">
+		<![CDATA[
+		delete from product where no=#{no}
+		]]>
+	</delete>
+	
+	
+	<!-- 서브 상품 게시물 총 개수 얻기 -->
+	<select id="getTotalCount" parameterType="Long" resultType="java.lang.Integer">
+	     <![CDATA[
+	  select count(*) from storeproduct where STORE_NO=#{StoreNo}
+	     ]]>
+	</select>
+	
+	<!-- 서브게시물 상품 리스트 가져오기 -->
 	<select id="getList" parameterType="map" resultType="storeproductvo">
    <![CDATA[
        select * from(
@@ -20,7 +91,7 @@
                  a.maker,
                  to_char(b.reg_date,'yyyy/mm/dd') as reg_date,
                  to_char(b.EXPIRY_DATE,'yyyy/mm/dd') as expiry_date,
-                 ceil(sysdate-a.reg_date) as newdate,
+                 ceil(sysdate-b.reg_date) as newdate,
                  e.IMAGEURL,
                  ceil(b.expiry_date-sysdate) as remainderdate, 
                 (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,
@@ -31,61 +102,58 @@
                 b.STORE_NO
           from product a, storeproduct b, store c, productkind d, boardsfilepr e
       where b.STORE_NO=#{store_no} and a.no=e.no and d.no=a.KIND_NO and a.no=b.PRODUCT_NO and c.no=b.STORE_NO
-      order by PRODUCT_NO,STORE_NO asc) c) where #{page_start}<=rn and rn<=#{page_end}
+      order by a.price asc) c) where #{page_start}<=rn and rn<=#{page_end}
    ]]>
    </select>
    
-     <!--검색된 게시물 리스트 가져오기  -->
-   	<select id="getListKeyword" parameterType="map" resultType="productvo">
+     <!--서브 검색된 상품 게시물 리스트 가져오기  -->
+   	<select id="getListKeyword" parameterType="map" resultType="storeproductvo">
    <![CDATA[
-  	select * from(
-  		select c.*,rownum rn from(
-  			select 
-  			       a.no,
-  				   a.NAME,
-  				   a.PRICE,to_char(a.reg_date,'yyyy.mm.dd'),
-  				   to_char(a.EXPIRY_DATE,'yyyy-mm-dd'),
-  				   a.maker,
-  				   d.imageurl, 
-  				   a.count,
-  				   ceil(sysdate-a.reg_date) as newdate,
-  				   ceil(a.expiry_date-sysdate) as remainderdate, 
-        		   (ceil(((b.DIS_PERCENT*0.01)*a.price)/7)) countprice,
-        		   ((b.DIS_PERCENT*0.01)*a.price) as maxcountprice,
-        			 a.price*0.5 as halfprice
-  				   from product a, productkind b, boardsfilepr d 
-  					where a.KIND_NO=b.NO and a.NO=d.NO and (a.NAME like #{keyword} or b.KIND like #{keyword}) 
-  		order by price desc, a.EXPIRY_DATE asc) c) 
-  	where #{page_start}<=rn and rn<=#{page_end}
+  	   select * from(
+        select c.*,rownum rn from(
+          select a.no,
+                 c.name as storename,
+                 a.name,
+                 a.price,
+                 a.maker,
+                 to_char(b.reg_date,'yyyy/mm/dd') as reg_date,
+                 to_char(b.EXPIRY_DATE,'yyyy/mm/dd') as expiry_date,
+                 ceil(sysdate-b.reg_date) as newdate,
+                 e.IMAGEURL,
+                 ceil(b.expiry_date-sysdate) as remainderdate, 
+                (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,
+                a.price*0.5 as halfprice,
+                b.count,
+                b.mount,
+                b.PRODUCT_NO,
+                b.STORE_NO
+          from product a, storeproduct b, store c, productkind d, boardsfilepr e
+      where b.STORE_NO=#{store_no} and a.no=e.no and d.no=a.KIND_NO and a.no=b.PRODUCT_NO and c.no=b.STORE_NO
+      and (a.NAME like #{keyword} or d.KIND like #{keyword})
+      order by a.price asc) c) where #{page_start}<=rn and rn<=#{page_end}
    ]]>
    </select>
 
 
-	<!-- 상품 등록 -->
-	<insert id="insertBoard" parameterType="productvo">
-
-		<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
-       	<![CDATA[
-       		SELECT seq_product.nextVal as no FROM DUAL
-       	]]>
-		</selectKey>
+	<!-- 서브 상품 등록 -->
+	<insert id="insertSubProduct" parameterType="storeproductvo">
 
 	<![CDATA[	
-			insert into product(
-				no, name, price,reg_date,expiry_date,maker,kind_no,count)
-			values
-			(
-				#{no},
-				#{name},
-				#{price},
-				#{reg_date},
-				#{expiry_date},
-				#{maker},
-				#{kind_no},
-				1
-			)
+	insert into storeproduct(
+	store_no,product_no,reg_date,expiry_date,mount,count
+	)
+	 VALUES(
+		#{store_no},#{product_no},#{reg_date},#{expiry_date},#{mount},1)
 		]]>
 	</insert>
+	
+	<!-- 서브 상품 삭제 -->
+	<delete id="deleteSubProduct"  parameterType="map">
+	<![CDATA[
+	 delete from storeproduct where STORE_NO=#{store_no} and PRODUCT_NO=#{product_no}
+	]]>
+	</delete>
+	
 	
 	<!--첨부파일 삽입  -->
 	<insert id="insertAttachPrFile" parameterType="kr.ac.sungkyul.gs25.vo.AttachFilePrVo">
@@ -114,87 +182,90 @@
 	]]>
 	</delete>
 	
-	<!-- 상품 삭제 -->
-	<delete id="deleteproduct" parameterType="java.lang.Long">
-		<![CDATA[
-		delete from product where no=#{no}
-		]]>
-	</delete>
-	
 	<!-- 상품 서브리스트 (유통기한) -->
-	<select id="getSubDate" resultType="productvo">
+	<select id="getSubDate" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
-		SELECT c.no, c.name,c.reg_date, c.expiry_date, c.maker, c.IMAGEURL,c.countprice,c.price,c.maxcountprice,c.halfprice
-			FROM (SELECT 
-					a.no, 
+SELECT 
+		c.no, 
+		c.name,
+		c.reg_date, 
+		c.expiry_date, 
+		c.maker, 
+		c.IMAGEURL,
+		c.countprice,
+		c.price,
+		c.maxcountprice,
+		c.halfprice
+from(                 
+		select   	a.no, 
 					a.name, 
 					a.price, 
-					a.reg_date, 
-					ceil(a.expiry_date-sysdate) as expiry_date, 
+					b.reg_date, 
+					ceil(b.expiry_date-sysdate) as expiry_date, 
 					a.maker, 
-					b.IMAGEURL,
-          		    ((c.DIS_PERCENT*0.01)*a.price) as maxcountprice,
-         		    (ceil(((c.DIS_PERCENT*0.01)*a.price)/7)) countprice,
-         		     a.price*0.5 as halfprice
-  				   FROM product a, boardsfilepr b,productkind c where a.KIND_NO=c.no 
-      			and a.no = b.no 
-          		and (a.EXPIRY_DATE-sysdate)>=1
-      			and (a.EXPIRY_DATE-sysdate)<=7
-      	and expiry_date > sysdate ORDER BY expiry_date) c WHERE rownum < 5
+					c.IMAGEURL,
+          ((d.DIS_PERCENT*0.01)*a.price) as maxcountprice,
+          (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,
+          a.price*0.5 as halfprice 
+from product a, storeproduct b, boardsfilepr c, productkind d
+where a.no=b.PRODUCT_NO and 
+      a.no=c.no and
+      d.no=a.KIND_NO and
+      b.STORE_NO=#{store_no} and
+      b.expiry_date > sysdate ORDER BY b.expiry_date) c where rownum <5
 		]]>
 	</select>
 	
 	<!-- 상품 서브리스트 (신상품) -->
-	<select id="getSubNew" resultType="productvo">
+	<select id="getSubNew" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
-		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
-		 FROM (SELECT a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL 
-  		 FROM product a, boardsfilepr b  where a.no = b.no ORDER BY reg_date desc) c WHERE rownum < 5
+	      		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
+		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
+  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.PRODUCT_NO and a.no = b.no and d.STORE_NO=#{store_no} ORDER BY reg_date desc) c WHERE rownum < 5
 		]]>
 	</select>
 	
 	<!-- 상품 서브리스트 (인기상품) -->
-	<select id="getSubPopular" resultType="productvo">
+	<select id="getSubPopular" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
-		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL,c.count
-		 FROM (SELECT a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL,a.count 
-  		 FROM product a, boardsfilepr b  where a.no = b.no ORDER BY count desc) c WHERE rownum < 5
+       	 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL,c.count
+		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL,d.count 
+  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} ORDER BY count desc) c WHERE rownum < 5
 		]]>
 	</select>
 	
 	<!-- 상품 서브리스트 (랜덤추천) -->
-	<select id="getSubReco" resultType="productvo">
+	<select id="getSubReco" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
-		 SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL
-  		 FROM(select a.no, a.name, a.price, a.reg_date, a.expiry_date, a.maker, b.IMAGEURL 
- 		 FROM product a, boardsfilepr b  where a.no = b.no order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
+		       		 SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL
+  		 FROM(select a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
+ 		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
 		]]>
 	</select>
 	
 	<!--상품 조회수 증가  -->
 	<update id="updateViewCount" parameterType="java.lang.Long">
 		<![CDATA[
-		update product set
-		count = count + 1 where no = #{no}
+		update storeproduct set
+		count = count + 1 where PRODUCT_NO=#{no}
 					]]>
 	</update>
 	
 	<!-- 상품 상세정보 -->
-	<select id="searchproduct" parameterType="long" resultType="productvo">
+	<select id="searchproduct" parameterType="map" resultType="storeproductvo">
 		<![CDATA[
-			  SELECT a.no, 
+		 SELECT a.no, 
 		  		 a.name, 
 		  		 a.price,  
-		  		 to_char(a.expiry_date,'yyyy/mm/dd') as expiry_date, 
+		  		 to_char(d.expiry_date,'yyyy/mm/dd') as expiry_date, 
 		  		 a.maker, 
 		  		 b.IMAGEURL,
-      			 ceil((a.EXPIRY_DATE-sysdate)-7) as remainderdate,
-      			 ceil(a.expiry_date-sysdate) as remaindercountdate,
+      			 ceil((d.EXPIRY_DATE-sysdate)-7) as remainderdate,
+      			 ceil(d.expiry_date-sysdate) as remaindercountdate,
       			 (ceil(((c.DIS_PERCENT*0.01)*a.price)/7)) countprice,
-            	((c.DIS_PERCENT*0.01)*a.price) as maxcountprice,
                  a.price*0.5 as halfprice
-		 	   FROM product a, boardsfilepr b, PRODUCTKIND c  
-		 			where a.no = b.no and c.no=a.KIND_NO and a.no=#{no}
+		 	   FROM product a, boardsfilepr b, PRODUCTKIND c, storeproduct d
+		 			where d.STORE_NO=#{store_no} and a.no = b.no and c.no=a.KIND_NO and a.no=d.PRODUCT_NO and a.no=#{no}
 		]]>
 	</select>
 	
