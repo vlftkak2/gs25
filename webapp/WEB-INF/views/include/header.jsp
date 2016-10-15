@@ -42,6 +42,10 @@
 						<h1 class="logo"><a href="/gs25/main">GS25</a></h1>
 						<div class="gnb" id="gnb_menu">
 							<ul>
+							<c:if test="${authUser.no==1 }">
+								<li><h2><a href="/gs25/product/Mainlist" class="on">상품</a></h2>
+								</li>
+								</c:if>
 								<li><h2><a href="/gs25/custom/list" class="on">고객센터</a></h2>
 								</li>
 								<li><h2><a href="/gs25/membership">맴버십</a></h2>

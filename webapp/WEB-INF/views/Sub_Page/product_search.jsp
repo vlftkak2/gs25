@@ -61,20 +61,18 @@
 											 <c:if test='${vo.count>=20 }'>
 											 <strong>인기</strong>
 											 </c:if>
-											 
 											 <c:if test='${vo.newdate<=15 }'>
 											 <strong>신상</strong>
 											 </c:if>
-											
+											 
+										<c:if test="${authUser.no==1 }">
+										<a href="/gs25/product/Subdelete?product_no=${vo.product_no }&store_no=${vo.store_no}" class="del">삭제</a>
+										</c:if>
+										
 											</li>
 										</ul> 
 										<div class="pic_product">
-										<c:if test="${authUser.no==1 }">
-										<div id="del">
-										<a href="/gs25/product/Subdelete?product_no=${vo.product_no }&store_no=${vo.store_no}" class="del">삭제</a>
-										</div>
-										</c:if>
-										
+									
 											<a href="/gs25/product/view?no=${vo.no }&&name=${vo.name}&&store_no=${store_no}">
 											<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락">
 											</a>
