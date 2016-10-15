@@ -78,7 +78,7 @@
 								 <c:otherwise>
 									<button id="btn2">찜해제</button>
 									<button id="btn1" class="hide">찜하기</button>
-									<a href="/gs25/cart/list"><button id="btn3">찜목록바로가기</button></a>
+									<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
 								</c:otherwise>
 							</c:choose>
 							</c:if>								
@@ -196,11 +196,11 @@
 $(function() {
 	$("#btn1").on("click", function(){
 		console.log('click');
-		var product_no = ${prodvo.no };
+		var alldata ={product_no:"${prodvo.no }", store_no:"${store_no}"};
 		$.ajax({
 			url: "/gs25/cart/write",
 			type: "POST",
-			data: {"product_no":product_no},
+			data: alldata,
 			dataType: "text",
 			success : function(result){
 				console.log('리절트!');
@@ -220,14 +220,13 @@ $(function() {
 	});
 	
 	$("#btn2").on("click", function(){
-		var product_no = ${prodvo.no };
+		var alldata ={product_no:"${prodvo.no }", store_no:"${store_no}"};
 		$.ajax({
 			url: "/gs25/cart/relieve",
 			type: "POST",
-			data: {"product_no":product_no},
+			data: alldata,
 			dataType: "text",
 			success: function(result){
-				console.log('dkqjd');
 				if(result == "1"){
 					//$(this).siblings("button").removeClass("hide");
 					sweetAlert("찜해제!");

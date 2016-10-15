@@ -26,7 +26,7 @@ public class CartListService {
 	private static final int LIST_PAGESIZE = 5; // 리스팅되는 게시물의 수
 	private static final int LIST_BLOCKSIZE = 5; // 페이지 리스트에서 표시되는 페이지 수
 
-	public Map<String, Object> list(Long page, Long user_no) {
+	public Map<String, Object> list(Long page, Long user_no,Long store_no) {
 
 		// 2.
 		long totalCount = cartlistDao.getCal(); // 전체 게시물 갯수
@@ -51,7 +51,7 @@ public class CartListService {
 		long nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
 		long prevtoPage = (currentBlock > 1) ? startPage - 3 : page;
 
-		List<CartVo> list = cartlistDao.getList(page, LIST_PAGESIZE, user_no);
+		List<CartVo> list = cartlistDao.getList(page, LIST_PAGESIZE, user_no,store_no);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -75,26 +75,31 @@ public class CartListService {
 		return map;
 	}
 
-	public String write(Long user_no, Long product_no) {
-		Integer resultInt = cartlistDao.insert(user_no, product_no);
+	public String write(Long user_no, Long product_no,Long store_no) {
+		Integer resultInt = cartlistDao.insert(user_no, product_no,store_no);
 		String result = String.valueOf(resultInt);
 		return result;
 
 	}
 
-	public String relieve(Long user_no, Long product_no) {
-		Integer resultInt = cartlistDao.delete(user_no, product_no);
+	public String relieve(Long user_no, Long product_no,Long store_no) {
+		Integer resultInt = cartlistDao.delete(user_no, product_no,store_no);
 		String result = String.valueOf(resultInt);
 		return result;
 	}
 
-	public void deleteCart(Long user_no, Long product_no) {
-		cartlistDao.deleteCart(user_no, product_no);
+	public void deleteCart(Long user_no, Long product_no,Long store_no) {
+		cartlistDao.deleteCart(user_no, product_no,store_no);
 	}
 	
 	//찜목록 총 개수
 	public int getCount(){
 		int TotalCount=cartlistDao.getCal();
 		return TotalCount;
+	}
+	
+	//카트 리스트
+	public void cartlistService(){
+		
 	}
 }

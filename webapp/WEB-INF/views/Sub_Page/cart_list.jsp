@@ -34,11 +34,11 @@
 	               <div id="cart_product">
 
 						<div id="del">
-							<a href="/gs25/cart/delete?no=${vo.product_no }" class="del">삭제</a>
+							<a href="/gs25/cart/delete?no=${vo.product_no }&store_no=${store_no}" class="del">찜해제</a>
 						</div>
 
 						
-						<a href="/gs25/product/view?no=${vo.product_no }&name=${vo.name}">
+						<a href="/gs25/product/view?no=${vo.product_no }&name=${vo.name}&store_no=${store_no}">
 						<img id="product" src="${vo.imageurl }" alt="형민)맛있는도시락">
 						</a>
 		                

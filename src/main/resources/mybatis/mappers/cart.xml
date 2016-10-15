@@ -12,34 +12,38 @@
 	
 	<select id="getList" parameterType="map" resultType="cartvo">
 		<![CDATA[
-		select * from (
-			select e.*, rownum rn from (
-				select d.USER_NO, 
-				d.PRODUCT_NO, 
-				c.name, 
-				c.price, 
-				c.maker, 
-				c.kind_no, 
-				c.imageurl,
-				c.remainderdate,
-				c.countprice,
-				c.halfprice
-    	   from(
-			select a.no, 
-				   a.name, 
-				   a.price, 
-				   a.maker, 
-				   a.kind_no, 
-				   b.imageurl,
-    			   ceil(a.expiry_date-sysdate) as remainderdate,
-    			   (ceil(((f.DIS_PERCENT*0.01)*a.price)/7)) countprice,
-    			   a.price*0.5 as halfprice from 
-    				   	product a,
-						BOARDSFILEPR b, 
-						productkind f where a.no=b.no and a.KIND_NO=f.NO) c, 
-			cart d where c.no = d.PRODUCT_NO and d.user_no=#{user_no})
-		e) where #{page_top}<=rn and rn<=#{page_bottom}
-    
+  select * from (
+      select e.*, rownum rn from (
+       	select 
+          d.USER_NO, 
+        	d.PRODUCT_NO, 
+          c.no,
+        	c.name, 
+        	c.price, 
+        	c.maker, 
+        	c.kind_no, 
+        	c.imageurl,
+        	c.remainderdate,
+      		c.countprice,
+      		c.halfprice,
+          c.store_no
+      	   from(
+      select 
+          a.no,
+          a.name,
+          a.price,
+          a.maker,
+          b.imageurl,
+          a.kind_no,  
+          ceil(c.expiry_date-sysdate) as remainderdate,
+          (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,c.product_no,c.store_no,
+          a.price*0.5 as halfprice from  product a, boardsfilepr b, storeproduct c, productkind d 
+      where a.no=b.no 
+      and a.KIND_NO=d.no 
+      and a.no=c.PRODUCT_NO) c, cart d where c.no=d.product_no 
+      and d.USER_NO=#{user_no}
+      and c.store_no=#{store_no}) e)
+ where #{page_top}<=rn and rn<=#{page_bottom}
 		]]>
 	</select>
 	
@@ -47,20 +51,21 @@
 		<![CDATA[
 		insert into cart values(
 			#{user_no},
-			#{product_no})
+			#{product_no},
+			#{store_no})
 		]]>
 	</insert>
 	
 	
 	<delete id="cartRelieve" parameterType="cartvo">
 	<![CDATA[
-	delete from cart where user_no=#{user_no} and product_no=#{product_no}
+	delete from cart where user_no=#{user_no} and product_no=#{product_no} and store_no=#{store_no}
 	]]>
 	</delete>
 	
 	<delete id="deleteCart" parameterType="cartvo">
 	<![CDATA[
-	delete from cart where user_no=#{user_no} and product_no=#{product_no}
+	delete from cart where user_no=#{user_no} and product_no=#{product_no} and store_no=#{store_no}
 	]]>
 	</delete>
 </mapper>

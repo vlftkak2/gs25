@@ -2,6 +2,7 @@ package kr.ac.sungkyul.gs25.vo;
 
 public class CartVo {
 	private Long user_no; // 회원번호
+	private Long store_no; //매장 번호
 	private Long product_no; // 상품번호
 	private String name; // 상품명
 	private int price; // 상품 가격
@@ -75,12 +76,19 @@ public class CartVo {
 		this.remainderdate = remainderdate;
 	}
 	
+	public Long getStore_no() {
+		return store_no;
+	}
+	public void setStore_no(Long store_no) {
+		this.store_no = store_no;
+	}
 	@Override
 	public String toString() {
-		return "CartVo [user_no=" + user_no + ", product_no=" + product_no + ", name=" + name + ", price=" + price
-				+ ", maker=" + maker + ", kind_no=" + kind_no + ", imageurl=" + imageurl + ", halfprice=" + halfprice
-				+ ", countprice=" + countprice + ", remainderdate=" + remainderdate + "]";
+		return "CartVo [user_no=" + user_no + ", store_no=" + store_no + ", product_no=" + product_no + ", name=" + name
+				+ ", price=" + price + ", maker=" + maker + ", kind_no=" + kind_no + ", imageurl=" + imageurl
+				+ ", halfprice=" + halfprice + ", countprice=" + countprice + ", remainderdate=" + remainderdate + "]";
 	}
+	
 
 	
 	
