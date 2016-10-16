@@ -300,7 +300,12 @@ where a.no=b.PRODUCT_NO and
 		select name as storename from store where no=#{StoreNo}
 		]]>
 	</select>
-
-
+	
+	<!-- 매장 상품 삭제 -->
+	<delete id="Storedelete" parameterType="Long">
+		<![CDATA[
+		delete from STOREPRODUCT where product_no=#{no}
+		]]>
+	</delete>
 
 </mapper>

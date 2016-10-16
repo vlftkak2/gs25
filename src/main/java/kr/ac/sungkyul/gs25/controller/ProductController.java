@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.ac.sungkyul.gs25.service.CartListService;
 import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.NblogVo;
@@ -36,6 +37,9 @@ public class ProductController {
 
 	@Autowired
 	ProductService productservice;
+	
+	@Autowired
+	CartListService cartservice;
 
 	/*
 	 2016-10-14
@@ -88,11 +92,21 @@ public class ProductController {
 				return "redirect:/main";
 			}
 			
+			//찜목록 상품 삭제
+			cartservice.deleteCart(no);
+			
+			//매장상품 삭제
+			productservice.Storedelete(no);
+			
 			//상품 첨부파일 삭제
 			productservice.deletefile(no);
+
 			
 			//상품 삭제
 			productservice.delete(no);
+			
+		
+			
 			
 			return "redirect:/product/Mainlist";
 		}
@@ -128,7 +142,6 @@ public class ProductController {
 		
 		//본사 상품 리스트 정보 가져오기
 		 List<ProductVo> Productlist=productservice.listBoard();
-		 System.out.println(Productlist);
 		 model.addAttribute("Productlist", Productlist);
 		 
 		//매장 번호 정보 얻기
@@ -163,8 +176,12 @@ public class ProductController {
 			return "redirect:/sub/main";
 		}
 		
+		
 		//상품 삭제
 		productservice.Subdelete(product_no,store_no);
+		
+		//등록된 찜목록 삭제
+		cartservice.deleteCart(product_no, store_no);
 		
 		return "redirect:/product/list?store_no="+store_no;
 	}

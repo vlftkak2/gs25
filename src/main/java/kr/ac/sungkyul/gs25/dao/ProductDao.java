@@ -194,6 +194,7 @@ public class ProductDao {
 			return vo;
 		}
 		
+		//찜목록 유지 상태
 		public CartVo maintainCheck(Long user_no, Long product_no){
 			CartVo checkVo = new CartVo();
 			checkVo.setUser_no(user_no);
@@ -202,10 +203,15 @@ public class ProductDao {
 			return checkVo;
 		}
 
+		//매장 이름 얻기
 		public StoreProductVo getStoreName(Long store_no){
 			
 			StoreProductVo StoreVo=sqlSession.selectOne("product.getStoreName",store_no);
 			return StoreVo;
 		}
-	
+		
+		//매장 상품 삭제
+		public void Storedelete(Long no){
+			sqlSession.delete("product.Storedelete",no);
+		}
 }

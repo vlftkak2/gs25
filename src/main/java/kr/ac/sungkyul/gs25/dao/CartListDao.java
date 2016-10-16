@@ -55,6 +55,7 @@ public class CartListDao {
 		return resultInt;
 	}
 	
+	//카트 찜목록 해제
 	public void deleteCart(Long user_no, Long product_no,Long store_no){
 		CartVo vo = new CartVo();
 		vo.setUser_no(user_no);
@@ -63,4 +64,21 @@ public class CartListDao {
 		
 		sqlSession.delete("cart.deleteCart", vo);
 	}
+	
+	//상품 리스트 삭제 시 찜목록 삭제
+	public void delete(Long product_no,Long store_no){
+		CartVo vo = new CartVo();
+		vo.setProduct_no(product_no);
+		vo.setStore_no(store_no);
+		
+		sqlSession.delete("cart.deleteShopCart",vo);
+		
+	}
+	
+	//본사 상품 삭제 시 찜목록 삭제
+	public void delete(Long no){
+
+		sqlSession.delete("cart.deleteMain",no);
+	}
+
 }

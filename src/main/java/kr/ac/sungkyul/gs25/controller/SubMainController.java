@@ -46,7 +46,6 @@ public class SubMainController {
 			HttpSession session){
 		
 		
-		System.out.println("매장 번호 :"+store_no);
 		
 		//상품 번호 세션 등록
 		session.setAttribute("store_no", store_no);

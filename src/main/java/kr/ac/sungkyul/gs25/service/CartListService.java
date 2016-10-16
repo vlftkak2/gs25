@@ -75,19 +75,21 @@ public class CartListService {
 		return map;
 	}
 
+	//카트 찜목록 등록
 	public String write(Long user_no, Long product_no,Long store_no) {
 		Integer resultInt = cartlistDao.insert(user_no, product_no,store_no);
 		String result = String.valueOf(resultInt);
 		return result;
-
 	}
 
+	//카트 찜목록 해제
 	public String relieve(Long user_no, Long product_no,Long store_no) {
 		Integer resultInt = cartlistDao.delete(user_no, product_no,store_no);
 		String result = String.valueOf(resultInt);
 		return result;
 	}
 
+	//카트 찜목록 해제
 	public void deleteCart(Long user_no, Long product_no,Long store_no) {
 		cartlistDao.deleteCart(user_no, product_no,store_no);
 	}
@@ -98,8 +100,14 @@ public class CartListService {
 		return TotalCount;
 	}
 	
-	//카트 리스트
-	public void cartlistService(){
-		
+	//상품 리스트 삭제 시 찜목록 삭제
+	public void deleteCart(Long product_no,Long store_no){
+		cartlistDao.delete(product_no, store_no);
 	}
+	
+	//본사 상품 삭제 시 찜목록 삭제
+	public void deleteCart(Long no){
+		cartlistDao.delete(no);
+	}
+	
 }

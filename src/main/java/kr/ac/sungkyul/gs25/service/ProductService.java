@@ -379,6 +379,11 @@ public class ProductService {
   		StoreProductVo StoreVo=productdao.getStoreName(store_no);
   		return StoreVo;
   	}
+  	
+  	//매장 상품 삭제
+  	public void Storedelete(Long no){
+  		productdao.Storedelete(no);
+  	}
  
 
 }

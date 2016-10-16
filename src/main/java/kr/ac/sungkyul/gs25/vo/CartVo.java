@@ -1,6 +1,7 @@
 package kr.ac.sungkyul.gs25.vo;
 
 public class CartVo {
+	
 	private Long user_no; // 회원번호
 	private Long store_no; //매장 번호
 	private Long product_no; // 상품번호
@@ -12,6 +13,7 @@ public class CartVo {
 	private int halfprice;
 	private int countprice;
 	private int remainderdate;
+	
 	
 	public Long getUser_no() {
 		return user_no;
@@ -88,6 +90,8 @@ public class CartVo {
 				+ ", price=" + price + ", maker=" + maker + ", kind_no=" + kind_no + ", imageurl=" + imageurl
 				+ ", halfprice=" + halfprice + ", countprice=" + countprice + ", remainderdate=" + remainderdate + "]";
 	}
+
+
 	
 
 	
