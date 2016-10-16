@@ -186,8 +186,12 @@ input[type=text], input[type=password] {
 }
 #endP{
 	text-align: center;
-	margin: 5px 0;
+	margin: 0px 0;
 	color: #a5a4a4;
+}
+
+#main{
+	margin-left:230px;
 }
 
 #storeName{

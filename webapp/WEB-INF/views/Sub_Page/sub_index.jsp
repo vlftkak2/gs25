@@ -50,18 +50,21 @@
 						<c:choose>
 							<c:when test='${"FEMALE" == authUser.gender }'>
 								<div id="login4_1">
+									<p id="main"><a href="/gs25/main">메인바로가기</a></p>
 									<p id="username">${authUser.name } 님</p>
 									<div id = "login5">
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/coins.png">
 										<p id="point">포인트&nbsp;${authUser.point }점</p>
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/cart.png">
 										<p id="point"><a href="/gs25/cart/list?store_no=${store_no }">찜목록</a> ${authUser.point }개</p>
+										
 									</div>
 									<p id="endP">아무개 매장에 찾아 주셔서 감사합니다.</p>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div id="login4">
+									<p id="main"><a href="/gs25/main">메인바로가기</a></p>
 									<p id="username">${authUser.name } 님</p>
 									<div id = "login5">
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/coins.png">
