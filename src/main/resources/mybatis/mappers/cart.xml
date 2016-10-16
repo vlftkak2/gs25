@@ -4,9 +4,9 @@
 <mapper namespace="cart">
 
 	<!-- 전체 이벤트 게시물 총 수 가져오기 -->
-	<select id="getCal" resultType="java.lang.Integer">
+	<select id="getCal" parameterType="Long" resultType="java.lang.Integer">
 	<![CDATA[
-	select count(*) from cart
+	select count(*) from cart where store_no=#{store_no}
 	]]>
 	</select>
 	

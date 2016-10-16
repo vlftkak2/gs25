@@ -71,7 +71,7 @@ public class SubMainController {
 		model.addAttribute("recommendVo",recommendVo);
 		
 		//찜목록 총 개수
-		Integer TotalCount=cartservice.getCount();
+		Integer TotalCount=cartservice.getCount(store_no);
 		model.addAttribute("TotalCount", TotalCount);
 		
 		return "Sub_Page/sub_index";

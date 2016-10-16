@@ -29,7 +29,7 @@ public class CartListService {
 	public Map<String, Object> list(Long page, Long user_no,Long store_no) {
 
 		// 2.
-		long totalCount = cartlistDao.getCal(); // 전체 게시물 갯수
+		long totalCount = cartlistDao.getCal(store_no); // 전체 게시물 갯수
 		long pageCount = (long) Math.ceil((double) totalCount / LIST_PAGESIZE); // 페이지
 		long blockCount = (long) Math.ceil((double) pageCount / LIST_BLOCKSIZE); // 블록
 		long currentBlock = (long) Math.ceil((double) page / LIST_BLOCKSIZE); // 현재
@@ -95,8 +95,8 @@ public class CartListService {
 	}
 	
 	//찜목록 총 개수
-	public int getCount(){
-		int TotalCount=cartlistDao.getCal();
+	public int getCount(Long store_no){
+		int TotalCount=cartlistDao.getCal(store_no);
 		return TotalCount;
 	}
 	
