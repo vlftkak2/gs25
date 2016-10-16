@@ -45,7 +45,14 @@
 						</form>
 					</div>
 
-					<c:if test='${authUser.no==1 }'>
+
+					<c:if test='${authUser.no==1 && store_no==4 }'>
+						<div class="insert">
+							<a href="/gs25/product/insert?store_no=${store_no }" id="new-book">상품등록</a>
+						</div>
+					</c:if>
+					
+						<c:if test='${authUser.no==2 && store_no==1 }'>
 						<div class="insert">
 							<a href="/gs25/product/insert?store_no=${store_no }" id="new-book">상품등록</a>
 						</div>
@@ -64,8 +71,13 @@
 											 <c:if test='${vo.newdate<=15 }'>
 											 <strong>신상</strong>
 											 </c:if>
-											 
-										<c:if test="${authUser.no==1 }">
+										
+										<!-- 서울관리자 -->	 
+										<c:if test='${authUser.no==1 && store_no==4 }'>
+										<a href="/gs25/product/Subdelete?product_no=${vo.product_no }&store_no=${vo.store_no}" class="del">삭제</a>
+										</c:if>
+										<!-- 안양 관리자 -->
+										<c:if test='${authUser.no==2 && store_no==1 }'>
 										<a href="/gs25/product/Subdelete?product_no=${vo.product_no }&store_no=${vo.store_no}" class="del">삭제</a>
 										</c:if>
 										

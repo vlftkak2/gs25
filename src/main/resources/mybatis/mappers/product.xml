@@ -212,7 +212,7 @@ where a.no=b.PRODUCT_NO and
       a.no=c.no and
       d.no=a.KIND_NO and
       b.STORE_NO=#{store_no} and
-      b.expiry_date > sysdate ORDER BY b.expiry_date) c where rownum <5
+      b.expiry_date > sysdate ORDER BY b.expiry_date) c where expiry_date<=10 and rownum <5
 		]]>
 	</select>
 	
