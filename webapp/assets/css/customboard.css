@@ -197,6 +197,12 @@ div.pager  ul {
 	height:150px;
 }
 
+#search{
+	margin-top:150px;
+	margin-left:280px;
+	height:200px;
+}
+
 #search_risk{
 	float:left;
 	margin-top:70px;
