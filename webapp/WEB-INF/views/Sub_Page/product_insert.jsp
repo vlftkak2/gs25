@@ -8,11 +8,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>product_insert</title>
-<link href="/gs25/assets/css/product.css" rel="stylesheet"
-	type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>	
+<link href="/gs25/assets/css/product.css" rel="stylesheet" type="text/css">
+<script src="/gs25/assets/js/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 </head>
 <body>
 	<div class="container">
@@ -26,7 +27,7 @@
 					</div>
 
 					<div id="board">
-						<form class="board-form" method="post"
+						<form class="board-form" method="post" id="board-form"
 							action="/gs25/product/insert?store_no=${store_no }" enctype="multipart/form-data">
 							<table class="tbl-ex">
 								<tr>
@@ -48,7 +49,7 @@
 
 									<td>
 										<div class="select_box">
-											<select id="selectbox" name="product_no">
+											<select id="selectbox2" name="product_no">
 												<option selected="selected">선택해 주세요</option>
 												<c:forEach var='vo' items='${Productlist }' varStatus='s'>
 												<option value="${vo.no }">${vo.name }</option>
@@ -57,7 +58,7 @@
 										</div>
 									</td>
 									<td class="label">수량</td>
-									<td><input type="text" name="mount" value=""></td>
+									<td><input type="text" id="mount" name="mount" value=""></td>
 								
 
 								</tr>
@@ -92,6 +93,52 @@
 
 <script>
   $(function() {
+	  
+	  $("#board-form").submit(
+	          function() {
+	        	  
+	        	  //매장 이름 체크
+	        	  if ($("#selectbox option:selected").val()=='선택해 주세요') {
+		                sweetAlert("매장이름은 필수 입력 항목입니다.",
+		                      "Something went wrong", "error");
+		                $("#selectbox").focus();
+		                return false;
+		             }
+	        	  
+	        	  //상품 체크
+	        	    if ($("#selectbox2 option:selected").val()=='선택해 주세요') {
+		                sweetAlert("상품은 필수 입력 항목입니다.",
+		                      "Something went wrong", "error");
+		                $("#selectbox2").focus();
+		                return false;
+		             }
+	        	  
+	             //수량 체크
+	             if ($("#mount").val() == "") {
+	                sweetAlert("상품이름은 필수 입력 항목입니다. ", "Something went wrong",
+	                      "error");
+	                $("#mount").focus();
+	                return false;
+	             }
+	             
+	             //제조일 체크
+	             if ($("#datepicker1").val() == "") {
+	                sweetAlert("제조일은 필수 입력 항목입니다. ", "Something went wrong",
+	                      "error");
+	                $("#datepicker1").focus();
+	                return false;
+	             }
+	             
+	             //유통기한 체크
+	             if ($("#datepicker2").val() == "") {
+	                sweetAlert("유통기한은 필수 입력 항목입니다. ", "Something went wrong",
+	                      "error");
+	                $("#datepicker2").focus();
+	                return false;
+	             }
+	            
+	          });
+	  
 	 $.datepicker.setDefaults({
       dateFormat: 'yymmdd',
       showButtonPanel: true,

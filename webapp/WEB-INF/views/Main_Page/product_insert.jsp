@@ -12,7 +12,9 @@
 	type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>	
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="/gs25/assets/js/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 </head>
 <body>
 	<div class="container">
@@ -26,7 +28,7 @@
 					</div>
 
 					<div id="board">
-						<form class="board-form" method="post"
+						<form class="board-form" method="post" id="board-form"
 							action="/gs25/product/Maininsert" enctype="multipart/form-data">
 							<table class="tbl-ex">
 								<tr>
@@ -34,11 +36,11 @@
 								</tr>
 								<tr>
 									<td class="label">상품이름</td>
-									<td><input type="text" name="name" value=""></td>
+									<td><input type="text" id="name" name="name" value=""></td>
 									<td class="label">가격</td>
-									<td><input type="text" name="price" value=""></td>
+									<td><input type="text" class="price" name="price" value=""></td>
 									<td class="label">제조사</td>
-									<td><input type="text" name="maker" value=""></td>
+									<td><input type="text" id="maker" name="maker" value=""></td>
 								</tr>
 								<tr>
 									<td class="label">첨부파일</td>
@@ -49,7 +51,7 @@
 									<td>
 										<div class="select_box">
 											<select id="selectbox" name="kind_no">
-												<option selected="selected">선택해 주세요</option>
+												<option selected="selected">상품을 선택해 주세요</option>
 												<option value="1">과일</option>
 												<option value="2">도시락</option>
 												<option value="3">김밥</option>
@@ -90,6 +92,45 @@
 
 <script>
   $(function() {
+	  
+	  $("#board-form").submit(
+	          function() {
+	             //제목 체크
+	             if ($("#name").val() == "") {
+	                sweetAlert("상품이름은 필수 입력 항목입니다. ", "Something went wrong",
+	                      "error");
+	                $("#name").focus();
+	                return false;
+	             }
+	             //가격 체크
+	             if ($(".price").val() == "") {
+	                sweetAlert("가격은 필수 입력 항목입니다.",
+	                      "Something went wrong", "error");
+	                $(".price").focus();
+	                return false;
+	             }
+	             //제조사 체크
+	             if ($("#maker").val() == "") {
+	                sweetAlert("제조사는 필수 입력 항목입니다.",
+	                      "Something went wrong", "error");
+	                $("#maker").focus();
+	                return false;
+	             }
+	             if ($("#file").val() == "") {
+		                sweetAlert("파일은 필수 입력 항목입니다.",
+		                      "Something went wrong", "error");
+		                $("#file").focus();
+		                return false;
+		             }
+	             if ($("#selectbox option:selected").val()=='상품을 선택해 주세요') {
+		                sweetAlert("상품종류는 필수 입력 항목입니다.",
+		                      "Something went wrong", "error");
+		                $("#selectbox").focus();
+		                return false;
+		             }
+	          });
+	  
+	  
 	 $.datepicker.setDefaults({
       dateFormat: 'yymmdd',
       showButtonPanel: true,
@@ -110,4 +151,5 @@
 	    $("#datepicker1, #datepicker2").datepicker();
 	  });
 </script>
+
 </html>
