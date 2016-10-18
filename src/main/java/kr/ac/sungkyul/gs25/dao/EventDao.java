@@ -30,19 +30,21 @@ public class EventDao {
 	}
 	
 	// 이벤트 리스트 가져오기
-	public List<EventBoardVo> getList(Long page,int pagesize, String keyword){
+	public List<EventBoardVo> getList(Long page,int pagesize, String keyword, Long store_no){
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		// 키워드 값에 따라 리스트 가져오기
 		if(keyword ==null || "".equals(keyword)){
 			map.put("page_top", (page-1)*pagesize + 1);
 			map.put("page_bottom", page * pagesize);
+			map.put("store_no", store_no);
 			List<EventBoardVo> list = sqlSession.selectList("eventboard.getList", map);
 			return list;
 		}else{
 			map.put("keyword", "%"+keyword+"%");
 			map.put("page_top", (page-1)*pagesize + 1);
 			map.put("page_bottom", page * pagesize);
+			map.put("store_no", store_no);
 			List<EventBoardVo> list = sqlSession.selectList("eventboard.getListKeyword", map);
 			return list;
 		}
