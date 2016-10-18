@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="submanage">
+
+	<select id="totalCountEvent" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from event
+		]]>
+	</select>
+	
+	<select id="getListEvent" parameterType="map" resultType="eventboardvo">
+	<![CDATA[
+	select * from
+	(select c.*, rownum rn from
+	(select a.no, a.title, to_char(a.startdate, 'yyyy-mm-dd') as startdate, 
+	to_char(a.enddate, 'yyyy-mm-dd') as enddate, b.name from event a, users b
+	where a.user_no=b.no and a.store_no =${store_no}) c) 
+	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<select id="getListEventKeyword" parameterType="map" resultType="eventboardvo">
+	<![CDATA[
+	select * from(select c.*, rownum rn 
+	from(select a.no, a.title, to_char(a.startdate, 'yyyy-mm-dd') as startdate, 
+	to_char(a.enddate, 'yyyy-mm-dd') as enddate, a.store_no, b.name 
+	from event a, users b
+	where a.user_no=b.no) c 
+	where c.store_no=${store_no} and c.title like #{keyword}) 
+	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<delete id="eventdelete" parameterType="java.lang.Long">
+	<![CDATA[
+	delete from eventfile where no=#{no}
+	]]>
+	</delete>
+	
+	<delete id="eventdeleteVo" parameterType="eventboardvo">
+	<![CDATA[
+	delete from event where no=#{no}
+	]]>
+	</delete>
+	
+	
+	<select id="totalCountGuest" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from guestbook
+		]]>
+	</select>
+	
+	<select id="getListGuest" parameterType="map" resultType="guestbookvo">
+	<![CDATA[
+	select * from(
+	select c.*, rownum rn from(
+	select a.no, a.content, to_char(a.reg_date, 'yyyy-mm-dd') as reg_date,
+	b.name from guestbook a, users b where a.user_no = b.no and a.store_no=${store_no}) c)
+	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<select id="getListGuestKeyword" parameterType="map" resultType="guestbookvo">
+	<![CDATA[
+	select * from(
+	select d.*, rownum rn from(
+	select * from(
+	select a.no, a.content, to_char(a.reg_date, 'yyyy-mm-dd') as reg_date,
+	b.name from guestbook a, users b 
+	where a.user_no = b.no and a.store_no = ${store_no})c 
+	where c.content like #{keyword} or c.name like #{keyword}) d) 
+	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<delete id="delete" parameterType="guestbookvo">
+	<![CDATA[
+		delete from guestbook where no=#{no}
+	]]>
+	</delete>
+</mapper>

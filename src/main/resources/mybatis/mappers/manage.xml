@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage">
+
+	<select id="totalCount" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from users
+		]]>
+	</select>
+	
+	<select id="getList" parameterType="map" resultType="uservo">
+	<![CDATA[
+	select * from (select a.*, rownum rn from(select * from users order by no desc) a)
+   	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<select id="getListKeyword" parameterType="map" resultType="uservo">
+	<![CDATA[
+	select * from (select a.*, rownum rn from(select * from users 
+  	where name like #{keyword} or email like #{keyword} order by no desc) a)
+   	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+
+	<delete id="deleteUser" parameterType="java.lang.Long">
+	<![CDATA[
+	delete from users where no=#{no}
+	]]>
+	</delete>
+</mapper>

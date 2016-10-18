@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  2016-10-02 
+  작업자 : 최재은
+  개발 상황 : 완료 -->
+
+<mapper namespace="user">
+
+<insert id="insert" parameterType="uservo">
+	<![CDATA[
+	insert into users values(seq_users.nextval, #{name},#{email},#{password}, to_date(#{birth},'yyyy-mm-dd'),#{gender},#{address},#{phone}, 0,#{position},#{store_no})
+	]]>
+</insert>
+
+<select id="login" parameterType="uservo" resultType="uservo">
+	<![CDATA[
+	select no,email ,name, gender, point,store_no from users where email=#{email } and password=#{password }
+	]]>
+</select>
+
+<select id="getModify" parameterType="long" resultType="uservo">
+	<![CDATA[
+	select no, name, to_char(birth,'yyyymmdd') as birth, gender, address, phone from users where no=#{no }
+	]]>
+</select>
+
+<update id="update" parameterType="uservo">
+ <choose>
+  <when test="#{password==''}">
+   <![CDATA[
+   update users set name=#{name }, birth=#{birth }, gender=#{gender }, address=#{address }, phone=#{phone } where no=#{no }
+   ]]>
+  </when>
+  <otherwise>
+   <![CDATA[
+   update users set name=#{name }, password=#{password }, birth=#{birth}, gender=#{gender }, address=#{address }, phone=#{phone } where no=#{no }
+   ]]>
+  </otherwise>
+</choose>
+</update>
+
+<select id="idFind" parameterType="uservo" resultType="string">
+	<![CDATA[
+	select email from users where name=#{name } and gender=#{gender } and birth= to_date(#{birth },'yyyy-mm-dd') and phone=#{phone }
+	]]>
+</select>
+
+<select id="passFind" parameterType="uservo" resultType="string">
+	<![CDATA[
+	select email from users where email=#{email } and name=#{name } and birth= to_date(#{birth },'yyyy-mm-dd') and phone=#{phone }
+	]]>
+</select>
+
+<update id="setPass" parameterType="passlinkvo">
+   <![CDATA[
+   	update users set password=#{password } where no=#{no }
+  	update passlink set state=#{state } where user_no=#{user_no }
+   ]]>
+</update>
+
+<update id="setState" parameterType="passlinkvo">
+   <![CDATA[
+  	update passlink set state=#{state } where user_no=#{user_no }
+   ]]>
+</update>
+
+<select id="checkEmail" parameterType="string" resultType="long">
+	<![CDATA[
+	select no from users where email=#{email }
+	]]>
+</select>
+
+<insert id="savelink" parameterType="passlinkvo">
+	<![CDATA[
+	insert into passlink values(seq_passlink.nextval, #{link }, #{state }, #{user_no })
+	]]>
+</insert>
+
+<select id="passlink" parameterType="string" resultType="passlinkvo">
+	<![CDATA[
+	select no, link, state, user_no from passlink where link=#{link }	
+	]]>
+</select>
+
+<update id="setPoint" parameterType="uservo">
+   <![CDATA[
+   		update users set point= point + #{point } where no = #{no }
+   ]]>
+</update>
+
+</mapper>
