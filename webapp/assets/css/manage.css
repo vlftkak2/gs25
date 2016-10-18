@@ -158,3 +158,283 @@ a#new-book	 {
 #back{
 	font-size:16px;
 }
+
+
+
+
+
+/*관리자 리모컨*/
+
+#STATICMENU { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px; right: 230px; top: 150px;}
+
+.mymenu {
+    width: 85px;
+    border: 1px solid #dfdfdf;
+    background: #fff;
+}
+.mymenu .couwrap_off {
+    background: url(/smartcan/assets/images/index/mycou_bg2.png) no-repeat;
+    height: 108px;
+    text-align: center;
+}
+.couwrap_off p {
+    padding: 20px 0px;
+    font-size: 11px;
+    color: #666;
+    line-height: 16px;
+}
+.btn_log {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background: #397ca8;
+    padding: 6px 16px;
+}
+.myarea {
+    left: 50% !important;
+    margin: 0 0 0 -600px !important;
+    position: absolute !important;
+    top: 0 !important;
+    width: 1200px !important;
+}
+.myarea_wrap {
+	z-index: 100;
+	left: 50%;
+    margin-left: 450px;
+
+	}
+.my_lst {
+    overflow: hidden;
+}
+a.my_m0 {
+  /*   background-position: 50% -308px; */
+    background: url(/gs25/assets/images/index/shop.png) 10px 1px no-repeat;
+    margin: 14px;
+}
+a.my_m1 {
+/*     background-position: 50% 14px; */
+   	background: url(/gs25/assets/images/index/users.png) 12px 1px no-repeat;
+    margin: 14px;
+}
+a.my_m2 {
+/*     background-position: 50% 14px; */
+    background: url(/gs25/assets/images/index/chocolate.png) 11px 1px no-repeat;
+    margin: 14px;
+}
+a.my_m3 {
+/*     background-position: 50% -308px; */
+    background: url(/gs25/assets/images/index/headphones.png) 11px 1px no-repeat;
+    margin: 14px;
+}
+
+.my_lst a {
+    display: block;
+    padding-top: 34px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+}
+.myarea_wrap .menuwrap {
+    overflow: hidden;
+    background: #fff;
+}
+#productLive {
+	z-index: 100; left: 50%; margin-left: 545px; padding: 0pt; position: absolute; right: 230px; top: 150px;
+}
+#userLive {
+	z-index: 100; left: 50%; margin-left: 620px; padding: 0pt; position: absolute; right: 230px; top: 150px;
+}
+.myarea_wrap .menu_tit {
+    background: #666;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.myarea_wrap .top {
+	display: block;
+	background: #fff;
+	border: 1px solid #999999;
+	text-align: center;
+	font-weight: bold;
+	color: #222;
+	margin-top: 5px;
+	padding: 8px 0px 7px;
+}
+
+#main_top{
+	margin-top:2px;
+	margin-bottom:20px;
+	text-align:center;
+}
+
+/*지도*/
+#seperate{
+    border-bottom: 4px solid #338ec9;
+    margin: 0 17px;
+    padding-bottom: 36px;
+}
+#map{
+    width: 960px;
+    height: 350px;
+    margin: 25px 16px 30px;
+    float: left;
+}
+#text_index{
+	margin-left: 16px;
+}
+#index_map{
+	font-size: 30px;
+    color: #222;
+    font-weight: bold;
+    margin-top: 50px !important;
+    text-align: left;
+}
+/* #tit {
+    margin-bottom: 10px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background: url(/gs25/assets/images/login/icon_signup.png) 0 -274px no-repeat;
+} */
+
+/*관리자 table 속성*/
+#manage_wrap{
+	margin: 0 auto;
+    width: 1187px;
+    text-align: center;
+}
+
+#tap_content {
+/*     width: 800px; */
+    height:500px;
+    margin: 50px auto;
+}
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-size:18px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width: 125px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    clear: both;
+/*     float: left;
+    width: 800px; */
+    background: #FFFFFF;
+}
+.tab_containerI{
+    border-top: none;
+    clear: both;
+    background: #FFFFFF;
+}
+.tab_content {
+    padding: 10px;
+    font-size: 16px;
+    display: none;
+    height: 520px;
+}
+.tab_container .tab_content ul {
+    width: 100%;
+    margin: 19px 149px;
+    padding: 0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+
+h4{
+    margin-bottom: 30px;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.tbl-ex		{
+	width: 100%;
+	border-collapse:collapse;
+	border-bottom:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	border-right:1px solid #c0c0c0
+}
+
+.tbl-ex th, 
+.tbl-ex td	{ 
+    padding: 12px 7px;
+	text-align:center; 	 
+}
+	
+.tbl-ex th	{ 
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0; 
+	font-size:1.1em; 
+	background-color:#00A5FF;
+	color:#FFFFFF
+}
+div.pager {
+    width: 850px;
+    float: left;
+    text-align: center;
+}
+div.pager ul {
+    height: 20px;
+    margin: 50px 0 30px 80px;
+}
+div.pager ul li {
+    display: inline-block;
+    margin: 5px 3px;
+    width: 20px;
+    font-weight: bold;
+}
+div.pager ul li a, div.pager ul li a:visited, div.pager ul li a:link, div.pager ul li a:active {
+    text-decoration: none;
+    color: #ff8080;
+}
+div.pager ul li.selected {
+    text-decoration: underline;
+    color: #f00;
+}
+
+#title1{
+	text-align: left;
+	margin-botton: 15px;
+}
+/*회원관리 삭제 버튼*/
+.del{
+	display:block;
+	width:20px;
+	height:20px; 
+	background:url("/gs25/assets/images/login/delete.png") no-repeat 0 0;
+	font-size:0;
+    margin: 0px auto;
+}

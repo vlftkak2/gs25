@@ -37,7 +37,7 @@
 	    height: 102px;
 	    background: url(/gs25/assets/images/subindex/icon_event.png) 0 -297px no-repeat;
 	    position: absolute;
-	    top: 397px;
+	    top: 379px;
 	    right: 490px;
 	}
 	.inform p{
@@ -169,8 +169,8 @@
 		margin: 28px 75px;
 	}
 	#mod_last {
-	    color: #929090;
-	    margin-left: 101px;
+        color: #929090;
+	    margin-left: 55px;
 	    margin-top: 55px;
 	}
 	#m_count{

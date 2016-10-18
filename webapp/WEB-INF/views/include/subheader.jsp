@@ -48,7 +48,9 @@
 									<a href="/gs25/guestbook/list?store_no=${store_no }" class="on"" class="on">방명록</a>
 								</h2></li>
 							<li><h2>
-									<a href="/gs25/sub/event_check" class="on">출석체크</a>
+							<c:if test='${not empty sessionScope.authUser }'>
+									<a href="/gs25/sub/event_check?store_no=${store_no }" class="on">출석체크</a>
+									</c:if>
 								</h2></li>
 							<li><h2>
 									<a href="/gs25/event/eventlist?store_no=${store_no }">이벤트</a>

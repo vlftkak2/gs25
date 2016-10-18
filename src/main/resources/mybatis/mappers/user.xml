@@ -15,7 +15,7 @@
 
 <select id="login" parameterType="uservo" resultType="uservo">
 	<![CDATA[
-	select no,email ,name, gender, point,store_no from users where email=#{email } and password=#{password }
+	select no,email ,name, gender, point, store_no, position from users where email=#{email } and password=#{password }
 	]]>
 </select>
 

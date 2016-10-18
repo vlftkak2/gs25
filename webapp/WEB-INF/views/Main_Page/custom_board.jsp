@@ -10,12 +10,18 @@
 <title>CustomBoardList</title>
 <link href="/gs25/assets/css/customboard.css" rel="stylesheet"
 	type="text/css">
+<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+	
 </head>
 <body>
 
 	<div id="container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
+		
 		<div id="content">
+		
+		<jsp:include page="/WEB-INF/views/include/Mainmenubar.jsp" />
+		
 
 			<div id="customBoard_main">
 				<div id="customBoard_sub">
@@ -72,8 +78,8 @@
 
 										<c:if test='${vo.depth > 1 }'>
 											<img src="/gs25/assets/images/customcenter/re2.png">
-										</c:if> <a
-										href="/gs25/custom/viewform?no=${vo.no}&&groupNo=${vo.groupNo}">${vo.title }</a>
+										</c:if> 
+										<a href="/gs25/custom/viewform?no=${vo.no}&&groupNo=${vo.groupNo}">${vo.title }</a>
 									</td>
 
 									<td>${vo.name }</td>
@@ -81,7 +87,7 @@
 									<td>${vo.regdate }</td>
 									<td><c:choose>
 											<c:when
-												test='${(not empty authUser && authUser.no == vo.userNo) || (authUser.no==1)  }'>
+												test='${(not empty authUser && authUser.no == vo.userNo) || (authUser.no==100)  }'>
 												<a
 													href="/gs25/custom/delete?groupNo=${vo.groupNo}&&groupOrderNo=${vo.groupOrderNo }"
 													class="del">삭제</a>

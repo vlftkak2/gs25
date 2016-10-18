@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +15,6 @@ import kr.ac.sungkyul.gs25.service.CartListService;
 import kr.ac.sungkyul.gs25.service.CheckeventService;
 import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.vo.CheckeventVo;
-import kr.ac.sungkyul.gs25.vo.ProductVo;
 import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
@@ -78,12 +76,17 @@ public class SubMainController {
 	}
 	
 	@RequestMapping("/event_check")	//출석체크 창 뿌려줄 경우 (누적횟수, 출석 상황)
-	public String event_check_form(HttpSession session, Model model){
-		UserVo uservo = (UserVo)session.getAttribute("authUser");
-		Long user_no = uservo.getNo();
+	public String event_check_form(HttpSession session, Model model,
+									@RequestParam("store_no") Long store_no){
 		
-		Integer count = ceService.getCount(user_no);
-		List<CheckeventVo> checkeventvo = ceService.checkList(user_no);
+		System.out.println("sub con: "+store_no);
+		
+		UserVo uservo = (UserVo)session.getAttribute("authUser");
+		System.out.println(uservo.toString());
+		Long user_no = uservo.getNo();
+		Integer count = ceService.getCount(user_no, store_no);
+		System.out.println("con count: "+count);
+		List<CheckeventVo> checkeventvo = ceService.checkList(user_no, store_no);
 		
 		model.addAttribute("count", count);
 		model.addAttribute("checkeventvo", checkeventvo);
@@ -95,10 +98,13 @@ public class SubMainController {
 	@RequestMapping("/checkDate")	//출석체크 클릭 시
 	public String checkDate(HttpSession session, Model model){
 		
+		Long store_no = (Long) session.getAttribute("store_no");
+		System.out.println("컨트롤 checkDate: "+store_no);
+		
 		UserVo uservo = (UserVo)session.getAttribute("authUser");
 		Long user_no = uservo.getNo();
 		
-		String result = ceService.setCheck(user_no);
+		String result = ceService.setCheck(user_no, store_no);
 		
 		return result;
 	}	

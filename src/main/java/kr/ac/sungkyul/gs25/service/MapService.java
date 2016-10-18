@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ac.sungkyul.gs25.dao.MapDao;
+import kr.ac.sungkyul.gs25.dao.StoreDao;
+import kr.ac.sungkyul.gs25.vo.InsertStoreVo;
 import kr.ac.sungkyul.gs25.vo.MapBoardVo;
 import kr.ac.sungkyul.gs25.vo.MapVo;
+import kr.ac.sungkyul.gs25.vo.StoreVo;
 
 
 /*
@@ -28,6 +31,9 @@ public class MapService {
 
 	@Autowired
 	private MapDao mapdao;
+	
+	@Autowired
+	private StoreDao storedao;
 
 	public Map<String, Object> list(String spage, String keyword) {
 
@@ -87,6 +93,70 @@ public class MapService {
 		map2.put("keyword", keyword);
 		return map2;
 	}
+	
+	//관리자 조회
+		public Map<String, Object> mlist(String spage, String keyword) {
+
+			int page = Integer.parseInt(spage);
+
+			int totalCount = mapdao.getTotalCount();
+			int pageCount = (int) Math.ceil((double) totalCount / LIST_PAGESIZE);
+			int blockCount = (int) Math.ceil((double) pageCount / LIST_BLOCKSIZE);
+			int currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
+
+			// 4. page값 검증
+			if (page < 1) {
+				page = 1;
+				currentBlock = 1;
+			} else if (page > pageCount) {
+				page = pageCount;
+				currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
+			}
+
+			// 5. 페이지를 그리기 위한 값 계산
+			int startPage = (currentBlock - 1) * LIST_BLOCKSIZE + 1;
+			int endPage = (startPage - 1) + LIST_BLOCKSIZE;
+			int prevPage = (page >= startPage) ? (page-1) : (currentBlock - 1) * LIST_BLOCKSIZE;
+			int nextPage = (page <= endPage) ? (page+1) : currentBlock * LIST_BLOCKSIZE + 1;
+			int nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
+			int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
+			
+			List<StoreVo> list = mapdao.getmList(page, LIST_PAGESIZE, keyword);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("sizeList", LIST_PAGESIZE);
+			map.put("firstPage", startPage);
+			map.put("lastPage", endPage);
+			map.put("prevPage", prevPage);
+			map.put("nextPage", nextPage);
+			map.put("currentPage", page);
+			map.put("pageCount", pageCount);
+			map.put("list", list);
+			map.put("totalCount", totalCount);
+			map.put("keyword", keyword);
+			map.put("nexttoPage", nexttoPage);
+			map.put("prevtoPage", prevtoPage);
+			return map;
+		}
+		
+		public void insert(InsertStoreVo vo){
+			
+			MapVo mapvo = new MapVo();
+			mapvo.setName(vo.getName());
+			mapvo.setLocalx(vo.getLocalx());
+			mapvo.setLocaly(vo.getLocaly());
+			mapvo.setRegion_no(vo.getRegion_no());
+			
+			Long map_no = mapdao.insertMap(mapvo);	//선)지도 삽입
+			System.out.println("mapvo no : " + map_no);
+			
+			StoreVo storevo = new StoreVo();
+			storevo.setName(vo.getName());
+			storevo.setAddress(vo.getAddress());
+			storevo.setMap_no(map_no);
+			
+			storedao.insertStore(storevo);	//후) 지점 삽입
+		}
 	
 
 }

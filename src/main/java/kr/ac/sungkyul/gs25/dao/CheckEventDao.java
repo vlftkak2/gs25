@@ -15,16 +15,19 @@ public class CheckEventDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public Integer getCount(Long user_no){
-		Integer count = sqlSession.selectOne("checkevent.getCount",user_no);
+	public Integer getCount(CheckeventVo checkeventvo){
+		
+		Integer count = sqlSession.selectOne("checkevent.getCount",checkeventvo);
 		return count;
 	}
 	
-	public Integer setCheck(Long user_no){
-		Integer resultInt = sqlSession.insert("checkevent.setCheck",user_no);
+	public Integer setCheck(CheckeventVo checkeventvo){
+		Integer resultInt = sqlSession.insert("checkevent.setCheck", checkeventvo);
 		
 		UserVo uservo = new UserVo();
+		
 		Integer point = 3;
+		Long user_no = checkeventvo.getUser_no();
 
 		uservo.setNo(user_no);
 		uservo.setPoint(point);
@@ -34,10 +37,10 @@ public class CheckEventDao {
 		return resultInt;
 	}
 	
-	public List<CheckeventVo> checkList(Long user_no){
-		List<CheckeventVo> checkeventvo = sqlSession.selectList("checkevent.checkList",user_no);
-		System.out.println(checkeventvo);
-		return checkeventvo;
+	public List<CheckeventVo> checkList(CheckeventVo checkeventvo){
+		List<CheckeventVo> checkvo = sqlSession.selectList("checkevent.checkList",checkeventvo);
+		System.out.println(checkvo);
+		return checkvo;
 	}
 
 }

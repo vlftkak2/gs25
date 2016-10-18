@@ -7,7 +7,16 @@ public class MapVo {
 	private double localx;
 	private double localy;
 	private Long regionno;
+	private Long region_no;
 	
+	
+	
+	public Long getRegion_no() {
+		return region_no;
+	}
+	public void setRegion_no(Long region_no) {
+		this.region_no = region_no;
+	}
 	public Long getNo() {
 		return no;
 	}

@@ -46,6 +46,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Downloads/check.png</locationURI>
 		</link>
 		<link>
+			<name>webapp/assets/images/index/users.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/users.png</locationURI>
+		</link>
+		<link>
 			<name>webapp/assets/images/manage/delete.png</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Desktop/delete.png</locationURI>

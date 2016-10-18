@@ -154,83 +154,81 @@ $(function() {
 			$("#"+d).append("<div id='toDbox'><p id='flag'></p><input id='checkDate' type='button' value='출석체크'></div>");
 		}
 		
-	//출석체크 클릭 시
-	 $("#checkDate").on("click", function(){
-		 console.log('click');
-		 $.ajax({	
-				url: "/gs25/sub/checkDate",
-				type: "POST",
-				/* date:, */
-				dataType: "text",
-				success: function(result){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
-					console.log(result);
-					 if(result == "0"){
+		//출석체크 클릭 시
+		 $("#checkDate").on("click", function(){
+			 console.log('click');
+			 $.ajax({	
+					url: "/gs25/sub/checkDate",
+					type: "POST",
+					/* date:, */
+					dataType: "text",
+					success: function(result){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
 						console.log(result);
-						alert("죄송합니다. 다시 시도해주세요")
-						return false;
-					}
-					
-					 if(result == "1"){
-						 alert("감사합니다. 출석되셨습니다.")
-					}
-					 
+						 if(result == "0"){
+							console.log(result);
+							alert("죄송합니다. 다시 시도해주세요")
+							return false;
+						}
+						
+				if(result == "1"){
+					 if('${count}' == 9){
+						  console.log(10);
+						  $.ajax({	
+								url: "/gs25/product/random1000",
+								type: "POST",
+								contentType: "application/json",
+								success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
+										console.log(productvo);
+										$("#goodsimg").attr('src',productvo.imageurl);
+										$("#goodsname").html(productvo.name);
+								},
+								error: function(jsXHR, status, e){
+									console.error("error:"+status+":"+e);
+								}
+							});
+							  
+							$("#modal_content").modal();
+								
+					  } else if('${count}' == 19){
+						  
+						  $.ajax({	
+								url: "/gs25/product/random2000",
+								type: "POST",
+								contentType: "application/json",
+								success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
+										console.log(productvo);
+										$("#goodsimg").attr('src',productvo.imageurl);
+										$("#goodsname").html(productvo.name);
+								},
+								error: function(jsXHR, status, e){
+									console.error("error:"+status+":"+e);
+								}
+							});
+						  
+							$("#modal_content").modal(); 
+							
+					  } else if('${count}' == 29){
+						  
+					  }else{
+					 	alert("감사합니다. 출석되셨습니다.")
+					  }
+				}
 					$("#checkDate").hide();
 					$("#count").html('${count + 1 }');
 					$("#"+d).append("<div id='stamp'></div>");
 				},
-				
 				error: function(jsXHR, status, e){
 					console.error("error:"+status+":"+e);
 				}
 			});
-		 
-	 });
+		 });
 	
 		$("#goods").click(function(){
-			  $("#modal_content").modal(); 
-			  
-			  console.log('click');
-			  
-			  if('${count}' == 10){
-				  
-				  $.ajax({	
-						url: "/gs25/product/random1000",
-						type: "POST",
-						contentType: "application/json",
-						success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
-								console.log(productvo);
-								$("#goodsimg").attr('src',productvo.imageurl);
-								$("#goodsname").html(productvo.name);
-						},
-						
-						error: function(jsXHR, status, e){
-							console.error("error:"+status+":"+e);
-						}
-					});
-			  }
-			  
-			  if('${count}' == 20){
-				  console.log('20입성');
-				  
-				  $.ajax({	
-						url: "/gs25/product/random2000",
-						type: "POST",
-						contentType: "application/json",
-						success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
-								console.log(productvo);
-								$("#goodsimg").attr('src',productvo.imageurl);
-								$("#goodsname").html(productvo.name);
-						},
-						
-						error: function(jsXHR, status, e){
-							console.error("error:"+status+":"+e);
-						}
-					});
-			  }
-			});
+			$("#modal_content").modal(); 
+		});
 		$("#m_close").click(function(){
-			  $.modal.close();
-			 });
+			$.modal.close();
+		 });
 	
 });
 /* var rtnValue= window.showModalDialog(url, args, option);
@@ -252,15 +250,15 @@ function action_pop(url) {
 		<div id="m_giftImg"></div>
 		<div class="title">
 		<c:choose>
-			<c:when test='${count == 10}'>
+			<c:when test='${count == 9}'>
 				<h1 class="mod_move"><em id="m_count">10회 </em> 달성!!!</h1>
 				<p class="mod_move2">10회 이상 달성하셨으므로 <em id="m_money">1000원 이하 상당의 상품</em>을 기프티콘으로 드립니다.</p>
 			</c:when>
-			<c:when test='${count == 20}'>
+			<c:when test='${count == 19}'>
 				<h1 class="mod_move"><em id="m_count">20회</em> 달성!!!</h1>
 				<p class="mod_move2">20회 이상 달성하셨으므로 <em id="m_money">2000원 이하 상당의 상품</em>을 기프티콘으로 드립니다.</p>
 			</c:when>
-			<c:when test='${count ==30}'>
+			<c:when test='${count == 29}'>
 				<h1 class="mod_move"><em id="m_count">30회</em> 달성!!!</h1>
 				<p class="mod_move2">거의 모두 달성하셨으므로  <em id="m_money">5000원 상당 상품권</em>을 드립니다.</p>
 			</c:when>
@@ -272,17 +270,17 @@ function action_pop(url) {
 		</div>
  		<div class="giftInfo">
  			<c:choose>
-				<c:when test='${count == 10}'>
+				<c:when test='${count == 9}'>
 					<img id="goodsimg" src="">
 			 		<h2 id="goodsname"></h2>
 			 		<p>GS25 편의점에서 사용 가능합니다. 매장 위치는 홈페이지를 참조해주세요.</p>
 				</c:when>
-				<c:when test='${count == 20}'>
+				<c:when test='${count == 19}'>
 					<img id="goodsimg" src="">
 			 		<h2 id="goodsname"></h2>
 			 		<p>GS25 편의점에서 사용 가능합니다. 매장 위치는 홈페이지를 참조해주세요.</p>
 				</c:when>
-				<c:when test='${count == 30}'>
+				<c:when test='${count == 29}'>
 					<img src="/gs25/assets/images/subindex/gs25Certi.png" style= "margin: 37px;">
 			 		<h2>GS25 - 5000원 상품권</h2>
 			 		<p>발급일로부터 3달 이내에 사용하시기 바랍니다. 자세한 내용은 홈페이지를 참조해주세요.</p>
@@ -293,14 +291,14 @@ function action_pop(url) {
 				</c:otherwise>
 			</c:choose>		
  		</div>
- 		<c:if test='${count == 10}'>
-			<h2 id="mod_last">위 기프티콘은 <em id="m_empha">카트</em>에서 확인 가능합니다. 축하합니다. 고객님</h2>
+ 		<c:if test='${count == 9}'>
+			<h2 id="mod_last">위 기프티콘은 회원님의 <em id="m_empha">이메일</em>로 보내드렸습니다. 축하합니다. 고객님</h2>
 		</c:if>
-		<c:if test='${count == 20}'>
-			<h2 id="mod_last">위 기프티콘은 <em id="m_empha">카트</em>에서 확인 가능합니다. 축하합니다. 고객님</h2>
+		<c:if test='${count == 19}'>
+			<h2 id="mod_last">위 기프티콘은 회원님의 <em id="m_empha">이메일</em>로 보내드렸습니다. 축하합니다. 고객님</h2>
 		</c:if>
-		<c:if test='${count == 30}'>
-			<h2 id="mod_last">위 기프티콘은 <em id="m_empha">카트</em>에서 확인 가능합니다. 축하합니다. 고객님</h2>
+		<c:if test='${count == 29}'>
+			<h2 id="mod_last">위 기프티콘은 회원님의 <em id="m_empha">이메일</em>로 보내드렸습니다. 축하합니다. 고객님</h2>
 		</c:if>
 	</div>
  </div>

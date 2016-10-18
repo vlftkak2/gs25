@@ -107,6 +107,32 @@ public class CustomCenterController {
 
 		return "redirect:/custom/list";
 	}
+	
+	//관리자 고객센터 글쓰기 삭제
+		@RequestMapping("/deleteManager")
+		public String deleteManager(HttpSession session, 
+				@RequestParam("groupNo") Integer no, 
+				@RequestParam("groupOrderNo") Integer orderno,
+				@ModelAttribute CustomBoardVo vo) {
+
+			if (session == null) {
+				return "redirect:/main";
+			}
+
+			//사용자 세션 정보 얻어오기
+			UserVo authUser = (UserVo) session.getAttribute("authUser");
+			if (authUser == null) {
+				return "redirect:/main";
+			}
+			
+			//게시물 첨부파일 삭제
+			customservice.delete(no,orderno);
+
+			//게시물 삭제
+			customservice.delete(vo);
+
+			return "redirect:/custom/list";
+		}
 
 	//고객센터 보기 폼 이동
 	@RequestMapping("/viewform")
@@ -150,7 +176,7 @@ public class CustomCenterController {
 		customservice.viewcountup(no);
 		
 		 //사용자가 관리자일 때
-	    if(authno==1){
+	    if(authno==100){
 	    	vo = customservice.boardinfo(no);
 			attachFileVO = customservice.selectAttachFileByNO(no);
 			model.addAttribute("vo", vo);
@@ -294,5 +320,16 @@ public class CustomCenterController {
 				
 			fin.close();
 			    
+		}
+		
+		//고객센터 관리자
+		//고객센터 관리자
+		@RequestMapping("/customboardManager")
+		public String customboardManager(Model model, @RequestParam(value = "p", required = true, defaultValue = "1") String page,
+				@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword){
+			//게시물 리스트
+			Map<String, Object> map = customservice.list(page, keyword);		
+			model.addAttribute("map", map);
+			return "/Main_Page/customboardManager";   
 		}
 }

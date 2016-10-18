@@ -10,6 +10,8 @@
 <title>main_index</title>
 <link href="/gs25/assets/css/index.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
+<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+
 
 </head>
 <body>
@@ -19,6 +21,8 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 <div id="content">
+<jsp:include page="/WEB-INF/views/include/Mainmenubar.jsp" />
+
 
 <div class="container_index">
 		<img src="/gs25/assets/images/index/gs25_03.gif"/>

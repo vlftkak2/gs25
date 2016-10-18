@@ -45,7 +45,9 @@
 					</div>
 
 						<div class="insert">
+						<c:if test='${authUser.no==100 }'>
 							<a href="/gs25/product/Maininsert" id="new-book">상품등록</a>
+							</c:if>
 						</div>
 				
 
