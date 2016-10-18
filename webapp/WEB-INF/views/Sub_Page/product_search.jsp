@@ -20,6 +20,8 @@
 
 		<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 
+		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
+
 
 		<div id="content">
 

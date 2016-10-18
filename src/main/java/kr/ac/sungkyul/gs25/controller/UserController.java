@@ -76,7 +76,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "checkLogin", method = RequestMethod.POST)
 	public String checkId(String email, String password, HttpSession session) {	//Request 객체받음, script or DB 객체 분별
-
+		
 		UserVo authUser =  userService.login(email,  password);
 
 		String result = "true";

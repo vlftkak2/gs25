@@ -42,7 +42,7 @@
 						<h1 class="logo"><a href="/gs25/main">GS25</a></h1>
 						<div class="gnb" id="gnb_menu">
 							<ul>
-							<c:if test="${authUser.no==1 }">
+							<c:if test="${authUser.no==100 }">
 								<li><h2><a href="/gs25/product/Mainlist" class="on">상품</a></h2>
 								</li>
 								</c:if>

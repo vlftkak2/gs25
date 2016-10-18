@@ -8,8 +8,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/sub.css" rel="stylesheet" type="text/css">
+<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+<script type="text/javascript"
+	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script type="text/javascript" src="/gs25/assets/js/menubar.js"></script>
+<script src="/gs25/assets/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
+<style>
+#STATICMENU {
+	margin: 0 150px;
+	padding: 0pt;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+</style>
 <title>Sub_Main</title>
 </head>
 <body>
@@ -83,6 +97,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
 	
 	<div class="prod_wrap">
 		<div class="container">
@@ -212,13 +228,13 @@
 $(function() {	
 	 $("#login-btn").on("click", function(){
 		if($("#email").val() == ""){
-			alert("아이디를 입력해주십시오.");
+			sweetAlert("아이디를 입력해주십시오.", "Something went wrong!", "error");
 			$("#email").focus();
 			return false;
 			}
 		
 		if($("#password").val() == ""){
-			alert("비밀번호를 입력해주십시오.");
+			sweetAlert("비밀번호를 입력해주십시오.", "Something went wrong!", "error");
 			$("#password").focus();
 			return false;
 			}

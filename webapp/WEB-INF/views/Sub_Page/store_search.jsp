@@ -115,7 +115,7 @@ function makeOutListener(infowindow) {
 
 			<div class="container_map">
 				<div class="container_mapsub">
-
+				
 					<div id="store_header">
 						<div id="store">
 							<h1 id="sub_h1">매장검색</h1>
@@ -211,6 +211,8 @@ function makeOutListener(infowindow) {
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+				<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
+		
 	</div>
 
 </body>

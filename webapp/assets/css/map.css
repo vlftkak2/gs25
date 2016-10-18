@@ -2,7 +2,7 @@
 @import "gs25site.css";
 
 #map{
-width: 40%; height: 350px; 
+width: 35%; height: 350px; 
 float:left;
 margin-bottom:30px;
 }
@@ -227,4 +227,3 @@ a.del	{
  div.pager  ul li a:link, 
  div.pager  ul li a:active { text-decoration: none; color:#ff8080 } 
  div.pager  ul li a:hover { text-decoration: none; color:#f00 } 
-

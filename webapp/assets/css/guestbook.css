@@ -94,6 +94,21 @@ a.del	{
 
 #guestbook textarea#content	{ width: 100%; border:none; height: 100px; resize: none; outline: none; }
 
+#right{
+	margin-left:240px;
+	height:200px;
+}
+#risk{
+	float:left;
+	margin-top:80px;
+}
+#right p.empty-list	{
+	 margin-top:85px;
+	margin-left:30px;
+	float:left;
+	font-weight:bold;
+	font-size:1.5em;
+	 }
 
 
 div.pager {
