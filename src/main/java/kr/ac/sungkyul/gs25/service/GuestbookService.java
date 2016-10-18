@@ -40,13 +40,13 @@ public class GuestbookService {
 	       currentBlock = (int) Math.ceil((double) page / LIST_BLOCKSIZE);
 	    }
 	    
-	    // 2. 페이지를 그리기 위한 값 계산
-	    long startPage = (currentBlock - 1) * LIST_BLOCKSIZE + 1;
-	    long endPage = (startPage - 1) + LIST_BLOCKSIZE;
-	    long prevPage = (page >= startPage) ? (page - 1) : (currentBlock - 1) * LIST_BLOCKSIZE;
-	    long nextPage = (page <= endPage) ? (page + 1) : currentBlock * LIST_BLOCKSIZE + 1;
-	    long nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
-	    long prevtoPage = (currentBlock > 1) ? startPage - 3 : page;
+	 // 4. 페이지를 그리기 위한 값 계산
+	 		long startPage = (currentBlock - 1) * LIST_BLOCKSIZE + 1;
+	 		long endPage = (startPage - 1) + LIST_BLOCKSIZE;
+	 		long prevPage = (page >= startPage) ? (page - 1) : (currentBlock - 1) * LIST_BLOCKSIZE;
+	 		long nextPage = (page <= endPage) ? (page + 1) : currentBlock * LIST_BLOCKSIZE + 1;
+	 		long nexttoPage = (currentBlock < blockCount) ? currentBlock * LIST_BLOCKSIZE + 1 : page;
+	 		long prevtoPage = (currentBlock > 1) ? startPage - 3 : page;
 	    
 	    // 3. 리스트 가져오기
 	    List<GuestbookVo> list = guestbookDao.getList(page, LIST_PAGESIZE, store_no);

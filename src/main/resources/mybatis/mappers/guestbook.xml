@@ -21,7 +21,7 @@
 	( select c.*, rownum rn from
 	( select a.no, a.content, a.reg_date, a.user_no,a.store_no, b.email 
 	from guestbook a, users b 
-	where a.user_no = b.no and a.store_no = 4 order by no desc) c) 
+	where a.user_no = b.no and a.store_no = #{store_no} order by no desc) c) 
 	where #{page_top}<=rn and rn<=#{page_bottom}
 	
 	]]>
