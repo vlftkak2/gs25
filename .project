@@ -45,5 +45,40 @@
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Downloads/check.png</locationURI>
 		</link>
+		<link>
+			<name>webapp/assets/images/manage/delete.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/delete.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/Rotten.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/Rotten.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/ice.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/ice.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/mycou_bg2.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/mycou_bg2.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/rainbow.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/rainbow.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/sakura.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/sakura.png</locationURI>
+		</link>
+		<link>
+			<name>webapp/assets/images/menubar/set.png</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%EB%91%90%EA%B2%AC/set.png</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
