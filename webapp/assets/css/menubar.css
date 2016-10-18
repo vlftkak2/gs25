@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+@import "gs25site.css";
+
+/* 움직이는 메뉴바 */
+.mymenu {
+    width: 90px;
+    border: 1px solid #dfdfdf;
+    background: #fff;
+}
+.mymenu .couwrap_off {
+    background: url(/gs25/assets/images/menubar/mycou_bg2.png) no-repeat;
+    height: 108px;
+    text-align: center;
+}
+.couwrap_off p {
+    padding: 14px 0px 4px;
+    font-size: 11px;
+    color: #666;
+    line-height: 16px;
+}
+.btn_log {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    border: none;
+    font-family:NanumBarunGothic !important;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background: #397ca8;
+    padding: 6px 16px;
+}
+
+
+.myarea_wrap {
+	z-index: 100;
+	left: 50%;
+	
+	}
+.my_lst {
+    overflow: hidden;
+}
+a.my_m0 {
+    background-position: 50% -308px;
+    background: url(/gs25/assets/images/menubar/Rotten.png) no-repeat;
+        margin: 20px;
+}
+
+a.my_m1 {
+    background-position: 50% 14px;
+    background: url(/gs25/assets/images/menubar/sakura.png) no-repeat;
+     margin: 20px;
+}
+a.my_m2 {
+    background-position: 50% -55px;
+    background: url(/gs25/assets/images/menubar/ice.png) no-repeat;
+    margin: 20px;
+}
+a.my_m3{
+	 background: url(/gs25/assets/images/menubar/rainbow.png) no-repeat;
+    margin: 17px;
+}
+a.my_m4{
+	background: url(/gs25/assets/images/menubar/set.png) no-repeat;
+    margin: 19px;
+}
+.my_lst a {
+    display: block;
+    padding-top: 33px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+}
+.myarea_wrap .menuwrap {
+    overflow: hidden;
+    background: #fff;
+}
+.myarea_wrap .menu_tit {
+    background: #666;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.myarea_wrap .top {
+	display: block;
+	background: #fff;
+	border: 1px solid #999999;
+	text-align: center;
+	font-weight: bold;
+	color: #222;
+	margin-top: 5px;
+	padding: 8px 0px 7px;
+}

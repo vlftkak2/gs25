@@ -1,0 +1,160 @@
+@CHARSET "UTF-8";
+@IMPORT "gs25site.css";
+
+#manage_wrap{
+	margin: 0 auto; width: 1500px;
+}
+
+
+#tap_content {
+    width: 930px;
+    height:500px;
+    margin: 50px auto;
+}
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-size:18px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:82px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    clear: both;
+    float: left;
+    width: 930px;
+    background: #FFFFFF;
+}
+.tab_content {
+    padding: 30px;
+    font-size: 16px;
+    display: none;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+input[type="submit"] {
+    padding: 5px;
+    border: 1px solid #ffffff;
+    background-color: #0080ff;
+    font-weight: bold;
+    color: #FFFFFF;
+    font: 1.0em "맑은 고딕", 돋움, 굴림;
+}
+
+h4{
+
+	margin-bottom:30px;
+}
+
+
+.tbl-ex		{
+	width:95%;
+	
+	border-collapse:collapse;
+	border-bottom:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	border-right:1px solid #c0c0c0
+}
+
+.tbl-ex th, 
+.tbl-ex td	{ 
+	padding:8px;
+	text-align:center; 	 
+}
+	
+.tbl-ex th	{ 
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0; 
+	font-size:1.1em; 
+	background-color:#00A5FF;
+	color:#FFFFFF
+}
+a.del	{
+	display:block;
+	width:20px;
+	height:20px; 
+	background:url("/gs25/assets/images/manage/delete.png") no-repeat 0 0;
+	font-size:0;
+}
+
+#right{
+	margin-left:240px;
+	height:200px;
+}
+#risk{
+	float:left;
+	margin-top:80px;
+}
+#right p.empty-list	{
+	 margin-top:85px;
+	margin-left:30px;
+	float:left;
+	font-weight:bold;
+	font-size:1.5em;
+	 }
+
+div.pager {
+    width: 850px;
+    float: left;
+    text-align: center;
+}
+div.pager ul {
+    height: 20px;
+    margin: 50px 0 30px 80px;
+}
+div.pager ul li {
+    display: inline-block;
+    margin: 5px 3px;
+    width: 20px;
+    font-weight: bold;
+}
+div.pager ul li a, div.pager ul li a:visited, div.pager ul li a:link, div.pager ul li a:active {
+    text-decoration: none;
+    color: #ff8080;
+}
+div.pager ul li.selected {
+    text-decoration: underline;
+    color: #f00;
+}
+a#new-book	 { 
+	float:right; 
+	padding:10px 20px 10px 20px ; 
+	border:1px solid #555; 
+	border-radius:5px;
+	font-weight:bold; 
+	background-color:#E8ECF6; 
+	color:#111 
+}
+#back{
+	font-size:16px;
+}
