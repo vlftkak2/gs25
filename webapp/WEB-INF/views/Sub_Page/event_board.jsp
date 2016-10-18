@@ -43,6 +43,8 @@
 			<img src="/gs25/assets/images/eventboard/stop2.png" id="slideShowButton"></img> <!-- Optional button element. -->
 			
 		</div>
+		
+		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
 	
 	<div id="Board_main">
 		<div id="event_board">
@@ -68,8 +70,12 @@
 				</td>
 				<td>${vo.count }</td>
 				<td><c:choose>
-						<c:when test='${authUser.no == 1}'>
-						<a href="/gs25/event/event_delete?no=${vo.no}" class="del">삭제</a>
+						<c:when test='${authUser.no == 1 && store_no==4}'>
+						<a href="/gs25/event/event_delete?no=${vo.no}&store_no=${store_no}" class="del">삭제</a>
+						</c:when>
+						
+						<c:when test='${authUser.no == 2 && store_no==1}'>
+						<a href="/gs25/event/event_delete?no=${vo.no}&store_no=${store_no}" class="del">삭제</a>
 						</c:when>
 						<c:otherwise>
 	            		&nbsp;
@@ -96,11 +102,11 @@
 							<ul>
 
 								<c:if test="${map.prevtoPage >= 0 }">
-									<li><a href="/gs25/event/eventlist?p=${map.prevtoPage }">◀◀</a></li>
+									<li><a href="/gs25/event/eventlist?store_no=${store_no }&p=${map.prevtoPage }">◀◀</a></li>
 								</c:if>
 
 								<c:if test="${map.prevPage >= 0 }">
-									<li><a href="/gs25/event/eventlist?p=${map.prevPage }">◀</a></li>
+									<li><a href="/gs25/event/eventlist?store_no=${store_no }&p=${map.prevPage }">◀</a></li>
 								</c:if>
 
 								<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
@@ -113,16 +119,16 @@
 											<li>${i }</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/gs25/event/eventlist?p=${i }">${i }</a></li>
+											<li><a href="/gs25/event/eventlist?store_no=${store_no }&p=${i }">${i }</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 
 								<c:if test='${map.nextPage > 0 }'>
-									<li><a href="/gs25/event/eventlist?p=${map.nextPage }">▶</a></li>
+									<li><a href="/gs25/event/eventlist?store_no=${store_no }&p=${map.nextPage }">▶</a></li>
 								</c:if>
 								<c:if test='${map.nexttoPage > 0 }'>
-									<li><a href="/gs25/event/eventlist?p=${map.nexttoPage }">▶▶</a></li>
+									<li><a href="/gs25/event/eventlist?store_no=${store_no }&p=${map.nexttoPage }">▶▶</a></li>
 								</c:if>
 
 							</ul>
@@ -139,7 +145,11 @@
 			<c:otherwise>
 			<div class="bottom">
 				<c:choose>
-				<c:when test='${authUser.no==1 }'>
+				<c:when test='${authUser.no==1 && store_no==4 }'>
+					<a href="/gs25/event/event_write?userno=${authUser.no}" id="new-book">글쓰기</a>
+				</c:when>
+				
+				<c:when test='${authUser.no==2 && store_no==1 }'>
 					<a href="/gs25/event/event_write?userno=${authUser.no}" id="new-book">글쓰기</a>
 				</c:when>
 				<c:otherwise>

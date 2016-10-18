@@ -3,6 +3,7 @@ package kr.ac.sungkyul.gs25.vo;
 public class EventBoardVo {
 
 	private Long no;
+	private String name;
 	private String title;
 	private String startdate;
 	private String enddate;
@@ -12,6 +13,12 @@ public class EventBoardVo {
 	private String imageurl;
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Long getNo() {
 		return no;
 	}

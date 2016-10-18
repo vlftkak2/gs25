@@ -20,5 +20,7 @@
 	<mapper resource="mybatis/mappers/guestbook.xml" />
 	<mapper resource="mybatis/mappers/cart.xml" />
 	<mapper resource="mybatis/mappers/checkevent.xml" />
+	<mapper resource="mybatis/mappers/manage.xml" />
+	<mapper resource="mybatis/mappers/submanage.xml" />
 	</mappers>
 </configuration>

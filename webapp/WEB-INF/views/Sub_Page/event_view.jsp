@@ -39,7 +39,7 @@
 				</div>
 				
 				<div id="btnwrap">
-					<a href="/gs25/event/eventlist" id="btn">목록</a>
+					<a href="/gs25/event/eventlist?store_no=${store_no }" id="btn">목록</a>
 				</div>
 				</div>	
 			</div>

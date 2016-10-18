@@ -17,15 +17,14 @@
 	
 	 <!--이벤트 게시물 리스트  --> 
 	<select id="getList" parameterType="map" resultType="eventboardvo">
-	
 	<![CDATA[
 	select * from
-	(select a.*, rownum rn from
-	(select a.no, a.title, b.imageurl, 
-	to_char(a.startdate, 'yyyy-mm-dd') as startdate, 
-	to_char(a.enddate, 'yyyy-mm-dd') as enddate,
-	a.count, a.user_no
-	from event a, eventfile b where a.no=b.no order by no desc) a)
+	(select c.*, rownum rn from
+	(select a.no, a.title, b.imageurl,
+	to_char(a.startdate, 'yyyy-mm-dd') as startdate, to_char(a.enddate, 'yyyy-mm-dd') as enddate,
+	a.count, a.user_no 
+	from event a, eventfile b 
+	where a.no=b.no and a.store_no=#{store_no} order by no desc) c) 
 	where #{page_top}<=rn and rn<=#{page_bottom}
 	]]>
 	</select>
@@ -33,13 +32,13 @@
 	<!-- 검색된 이벤트 리스트  --> 
 	<select id="getListKeyword" parameterType="map" resultType="eventboardvo">
 	<![CDATA[
-	select * from
-	(select a.*, rownum rn from
-	(select a.no, a.title, b.imageurl, 
-	to_char(a.startdate, 'yyyy-mm-dd') as startdate, 
-	to_char(a.enddate, 'yyyy-mm-dd') as enddate,
-	a.count, a.user_no
-	from event a, eventfile b where a.no=b.no and title like #{keyword} order by no desc) a)
+	select * from	
+	(select d.*, rownum rn from(
+	select * from(select a.no, a.title, b.imageurl,
+	to_char(a.startdate, 'yyyy-mm-dd') as startdate, to_char(a.enddate, 'yyyy-mm-dd') as enddate,
+	a.count, a.user_no from event a, eventfile b 
+	where a.no=b.no and a.store_no=#{store_no})
+	c where title like #{keyword} order by no desc) d) 
 	where #{page_top}<=rn and rn<=#{page_bottom}
 	]]>
 	</select>
@@ -88,7 +87,7 @@
 		#{startdate},
 		#{enddate},
 		0,
-		4,
+		#{store_no},
 		#{UserNo}
 		)
 	]]>
@@ -105,3 +104,4 @@
 	]]>
 	</insert>
 </mapper>
+	
