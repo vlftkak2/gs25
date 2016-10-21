@@ -53,7 +53,16 @@
 							<ul class="productView_content_ul">
 								<li><strong>제조사</strong> : <span>${prodvo.maker }</span></li>
 								<li><strong>유통기한</strong> : <span>${prodvo.expiry_date }</span></li>
+								
+								<c:choose>
+								<c:when test='${prodvo.mount<=0 }'>
+								<strong id="mount">재고수 : 없음</strong>
+								</c:when>
+								<c:otherwise>
 								<li><strong>재고수</strong> : <span>${prodvo.mount }개</span></li>
+								</c:otherwise>
+								
+								</c:choose>
 								
 								<c:choose>
 									<c:when test='${prodvo.remainderdate<1 }'>
