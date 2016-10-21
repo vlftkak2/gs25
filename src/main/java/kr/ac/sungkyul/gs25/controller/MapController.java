@@ -81,7 +81,6 @@ public class MapController {
 		public String insertForm(Model model){
 			
 			List<RegionVo> regionvo = regionservice.research();
-			System.out.println(regionvo.toString());
 			model.addAttribute("regionvo",regionvo);
 			
 			return "/Main_Page/insertStore";
@@ -90,7 +89,6 @@ public class MapController {
 		@RequestMapping(value = "insert")
 		public String insert(@ModelAttribute InsertStoreVo vo){
 			
-			System.out.println(vo.toString());
 			mapservice.insert(vo);
 			
 			return "redirect:/map/mlist";

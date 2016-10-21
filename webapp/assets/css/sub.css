@@ -122,7 +122,7 @@ input[type=text], input[type=password] {
 .prod_tab{width: 240px; float:left;}
 .prod_tab #tab4{border-bottom: 0px;}
 
-.afterClass, .beforeClass{border-bottom:1px solid #29a8e9; background-color: #0091df; font-size: 20px;font-weight: bold;font-style: normal;}
+.afterClass, .beforeClass{border-bottom:1px solid #29a8e9; background-color: #0091df; font-size: 20px;font-weight: bold;font-style: normal; cursor:pointer;}
 .beforeClass {padding: 8px 28px; height:37px; font-size: 20px;color:#a8e5ff;}
 .afterClass{padding:28px 0px 0px 28px;height:100px; font-size: 24px;color:#fff;}
 

@@ -16,8 +16,13 @@ public class CartListDao {
 	private SqlSession sqlSession;
 	
 	//  게시물 총 수 구하기
-	public int getCal(Long store_no){
-		int totalCount = sqlSession.selectOne("cart.getCal",store_no);
+	public int getCal(Long store_no,Long user_no){
+		
+		CartVo cartvo=new CartVo();
+		cartvo.setStore_no(store_no);
+		cartvo.setUser_no(user_no);
+		
+		int totalCount = sqlSession.selectOne("cart.getCal",cartvo);
 		return totalCount;
 	}
 	

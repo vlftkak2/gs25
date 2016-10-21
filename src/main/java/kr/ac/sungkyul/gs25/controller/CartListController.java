@@ -39,7 +39,7 @@ public class CartListController {
 			return "redirect:/sub/main";
 		}
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		
+
 		if(authUser!=null){
 			Long user_no = authUser.getNo();
 			Map<String, Object> map = cartlistService.list(page,user_no,store_no);

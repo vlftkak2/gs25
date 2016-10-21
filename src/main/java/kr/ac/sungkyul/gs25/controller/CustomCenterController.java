@@ -131,7 +131,7 @@ public class CustomCenterController {
 			//게시물 삭제
 			customservice.delete(vo);
 
-			return "redirect:/custom/list";
+			return "redirect:/custom/customboardManager";
 		}
 
 	//고객센터 보기 폼 이동

@@ -84,7 +84,7 @@ where a.no=b.no
    <![CDATA[
        select * from(
         select c.*,rownum rn from(
-          select a.no,
+          select b.no,
                  c.name as storename,
                  a.name,
                  a.price,
@@ -102,6 +102,7 @@ where a.no=b.no
                 b.STORE_NO
           from product a, storeproduct b, store c, productkind d, boardsfilepr e
       where b.STORE_NO=#{store_no} and a.no=e.no and d.no=a.KIND_NO and a.no=b.PRODUCT_NO and c.no=b.STORE_NO
+      and b.EXPIRY_DATE>sysdate
       order by a.price asc) c) where #{page_start}<=rn and rn<=#{page_end}
    ]]>
    </select>
@@ -140,10 +141,10 @@ where a.no=b.no
 
 	<![CDATA[	
 	insert into storeproduct(
-	store_no,product_no,reg_date,expiry_date,mount,count
+	no,store_no,product_no,reg_date,expiry_date,mount,count
 	)
 	 VALUES(
-		#{store_no},#{product_no},#{reg_date},#{expiry_date},#{mount},1)
+		seq_storeproduct.nextVal,#{store_no},#{product_no},#{reg_date},#{expiry_date},#{mount},1)
 		]]>
 	</insert>
 	
@@ -221,7 +222,9 @@ where a.no=b.PRODUCT_NO and
 		<![CDATA[
 	      		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
 		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
-  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.PRODUCT_NO and a.no = b.no and d.STORE_NO=#{store_no} ORDER BY reg_date desc) c WHERE rownum < 5
+  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.PRODUCT_NO and a.no = b.no and d.STORE_NO=#{store_no} 
+  		 and d.expiry_date > sysdate
+  		 ORDER BY reg_date desc) c WHERE rownum < 5
 		]]>
 	</select>
 	
@@ -230,7 +233,9 @@ where a.no=b.PRODUCT_NO and
 		<![CDATA[
        	 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL,c.count
 		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL,d.count 
-  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} ORDER BY count desc) c WHERE rownum < 5
+  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} 
+  		 and d.expiry_date > sysdate
+  		 ORDER BY count desc) c WHERE rownum < 5
 		]]>
 	</select>
 	
@@ -239,7 +244,9 @@ where a.no=b.PRODUCT_NO and
 		<![CDATA[
 		       		 SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL
   		 FROM(select a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
- 		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
+ 		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no}
+ 		  and d.expiry_date > sysdate
+ 		  order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
 		]]>
 	</select>
 	
@@ -254,36 +261,41 @@ where a.no=b.PRODUCT_NO and
 	<!-- 상품 상세정보 -->
 	<select id="searchproduct" parameterType="map" resultType="storeproductvo">
 		<![CDATA[
-		 SELECT a.no, 
-		  		 a.name, 
-		  		 a.price,  
+		 SELECT d.no as no, 
+		  		 a.name as name, 
+		  		 a.price as price,  
 		  		 to_char(d.expiry_date,'yyyy/mm/dd') as expiry_date, 
-		  		 a.maker, 
-		  		 b.IMAGEURL,
+		  		 a.maker as maker, 
+		  		 b.IMAGEURL as imageurl,
+		  		 d.mount as mount,
       			 ceil((d.EXPIRY_DATE-sysdate)-7) as remainderdate,
       			 ceil(d.expiry_date-sysdate) as remaindercountdate,
-      			 (ceil(((c.DIS_PERCENT*0.01)*a.price)/7)) countprice,
+      			 (ceil(((c.DIS_PERCENT*0.01)*a.price)/7)) as countprice,
                  a.price*0.5 as halfprice
 		 	   FROM product a, boardsfilepr b, PRODUCTKIND c, storeproduct d
-		 			where d.STORE_NO=#{store_no} and a.no = b.no and c.no=a.KIND_NO and a.no=d.PRODUCT_NO and a.no=#{no}
+		 			where d.STORE_NO=#{store_no} and a.no = b.no and c.no=a.KIND_NO and a.no=d.PRODUCT_NO and d.no=#{no}
 		]]>
 	</select>
 	
 	<!-- 상품 1000원이하 랜덤 증정(출첵) -->
-	<select id="random1000" resultType="productvo">
+	<select id="random1000" parameterType="long" resultType="storeproductvo">
 		<![CDATA[
-		 SELECT c.no, c.name, c.price, c.maker, c.IMAGEURL
-  		 FROM(select a.no, a.name, a.price, a.maker, b.IMAGEURL 
- 		 FROM product a, boardsfilepr b  where a.no = b.no and a.price < 1000 order by DBMS_RANDOM.RANDOM) c WHERE rownum < 2
+		SELECT e.* from(
+		SELECT c.*, d.name, d.price, d.maker, d.IMAGEURL 
+		from (SELECT p.*, s.name as storename from storeproduct p, store s where p.STORE_NO = s.NO and s.NO=#{store_no}) c,
+		(SELECT a.no, a.name, a.price, a.maker, b.IMAGEURL FROM product a, boardsfilepr b where a.no = b.no and a.price <= 1000) d
+		where c.PRODUCT_NO= d.no  order by DBMS_RANDOM.RANDOM)e WHERE rownum < 2
 		]]>
 	</select>
 	
 	<!-- 상품 2000원이하 랜덤 증정(출첵) -->
-	<select id="random2000" resultType="productvo">
+	<select id="random2000" parameterType="long" resultType="storeproductvo">
 		<![CDATA[
-		  SELECT c.no, c.name, c.price, c.maker, c.IMAGEURL
-  		 FROM(select a.no, a.name, a.price, a.maker, b.IMAGEURL 
- 		 FROM product a, boardsfilepr b  where a.no = b.no and a.price < 2000 and a.price > 1000 order by DBMS_RANDOM.RANDOM) c WHERE rownum < 2
+		SELECT e.* from(
+		SELECT c.*, d.name, d.price, d.maker, d.IMAGEURL 
+		from (SELECT p.*, s.name as storename from storeproduct p, store s where p.STORE_NO = s.NO and s.NO=#{store_no}) c,
+		(SELECT a.no, a.name, a.price, a.maker, b.IMAGEURL FROM product a, boardsfilepr b where a.no = b.no and a.price <= 2000) d
+		where c.PRODUCT_NO= d.no  order by DBMS_RANDOM.RANDOM)e WHERE rownum < 2
 		]]>
 	</select>
 	
@@ -307,5 +319,23 @@ where a.no=b.PRODUCT_NO and
 		delete from STOREPRODUCT where product_no=#{no}
 		]]>
 	</delete>
+	
+	<!-- 기프티콘에 쓰일 정보 가져오기 -->
+	<select id="searchstoreproduct" parameterType="map" resultType="storeproductvo">
+		<![CDATA[
+		SELECT c.*, d.name, d.price, d.maker, d.IMAGEURL, d.ORGNAME 
+		from (select p.*, s.name as storename from storeproduct p, store s where p.STORE_NO = s.NO and p.no=#{no} and s.NO= #{store_no} ) c,
+		(SELECT a.no, a.name, a.price, a.maker, b.IMAGEURL, b.ORGNAME
+		FROM product a, boardsfilepr b  where a.no = b.no) d where c.PRODUCT_NO= d.no
+		]]>
+	</select>
+	
+	<!-- 수량 감소  -->
+	<update id="cutmount" parameterType="long">
+		<![CDATA[
+		update storeproduct set
+		mount = mount - 1 where no = #{storeproduct_no}
+		]]>
+	</update>
 
 </mapper>

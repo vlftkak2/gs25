@@ -76,16 +76,13 @@
 							</c:forEach>
 						</table>
 
-						<ul>
-							<li><a href="/gs25/sub/main?store_no=${store_no }">메인으로 돌아가기</a></li>
-						</ul>
 						
 						 <c:if test="${empty map.list}">
-               			<div id="right">
-                  		<div id="risk">
+               			<div id="right1">
+                  		<div id="risk1">
                      	<img src="/gs25/assets/images/cart/risk.png">
                   		</div>
-                  		<p class="empty-list">검색된 결과가 없습니다. <br> </p>
+                  		<p class="empty-list1">검색된 결과가 없습니다. <br> </p>
               		 </div>
             		</c:if>
          
@@ -93,7 +90,7 @@
        			    <c:if test='${not empty map.list }'>
 						<!-- begin:paging -->
 
-						<div class="pager">
+						<div class="pager1">
 							<ul>
 
 								<c:if test="${map.prevtoPage >= 0 }">

@@ -7,12 +7,16 @@
 <link href="/gs25/assets/css/membership.css" rel="stylesheet"
 	type="text/css">
 <title>Insert title here</title>
+<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 	<div id="container">
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 		<div id="content">
+		<jsp:include page="/WEB-INF/views/include/Mainmenubar.jsp" />
+		
 			<div id="member_main">
 			<div id="member_sub">
 				<div id="top_wrap">

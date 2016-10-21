@@ -7,6 +7,8 @@
 <link href="/gs25/assets/css/companyintro.css" rel="stylesheet"
 	type="text/css">
 <title>회사 소개</title>
+<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -14,6 +16,8 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 		<div id="content">
+		<jsp:include page="/WEB-INF/views/include/Mainmenubar.jsp" />
+		
 			<div id="intro_main">
 			<div id="intro_sub">
 				<div id="brand_main">

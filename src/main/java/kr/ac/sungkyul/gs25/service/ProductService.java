@@ -47,6 +47,9 @@ public class ProductService {
 	@Autowired
 	private ProductDao productdao;
 	
+	@Autowired
+	GificonService gifticonservice;
+	
 	//메인 상품 리스트 가져오기
 	public List<ProductVo> listBoard(){
 		List<ProductVo> Productlist=productdao.getList();
@@ -180,7 +183,6 @@ public class ProductService {
 		int prevtoPage = (currentBlock > 1) ? startPage-3  : page;
 		
 		List<StoreProductVo> list=productdao.getList(page, LIST_PAGESIZE, keyword,StoreNo);
-		
 		// 6. map에 객체 담기
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("sizeList", LIST_PAGESIZE);
@@ -357,15 +359,35 @@ public class ProductService {
     }
     
     // 1000원 이하 랜덤 상품 (출석체크 상품 증정)
- 	public ProductVo random1000() {
- 		ProductVo vo = productdao.random1000();
+ 	public StoreProductVo random1000(Long user_no, Long store_no) {
+ 		
+ 		StoreProductVo vo = productdao.random1000(store_no);
+ 		System.out.println("---pser- "+vo);
+ 		
+ 		//기프티콘으로 저장
+ 		Long storeproduct_no = vo.getNo();
+ 		gifticonservice.insert(user_no, storeproduct_no, store_no);
+ 		
+ 		//수량 감소
+ 		productdao.cutmount(storeproduct_no);
+ 		
  		return vo;
  	}	
  	
+
  	// 2000원 이하 랜덤 상품 (출석체크 상품 증정)
-  	public ProductVo random2000() {
-  		ProductVo vo = productdao.random2000();
-  		return vo;
+  	public StoreProductVo random2000(Long user_no, Long store_no) {
+  		
+  		StoreProductVo vo = productdao.random2000(store_no);
+ 		
+ 		//기프티콘으로 저장
+ 		Long storeproduct_no = vo.getNo();
+ 		gifticonservice.insert(user_no, storeproduct_no, store_no);
+ 		
+ 		//수량 감소
+ 		productdao.cutmount(storeproduct_no);
+ 		
+ 		return vo;
   	}
   	
   	public CartVo maintainCheck(Long user_no, Long product_no){

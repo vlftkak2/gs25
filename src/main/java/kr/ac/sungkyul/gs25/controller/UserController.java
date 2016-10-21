@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.sungkyul.gs25.dao.ProductDao;
+import kr.ac.sungkyul.gs25.service.GificonService;
+import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.service.UserService;
 import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
@@ -25,6 +28,12 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	GificonService gifticonservice;
+	
+	@Autowired
+	private ProductDao productdao;
 	
 	@RequestMapping("/joinform")
 	public String joinform(){
@@ -38,14 +47,12 @@ public class UserController {
 	
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo vo){
-		System.out.println("join: "+vo.toString());
 		userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}
 	
 	@RequestMapping("/Subjoin")
 	public String Subjoin(@ModelAttribute UserVo vo){
-		System.out.println("join: "+vo.toString());
 		userService.join(vo);
 		return "redirect:/user/Subjoinsuccess";
 	}
@@ -76,6 +83,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "checkLogin", method = RequestMethod.POST)
 	public String checkId(String email, String password, HttpSession session) {	//Request 객체받음, script or DB 객체 분별
+		
 		
 		UserVo authUser =  userService.login(email,  password);
 
@@ -210,7 +218,6 @@ public class UserController {
 		else {
 			try {
 				result = userService.sendEmail(email);
-				System.out.println(result);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -222,7 +229,6 @@ public class UserController {
 	@RequestMapping(value = "/{domain}/repassword", method = RequestMethod.GET)
 	public String abc(@PathVariable String domain, Model model){
 		Long no = userService.passlink(domain);
-		System.out.println(no);
 //		비밀번호 변경창으로 보냄 (어떤 멤버인지는 알아야 함)
 		model.addAttribute("userno", no);
 		
@@ -234,7 +240,6 @@ public class UserController {
 	public String setPassword(Long no, String password){
 		//state 1로 변경
 		String result = userService.setpass(no,password);
-		System.out.println("controller: "+result);
 		return result;
 	}
 	
@@ -260,5 +265,52 @@ public class UserController {
 		Map<String, Object> map = userService.checkEmail(email);
 		
 		return map;
+	}
+	
+	//회원 관리 (본사관리자)
+	@RequestMapping(value = "mlist")
+	public String mlist(Model model, 
+			@RequestParam(value = "p", required = true, defaultValue = "1") String page,
+			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword){//Request 객체받음, script or DB 객체 분별
+		
+		Map<String, Object> map = userService.userManageC(page, keyword);	//customer
+		Map<String, Object> map2 = userService.userManageB(page);	//branch
+		Integer total =userService.totalMember();
+		
+		model.addAttribute("total",total);
+		model.addAttribute("map", map);
+		model.addAttribute("map2", map2);
+		
+		return "user/mlist";
+	}
+	
+	//포인트로 상품 결제
+	@ResponseBody
+	@RequestMapping(value="/pointuse", method = RequestMethod.POST)
+	public String pointuse(HttpSession session, Model model,
+							Long storeproduct_no, Integer product_price, Long store_no,
+							Integer remaindercountdate,Integer countprice,Integer halfprice,
+							Integer point){
+		
+//		System.out.println("원래 가격 :"+product_price);
+//		System.out.println("남은 일자 :"+remaindercountdate);
+//		System.out.println("할인 가격 :"+countprice);
+		System.out.println("포인트 :"+point );
+		
+		UserVo temp = (UserVo)session.getAttribute("authUser");
+		Long no = temp.getNo();
+		
+		
+		//포인트 차감
+		String result = userService.pointuse(no, point, product_price,remaindercountdate,countprice,halfprice);
+		System.out.println(result);
+		
+		//기프티콘 전송
+		gifticonservice.insert(no, storeproduct_no, store_no);
+		
+		//수량 감소
+		productdao.cutmount(storeproduct_no);
+		
+		return result;
 	}
 }

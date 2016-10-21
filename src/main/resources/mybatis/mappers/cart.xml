@@ -4,45 +4,40 @@
 <mapper namespace="cart">
 
 	<!-- 전체 이벤트 게시물 총 수 가져오기 -->
-	<select id="getCal" parameterType="Long" resultType="java.lang.Integer">
+	<select id="getCal" parameterType="cartvo" resultType="java.lang.Integer">
 	<![CDATA[
-	select count(*) from cart where store_no=#{store_no}
+	select count(*) from cart where store_no=#{store_no} and user_no=#{user_no}
 	]]>
 	</select>
 	
 	<select id="getList" parameterType="map" resultType="cartvo">
 		<![CDATA[
   select * from (
-      select e.*, rownum rn from (
-       	select 
+ select e.*, rownum rn from (
+   	select 
           d.USER_NO, 
         	d.PRODUCT_NO, 
           c.no,
         	c.name, 
         	c.price, 
         	c.maker, 
-        	c.kind_no, 
         	c.imageurl,
         	c.remainderdate,
       		c.countprice,
       		c.halfprice,
           c.store_no
       	   from(
-      select 
-          a.no,
+ select   c.no,
           a.name,
           a.price,
           a.maker,
           b.imageurl,
-          a.kind_no,  
           ceil(c.expiry_date-sysdate) as remainderdate,
           (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,c.product_no,c.store_no,
-          a.price*0.5 as halfprice from  product a, boardsfilepr b, storeproduct c, productkind d 
-      where a.no=b.no 
-      and a.KIND_NO=d.no 
-      and a.no=c.PRODUCT_NO) c, cart d where c.no=d.product_no 
-      and d.USER_NO=#{user_no}
-      and c.store_no=#{store_no}) e)
+          a.price*0.5 as halfprice from product a, boardsfilepr b, storeproduct c, productkind d
+ where a.no=b.no
+ and a.KIND_NO=d.no
+ and a.no=c.PRODUCT_NO) c, cart d where c.no=d.product_no and user_no=#{user_no} and d.STORE_NO=#{store_no}) e)
  where #{page_top}<=rn and rn<=#{page_bottom}
 		]]>
 	</select>

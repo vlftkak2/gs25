@@ -12,6 +12,7 @@
 	type="text/css"><script type="text/javascript"
 	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 	<script src="/gs25/assets/js/sweetalert.min.js"></script>
+	
 	<title>Insert title here</title>
 </head>
 <body>
@@ -52,6 +53,8 @@
 							<ul class="productView_content_ul">
 								<li><strong>제조사</strong> : <span>${prodvo.maker }</span></li>
 								<li><strong>유통기한</strong> : <span>${prodvo.expiry_date }</span></li>
+								<li><strong>재고수</strong> : <span>${prodvo.mount }개</span></li>
+								
 								<c:choose>
 									<c:when test='${prodvo.remainderdate<1 }'>
 										<c:choose>
@@ -68,24 +71,25 @@
 										</c:otherwise>
 								</c:choose>
 								
-							<c:if test="${not empty authUser}">
-							<c:choose>
-								<c:when test='${empty checkVo.user_no}'>
-									<button id="btn1">찜하기</button>
-									<button id="btn2" class="hide">찜해제</button>
-									<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
-								 </c:when>
-								 <c:otherwise>
-									<button id="btn2">찜해제</button>
-									<button id="btn1" class="hide">찜하기</button>
-									<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
-								</c:otherwise>
-							</c:choose>
+								<c:if test="${not empty authUser}">
+								<c:choose>
+									<c:when test='${empty checkVo.user_no}'>
+										<button id="btn1">찜하기</button>
+										<button id="btn2" class="hide">찜해제</button>
+										<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
+									 </c:when>
+									 <c:otherwise>
+										<button id="btn2">찜해제</button>
+										<button id="btn1" class="hide">찜하기</button>
+										<a href="/gs25/cart/list?store_no=${store_no }"><button id="btn3">찜목록바로가기</button></a>
+									</c:otherwise>
+								</c:choose>
+
+								<p id="mypoint">내가 보유한 포인트: &nbsp;${uservo.point }점</p>
+								<input type="button" id="pointBuy" value="포인트로 구매">
+
 							</c:if>								
 							</ul>
-
-							
-							<span id="txt1">고객님 위 제품은 어떠세요?아래 후기를 통해 참고하실 수 있습니다.^^</span>
 						</dd>
 						<dd class="productView_content_dd_02">
 						
@@ -97,37 +101,37 @@
 								</c:when>
 								<c:when test='${prodvo.remaindercountdate==7 && (prodvo.price-vo.countprice)>=(prodvo.price*0.5) }'>
 								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice)}</strong><span>원</span></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==6 && (prodvo.price-prodvo.countprice*2)>=(prodvo.price*0.5) }'>
-								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*2)}</strong><span>원</span></span>
+								<span class="product_price"> <strong>${prodvo.price }원</strong></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*2)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==5 && (prodvo.price-prodvo.countprice*3)>=(prodvo.price*0.5) }'>
-								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*3)}</strong><span>원</span></span>
+								<span class="product_price"> <strong>${prodvo.price }원</strong></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*3)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==4 && (prodvo.price-prodvo.countprice*4)>=(prodvo.price*0.5) }'>
 								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*4)}</strong><span>원</span></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*4)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==3 && (prodvo.price-prodvo.countprice*5)>=(prodvo.price*0.5) }'>
-								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*5)}</strong><span>원</span></span>
+								<span class="product_price"> <strong>${prodvo.price }원</strong></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*5)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==2 && ((prodvo.price-(prodvo.countprice*6))>=(prodvo.price*0.5)) }'>
 								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*6)}</strong><span>원</span></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*6)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate==1 && (prodvo.price-prodvo.countprice*7)>=(prodvo.price*0.5) }'>
 								<span class="product_price"> <strong>${prodvo.price }</strong><span>원</span></span>
-								<span class="product_countprice"><strong>할인 가격 : ${prodvo.price-(prodvo.countprice*7)}</strong><span>원</span></span>
+								<span class="product_countprice"><strong><p id=discount">할인 가격 : ${prodvo.price-(prodvo.countprice*7)}원</p></strong></span>
 								</c:when>
 								
 								<c:when test='${prodvo.remaindercountdate<=0 }'>
@@ -152,6 +156,7 @@
 	<div class="container_main">
 		<div id="Nsearch">
 			<h5 id="tit">네이버 블로그 후기</h5>
+			<br><span id="txt1">고객님 위 제품은 어떠세요?아래 후기를 통해 참고하실 수 있습니다.^^</span>
 			<table class="tbl_wtype1">
 				<tr>
 					<td id="table_head">
@@ -243,11 +248,52 @@ $(function() {
 		});
 	
 	});
+	
+	$("#pointBuy").on("click", function(){
+		
+		var storeproduct_no = ${prodvo.no };
+		var product_price = ${prodvo.price };
+		var store_no =  ${store_no };
+		var point = ${uservo.point};
+		var discount = $("#discount").text();
+		
+		console.log(discount);
+		
+		console.log("상품번호"+storeproduct_no);
+		console.log("상품가격"+product_price);
+		console.log("매장번호"+store_no);
+		console.log("포인트"+point);
+		
+		var alldata ={storeproduct_no:"${prodvo.no }", product_price:"${prodvo.price }",store_no:" ${store_no }",
+					point:"${uservo.point}",remaindercountdate:"${prodvo.remaindercountdate}",countprice:"${prodvo.countprice}",
+					halfprice:"${prodvo.halfprice}"};
+
+		
+		if(point> product_price){
+			$.ajax({
+				url: "/gs25/user/pointuse",
+				type: "POST",
+				data: alldata,
+				dataType: "text",
+				success: function(result){
+					console.log('success');
+					if(result == "1"){
+						sweetAlert("구매하신 상품은 이메일로 보내드렸습니다 매장에서 사용해주세요. 감사합니다.");
+						/* sweetAlert("찜해제!"); */
+						$("#popo").html('${uservo.point - prodvo.price }');
+					} else{
+						alert('죄송합니다. 다시 시도해주세요');
+					}
+				},
+				"error": function(jsXHR, status, e){
+					console.error("error:"+status+":"+e);
+				}
+			});
+		} else{
+			sweetAlert("포인트가 부족합니다.");
+
+		}
+	});
 });
 </script>
-
-
-
-
-
 </html>

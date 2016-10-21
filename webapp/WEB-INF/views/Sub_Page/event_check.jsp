@@ -34,7 +34,7 @@
 			</div>
 			<form class="event_cal">
 				<div class="count">나의 출석횟수:<em id="count">${count }</em> &nbsp;회</div>
-				<input type="button" id="goods" value="증정품">
+				<!-- <input type="button" id="goods" value="증정품"> -->
 			</form>
 		
 		<div class="float_clear"></div>
@@ -156,6 +156,9 @@ $(function() {
 		
 		//출석체크 클릭 시
 		 $("#checkDate").on("click", function(){
+			 
+			 var store_no = ${store_no};
+			 console.log(store_no);
 			 console.log('click');
 			 $.ajax({	
 					url: "/gs25/sub/checkDate",
@@ -175,12 +178,14 @@ $(function() {
 						  console.log(10);
 						  $.ajax({	
 								url: "/gs25/product/random1000",
+								data: {"store_no":store_no},
+								dataType: "json",
 								type: "POST",
-								contentType: "application/json",
-								success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
-										console.log(productvo);
-										$("#goodsimg").attr('src',productvo.imageurl);
-										$("#goodsname").html(productvo.name);
+								/* contentType: "application/json", */
+								success: function( storeproductvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
+										console.log(storeproductvo);
+										$("#goodsimg").attr('src',storeproductvo.imageurl);
+										$("#goodsname").html(storeproductvo.name);
 								},
 								error: function(jsXHR, status, e){
 									console.error("error:"+status+":"+e);
@@ -193,12 +198,14 @@ $(function() {
 						  
 						  $.ajax({	
 								url: "/gs25/product/random2000",
+								data: {"store_no":store_no},
+								dataType: "json",
 								type: "POST",
-								contentType: "application/json",
-								success: function( productvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
-										console.log(productvo);
-										$("#goodsimg").attr('src',productvo.imageurl);
-										$("#goodsname").html(productvo.name);
+								/* contentType: "application/json", */
+								success: function( storeproductvo ){	//비동기식으로 진행되어 결과와 상관 없이 submit되므로 계속 refres됨(따로 동기식으로 변경해야함)
+										console.log(storeproductvo);
+										$("#goodsimg").attr('src',storeproductvo.imageurl);
+										$("#goodsname").html(storeproductvo.name);
 								},
 								error: function(jsXHR, status, e){
 									console.error("error:"+status+":"+e);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.ac.sungkyul.gs25.service.CartListService;
 import kr.ac.sungkyul.gs25.service.CheckeventService;
 import kr.ac.sungkyul.gs25.service.ProductService;
+import kr.ac.sungkyul.gs25.service.UserService;
 import kr.ac.sungkyul.gs25.vo.CheckeventVo;
 import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
@@ -37,16 +38,33 @@ public class SubMainController {
 	@Autowired
 	CartListService cartservice;
 	
+	@Autowired
+	UserService userservice;
+	
 	//서브 메인 페이지 이동
 	@RequestMapping("/main")
 	public String SubMain(Model model, 
 			@RequestParam("store_no") Long store_no,
 			HttpSession session){
 		
+		//사용자 번호 받기
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		
+		if(authUser !=null){
+			Long user_no=authUser.getNo();
+			
+			//찜목록 총 개수
+			Integer TotalCount=cartservice.getCount(store_no,user_no);
+			model.addAttribute("TotalCount", TotalCount);
+			
+			//사용자 포인트 정보 얻기
+			UserVo uservo=userservice.getPoint(user_no);
+			model.addAttribute("uservo", uservo);
+		}
 		
 		//상품 번호 세션 등록
 		session.setAttribute("store_no", store_no);
+		
 
 		//매장 이름  정보얻기
 		StoreProductVo StoreVo=productservice.getStoreName(store_no);
@@ -68,9 +86,7 @@ public class SubMainController {
 		List<StoreProductVo> recommendVo = productservice.getSubReco(store_no);
 		model.addAttribute("recommendVo",recommendVo);
 		
-		//찜목록 총 개수
-		Integer TotalCount=cartservice.getCount(store_no);
-		model.addAttribute("TotalCount", TotalCount);
+		
 		
 		return "Sub_Page/sub_index";
 	}
@@ -82,13 +98,14 @@ public class SubMainController {
 		System.out.println("sub con: "+store_no);
 		
 		UserVo uservo = (UserVo)session.getAttribute("authUser");
-		System.out.println(uservo.toString());
+//		System.out.println(uservo.toString());
 		Long user_no = uservo.getNo();
 		Integer count = ceService.getCount(user_no, store_no);
 		System.out.println("con count: "+count);
 		List<CheckeventVo> checkeventvo = ceService.checkList(user_no, store_no);
 		
 		model.addAttribute("count", count);
+		model.addAttribute("store_no", store_no);
 		model.addAttribute("checkeventvo", checkeventvo);
 		
 		return "Sub_Page/event_check";

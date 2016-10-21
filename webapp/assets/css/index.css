@@ -4,13 +4,13 @@
 	a {color:#333; text-decoration:none;}
 		.container_index {margin: 0 auto; width: 990px; text-align: center;}
 
-        .markey_list_sub{margin-left:13px;}
+          .markey_list_sub{margin-left:13px;}
 
 		.market_list {clear:both; overflow: hidden; margin: 0px 0 8px; padding-left: 0px;}
-		.market_list li{float:left;width:135px;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;}
-		.market_list li+li{width:136px}
+		.market_list li{float:left; width: 155px; border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;}
+		.market_list li+li{ width: 155px;}
 		.market_list li a{width:100%;display:inline-block;padding:15px 0 13px;border-top:4px solid #dfdfdf;text-align:center;font-size:16px;color:#666;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-		.market_list li:first-child{border-left:1px solid #dfdfdf;}
+		.market_list li:first-child{border-left:1px solid #dfdfdf; width: 155px;}
 		.market_list li a.sty01{padding:23px 0 24px;}
 		.market_list li a:hover,
 		.market_list li a.on{background:url("/gs25/assets/images/index/tab_bg_arr.png") 50% 0 no-repeat;color:#397ca8;border-top:4px solid #397ca8;font-weight:bold;}
@@ -18,3 +18,58 @@
 		.market_list_point{clear:both; overflow: hidden; margin: 0px 0 8px; padding-left: 0px;}	
 
 		.line_dfdfdf {background-color: #397ca8 ; height: 4px; margin-bottom: 8px;}
+		
+.tbl-ex		{
+	width: 100%;
+	border-collapse:collapse;
+	border-bottom:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	border-right:1px solid #c0c0c0
+}
+
+.tbl-ex th, 
+.tbl-ex td	{ 
+    padding: 12px 7px;
+	text-align:center; 	 
+}
+	
+.tbl-ex th	{ 
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0; 
+	font-size:1.1em; 
+	background-color:#00A5FF;
+	color:#FFFFFF
+}
+d.pager {
+    width: 850px;
+    float: left;
+    text-align: center;
+}
+.pager ul {
+    height: 20px;
+    margin: 50px 0 30px 80px;
+}
+.pager ul li {
+    display: inline-block;
+    margin: 5px 3px;
+    width: 20px;
+    font-weight: bold;
+}
+.pager ul li a, div.pager ul li a:visited, div.pager ul li a:link, div.pager ul li a:active {
+    text-decoration: none;
+    color: #ff8080;
+}
+.pager ul li.selected {
+    text-decoration: underline;
+    color: #f00;
+}
+/*main 지역클릭*/
+ul.tabs li {
+	display:inline-block; padding:15px 0 13px; border-top: 4px solid #dfdfdf; text-align:center;font-size:16px;color:#666;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box; background: #fff; height: 58px;
+}
+ul.tabs li.on {
+	padding: 15px 0 13px; height: 25px; border-left:1px solid #dfdfdf; background:url("/gs25/assets/images/index/tab_bg_arr.png") 50% 0 no-repeat;color:#397ca8;border-top:4px solid #397ca8;font-weight:bold; height: 58px;
+}
+#nopad{
+	padding: 0;
+}

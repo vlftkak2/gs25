@@ -32,28 +32,7 @@
 		
 		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
 		
-			<div id="menubar">
-				<div id="STATICMENU">
-					<div class="myarea_wrap">
-						<div class="mymenu">
-							<div class="couwrap_off">
-								<p>
-									서비스 이용을<br> 위해 로그인<br> 해주세요 <br>
-								</p>
-								<input type="button" class="btn_log" value="로그인"
-									onclick="location.href='/gs25/user/loginform';">
-							</div>
-							<ul class="my_lst">
-								<li><a href="/gs25/product/list" class="my_m2">상품</a></li>
-								<li><a href="/gs25/Sub_Page/eventlist" class="my_m1">이벤트</a></li>
-							</ul>
-							
-						</div>
-						<a href="#" class="top">TOP</a>
-					</div>
-				</div>
-			</div>
-			
+		
 		
 			<div id="tap_content">
 			    <ul class="tabs">
@@ -102,10 +81,7 @@
 						</c:forEach>
 						</table>
 						
-			            <ul>
-			                <li><a href="/gs25/sub/main?store_no=${store_no }">메인으로 돌아가기</a>
-			                </li>
-			            </ul>
+			           
 			            
 			             <c:if test="${empty map.list}">
                			<div id="right">
@@ -120,7 +96,7 @@
            <c:if test='${not empty map.list }'>
 			            <!-- begin:paging -->
 			         
-							<div class="pager">
+							<div class="pager1">
 								<ul>
 
 									<c:if test="${map.prevtoPage >= 0 }">

@@ -68,12 +68,12 @@
 									<p id="username">${authUser.name } 님</p>
 									<div id = "login5">
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/coins.png">
-										<p id="point">포인트&nbsp;${authUser.point }점</p>
+										<p id="point">포인트${uservo.point }점</p>
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/cart.png">
 										<p id="point"><a href="/gs25/cart/list?store_no=${store_no }">찜목록</a> ${authUser.point }개</p>
 										
 									</div>
-									<p id="endP">아무개 매장에 찾아 주셔서 감사합니다.</p>
+									<p id="endP">GS ${StoreVo.storename }점 매장에 찾아 주셔서 감사합니다.</p>
 								</div>
 							</c:when>
 							<c:otherwise>
@@ -82,12 +82,12 @@
 									<p id="username">${authUser.name } 님</p>
 									<div id = "login5">
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/coins.png">
-										<p id="point">포인트&nbsp;${authUser.point } 점</p>
+										<p id="point">포인트&nbsp;${uservo.point } 점</p>
 										<input type="image" id="userbutton" src="/gs25/assets/images/login/cart.png">
 										<a href="/gs25/" id="userbutton" src="/gs25/assets/images/login/cart.png"></a>
 										<p id="point"><a href="/gs25/cart/list?store_no=${store_no }">찜목록</a> ${TotalCount } 개</p>
 									</div>
-									<p id="endP">아무개 매장에 찾아 주셔서 감사합니다.</p>
+									<p id="endP">GS ${StoreVo.storename }점매장에 찾아 주셔서 감사합니다.</p>
 								</div>
 							</c:otherwise>
 							</c:choose>
@@ -251,7 +251,7 @@ $(function() {
 				console.log(result);
 				if(result == "false"){
 					console.log(result);
-					alert("유효하지 않는 로그인입니다. 다시 시도해주세요.")
+					sweetAlert("유효하지 않는 로그인입니다. 다시 시도해주세요.", "Something went wrong!", "error");
 					return false;
 				}
 				

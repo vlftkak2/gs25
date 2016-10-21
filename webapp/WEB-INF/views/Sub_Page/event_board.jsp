@@ -50,6 +50,7 @@
 		<div id="event_board">
 			<form id="search_form" action="/gs25/event/eventlist" method="get">
 				<input type="text" id="kwd" name="kwd" value="${map.keyword }">
+				<input type="hidden" name=store_no value=${store_no }>
 				<input type="submit" value="찾기">
 			</form>
 			<table class="tbl-ex">

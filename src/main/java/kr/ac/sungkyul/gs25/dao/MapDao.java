@@ -99,14 +99,24 @@ public class MapDao {
 		
 		//지도  사입
 		public Long insertMap(MapVo mapvo){
-			System.out.println("before: " + mapvo.toString());
 			sqlSession.insert("store.insertMap", mapvo);   // 파라미터 첫번째 값은 xml에 ID값, 두번째는 넘길 변수
-			System.out.println("after: " + mapvo.toString());
 			Long no = mapvo.getNo();
 			return no;
 		}
 
 		public void delete(Long no) {
 			sqlSession.delete("store.deleteMap", no);  
+		}
+		
+		//메인창 지점 리스트
+		public List<StoreVo> getlist(){
+			List<StoreVo> storevo = sqlSession.selectList("store.getlistAll");
+			return storevo;
+		}
+		
+		//메인창 지도 가져오기
+		public List<MapVo> getmaplist(){
+			List<MapVo> mapvo = sqlSession.selectList("store.getmapAll");
+			return mapvo;
 		}
 }

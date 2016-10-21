@@ -13,6 +13,8 @@
 </head>
 <link href="/gs25/assets/css/product.css" rel="stylesheet"
 	type="text/css">
+	<link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
+	
 
 <body>
 
@@ -22,6 +24,7 @@
 
 
 		<div id="content">
+		<jsp:include page="/WEB-INF/views/include/Mainmenubar.jsp" />
 
 			<div class="container_product">
 				<div class="container_productsub">
@@ -62,7 +65,7 @@
 											</li>
 										</ul> 
 										<div class="pic_product">
-										<c:if test="${authUser.no==1 }">
+										<c:if test="${authUser.no==100 }">
 										<div id="del">
 										<a href="/gs25/product/Maindelete?no=${vo.no }" class="del">삭제</a>
 										</div>

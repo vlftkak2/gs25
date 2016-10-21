@@ -89,4 +89,57 @@
    ]]>
 </update>
 
+<!-- 관리자 - 총 회원 정보 수-->
+	<select id="totalCount" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from users where position = 'CUSTOMER' or  position = 'BRANCH'
+		]]>
+	</select>
+	
+	<!-- 관리자 - customer 회원 정보 수-->
+	<select id="totalCountC" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from users where position = 'CUSTOMER'
+		]]>
+	</select>
+	
+	<!-- 관리자 - branch 회원 정보 수-->
+	<select id="totalCountB" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(*) from users where position='BRANCH'
+		]]>
+	</select>
+	
+	<!-- 관리자 - customer 회원 정보 리스트-->
+	<select id="getListC" parameterType="map" resultType="uservo">
+	<![CDATA[
+	SELECT * FROM (select a.*, rownum rn 
+	FROM(select  no, name, email, password, to_char(birth,'yyyy/mm/dd') as birth, gender, address, phone, point, position, store_no from users where position='CUSTOMER' order by no desc) a)
+   	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<!-- 관리자 - branch 회원 정보 리스트-->
+	<select id="getListB" parameterType="map" resultType="uservo">
+	<![CDATA[
+	SELECT * FROM (select a.*, rownum rn 
+	FROM(select  no, name, email, password, to_char(birth,'yyyy/mm/dd') as birth, gender, address, phone, point, position, store_no from users where position='BRANCH' order by no desc) a)
+   	where #{page_top}<=rn and rn<=#{page_bottom}
+	]]>
+	</select>
+	
+	<!-- 포인트 차감 -->
+	<update id="pointuse" parameterType="map">
+	   <![CDATA[
+	   	update users set point=#{point } where no=#{no }
+	   ]]>
+	</update>
+	
+	<!-- 사용자 포인트 정보 얻기 -->
+	<select id="getpoint" parameterType="Long" resultType="uservo">
+	   <![CDATA[
+	       select point from users where no=#{no}
+		   ]]>
+	</select>
+
 </mapper>

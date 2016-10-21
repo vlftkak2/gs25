@@ -148,7 +148,6 @@ public class MapService {
 			mapvo.setRegion_no(vo.getRegion_no());
 			
 			Long map_no = mapdao.insertMap(mapvo);	//선)지도 삽입
-			System.out.println("mapvo no : " + map_no);
 			
 			StoreVo storevo = new StoreVo();
 			storevo.setName(vo.getName());
@@ -156,6 +155,17 @@ public class MapService {
 			storevo.setMap_no(map_no);
 			
 			storedao.insertStore(storevo);	//후) 지점 삽입
+		}
+		
+		//메인창 출력
+		public List<StoreVo>  getlist(){
+			List<StoreVo> storevo =  mapdao.getlist();
+			return storevo;
+		}
+		
+		public List<MapVo> mainmaplist(){
+			List<MapVo> mapvo = mapdao.getmaplist();
+			return mapvo;
 		}
 	
 

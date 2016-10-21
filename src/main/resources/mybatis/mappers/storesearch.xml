@@ -72,6 +72,87 @@
  	where a.REGION_NO=b.NO and (b.NAME like #{keyword} or a.NAME like #{keyword})
    ]]>
    </select>
+   
+    <!-- 관리자 가게 정보 (region_name 추가) -->
+	<select id="getmList" resultType= "storevo">
+   <![CDATA[
+	  select * from(
+		  select e.*,rownum rn from(
+		    select c.no, c.name, c.address, d.name as region_name, d.no as map_no
+		    from store c,(select a.no, b.name from map a, region b where a.REGION_NO = b.NO) d 
+		  where c.MAP_NO = d.no) e) 
+		where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+   
+   <!--관리자 가게 정보 검색 (region_name 추가)-->
+   	<select id="getListmKeyword" parameterType="map" resultType="storevo">
+   <![CDATA[
+ 	   select * from(
+ 		select e.*,rownum rn from(
+		   select c.no, c.name, c.address, c.map_no, d.name as region_name from 
+		   (select a.*,b.region_no from (select no,	name,	address, map_no from store where name like #{keyword} or address like #{keyword}) a, map b
+	   	where a.map_no = b.no) c, region d where c.region_no = d.no ) e) 
+	   where #{page_start}<=rn and rn<=#{page_end}
+   ]]>
+   </select>
+   
+   <insert id="insertMap" parameterType="mapvo">
+      <selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
+         <![CDATA[
+             SELECT seq_map.nextVal as no FROM DUAL
+         ]]>
+      </selectKey>
+      
+      <![CDATA[      
+         INSERT into map values (#{no }, #{name }, #{localx }, #{localy },#{region_no})
+      ]]>
+   </insert>
+   
+   <insert id="insertStore" parameterType="storevo">
+      <![CDATA[      
+         INSERT into store values (seq_store.nextval, #{name }, #{address }, #{map_no })
+      ]]>
+   </insert>
+   
+    <!-- 삭제 대상  map_no -->
+   	<select id="deleteSearch" parameterType="long" resultType="long">
+   <![CDATA[
+   select map_no from store where no=#{no}
+   ]]>
+   </select>
+   
+   <!-- 지점삭제 -->
+	<delete id="delete"  parameterType="long" >
+	 <![CDATA[   
+	 	DELETE from store where no=#{no}
+     ]]>
+	</delete>
+	
+   
+   <!-- 지도 삭제 -->
+	<delete id="deleteMap"  parameterType="long" >
+	 <![CDATA[   
+	 	DELETE from map where no=#{no}
+     ]]>
+	</delete>
+	
+		<!--관리자 가게 정보 검색 (region_name 추가)-->
+   	<select id="getlistAll" resultType="storevo">
+   <![CDATA[
+ 	  select c.no, c.name, c.address, d.name as region_name, d.no as map_no
+	    from store c,(select a.no, b.name from map a, region b where a.REGION_NO = b.NO order by no) d 
+	  where c.MAP_NO = d.no
+   ]]>
+   </select>
+	
+	<!--메인창 지도 모두 츨력 -->
+   	<select id="getmapAll" resultType="mapvo">
+   <![CDATA[
+ 	  select * from map
+   ]]>
+   </select>
+   
 
 
 

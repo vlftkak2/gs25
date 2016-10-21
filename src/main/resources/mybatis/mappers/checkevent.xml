@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="checkevent">
+<!--  
+ /* 
+  2016-10-10  작업자 : 최재은
+      개발 상황 : - */ 
+ -->
+    
+  	<!-- 처음 페이지 로딩 시 포인트 누적 횟수 -->
+	<select id="getCount" parameterType="checkeventvo" resultType="Integer">
+	<![CDATA[
+		select count(*) from (select * from check_event where user_no = #{user_no} and store_no = #{store_no} and years =(select to_char(trunc(sysdate),'yyyy') from dual) and months=(select to_char(trunc(sysdate),'mm') from dual))
+	]]>
+	</select>
+	
+	<!-- 출석체크 클릭 시 -->
+	<insert id="setCheck" parameterType="checkeventvo">
+	<![CDATA[
+		insert into check_event values(#{user_no}, to_char(sysdate,'yyyy'), to_char(sysdate,'mm'), to_char(sysdate,'dd'), #{store_no})
+	]]>
+	</insert>
+	
+	<!-- 출석체크 현황(달력 뿌려주기) -->
+	<select id="checkList" parameterType="checkeventvo" resultType="checkeventvo">
+	<![CDATA[
+		select * from check_event where user_no = #{user_no} and years =(select to_char(trunc(sysdate),'yyyy') from dual) and months=(select to_char(trunc(sysdate),'mm') from dual) and store_no= #{store_no} order by dates
+	]]>
+	</select>
+	
+</mapper>

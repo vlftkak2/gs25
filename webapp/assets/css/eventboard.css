@@ -227,3 +227,11 @@ div.pager  ul li a:visited,
 div.pager  ul li a:link,
 div.pager  ul li a:active { text-decoration: none; color:#ff8080 }
 div.pager  ul li a:hover { text-decoration: none; color:#f00 }
+
+
+input[type="submit"] {
+	padding:5px;
+	border:1px solid #ffffff; 
+	background-color: #0080ff; font-weight:bold; color:#FFFFFF;
+	font:1.0em "맑은 고딕", 돋움, 굴림;
+}

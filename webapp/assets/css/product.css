@@ -558,8 +558,6 @@ button {
 	padding: 7px 13px;
 	border-radius: 22px;
 	cursor: pointer	
-	
-	
 }
 button:hover{
 	border: 0px solid #0a3c59;
@@ -569,4 +567,20 @@ button:hover{
 
 .productView_content_ul li {
 	font-size:1em;
+}
+
+#pointBuy {
+    font-family: 'NanumBarunGothic', NanumBarunGothic,'돋움',Dotum, Arial,sans-serif;
+	float:right;
+    width: 105px;
+    height: 38px;
+	border: 0.5px solid white;
+	background: orange; 
+	cursor:pointer;
+	border-radius: 21px;
+    margin-top: 8px;
+}
+#mypoint {
+    float: left;
+    margin-top: 19px;
 }

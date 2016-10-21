@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.sungkyul.gs25.service.CartListService;
 import kr.ac.sungkyul.gs25.service.ProductService;
+import kr.ac.sungkyul.gs25.service.UserService;
 import kr.ac.sungkyul.gs25.vo.CartVo;
 import kr.ac.sungkyul.gs25.vo.NblogVo;
 import kr.ac.sungkyul.gs25.vo.ProductVo;
@@ -40,6 +41,9 @@ public class ProductController {
 	
 	@Autowired
 	CartListService cartservice;
+	
+	@Autowired
+	UserService userservice;
 
 	/*
 	 2016-10-14
@@ -123,7 +127,7 @@ public class ProductController {
 		
 		//상품 리스트
 		Map<String, Object> map = productservice.listBoard(page, keyword,StoreNo);
-
+		
 		model.addAttribute("map", map);
 
 		return "/Sub_Page/product_search";
@@ -201,7 +205,6 @@ public class ProductController {
 				@RequestParam(value="name") String name,
 				@RequestParam(value="store_no") Long store_no,
 				HttpSession session){
-			
 			UserVo authUser = (UserVo)session.getAttribute("authUser");
 			
 			if(authUser != null){
@@ -217,6 +220,11 @@ public class ProductController {
 			StoreProductVo vo = productservice.productInfo(no,store_no);
 			model.addAttribute("prodvo", vo);
 			
+
+			//사용자 포인트 정보 얻기
+			UserVo uservo=userservice.getPoint(user_no);
+			model.addAttribute("uservo", uservo);
+			
 			}else{
 				
 			//매장번호 넘기기
@@ -224,6 +232,7 @@ public class ProductController {
 			
 			//상품 정보
 			StoreProductVo vo = productservice.productInfo(no,store_no);
+			
 			model.addAttribute("prodvo", vo);
 			}
 			
@@ -236,28 +245,28 @@ public class ProductController {
 			return "/Sub_Page/product_view";
 		}
 		
+
 		@ResponseBody
 		@RequestMapping("/random1000")	//출석체크 클릭 시
-		public ProductVo random1000(HttpSession session){
+		public StoreProductVo random1000(HttpSession session, Long store_no){
 			
-//			UserVo uservo = (UserVo)session.getAttribute("authUser");
-//			Long user_no = uservo.getNo();
+			UserVo uservo = (UserVo)session.getAttribute("authUser");
+			Long user_no = uservo.getNo();
 			
-			ProductVo productvo = productservice.random1000();
+			StoreProductVo storeproductvo = productservice.random1000(user_no, store_no);
 			
-			return productvo;
+			return storeproductvo;
 		}
 		
 		@ResponseBody
 		@RequestMapping("/random2000")	//출석체크 클릭 시
-		public ProductVo random2000(HttpSession session){
+		public StoreProductVo random2000(HttpSession session, Long store_no){
 			
-//			UserVo uservo = (UserVo)session.getAttribute("authUser");
-//			Long user_no = uservo.getNo();
+			UserVo uservo = (UserVo)session.getAttribute("authUser");
+			Long user_no = uservo.getNo();
 			
-			ProductVo productvo = productservice.random2000();
-			
-			return productvo;
+			StoreProductVo storeproductvo = productservice.random2000(user_no, store_no);
+			return storeproductvo;
 		}
 		
 		

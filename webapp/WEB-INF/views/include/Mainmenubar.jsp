@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="/gs25/assets/js/menubar.js"></script>
+<script type="text/javascript" src="/gs25/assets/js/Mainmenubar.js"></script>
 <style>
 #STATICMENU {
 	margin: 0 170px;
@@ -18,8 +18,10 @@
 	top: 0px;
 }
 </style>
+
 </head>
 <body>
+
 <div id="menubar">
 			<div id="STATICMENU">
 				<div class="myarea_wrap">
@@ -43,20 +45,28 @@
 								</c:choose>
 						</div>
 						<ul class="my_lst">
-							<li><a href="/gs25/product/list?store_no=${store_no }" class="my_m2">상품</a></li>
-							<li><a href="/gs25/event/eventlist?store_no=${store_no }" class="my_m1">이벤트</a></li>
+						  	<li><a href="/gs25/product/Mainlist" class="my_m2">상품</a></li>
+							<li><a href="/gs25/custom/list" class="my_m3" >고객센터</a></li>
 						</ul>
 						<div class="menuwrap">
 							<c:choose>
-								<c:when test='${authUser.no ==2 || authUser.no==1}'>
+								<c:when test='${authUser.no ==100}'>
 							
 									<p class="menu_tit">관리자 메뉴</p>
 									<ul class="my_lst">
-										<li><a href="/gs25/manage/eventList?store_no=${store_no }" class="my_m4">이벤트</a>
-										</li>
-										<li><a href="/gs25/guestmanage/guestList?store_no=${store_no }" class="my_m4">방명록</a>
-										</li>
-									</ul>
+					<li>
+						<a href="/gs25/map/mlist" class="my_m0">매장관리</a>
+					</li>
+					<li>
+						<a href="/gs25/user/mlist" class="my_m1">회원관리</a>
+					</li>
+					<li>
+						<a href="/gs25/product/Mainlist" class="my_m2">상품관리</a>
+					</li>
+					<li>
+						<a href="/gs25/custom/customboardManager" class="my_m3">고객센터</a>
+					</li>
+				</ul>
 								</c:when>
 								<c:otherwise>
 									<p class="menu_tit">반가워요</p>
@@ -68,23 +78,7 @@
 				</div>
 			</div>
 		</div>
+
 </body>
-<script>
-$(function () {
-    
-    $( window ).scroll( function() {
-        if ( $( this ).scrollTop() > 200 ) {
-          $( '.top' ).fadeIn();
-        } else {
-          $( '.top' ).fadeOut();
-        }
-      } );
-      $( '.top' ).click( function() {
-        $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
-        return false;
-      } );
-   
- 
-});
-</script>
+
 </html>

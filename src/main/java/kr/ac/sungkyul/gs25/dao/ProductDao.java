@@ -181,16 +181,15 @@ public class ProductDao {
 	
 	
 	// 1000원 이하 랜덤 상품 (출석체크 상품 증정)
-		public ProductVo random1000(){
-			
-			ProductVo vo = sqlSession.selectOne("product.random1000");
+		public StoreProductVo random1000(Long store_no){
+			StoreProductVo vo = sqlSession.selectOne("product.random1000",store_no);
 			return vo;
 		}
 		
+		
 		// 2000원 이하 랜덤 상품 (출석체크 상품 증정)
-		public ProductVo random2000(){
-			
-			ProductVo vo = sqlSession.selectOne("product.random2000");
+		public StoreProductVo random2000(Long store_no){
+			StoreProductVo vo = sqlSession.selectOne("product.random2000",store_no);
 			return vo;
 		}
 		
@@ -214,4 +213,26 @@ public class ProductDao {
 		public void Storedelete(Long no){
 			sqlSession.delete("product.Storedelete",no);
 		}
+		
+		//기프티콘에 쓰일 정보 출력
+		public StoreProductVo giftprductInfo(Long store_no, Long no){
+					
+			Map<String, Object> map=new HashMap<>();
+			map.put("store_no", store_no);
+			map.put("no", no);
+			
+			StoreProductVo vo = sqlSession.selectOne("product.searchstoreproduct",map);
+//			System.out.println("상품상세정보: " + vo.toString());
+			return vo;
+		}
+		
+		//상품 수량 감소
+		public void cutmount(Long storeproduct_no){
+			
+			sqlSession.update("product.cutmount",storeproduct_no);
+			System.out.println("성공");
+
+		}
+		
+		
 }
