@@ -19,7 +19,8 @@
    			select 
    				no,
    				name,
-   				address 
+   				address,
+   				map_no
    				from store) c) 
    	where #{page_start}<=rn and rn<=#{page_end}
    ]]>

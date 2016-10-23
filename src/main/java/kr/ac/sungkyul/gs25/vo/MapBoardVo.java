@@ -6,6 +6,7 @@ public class MapBoardVo {
 	private String name;
 	private String address;
 	private Long regionno;
+	private int map_no;
 	
 	public Long getNo() {
 		return no;
@@ -32,9 +33,17 @@ public class MapBoardVo {
 	public void setRegionno(Long regionno) {
 		this.regionno = regionno;
 	}
+	
+	public int getMap_no() {
+		return map_no;
+	}
+	public void setMap_no(int map_no) {
+		this.map_no = map_no;
+	}
 	@Override
 	public String toString() {
-		return "MapBoardVo [no=" + no + ", name=" + name + ", address=" + address + ", regionno=" + regionno + "]";
+		return "MapBoardVo [no=" + no + ", name=" + name + ", address=" + address + ", regionno=" + regionno
+				+ ", map_no=" + map_no + "]";
 	}
 	
 	

@@ -264,7 +264,9 @@ $(function() {
 		var product_price = ${prodvo.price };
 		var store_no =  ${store_no };
 		var point = ${uservo.point};
+		var mount = ${prodvo.mount};
 		var discount = $("#discount").text();
+	
 		
 		console.log(discount);
 		
@@ -278,7 +280,7 @@ $(function() {
 					halfprice:"${prodvo.halfprice}"};
 
 		
-		if(point> product_price){
+		if((point> product_price) && mount>0){
 			$.ajax({
 				url: "/gs25/user/pointuse",
 				type: "POST",
@@ -291,14 +293,17 @@ $(function() {
 						/* sweetAlert("찜해제!"); */
 						$("#popo").html('${uservo.point - prodvo.price }');
 					} else{
-						alert('죄송합니다. 다시 시도해주세요');
+						sweetAlert('죄송합니다. 다시 시도해주세요');
 					}
 				},
 				"error": function(jsXHR, status, e){
 					console.error("error:"+status+":"+e);
 				}
 			});
-		} else{
+		}else if(mount<=0){
+			sweetAlert("재고수가 부족합니다.");
+		} 
+		else{
 			sweetAlert("포인트가 부족합니다.");
 
 		}

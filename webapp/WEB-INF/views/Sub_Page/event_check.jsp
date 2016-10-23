@@ -12,6 +12,10 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type='text/javascript' src='/gs25/assets/js/jquery.simplemodal.js'></script>
+<script src="/gs25/assets/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
+
+
 
 
 <title>attendance_check</title>
@@ -169,7 +173,7 @@ $(function() {
 						console.log(result);
 						 if(result == "0"){
 							console.log(result);
-							alert("죄송합니다. 다시 시도해주세요")
+							sweetAlert("죄송합니다. 다시 시도해주세요!");
 							return false;
 						}
 						
@@ -217,7 +221,7 @@ $(function() {
 					  } else if('${count}' == 29){
 						  
 					  }else{
-					 	alert("감사합니다. 출석되셨습니다.")
+							sweetAlert("감사합니다. 출석되셨습니다.");
 					  }
 				}
 					$("#checkDate").hide();
