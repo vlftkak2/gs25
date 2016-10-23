@@ -73,3 +73,14 @@ ul.tabs li.on {
 #nopad{
 	padding: 0;
 }
+
+#happy{
+	float:left;
+	margin-bottom:30px;
+	margin-left:20px;
+}
+#happy2{
+	float:left;
+	margin-left:50px;
+}
+

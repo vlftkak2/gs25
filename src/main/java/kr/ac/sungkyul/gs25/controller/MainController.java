@@ -66,6 +66,4 @@ public class MainController {
 		return "/Main_Page/companyintro";
 	}
 	
-
-
 }
