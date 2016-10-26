@@ -35,9 +35,15 @@
 							<input type="button" class="btn_log" value="로그인"
 								onclick="location.href='/gs25/user/loginform';">
 								</c:when>
+							
+								<c:when test='${authUser.no==100 }'>
+									<p>
+								환영합니다<br>${authUser.name }님 <br> ^^</p>
+								</c:when>
+								
 								<c:otherwise>
 								<p>
-								환영합니다<br>${authUser.name }님 <br> ^^
+								<a href="/gs25/sub/main?store_no=${authUser.store_no }">환영합니다<br>${authUser.name }님 <br> ^^</a>
 								</p>
 								<input type="button" class="btn_log" value="로그아웃"
 								onclick="location.href='/gs25/user/logout';">
