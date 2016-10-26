@@ -75,7 +75,7 @@ where a.no=b.no
 	<!-- 서브 상품 게시물 총 개수 얻기 -->
 	<select id="getTotalCount" parameterType="Long" resultType="java.lang.Integer">
 	     <![CDATA[
-	  select count(*) from storeproduct where STORE_NO=#{StoreNo}
+	  select count(*) from storeproduct where STORE_NO=#{StoreNo} and EXPIRY_DATE>sysdate
 	     ]]>
 	</select>
 	
@@ -337,5 +337,36 @@ where a.no=b.PRODUCT_NO and
 		mount = mount - 1 where no = #{storeproduct_no}
 		]]>
 	</update>
+	
+	<!-- 안드로이드 상품 리스트 -->
+	<select id="getListBoard" resultType="storeproductvo">
+		<![CDATA[
+		
+		  select * from(
+        select c.*,rownum rn from(
+          select b.no,
+                 c.name as storename,
+                 a.name,
+                 a.price,
+                 a.maker,
+                 to_char(b.reg_date,'yyyy/mm/dd') as reg_date,
+                 to_char(b.EXPIRY_DATE,'yyyy/mm/dd') as expiry_date,
+                 ceil(sysdate-b.reg_date) as newdate,
+                 e.IMAGEURL,
+                 ceil(b.expiry_date-sysdate) as remainderdate, 
+                (ceil(((d.DIS_PERCENT*0.01)*a.price)/7)) countprice,
+                a.price*0.5 as halfprice,
+                b.count,
+                b.mount,
+                b.PRODUCT_NO,
+                b.STORE_NO
+          from product a, storeproduct b, store c, productkind d, boardsfilepr e
+      where a.no=e.no and d.no=a.KIND_NO and a.no=b.PRODUCT_NO and c.no=b.STORE_NO
+      and b.EXPIRY_DATE>sysdate
+      order by a.price asc) c)
+
+			]]>
+	
+	</select>
 
 </mapper>

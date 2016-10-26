@@ -266,6 +266,7 @@ $(function() {
 		var point = ${uservo.point};
 		var mount = ${prodvo.mount};
 		var discount = $("#discount").text();
+		var halfprice = ${prodvo.halfprice};
 	
 		
 		console.log(discount);
@@ -280,7 +281,7 @@ $(function() {
 					halfprice:"${prodvo.halfprice}"};
 
 		
-		if((point> product_price) && mount>0){
+		if((point>= halfprice) && mount>0){
 			$.ajax({
 				url: "/gs25/user/pointuse",
 				type: "POST",

@@ -442,6 +442,7 @@ input[type=text], input[type=password] {
 .lineM{
 	background:url("/gs25/assets/images/login/home.png") no-repeat 25px 20px;
 	padding: 17px 0px 20px 57px;
+	margin-top:50px;
 	color:#fff;
 }
 .lineL{

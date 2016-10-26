@@ -48,7 +48,7 @@
 								</c:if>
 								<li><h2><a href="/gs25/custom/list" class="on">고객센터</a></h2>
 								</li>
-								<li><h2><a href="/gs25/membership">맴버십</a></h2>
+								<li><h2><a href="/gs25/membership">멤버십</a></h2>
 								</li>
 								<li><h2><a href="/gs25/map/list">매장검색</a></h2>
 								</li>

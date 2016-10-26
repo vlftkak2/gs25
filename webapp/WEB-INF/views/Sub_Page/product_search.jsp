@@ -42,7 +42,7 @@
 					<div id="search">
 						<form id="search_form" action="/gs25/product/list" method="get">
 							<input type="hidden" name="store_no" value="${StoreNo }">
-							<input type="text" id="kwd" name="kwd" value="${map.keyword }">
+							<input type="text" id="kwd" name="kwd" value="${map2.keyword }">
 							<input type="submit" value="찾기">
 						</form>
 					</div>
@@ -63,7 +63,7 @@
 					<div id="productboard">
 						<div id="productlist">
 							<ul>
-								<c:forEach var='vo' items='${map.list}' varStatus='status'>
+								<c:forEach var='vo' items='${map2.list}' varStatus='status'>
 									<li id="product_li">
 										<ul class="tag_list_01">
 											<li class="ico_tag_03">
@@ -151,7 +151,7 @@
 								</c:forEach>
 							</ul>
 
-							<c:if test="${empty map.list}">
+							<c:if test="${empty map2.list}">
 								<div id="right">
 									<div id="risk">
 										<img src="/gs25/assets/images/customcenter/risk.png">
@@ -163,40 +163,40 @@
 							</c:if>
 
 
-							<c:if test='${not empty map.list }'>
+							<c:if test='${not empty map2.list }'>
 								<!-- begin:paging -->
 								<div class="pager">
 									<ul>
-										<c:if test="${map.prevtoPage >= 0 }">
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.prevtoPage }">◀◀</a></li>
+										<c:if test="${map2.prevtoPage >= 0 }">
+											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map2.prevtoPage }">◀◀</a></li>
 										</c:if>
 
-										<c:if test="${map.prevPage >= 0 }">
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.prevPage }">◀</a></li>
+										<c:if test="${map2.prevPage >= 0 }">
+											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map2.prevPage }">◀</a></li>
 										</c:if>
 
-										<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
+										<c:forEach begin='${map2.firstPage }' end='${map2.lastPage }'
 											step='1' var='i'>
 											<c:choose>
-												<c:when test='${map.currentPage == i }'>
+												<c:when test='${map2.currentPage == i }'>
 													<li class="selected">${i }</li>
 												</c:when>
 
-												<c:when test='${i > map.pageCount }'>
+												<c:when test='${i > map2.pageCount }'>
 													<li>${i }</li>
 												</c:when>
 
 												<c:otherwise>
-													<li><a href="/gs25/product/list?store_no=${store_no }&p=${i }">${i }</a></li>
+													<li><a href="/gs25/product/list?store_no=${store_no }&p=${i}">${i }</a></li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
 
-										<c:if test='${map.nextPage > 0 }'>
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.nextPage }">▶</a></li>
+										<c:if test='${map2.nextPage > 0 }'>
+											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map2.nextPage }">▶</a></li>
 										</c:if>
-										<c:if test='${map.nexttoPage > 0 }'>
-											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map.nexttoPage }">▶▶</a></li>
+										<c:if test='${map2.nexttoPage > 0 }'>
+											<li><a href="/gs25/product/list?store_no=${store_no }&p=${map2.nexttoPage }">▶▶</a></li>
 										</c:if>
 									</ul>
 								</div>

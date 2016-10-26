@@ -234,5 +234,10 @@ public class ProductDao {
 
 		}
 		
+		//안드로이드 상품 리스트
+		public List<StoreProductVo> getListBoard(){
+			return sqlSession.selectList("product.getListBoard");
+		}
+		
 		
 }

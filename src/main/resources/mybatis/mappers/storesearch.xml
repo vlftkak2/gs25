@@ -34,7 +34,8 @@
  			select 
  		 		no,
  				name,
- 				address 
+ 				address,
+ 				map_no
  				from store where name like #{keyword} or address like #{keyword}) c) 
  	where #{page_start}<=rn and rn<=#{page_end}
    ]]>

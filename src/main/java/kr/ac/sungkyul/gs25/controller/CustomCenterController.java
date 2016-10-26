@@ -146,10 +146,11 @@ public class CustomCenterController {
 			return "redirect:/main";
 		}
 		
+		
 		//사용자 세션 정보 얻어오기
 		UserVo authUser=(UserVo)session.getAttribute("authUser");
 		if(authUser==null){
-			return "redirect:/main";
+			return "redirect:/custom/right";
 		}
 		
 		//사용자 세션의 번호값을 얻기
@@ -299,6 +300,13 @@ public class CustomCenterController {
 	public String right(){
 		return "/Main_Page/custom_right";
 	}
+	
+	//권한 위배시 발생되는 이벤트
+		@RequestMapping("/guestbookright")
+		public String guestbookright(){
+			return "/Sub_Page/custom_right";
+		}
+		
 	
 		//파일다운로드
 		@RequestMapping(value = "download", method = RequestMethod.GET)

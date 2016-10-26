@@ -128,7 +128,7 @@
 											<li><a href="/gs25/product/Mainlist?p=${map.nextPage }">▶</a></li>
 										</c:if>
 										<c:if test='${map.nexttoPage > 0 }'>
-											<li><a href="/gs25/product/list/Mainlist?p=${map.nexttoPage }">▶▶</a></li>
+											<li><a href="/gs25/product/Mainlist?p=${map.nexttoPage }">▶▶</a></li>
 										</c:if>
 									</ul>
 								</div>

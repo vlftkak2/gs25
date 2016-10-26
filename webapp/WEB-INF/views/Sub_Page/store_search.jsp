@@ -147,7 +147,7 @@ function makeOutListener(infowindow) {
 									<tr>
 										<td>${vo.name }</td>
 										<td>${vo.address }</td>
-										<td><a href="#">바로가기</a></td>
+										<td><a href="/gs25/sub/main?store_no=${vo.map_no }">바로가기</a></td>
 									</tr>
 								</c:forEach>
 							</table>

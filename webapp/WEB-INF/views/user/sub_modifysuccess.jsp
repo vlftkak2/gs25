@@ -27,7 +27,7 @@
 				<div id="goMain">
 					<ul>
 						<li id="line"><h3 class="lineM"><a href="/gs25/sub/main">메인페이지 이동</a></h3></li>
-						<li id="line"><h3 class="lineL"><a href="/gs25/user/Subloginform">로그인하기</a></h3></li>
+					<!-- <li id="line"><h3 class="lineL"><a href="/gs25/user/Subloginform">로그인하기</a></h3></li> -->
 					</ul>
 				</div>	
 			</div>

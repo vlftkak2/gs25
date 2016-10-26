@@ -20,6 +20,12 @@ public class UserDao {
 	public void insert(UserVo vo) {
 		sqlSession.insert("user.insert",vo);
 	}
+	
+	//안드로이드 로그인 삽입
+	public int androidinsert(UserVo vo){
+		int check=sqlSession.insert("user.androidinsert",vo);
+		return check;
+	}
 
 
 	public UserVo login(String email, String password) { // login

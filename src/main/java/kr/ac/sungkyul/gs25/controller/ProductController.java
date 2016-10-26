@@ -126,9 +126,9 @@ public class ProductController {
 		model.addAttribute("StoreNo", StoreNo);
 		
 		//상품 리스트
-		Map<String, Object> map = productservice.listBoard(page, keyword,StoreNo);
+		Map<String, Object> map2 = productservice.listBoard(page, keyword,StoreNo);
 		
-		model.addAttribute("map", map);
+		model.addAttribute("map2", map2);
 
 		return "/Sub_Page/product_search";
 	}
@@ -268,6 +268,5 @@ public class ProductController {
 			StoreProductVo storeproductvo = productservice.random2000(user_no, store_no);
 			return storeproductvo;
 		}
-		
 		
 }

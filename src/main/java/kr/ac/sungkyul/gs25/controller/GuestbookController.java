@@ -49,7 +49,7 @@ public class GuestbookController {
 		}
 		UserVo authUser=(UserVo)session.getAttribute("authUser");
 		if(authUser==null){
-			return "redirect:/main";
+			return "redirect:/custom/guestbookright";
 		}
 		vo.setUser_no(authUser.getNo());
 		vo.setStore_no(store_no);

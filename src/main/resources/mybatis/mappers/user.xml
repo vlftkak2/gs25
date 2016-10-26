@@ -13,6 +13,19 @@
 	]]>
 </insert>
 
+<insert id="androidinsert" parameterType="uservo">
+
+	<selectKey resultType="java.lang.Long" keyProperty="no" order="BEFORE">
+       	<![CDATA[
+       		SELECT seq_users.nextVal as no FROM DUAL
+       	]]>
+		</selectKey>
+
+<![CDATA[
+	insert into users values(#{no}, #{name},#{email},#{password}, to_date(#{birth},'yyyy-mm-dd'),#{gender},#{address},#{phone}, 0,'CUSTOMER',0)
+]]>
+</insert>
+
 <select id="login" parameterType="uservo" resultType="uservo">
 	<![CDATA[
 	select no,email ,name, gender, point, store_no, position from users where email=#{email } and password=#{password }

@@ -36,6 +36,12 @@ public class UserService {
 		usersdao.insert(vo);
 	}
 	
+	//안드로이드 조인
+	public int Androidjoin(UserVo vo){
+		int check=usersdao.androidinsert(vo);
+		return check;
+	}
+	
 	public UserVo login(String email, String password){ // 로그인
 		UserVo authUser = usersdao.login(email,password);
 		return authUser;
