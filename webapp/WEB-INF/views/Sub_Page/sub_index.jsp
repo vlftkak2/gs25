@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>서브 메인</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/sub.css" rel="stylesheet" type="text/css">
 <link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">

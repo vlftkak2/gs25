@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>상품 검색</title>
 <script type="text/javascript"
 	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 </head>
@@ -70,7 +70,7 @@
 											 <c:if test='${vo.count>=20 }'>
 											 <strong>인기</strong>
 											 </c:if>
-											 <c:if test='${vo.newdate<=15 }'>
+											 <c:if test='${vo.newdate<=7 }'>
 											 <strong>신상</strong>
 											 </c:if>
 										

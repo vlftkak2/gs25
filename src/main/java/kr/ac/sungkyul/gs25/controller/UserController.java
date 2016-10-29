@@ -238,6 +238,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value ="/setPass", method = {RequestMethod.GET, RequestMethod.POST})	//재설정 비번 저장
 	public String setPassword(Long no, String password){
+		System.out.println("cont "+no +" "+password);
 		//state 1로 변경
 		String result = userService.setpass(no,password);
 		return result;
@@ -306,7 +307,7 @@ public class UserController {
 		System.out.println(result);
 		
 		//기프티콘 전송
-		gifticonservice.insert(no, storeproduct_no, store_no);
+		gifticonservice.insert2(no, storeproduct_no, store_no);
 		
 		//수량 감소
 		productdao.cutmount(storeproduct_no);

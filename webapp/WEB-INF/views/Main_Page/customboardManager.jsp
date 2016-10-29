@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CustomBoardList</title>
+<title>고객센터 관리자</title>
 <link href="/gs25/assets/css/customboard.css" rel="stylesheet" type="text/css">
 <link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
 

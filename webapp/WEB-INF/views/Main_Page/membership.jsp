@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/membership.css" rel="stylesheet"
 	type="text/css">
-<title>Insert title here</title>
+<title>멤버십</title>
 <link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">
 
 </head>

@@ -10,7 +10,7 @@
 <link href="/gs25/assets/css/eventboard.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="/gs25/assets/js/slideShow.js"></script>
-<title>Slide Show</title>
+<title>이벤트 게시판</title>
 <style>
     #slideShowImages { /* css  */
       border: 1px #f7f7f7 solid;

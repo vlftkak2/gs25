@@ -8,7 +8,7 @@
 <!doctype html>
 <html>
 <head>
-<title>mysite</title>
+<title>방명록 리스트</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="/gs25/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 </head>

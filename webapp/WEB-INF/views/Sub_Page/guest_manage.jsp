@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>방명록 관리</title>
 <link href="/gs25/assets/css/manage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>

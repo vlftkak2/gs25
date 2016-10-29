@@ -79,6 +79,7 @@ public class UserVo {
 	public void setStore_no(Long store_no) {
 		this.store_no = store_no;
 	}
+	
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", birth="

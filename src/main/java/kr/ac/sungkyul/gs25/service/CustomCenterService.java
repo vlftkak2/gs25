@@ -224,5 +224,12 @@ public class CustomCenterService {
 		return vo;
 	}
 	
+	//안드로이드 고객센터 리스트
+	public List<CustomBoardVo> getListCustomBoard(){
+		
+		List<CustomBoardVo> list=customdao.getListCustomBoard();
+		return list;
+	}
+	
 
 }

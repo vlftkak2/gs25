@@ -31,14 +31,14 @@
 								서비스 이용을<br> 위해 로그인<br> 해주세요 <br>
 							</p>
 							<input type="button" class="btn_log" value="로그인"
-								onclick="location.href='/gs25/user/loginform';">
+								onclick="location.href='/gs25/user/Subloginform';">
 								</c:when>
 								<c:otherwise>
 								<p>
 								환영합니다<br>${authUser.name }님 <br> ^^
 								</p>
 								<input type="button" class="btn_log" value="로그아웃"
-								onclick="location.href='/gs25/user/logout';">
+								onclick="location.href='/gs25/user/Sublogout?store_no=${store_no}';">
 								</c:otherwise>
 								</c:choose>
 						</div>

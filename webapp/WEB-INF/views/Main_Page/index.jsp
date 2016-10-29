@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>main_index</title>
+<title>메인</title>
 <link href="/gs25/assets/css/manage.css" rel="stylesheet" type="text/css">
 <link href="/gs25/assets/css/index.css" rel="stylesheet" type="text/css">
 
@@ -191,7 +191,7 @@ function makeOutListener(infowindow) {
 <!-- 		<p id="tit"></p> -->
 		</div>
 		
-			<div id="tap_content" style="height: 500px;">
+			<div id="tap_content" style="height: 200px;">
 			    <ul class="tabs" style="height: 57px;">
 			    	<c:forEach var='regionvo' items='${regionvo}' varStatus='status'>
 						<c:choose>
@@ -205,7 +205,7 @@ function makeOutListener(infowindow) {
 				</c:forEach>
 			    </ul>
 			    <div class="tab_container">
-			        <div id="tab1" class="tab_content" style="height: 385px;">
+			        <div id="tab1" class="tab_content" style="height: 100px;">
 	       				<div class="market_list">
 						<div class="markey_list_sub">
 		       			<ul class="market_list_point" style="margin: 20px 5px;">
@@ -232,7 +232,7 @@ function makeOutListener(infowindow) {
 						</div>
 						</div>
 					</div>
-					<div id="tab2" class="tab_content" style="height: 385px;">
+					<div id="tab2" class="tab_content" style="height: 100px;">
 						<div class="market_list">
 						<div class="markey_list_sub">
 		       			<ul class="market_list_point" style="margin: 20px 5px;">
@@ -259,7 +259,7 @@ function makeOutListener(infowindow) {
 						</div>
 						</div>
 					</div>
-					<div id="tab3" class="tab_content" style="height: 385px;">
+					<div id="tab3" class="tab_content" style="height: 100px;">
 						<div class="market_list">
 						<div class="markey_list_sub">
 		       			<ul class="market_list_point" style="margin: 20px 5px;">

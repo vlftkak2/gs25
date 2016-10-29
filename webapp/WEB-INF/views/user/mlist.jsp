@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원 리스트 수</title>
 <link href="/gs25/assets/css/manage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 <link href="/gs25/assets/css/menubar.css" rel="stylesheet" type="text/css">

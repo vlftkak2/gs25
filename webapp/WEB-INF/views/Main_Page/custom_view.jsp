@@ -10,7 +10,7 @@
 <%
 	pageContext.setAttribute("newLine", "\n");
 %>
-<title>gs25_view</title>
+<title>고객센터 보기</title>
 <link href="/gs25/assets/css/customboard.css" rel="stylesheet" type="text/css">
 
 </head>

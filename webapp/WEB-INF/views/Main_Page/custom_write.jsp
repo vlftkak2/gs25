@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>gs25_write</title>
+<title>고객센터 글작성</title>
 <link href="/gs25/assets/css/customboard.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 

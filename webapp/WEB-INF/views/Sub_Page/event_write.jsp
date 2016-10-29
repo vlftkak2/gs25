@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>이벤트 글쓰기</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/eventboard.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
@@ -80,7 +81,7 @@
 
 							<div class="bottom">
 								<a href="/gs25/event/eventlist?store_no=${store_no }">취소</a>
-								<input type="submit" class="register" value="등록">
+								<input type="submit" id="submit" class="register" value="등록">
 							</div>
 						</form>
 					</div>

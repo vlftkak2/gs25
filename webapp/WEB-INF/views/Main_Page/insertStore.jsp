@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>product_insert</title>
+<title>상품 삽입</title>
 <link href="/gs25/assets/css/product.css" rel="stylesheet"
 	type="text/css">
 </head>

@@ -13,7 +13,7 @@
 	src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 	<script src="/gs25/assets/js/sweetalert.min.js"></script>
 	
-	<title>Insert title here</title>
+	<title>상품 보기</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/subheader.jsp" />

@@ -55,7 +55,7 @@
 	<![CDATA[
 	select * from(
 	select c.*, rownum rn from(
-	select a.no, a.content, to_char(a.reg_date, 'yyyy-mm-dd') as reg_date,
+	select a.no, a.content, to_char(a.reg_date, 'yyyy-mm-dd') as reg_date,b.email,
 	b.name from guestbook a, users b where a.user_no = b.no and a.store_no=${store_no}) c)
 	where #{page_top}<=rn and rn<=#{page_bottom}
 	]]>

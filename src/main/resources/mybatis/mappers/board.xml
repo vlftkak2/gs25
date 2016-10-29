@@ -219,6 +219,25 @@
 		select groupno from boardsfile
 			]]>
 	</select>
+	
+	<!-- 안드로이드 고객센터 리스트 -->
+	<select id="getListCustomBoard" resultType="kr.ac.sungkyul.gs25.vo.CustomBoardVo">
+			<![CDATA[	
+   				select 
+   					a.no,
+   					a.title,
+   					b.name,
+   					a.user_no as UserNo,
+   					a.view_count as count,
+   					to_char(a.reg_date,'yyyy-mm-dd pm hh:mi:ss') as regdate,
+   					a.depth,
+   					a.GROUP_NO as groupNo,
+   					a.ORDER_NO as groupOrderNo 
+   				from boards a, users b 
+   				where a.user_no=b.no 
+   				order by group_no desc, order_no asc
+		]]>
+	</select>
 
 
 </mapper>

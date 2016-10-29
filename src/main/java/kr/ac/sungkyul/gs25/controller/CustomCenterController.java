@@ -4,6 +4,7 @@ package kr.ac.sungkyul.gs25.controller;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -340,4 +341,5 @@ public class CustomCenterController {
 			model.addAttribute("map", map);
 			return "/Main_Page/customboardManager";   
 		}
+		
 }

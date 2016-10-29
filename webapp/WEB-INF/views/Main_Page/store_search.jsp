@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<title>GS25</title>
+<title>지도 검색</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="/gs25/assets/css/map.css" rel="stylesheet" type="text/css">
 
@@ -27,6 +27,59 @@ mapOption = {
     center: new daum.maps.LatLng(37.5547992, 126.9684953),
     level: 4 // 지도의 확대 레벨
 };
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='파리바게트' || '${map.keyword}'=='파리' ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.503238, 126.7204644),
+	    level: 4// 지도의 확대 레벨
+	};
+	
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='부평고등학교'  ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.5017369, 126.7255239),
+	    level: 4// 지도의 확대 레벨
+	};
+	
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='아인스월드' || '${map.keyword}'=='아인스' ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.5550432, 126.9662053),
+	    level: 4// 지도의 확대 레벨
+	};
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='삼성전자' || '${map.keyword}'=='삼성' ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.556897, 126.968231),
+	    level: 4// 지도의 확대 레벨
+	};
+	
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='명학공원' || '${map.keyword}'=='명학' ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.384182, 126.933465),
+	    level: 4// 지도의 확대 레벨
+	};
+	
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+}else if('${map.keyword}'=='안양경찰서' || '${map.keyword}'=='경찰서' ){	
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.391171, 126.9466219),
+	    level: 4// 지도의 확대 레벨
+	};
 
 var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 

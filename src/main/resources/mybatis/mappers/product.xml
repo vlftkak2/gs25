@@ -341,7 +341,6 @@ where a.no=b.PRODUCT_NO and
 	<!-- 안드로이드 상품 리스트 -->
 	<select id="getListBoard" resultType="storeproductvo">
 		<![CDATA[
-		
 		  select * from(
         select c.*,rownum rn from(
           select b.no,
@@ -362,11 +361,9 @@ where a.no=b.PRODUCT_NO and
                 b.STORE_NO
           from product a, storeproduct b, store c, productkind d, boardsfilepr e
       where a.no=e.no and d.no=a.KIND_NO and a.no=b.PRODUCT_NO and c.no=b.STORE_NO
-      and b.EXPIRY_DATE>sysdate
+      and b.EXPIRY_DATE>sysdate 
       order by a.price asc) c)
-
 			]]>
-	
 	</select>
 
 </mapper>

@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>이벤트 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/gs25/assets/css/manage.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="/gs25/assets/css/sweetalert.css">
@@ -27,18 +28,17 @@
 <div id="container">
 	<jsp:include page="/WEB-INF/views/include/subheader.jsp" />
 <div id="content">
+		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
 
 		<div id="manage_wrap">
-		
-		<jsp:include page="/WEB-INF/views/include/menubar.jsp" />
-		
-		
-		
+				
 			<div id="tap_content">
 			    <ul class="tabs">
 			     <li class="active" id="tap0" rel="tab0">이벤트 창</li>
 
 			    </ul>
+			    
+			    
 			    
 			    <div class="tab_container">
 			    
@@ -100,11 +100,11 @@
 								<ul>
 
 									<c:if test="${map.prevtoPage >= 0 }">
-										<li><a href="/gs25/manage/eventList?p=${map.prevtoPage }">◀◀</a></li>
+										<li><a href="/gs25/manage/eventList?store_no=${store_no }&p=${map.prevtoPage }">◀◀</a></li>
 									</c:if>
 
 									<c:if test="${map.prevPage >= 0 }">
-										<li><a href="/gs25/manage/eventList?p=${map.prevPage }">◀</a></li>
+										<li><a href="/gs25/manage/eventList?store_no=${store_no }&p=${map.prevPage }">◀</a></li>
 									</c:if>
 
 									<c:forEach begin='${map.firstPage }' end='${map.lastPage }'
@@ -117,16 +117,16 @@
 												<li>${i }</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/gs25/manage/eventList?p=${i }">${i }</a></li>
+												<li><a href="/gs25/manage/eventList?store_no=${store_no }&p=${i }">${i }</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 
 									<c:if test='${map.nextPage > 0 }'>
-										<li><a href="/gs25/manage/eventList?p=${map.nextPage }">▶</a></li>
+										<li><a href="/gs25/manage/eventList?store_no=${store_no }&p=${map.nextPage }">▶</a></li>
 									</c:if>
 									<c:if test='${map.nexttoPage > 0 }'>
-										<li><a href="/gs25/manage/eventList?p=${map.nexttoPage }">▶▶</a></li>
+										<li><a href="/gs25/manage/eventList?store_no=${store_no }&p=${map.nexttoPage }">▶▶</a></li>
 									</c:if>
 
 								</ul>

@@ -46,12 +46,35 @@ public class GificonService {
  		//이메일에 보낼 상품 정보
  		StoreProductVo storeproductvo = productdao.giftprductInfo(store_no, storeproduct_no);
  		try {
- 			PointemailGift(user_no, storeproductvo);
+ 			emailGift(user_no, storeproductvo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
  	}
+ 	
+ // 포인트 구매 삽입
+  	public void insert2(Long user_no, Long storeproduct_no, Long store_no) {
+  		
+  		GifticonVo gifticonvo = new GifticonVo();
+ 		
+ 		gifticonvo.setUser_no(user_no);
+ 		gifticonvo.setStoreproduct_no(storeproduct_no);
+ 		
+  		
+ 		//기프티콘 테이블 삽입
+  		gifticondao.insert(gifticonvo);
+  		
+  		//이메일에 보낼 상품 정보
+  		StoreProductVo storeproductvo = productdao.giftprductInfo(store_no, storeproduct_no);
+  		try {
+  			PointemailGift(user_no, storeproductvo);
+ 		} catch (Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+  	}
+  	
  	
  	// 기프티콘 이메일 전송
   	public void emailGift(Long user_no, StoreProductVo storeproductvo) throws Exception {
@@ -71,7 +94,7 @@ public class GificonService {
 //             +"<img src=\"cid:cde\">" ;
              messageHelper.setText(htmlContent, true);
              messageHelper.setFrom("GS25@gmail.com", "GS25");
-             messageHelper.setTo(new InternetAddress("vlftkak2@naver.com", "UTF-8"));
+             messageHelper.setTo(new InternetAddress("beckyi@naver.com", "UTF-8"));
              
              //내장 이미지 전송
              FileSystemResource res = new FileSystemResource(new File("C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\subindex\\giftiBack.png"));
@@ -128,7 +151,7 @@ public class GificonService {
 //             +"<img src=\"cid:cde\">" ;
              messageHelper.setText(htmlContent, true);
              messageHelper.setFrom("GS25@gmail.com", "GS25");
-             messageHelper.setTo(new InternetAddress("vlftkak2@naver.com", "UTF-8"));
+             messageHelper.setTo(new InternetAddress("beckyi@naver.com", "UTF-8"));
              
              //내장 이미지 전송
              FileSystemResource res = new FileSystemResource(new File("C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\subindex\\giftiBack.png"));

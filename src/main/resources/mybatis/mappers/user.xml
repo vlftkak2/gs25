@@ -65,10 +65,9 @@
 	]]>
 </select>
 
-<update id="setPass" parameterType="passlinkvo">
+<update id="setPass" parameterType="uservo">
    <![CDATA[
-   	update users set password=#{password } where no=#{no }
-  	update passlink set state=#{state } where user_no=#{user_no }
+  	update users set password=#{password } where no=#{no }
    ]]>
 </update>
 

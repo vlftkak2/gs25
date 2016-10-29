@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import kr.ac.sungkyul.gs25.service.CustomCenterService;
 import kr.ac.sungkyul.gs25.service.ProductService;
 import kr.ac.sungkyul.gs25.service.UserService;
+import kr.ac.sungkyul.gs25.vo.CustomBoardVo;
 import kr.ac.sungkyul.gs25.vo.StoreProductVo;
 import kr.ac.sungkyul.gs25.vo.UserVo;
 
@@ -28,6 +29,9 @@ public class AndroidDispatcher {
 	
 	@Autowired
 	ProductService productservice;
+	
+	@Autowired
+	CustomCenterService customservice;
 	
 	//안드로이드 로그인
 	@RequestMapping(value = "checkLogin", method = RequestMethod.POST)
@@ -109,6 +113,17 @@ public class AndroidDispatcher {
 				
 				List<StoreProductVo> list=productservice.getListBoard();
 				System.out.println(list);				
+				
+				return list;
+			}
+			
+			//안드로이드 고객센터 리스트
+			@RequestMapping(value="getCustomList", method=RequestMethod.GET)
+			@ResponseBody
+			public List<CustomBoardVo> getCustomList(){
+				
+				List<CustomBoardVo> list=customservice.getListCustomBoard();
+				System.out.println(list);
 				
 				return list;
 			}

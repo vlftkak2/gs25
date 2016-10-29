@@ -135,6 +135,12 @@ public class CustomCenterDao {
 		
 		CustomBoardVo vo=sqlSession.selectOne("board.ListByGroupNo",groupNo);
 		return vo;
+	}
 	
-}
+	//안드로이드 고객센터 리스트
+	public List<CustomBoardVo> getListCustomBoard(){
+		
+		List<CustomBoardVo> list=sqlSession.selectList("board.getListCustomBoard");
+		return list;
+	}
 }

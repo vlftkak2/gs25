@@ -18,7 +18,7 @@
 
 
 
-<title>attendance_check</title>
+<title>출석 체크</title>
 
 </head>
 <body>

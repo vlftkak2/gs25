@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/gs25/assets/js/jquery/jquery-1.9.0.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원정보 수정 완료</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/subheader.jsp" />
