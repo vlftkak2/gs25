@@ -121,7 +121,7 @@ public class UserService {
 	    	usersdao.savelink(link,email);	//DB에 링크 저장
 	    	
 	    	String sender = "GS25_Manager@gs25.com"; 
-	    	String receiver = "beckyi@naver.com"; //받을사람의 이메일입니다.
+	    	String receiver = "vlftkak2@naver.com"; //받을사람의 이메일입니다.
 	        String subject = "GS25편의점 회원님의 임시 비밀번호입니다.";
 	        String content = "안녕하세요. GS25편의점입니다. 회원님의 비밀번호를 새로 설정하실 수 있으시는 링크 입니다. \n" 
 	        				+ "http://localhost:8088/gs25/user/" + link +"/repassword";

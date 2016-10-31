@@ -60,7 +60,8 @@
 												<option value="6">라면</option>
 												<option value="7">아이스크림</option>
 												<option value="8">샐러드</option>
-
+												<option value="9">과자</option>
+												<option value="10">음료수</option>
 											</select>
 										</div>
 									</td>

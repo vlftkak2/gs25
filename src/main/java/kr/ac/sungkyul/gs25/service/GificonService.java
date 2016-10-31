@@ -94,7 +94,7 @@ public class GificonService {
 //             +"<img src=\"cid:cde\">" ;
              messageHelper.setText(htmlContent, true);
              messageHelper.setFrom("GS25@gmail.com", "GS25");
-             messageHelper.setTo(new InternetAddress("beckyi@naver.com", "UTF-8"));
+             messageHelper.setTo(new InternetAddress("vlftkak2@naver.com", "UTF-8"));
              
              //내장 이미지 전송
              FileSystemResource res = new FileSystemResource(new File("C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\subindex\\giftiBack.png"));
@@ -151,7 +151,7 @@ public class GificonService {
 //             +"<img src=\"cid:cde\">" ;
              messageHelper.setText(htmlContent, true);
              messageHelper.setFrom("GS25@gmail.com", "GS25");
-             messageHelper.setTo(new InternetAddress("beckyi@naver.com", "UTF-8"));
+             messageHelper.setTo(new InternetAddress("vlftkak2@naver.com", "UTF-8"));
              
              //내장 이미지 전송
              FileSystemResource res = new FileSystemResource(new File("C:\\Users\\형민\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\gs25\\assets\\images\\subindex\\giftiBack.png"));

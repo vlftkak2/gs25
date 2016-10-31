@@ -112,7 +112,7 @@ where a.no=b.no
    <![CDATA[
   	   select * from(
         select c.*,rownum rn from(
-          select a.no,
+          select b.no,
                  c.name as storename,
                  a.name,
                  a.price,
@@ -198,7 +198,7 @@ SELECT
 		c.maxcountprice,
 		c.halfprice
 from(                 
-		select   	a.no, 
+		select   	b.no, 
 					a.name, 
 					a.price, 
 					b.reg_date, 
@@ -221,7 +221,7 @@ where a.no=b.PRODUCT_NO and
 	<select id="getSubNew" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
 	      		 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL 
-		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
+		 FROM (SELECT d.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
   		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.PRODUCT_NO and a.no = b.no and d.STORE_NO=#{store_no} 
   		 and d.expiry_date > sysdate
   		 ORDER BY reg_date desc) c WHERE rownum < 5
@@ -232,7 +232,7 @@ where a.no=b.PRODUCT_NO and
 	<select id="getSubPopular" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
        	 SELECT c.no,c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL,c.count
-		 FROM (SELECT a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL,d.count 
+		 FROM (SELECT d.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL,d.count 
   		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no} 
   		 and d.expiry_date > sysdate
   		 ORDER BY count desc) c WHERE rownum < 5
@@ -243,7 +243,7 @@ where a.no=b.PRODUCT_NO and
 	<select id="getSubReco" parameterType="Long" resultType="storeproductvo">
 		<![CDATA[
 		       		 SELECT c.no, c.name, c.price, c.reg_date, c.expiry_date, c.maker, c.IMAGEURL
-  		 FROM(select a.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
+  		 FROM(select d.no, a.name, a.price, d.reg_date, d.expiry_date, a.maker, b.IMAGEURL 
  		 FROM product a, boardsfilepr b, storeproduct d  where a.no=d.product_no and a.no = b.no and d.store_no=#{store_no}
  		  and d.expiry_date > sysdate
  		  order by DBMS_RANDOM.RANDOM) c WHERE rownum < 5
@@ -254,7 +254,7 @@ where a.no=b.PRODUCT_NO and
 	<update id="updateViewCount" parameterType="java.lang.Long">
 		<![CDATA[
 		update storeproduct set
-		count = count + 1 where PRODUCT_NO=#{no}
+		count = count + 1 where no=#{no}
 					]]>
 	</update>
 	

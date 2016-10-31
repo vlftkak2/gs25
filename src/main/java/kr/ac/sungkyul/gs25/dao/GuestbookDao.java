@@ -23,8 +23,8 @@ public class GuestbookDao {
 	private SqlSession sqlSession;
 	
 	// 방명록 총 갯 수
-	public int getCal(){
-		int totalCount = sqlSession.selectOne("guestbook.getCal");
+	public int getCal(Long store_no){
+		int totalCount = sqlSession.selectOne("guestbook.getCal",store_no);
 		return totalCount;
 	}
 	

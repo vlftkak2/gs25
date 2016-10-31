@@ -75,7 +75,7 @@
 								style="width: 95%; max-width: 100%; border: 1px solid #c0c0c0; display: none;"></div>
 
 							<div class="bottom">
-								<a href="/gs25/product/list">취소</a> <input type="submit"
+								<a href="/gs25/product/list?store_no=${store_no }">취소</a> <input type="submit"
 									value="등록">
 							</div>
 						</form>

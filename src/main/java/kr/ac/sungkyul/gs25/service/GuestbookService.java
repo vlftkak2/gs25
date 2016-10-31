@@ -26,7 +26,7 @@ public class GuestbookService {
 	private final int LIST_BLOCKSIZE = 5; // 페이지 리스트에서 표시되는 페이지 수
 	
 	public Map<String, Object> list(Long page, Long store_no){
-		long totalCount= guestbookDao.getCal();  // 전체 게시물 갯수
+		long totalCount= guestbookDao.getCal(store_no);  // 전체 게시물 갯수
 		long pageCount = (long) Math.ceil((double) totalCount / LIST_PAGESIZE); // 페이지 갯수
 	    long blockCount = (long) Math.ceil((double) pageCount / LIST_BLOCKSIZE); // 블록 갯수
 	    long currentBlock = (long) Math.ceil((double) page / LIST_BLOCKSIZE); // 현재 블록

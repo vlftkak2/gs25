@@ -43,10 +43,10 @@ public class MainController {
 		
 		List<RegionVo> regionvo = regionservice.research();
 		model.addAttribute("regionvo",regionvo);
-		
+		System.out.println(regionvo.toString());
 		List<StoreVo> storevo= mapservice.getlist();
 		model.addAttribute("storevo", storevo);
-		
+		System.out.println(storevo.toString());
 		List<MapVo> mapvo = mapservice.mainmaplist(); //지도 리스트
 		model.addAttribute("mapvo", mapvo);
 		

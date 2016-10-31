@@ -118,10 +118,10 @@
 			<div class="pager">
 				<ul>
 					<c:if test="${map.prevtoPage >= 0 }">
-					<li><a href="/gs25/cart/list?p=${map.prevtoPage }">◀◀</a></li>
+					<li><a href="/gs25/cart/list?store_no=${store_no }&p=${map.prevtoPage }">◀◀</a></li>
 					</c:if>
 					<c:if test="${map.prevPage >= 0 }">
-						<li><a href="/gs25/cart/list?p=${map.prevPage }">◀</a></li>
+						<li><a href="/gs25/cart/list?store_no=${store_no }&p=${map.prevPage }">◀</a></li>
 					</c:if>
 
 				<c:forEach begin='${map.firstPage }' end='${map.lastPage }' step='1' var='i'>
@@ -139,10 +139,10 @@
 				</c:forEach>
 
 							<c:if test='${map.nextPage > 0 }'>
-								<li><a href="/gs25/cart/list?p=${map.nextPage }">▶</a></li>
+								<li><a href="/gs25/cart/list?store_no=${store_no }&p=${map.nextPage }">▶</a></li>
 							</c:if>
 							<c:if test='${map.nexttoPage > 0 }'>
-								<li><a href="/gs25/cart/list?p=${map.nexttoPage }">▶▶</a></li>
+								<li><a href="/gs25/cart/list?store_no=${store_no }&p=${map.nexttoPage }">▶▶</a></li>
 							</c:if>
 
 						</ul>

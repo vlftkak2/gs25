@@ -64,7 +64,7 @@ $(function(){
 	$("#maptab2").click(function (){
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
-		    center: new daum.maps.LatLng(37.3800181, 126.9264755),
+		    center: new daum.maps.LatLng(37.503463, 126.72378),
 		    level: 4 // 지도의 확대 레벨
 		};
 		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -99,7 +99,7 @@ $(function(){
 	$("#maptab3").click(function (){
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
-		    center: new daum.maps.LatLng(37.503463, 126.72378),
+		    center: new daum.maps.LatLng(37.3800181, 126.9264755),
 		    level: 4// 지도의 확대 레벨
 		};
 		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -237,7 +237,7 @@ function makeOutListener(infowindow) {
 						<div class="markey_list_sub">
 		       			<ul class="market_list_point" style="margin: 20px 5px;">
 		       				<c:forEach var='vo' items='${storevo}' varStatus='status'>
-		       					<c:if test="${vo.region_name  == '안양'}">
+		       					<c:if test="${vo.region_name  == '인천'}">
 			       				<c:choose>
 									<c:when test='${vo.no  == 0}'>
 									 	<li id="nopad"><a href="/gs25/main?" class="on">${vo.name }</a></li>
@@ -264,7 +264,7 @@ function makeOutListener(infowindow) {
 						<div class="markey_list_sub">
 		       			<ul class="market_list_point" style="margin: 20px 5px;">
 		       				<c:forEach var='vo' items='${storevo}' varStatus='status'>
-		       					<c:if test="${vo.region_name  == '인천'}">
+		       					<c:if test="${vo.region_name  == '안양'}">
 			       				<c:choose>
 									<c:when test='${vo.no  == 0}'>
 									 	<li id="nopad"><a href="/gs25/main?" class="on">${vo.name }</a></li>
